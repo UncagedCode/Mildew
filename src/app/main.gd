@@ -197,9 +197,23 @@ func _title_menu() -> void:
 func _viewer_menu() -> void:
 	var g := view.gfx
 	g.menu_title = "VIEWER INFORMATION SERVICE"
-	g.menu_items = [{"label": "BACK", "desc": "No factual items have been broadcast on this installation yet. Facts used in future programmes, with their sources, will be listed here."}]
-	g.menu_selected = 0
+	g.menu_items = _viewer_items()
+	g.menu_selected = menu_sel
 	g.menu_footer = "MILDEW VIEWER INFORMATION SERVICE · P.O. BOX 1998"
+
+
+## Viewer Information Service: legitimate sources only (never incidents). CP2: picture credits for
+## the real photographs used in HOLE, straight from each item's media metadata.
+func _viewer_items() -> Array:
+	var items: Array = [{"label": "BACK", "desc": "Facts and pictures used on the programme, with their sources. Scroll for picture credits."}]
+	for it in content.query("hole", "", 5, 0):
+		var media: Array = it.get("media", [])
+		if media.is_empty() or str(media[0].get("source", "")) != "Wikimedia Commons":
+			continue
+		var m: Dictionary = media[0]
+		items.append({"label": "PICTURE: " + str(it.get("answer", "")).to_upper(),
+			"desc": "Photograph: %s. Licence: %s. Via Wikimedia Commons. Cropped and resized. %s" % [m.get("creator", "Unknown"), m.get("licence", ""), str(m.get("source_page", "")).uri_decode()]})
+	return items
 
 
 func _settings_items() -> Array:
@@ -320,7 +334,12 @@ func _unhandled_input(event: InputEvent) -> void:
 					3:
 						dev.visible = not dev.visible
 		"viewer":
-			if ok:
+			var n := view.gfx.menu_items.size()
+			if up or down:
+				menu_sel = (menu_sel + (1 if down else -1) + n) % n
+				view.gfx.menu_selected = menu_sel
+				audio.play("tick")
+			elif ok and menu_sel == 0:
 				_go("title")
 		"settings":
 			var items := _settings_items()
@@ -571,6 +590,17 @@ func _run_tour() -> void:
 	await _shot("01_ident")
 	await _wait(3.8)
 	await _shot("02_title")
+	_go("viewer")
+	menu_sel = 4
+	view.gfx.menu_selected = 4
+	await _wait(0.4)
+	await _shot("02b_viewer_credits")
+	_go("settings")
+	menu_sel = 6
+	_settings_menu(view.gfx)
+	await _wait(0.4)
+	await _shot("02c_settings")
+	_go("title")
 	_begin_transmission()
 	await _wait(1.0)
 	await _shot("03_lobby_empty")

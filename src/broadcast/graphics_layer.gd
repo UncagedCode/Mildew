@@ -497,13 +497,21 @@ func _draw_slate() -> void:
 
 func _draw_menu() -> void:
 	# "Interactive home edition" menu, inside the programme frame.
-	var top := 560.0
+	var n := menu_items.size()
+	var top := 560.0 if n <= 4 else 330.0
+	# Long menus scroll: a window of rows around the selection (settings, picture credits).
+	var rows := mini(n, 6)
+	var first := clampi(menu_selected - 2, 0, maxi(0, n - rows))
 	if menu_title != "":
 		_shadow_text(f_display, Vector2(0, top - 40), menu_title, HORIZONTAL_ALIGNMENT_CENTER, W, 58, Color(1, 0.95, 0.8), 5)
-	for i in menu_items.size():
+	if first > 0:
+		draw_string(f_mono, Vector2(0, top - 4), "▲", HORIZONTAL_ALIGNMENT_CENTER, W, 22, Color(1, 1, 0.4))
+	if first + rows < n:
+		draw_string(f_mono, Vector2(0, top + rows * 74 + 6), "▼", HORIZONTAL_ALIGNMENT_CENTER, W, 22, Color(1, 1, 0.4))
+	for i in range(first, first + rows):
 		var it: Dictionary = menu_items[i]
 		var sel := i == menu_selected
-		var r := Rect2(W * 0.5 - 400, top + i * 74, 800, 62)
+		var r := Rect2(W * 0.5 - 400, top + (i - first) * 74, 800, 62)
 		var pulse := 0.5 + 0.5 * sin(_t * 6.0)
 		_grad_rect(r, Color(0.1, 0.18, 0.62, 0.95) if not sel else Color(0.95, 0.75, 0.15).lerp(Color(1, 0.9, 0.4), pulse), Color(0.04, 0.06, 0.3, 0.95) if not sel else Color(0.8, 0.5, 0.05))
 		draw_rect(r, Color(0.85, 0.85, 0.95), false, 3.0)
@@ -514,7 +522,7 @@ func _draw_menu() -> void:
 	var desc := ""
 	if menu_selected < menu_items.size():
 		desc = str(menu_items[menu_selected].get("desc", ""))
-	var y := top + menu_items.size() * 74 + 24
+	var y := top + rows * 74 + 34
 	for line in _wrap(desc, 56):
 		draw_string(f_mono, Vector2(0, y), line, HORIZONTAL_ALIGNMENT_CENTER, W, 26, Color(0.85, 1, 0.75))
 		y += 34

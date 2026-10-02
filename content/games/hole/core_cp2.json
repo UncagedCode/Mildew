@@ -602,12 +602,12 @@
      "retrieved": "2026-10-02"
     }
    ],
-   "answer": "A sewer outfall pipe",
+   "answer": "A drainage pipe",
    "category": "drain_pipe",
    "scale": "human",
    "candidates": [
     {
-     "label": "A sewer outfall pipe",
+     "label": "A drainage pipe",
      "category": "drain_pipe"
     },
     {
@@ -640,7 +640,7 @@
     }
    ],
    "safety_net": [
-    "A sewer outfall pipe",
+    "A drainage pipe",
     "A cannon",
     "A chimney",
     "A porthole"

@@ -1,24 +1,48 @@
 # PROGRESS — Mildew
 
-Last updated: 2026-10-02 12:20 (Europe/London)
-Current checkpoint: **CP1 — Real LAN lobby + first playable slice** (CP0 toolchain complete)
-Current build/version: `0.1.0-cp1` (versionCode 1), debug APK
-Current branch: `claude/cp1-lan-slice` (see git log for commit)
-Godot version: **4.7.2-stable** (GL Compatibility) — pinned (DECISIONS D001)
-Android toolchain status: headless non-Gradle export + container v2 signer + TV-launcher template patch (D007, D008). Reproducible via `tools/build/setup_container_toolchain.sh`; build via `tools/build/build_apk.sh`.
-Latest APK: `build/mildew-0.1.0-cp1-debug.apk` (61 MB, arm64-v8a + armeabi-v7a; not committed — delivered separately; rebuild with the script). SHA-256 recorded in `docs/testing/TEST_REPORT_CP1.md`.
+Last updated: 2026-10-02 (Europe/London)
+Current checkpoint: **CP2 — Hole vertical slice** (CP0 complete; CP1 complete pending device test)
+Current build/version: `0.1.0-cp2` (versionCode 2), debug APK
+Current branch: `claude/cp2-hole` (see git log)
+Godot version: **4.7.2-stable** (GL Compatibility) — pinned (D001)
+Android toolchain: headless non-Gradle export + container v2 signer + TV-launcher patch (D007, D008). Build: `tools/build/build_apk.sh`.
+Latest APK: `build/mildew-0.1.0-cp2-debug.apk` (77.6 MB; not committed). SHA-256 in `docs/testing/TEST_REPORT_CP2.md`.
 
 ## Executive status
 
-The CP1 slice is implemented end to end and passes every automated gate: one Android TV app hosts the broadcast,
-serves the phone controller over local Wi-Fi (HTTP 8080 + WebSocket 8081, no internet), and runs a complete
-Director-planned "Studio Rehearsal" programme for 2–8 phones: Sallow ident → home-edition title menu →
-BEGIN TRANSMISSION → studio lobby with Graham waiting, QR + URL + room code → contestant wizard on the phone
-(name, pronunciation check spoken by the TV, avatar) → podiums appear → opening titles → introductions →
-sting → 3 questions answered on phones with server-side scoring → scoreboard → winner → sign-off → END OF
-TRANSMISSION, with the 30-second reconnect flow, pause/settings/end on the remote, and dev tooling.
-**Not yet verified on real hardware**: no Android TV or physical phone is reachable from the build environment.
-The CP1 gate item "APK runs on target" therefore remains **PENDING USER DEVICE TEST** (checklist in NEXT_BUILD.md).
+CP2 is implemented and passes every automated gate. A broadcast now runs lobby → opening → introductions →
+(two-question studio rehearsal on a new installation) → **HOLE** (sting, rules, 6 rounds with staged reveals of
+real photographs, early-lock gambling on the phone, safety-net multiple choice, SCALE and NO SAFETY NET variants,
+partial credit, audience reactions, Graham commentary) → scores → winner → sign-off, for 2–8 phones, with Tier 0
+production mess and light Tier 1 irregularities scheduled by the Director's incident engine.
+Graham is now a **photographic composited presenter** (alpha cut-outs over our own studio, D021/D022) with
+blinks, breathing, mouth cycle and TV editing that cuts away while he keeps talking.
+**Still not verified on hardware** (no TV/phones reachable from the build environment): CP1 and CP2 gate items
+"APK runs on target" remain **PENDING USER DEVICE TEST** (checklist in NEXT_BUILD.md).
+
+## Checkpoint status — CP2
+
+| Requirement | Status | Implementation/files | Verified how | Notes |
+|---|---|---|---|---|
+| 20–30 Hole items | VERIFIED | `content/games/hole/core_cp2.json` (27; 25 enabled) | validator, tests | real Commons photos, `reviewed`; 2 disabled pending photos |
+| Real photos + licence metadata | VERIFIED | `tools/content/commons_media.py`, `tools/content/hole_photos.json` (+`.media.json`), `assets/content/hole/*.jpg` | stage previews, tour | PD/CC0/CC BY only; credits `docs/CREDITS_MEDIA.md` + Viewer Information Service |
+| Multi-stage reveal | VERIFIED | `seg_hole.gd`, `hole_board.gd` | unit + tour | 3 looks + safety net; log-space dolly pull-back |
+| Early lock / pass / grace | VERIFIED | `seg_hole.gd`, `protocol.gd` (`lock`, `pass`) | unit + LAN + Chromium | irreversible, confirm step on phone |
+| Scoring values + partial credit | VERIFIED | `seg_hole.gd`, `config/design_constants.json` hole.* | unit | 1500/1100/750/500; 20% for right category on looks 1–3 |
+| Variants | VERIFIED | SCALE, OPEN (familiarity-gated), studio hole (tier 3, rare) | unit | dev-forceable via `director.force` |
+| Two-player support | VERIFIED | unchanged rules, head-to-head | unit + LAN | |
+| Short game sting | IMPLEMENTED | `graphics_layer.gd` `_draw_sting_hole`, `sting_hole` audio | tour | audio synthesized, not auditioned |
+| Graham line pools | IMPLEMENTED | `content/graham/lines/hole_cp2.json` (56) | sims | draft copy |
+| Audience reactions | IMPLEMENTED | `audio_desk.gd` crowd ooh/aww/laugh/gasp, applause sizes, deliberate silence | tour | synthesized |
+| Content quality metadata + validator | VERIFIED | `content_validator.gd` `_validate_hole`, `_validate_media`, `_validate_incident` | unit | |
+| Tier 0 + light Tier 1 incidents | VERIFIED | `incident_engine.gd`, `seg_incident.gd`, `content/incidents/*`, presenter `_incident` | `test_incidents` (rates, cooldowns, settings, safeguards) | Hole doorway "Not that one." hook |
+| Photographic Graham (D021/D022) | VERIFIED (render) | `tools/art/import_graham_cutouts.py`, `config/graham_cutouts.json`, `graham_presenter.gd`, `studio_set.gd` | `test_graham`, gallery `docs/testing/graham_gallery.jpg`, tour | 25 semantic states; dev gallery (F11/F12) |
+| TV editing grammar | IMPLEMENTED | `presenter.gd` `_shot_graham_line`, `config/graham_shots.json` | tour | speech continues over cutaways/graphics |
+| Subtitle placement over game graphics | VERIFIED | `graphics_layer.gd` `bottom_busy` | tour | |
+| APK | IMPLEMENTED | `build/mildew-0.1.0-cp2-debug.apk` | signature, manifest, pack listing | **device install pending** |
+
+**CP2 gate:** full Hole game lobby→scoreboard ✅ · 2–8 simulation ✅ · no repeat within game ✅ · APK ✅ (container) ·
+on-device ⏳ **pending user device test**. → CP2 is complete pending the on-device smoke test.
 
 ## Checkpoint status — CP0
 
@@ -63,34 +87,29 @@ reconnect works ✅ · server rejects invalid actions ✅ · APK runs on target 
 → CP1 is **not yet declared complete**; it is complete pending the on-device smoke test.
 
 ## Working now
-- Full rehearsal broadcast, 2–8 players, accelerated simulation and real-socket play.
-- Reconnect within 30 s resumes the same contestant (resume token in phone localStorage); failure to return drops the player and the show continues with ≥2; everyone gone → Graham "Fine." → transmission ends; one player left → honest "waiting for contestants" hold, new joiners admitted.
-- Late joiners wait in spectator mode until a game boundary.
-- Versioned saves with migration/backup, installation seed, reset scopes, profile stats updated after each show.
-- Content validator (duplicates, answers, tiers, tags, player counts, factual sources/licences, release-mode placeholder block).
+- Everything from CP1 (lobby, profiles, reconnect, late join, pause/settings/reset, dev tools).
+- Full Hole game for 2–8 players over real sockets; phones gamble/pass/lock; server-side scoring; reveal chips per contestant.
+- Incident engine: Tier 0 (mic pop, typo lower third, early applause, late cut, wrong camera, off-mic cue, signal tear, captions) and Tier 1 (empty corridor, Hole doorway, wrong name, odd caption, wrong audience reaction, floor shot) with rarity, cooldowns, temperament, interference setting and tone safeguards.
+- Photographic Graham in the 3D studio on all cameras; dev Graham gallery.
+- Viewer Information Service: picture credits for every real photo.
 
 ## Partially working
-- Graham voice: depends on the TV's offline TTS voices (untested on device); subtitles always on by default.
-- Same-name verification vote (D014).
-- Android TV banner art (D008).
+- Graham voice: device offline TTS (untested on device).
+- Graham motion excerpts only in plate mode (cut mode has stills + compositing animation).
+- Same-name verification vote (D014). Android TV banner art (D008).
 
 ## Known broken / blockers
-- No physical-device verification possible from the cloud container (Android TV, phone browsers, Wi-Fi, TTS, performance).
-- APK signing uses a project-written v2 signer (D007): if the TV rejects the install with a signature/parse error, report it — fallback is to build on a PC with the Android SDK (`tools/build/build_apk.sh` works there with the real apksigner).
+- No physical-device verification possible from the cloud container.
+- No licensed real photos yet for bowling-ball finger holes and a golf cup (items disabled).
+- Generated-image service terms for the Graham cut-outs must be checked before any commercial release.
 
 ## Networking status
-- TV host: pure GDScript; binds all interfaces; LAN IP chosen by `LanInfo` (prefers 192.168/10.x Wi-Fi/Ethernet).
-- Controller HTTP: verified (source + exported pack).
-- WebSocket/realtime: verified (Node clients + Chromium).
-- QR join: encoder verified module-for-module; physical scan pending.
-- Real phones tested: **none yet** (Chromium phone emulation only).
-- Fake players: yes (in-process loopback using the real protocol).
-- Reconnect: verified. Late join: verified.
+Unchanged from CP1 (verified in container); Hole adds `lock`/`pass` actions. Real phones tested: none yet.
 
 ## Games status
 | Game | 2P | 3–8P | Scoring | Content | Broadcast polish | Tests |
 |---|---|---|---|---|---|---|
-| Hole | – | – | – | – | – | CP2 next |
+| Hole | ✅ | ✅ | ✅ stage + partial | 25 real photos (reviewed) | sting, monitor board, dolly, reveal chips, crowd | ✅ unit/LAN/phone |
 | Real or Mildew? | – | – | engine ready (SegQuestion) | – | – | CP3 |
 | Guess the Genitals | – | – | engine ready | – | – | CP3 |
 | Mildew Survey | – | – | – | – | – | CP4 |
@@ -98,42 +117,33 @@ reconnect works ✅ · server rejects invalid actions ✅ · APK runs on target 
 | Police Sketch | – | – | – | – | – | CP5 |
 | Do Not Press That | – | – | – | – | – | CP6 |
 | The Basement | – | – | – | – | – | CP7 |
-| *(Studio Rehearsal — CP1 test segment)* | ✅ | ✅ | ✅ | 8 draft items | sting, board, reveal chips | ✅ |
+| *(Studio Rehearsal — warm-up, new installs only)* | ✅ | ✅ | ✅ | 8 draft | ✅ | ✅ |
 
 ## Director status
-- Episode skeleton: partial skeleton with resolved/unresolved slots (CP1 resolves only the rehearsal).
-- Mood/tone balance: tone channels tracked + decay; balancing logic arrives with real formats (CP2+/CP8).
-- Graham state: visible mood (relaxed/pleased/amused/irritated/angry/embarrassed/rattled) driven by results/disconnects, drifts back.
-- Relationships: favourite/irritant/disappointment/interesting/pity/grudge weights updated from answers/standings.
-- Degradation / Complicity / Pressure / Familiarity: state + snapshot; Pressure rises on disconnects and drives sweat/tie; Familiarity gates content tiers.
-- Punishments, incidents, private interference, recurring rooms: not yet (CP2+ / CP4 / CP8).
-- Announcer: stage-0 line pool (functional continuity voice) wired.
+- Format registry; `plan_episode` (warm-up for new installs, then Hole via `plan_game`); Hole item picking (weighted, no repeat, studio-hole cap) and variant choice; decision log.
+- Incident engine (above); show-time clock freezes on holds.
+- Mood/relationships/axes as CP1; Tier 2+ incidents, private interference, rooms: not yet (CP4/CP8).
 
 ## Content status
-- Approved factual items: 0. Placeholder factual items: 0.
-- Rehearsal questions: 8 (draft, fictional). Graham lines: ~90 in 35 categories (draft). Announcer lines: 7 (draft).
-- Fake adverts / rooms / incidents: 0 (CP8). Validation errors: 0.
+- Hole: 25 enabled items with real photos (`reviewed`), 2 disabled placeholders. Incidents: 8 Tier 0, 6 Tier 1 (draft). Graham lines: CP1 pools + 56 Hole + incident lines (draft).
+- Approved factual items: 0 (Hole reveal facts are light; CP3 brings sourced factual content). Validation errors: 0.
 
-## Art/audio status (all provisional, project-owned — `assets/LICENSES.md`)
-- Graham: procedural puppet, 7 moods, speaking/blink/stare/look-off/reading/waiting.
-- Studio: 3D set — carpet, gradient MDF panels, chrome MILDEW logo, curtains, trusses, plants, lectern, podiums with CRTs.
-- Cameras: cam1 Graham MCU, cam2 wide, cam3 podiums, cam4 roaming, podium CUs, title/ident rigs.
-- Opening: tunnel + chrome logo + flying ?s + flares, 9 s synthesized theme. Game sting: ray-burst card + brass sting.
-- Audience audio: small/medium/big applause layers; deliberate silence on all-wrong.
-- Announcer: subtitled (cyan) + TTS. TTS/voice: device offline TTS with pre-rendered hook.
+## Art/audio status
+- Graham: photographic alpha cut-outs (user-supplied, generated), composited — provisional pending licence review.
+- Hole imagery: real licensed photos. Studio: restyled set (sage/blue panels, chrome, curved MILDEW sign) — procedural.
+- Audio: synthesized sting/crowd/servo/mic pop — provisional, not human-auditioned.
 
 ## Testing performed this checkpoint
-See `docs/testing/TEST_REPORT_CP1.md`: 28 GDScript tests (incl. 60-session soak), 6 real-socket scenarios, 11 Chromium phone checks, 90 QR matrices, APK verification, 16 TV + 13 phone screenshots in `docs/testing/cp1_screens/`.
+See `docs/testing/TEST_REPORT_CP2.md`: 51 GDScript tests (2394 checks), 6 real-socket scenarios, 13 Chromium phone checks, 90 QR matrices, APK verification, TV + phone screenshots in `docs/testing/cp2_screens/`.
 
 ## Performance observations
-- Device: not measured (no hardware). Rendering budget risk: programme viewport 1440×1080 + 2×MSAA + broadcast shader (5 taps) + Graham 512×640 + up to 8 podium 320×240 viewports, all updating every frame. If the TV is below 60 FPS, first levers: podium viewports update on change only, MSAA off, lower programme viewport scale, fewer lights.
+- Device: not measured. New load: one 1600×1200 photo texture at a time (threaded load), Graham Sprite3D (815×1086 lossy texture swaps). Levers as CP1.
 
 ## Design compliance notes
-- Graham, studio, audio are provisional procedural placeholders following the art bible (not final assets).
-- Studio Rehearsal is a CP1 test segment, not a launch game.
-- No interference/incidents yet; "Standard Transmission" setting is stored but has nothing to modulate until CP2+.
+- Hole follows docs/04 §2; incidents follow docs/03 tiers (no Tier 2+ yet); programme never explains irregularities; real connection status never faked.
+- Graham presentation follows the user's low-budget direction (D021) and approved compositing (D022).
 
 ## Next immediate actions
-1. **User:** install the APK on the Android TV and run the device checklist in `NEXT_BUILD.md`; report results (photos of dev overlay FPS line welcome).
-2. Fix anything found on device; then mark CP1 VERIFIED.
-3. Start CP2 (Hole vertical slice) per `NEXT_BUILD.md`.
+1. **User:** install the CP2 APK on the Android TV and run the device checklist in `NEXT_BUILD.md`.
+2. Optionally supply/approve real photos for bowling-ball finger holes and a golf cup.
+3. Start CP3 (Real or Mildew? + Guess the Genitals) per `NEXT_BUILD.md`.
