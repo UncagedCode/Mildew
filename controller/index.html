@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#2a261c">
+<meta name="format-detection" content="telephone=no">
+<title>MILDEW HOME RESPONSE UNIT</title>
+<link rel="stylesheet" href="/style.css">
+<script src="/config.js"></script>
+</head>
+<body>
+<div id="unit" class="unit">
+  <header class="unit-head">
+    <div class="brand">
+      <div class="logo">MILDEW</div>
+      <div class="model">HOME RESPONSE UNIT &middot; MODEL HRU-98</div>
+    </div>
+    <!-- REAL connection status. Never used for fictional effects. -->
+    <div class="link" id="link" data-state="down" aria-live="polite">
+      <span class="led"></span><span id="link-text">NO LINK</span>
+    </div>
+  </header>
+  <div class="grille" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <main class="lcd" id="lcd">
+    <div class="lcd-inner" id="lcd-inner"></div>
+    <div class="lcd-scan" aria-hidden="true"></div>
+  </main>
+  <section class="keys" id="keys"></section>
+  <footer class="unit-foot">
+    <span id="unit-no">UNIT No. ----</span>
+    <span class="prop">PROPERTY OF SALLOW ENTERTAINMENT LTD &middot; DO NOT IMMERSE</span>
+  </footer>
+</div>
+<!-- Honest system overlay: real network problems / real pauses (outside the fiction). -->
+<div id="sysbar" class="sysbar" hidden>
+  <div class="sys-title" id="sys-title"></div>
+  <div class="sys-detail" id="sys-detail"></div>
+</div>
+<script src="/app.js"></script>
+</body>
+</html>

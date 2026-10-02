@@ -41,8 +41,14 @@ exec python3 "$REPO/tools/build/apksigner_v2.py" "\$@"
 EOS
 chmod +x "$SDK/platform-tools/adb" "$SDK/build-tools/35.0.0/apksigner"
 
+# Godot's non-Gradle export ignores show_in_android_tv: add LEANBACK_LAUNCHER to the templates.
+for k in debug release; do
+  [ -f "$TPL_DIR/android_$k.apk.orig" ] || cp "$TPL_DIR/android_$k.apk" "$TPL_DIR/android_$k.apk.orig"
+  python3 "$REPO/tools/build/patch_tv_template.py" "$TPL_DIR/android_$k.apk.orig" "$TPL_DIR/android_$k.apk"
+done
+
 # Generate editor settings once, then point them at the stub SDK.
-godot --headless --editor --quit --path "$REPO/game" >/dev/null 2>&1 || true
+godot --headless --editor --quit --path "$REPO" >/dev/null 2>&1 || true
 ES="$(ls "$HOME"/.config/godot/editor_settings-4*.tres | head -1)"
 sed -i "s#^export/android/android_sdk_path = .*#export/android/android_sdk_path = \"$SDK\"#" "$ES"
 grep -q '^export/android/android_sdk_path' "$ES" || echo "export/android/android_sdk_path = \"$SDK\"" >> "$ES"

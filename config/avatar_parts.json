@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "_comment": "Deliberately cheap late-90s contestant graphics (docs/08 Player avatars). Shared by the TV podium renderer and the phone controller (served at /api/avatar). Indices are what profiles store; server clamps ranges. Skin tones are neutral swatches and are never a subject of Graham commentary (docs/13).",
+  "hair": ["SIDE PARTING", "CURTAINS", "MULLET", "BALDING", "PERM", "BOB"],
+  "hair_colour": [["MOUSE", "#7a5a3a"], ["JET", "#1e1b1b"], ["GINGER", "#b8572a"], ["PLATINUM", "#e6d79a"], ["GREY", "#9b9a95"], ["AUBERGINE", "#5c2442"]],
+  "skin": ["#f1c9a4", "#dfab7d", "#c48a5a", "#8c593a", "#5b3925"],
+  "glasses": ["NONE", "BIG GOLD FRAMES", "TINTED"],
+  "outfit": [
+    ["TEAL SHELL SUIT", "#1f8a8a", "#e0457b"],
+    ["BURGUNDY BLAZER", "#6b1f2e", "#d9b24c"],
+    ["MUSTARD KNIT", "#c79a2b", "#6a4a1a"],
+    ["PURPLE BOMBER", "#4b2a7a", "#2ec4b6"],
+    ["DOUBLE DENIM", "#3b5f8a", "#9fb8d8"],
+    ["NICOTINE CARDIGAN", "#b9a77a", "#5e5340"],
+    ["MILDEW GREEN", "#4d6b3a", "#c8d96f"],
+    ["LOUD SHIRT", "#e04f2f", "#f4d03f"]
+  ],
+  "accessory": ["NOTHING", "BOW TIE", "EARRING", "MOUSTACHE", "MEDAL", "SCRUNCHIE"]
+}

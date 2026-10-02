@@ -329,7 +329,7 @@ func _on_say_name(conn_id: int, msg: Dictionary) -> void:
 	if _validate_name(speech, cfg.i("lobby.max_speech_name_chars", 40)) != "":
 		_invalid(conn_id, Protocol.E_NAME_INVALID)
 		return
-	if session_time - float(c.last_say) < 1.2 * time_scale:
+	if session_time - float(c.last_say) < 0.6 * time_scale:
 		return  # ignore button-mashing; not an error
 	c.last_say = session_time
 	var line := director.line("graham", "pronounce", {"name": speech, "speech_name": speech})

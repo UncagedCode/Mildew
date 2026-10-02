@@ -1,0 +1,160 @@
+/* MILDEW HOME RESPONSE UNIT — controller styling.
+   A cheap 1998 beige plastic handset with a green-phosphor LCD and chunky keys.
+   Portrait-first. Fonts are bundled and served by the TV (no internet). */
+
+@font-face { font-family: "HRU Mono"; src: url("/assets/fonts/DejaVuSansMono-Bold.ttf") format("truetype"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "HRU Sans"; src: url("/assets/fonts/LiberationSans-Bold.ttf") format("truetype"); font-weight: 700; font-display: swap; }
+
+:root {
+  --plastic-hi: #e3d9bd;
+  --plastic: #cfc39f;
+  --plastic-lo: #a99c76;
+  --plastic-edge: #7f7455;
+  --ink: #2d2a20;
+  --lcd-bg: #0f1a10;
+  --lcd-bg2: #142416;
+  --lcd-fg: #b9f47c;
+  --lcd-dim: #5f8a45;
+  --lcd-warn: #ffd166;
+  --key-red: #c7362b;
+  --key-yellow: #e2b42c;
+  --key-green: #3f9a45;
+  --key-blue: #2e5fae;
+  --key-grey: #6f6a5c;
+  --burgundy: #6b1f2e;
+  --sys-bg: #000;
+  --sys-fg: #fff;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; height: 100%; background: #2a261c; overscroll-behavior: none; }
+body {
+  font-family: "HRU Sans", "Arial Narrow", Arial, sans-serif;
+  color: var(--ink);
+  -webkit-user-select: none; user-select: none;
+  touch-action: manipulation;
+}
+
+.unit {
+  position: relative;
+  min-height: 100dvh;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  padding: max(10px, env(safe-area-inset-top)) 12px max(10px, env(safe-area-inset-bottom));
+  background:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .09 0'/></filter><rect width='120' height='120' filter='url(%23n)'/></svg>"),
+    linear-gradient(180deg, var(--plastic-hi) 0%, var(--plastic) 45%, var(--plastic-lo) 100%);
+  border-radius: 22px;
+  box-shadow: inset 0 2px 0 rgba(255,255,255,.55), inset 0 -3px 0 rgba(0,0,0,.25), inset 0 0 0 2px var(--plastic-edge);
+}
+@media (min-width: 560px) { .unit { max-width: 480px; margin: 0 auto; } }
+
+.unit-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+.brand .logo {
+  font-family: "HRU Sans", sans-serif; font-weight: 700; font-size: 26px; letter-spacing: 2px;
+  font-style: italic; color: var(--burgundy);
+  text-shadow: 0 1px 0 rgba(255,255,255,.6), 0 -1px 0 rgba(0,0,0,.25);
+}
+.brand .model { font-size: 9.5px; letter-spacing: 1.4px; color: #5d5440; margin-top: -2px; }
+
+.link { display: flex; align-items: center; gap: 6px; font-family: "HRU Mono", monospace; font-size: 11px; letter-spacing: 1px;
+  padding: 5px 8px; border-radius: 6px; background: rgba(0,0,0,.12); box-shadow: inset 0 1px 2px rgba(0,0,0,.35); color: #3a3426; }
+.led { width: 11px; height: 11px; border-radius: 50%; background: #5a1410; box-shadow: inset 0 -1px 2px rgba(0,0,0,.6); }
+.link[data-state="up"] .led { background: #4cff5a; box-shadow: 0 0 8px #4cff5a, inset 0 -1px 2px rgba(0,0,0,.4); }
+.link[data-state="retry"] .led { background: #ffb52e; box-shadow: 0 0 8px #ffb52e; animation: blink .7s steps(2) infinite; }
+.link[data-state="down"] .led { background: #ff3b30; box-shadow: 0 0 6px #ff3b30; }
+@keyframes blink { 50% { opacity: .25; } }
+
+.grille { display: flex; gap: 5px; justify-content: center; margin: 8px 0 8px; }
+.grille i { display: block; width: 26px; height: 4px; border-radius: 3px; background: rgba(0,0,0,.35); box-shadow: 0 1px 0 rgba(255,255,255,.5); }
+
+/* --- LCD ------------------------------------------------------------- */
+.lcd {
+  position: relative; flex: 1 1 auto; min-height: 210px;
+  border-radius: 12px; padding: 14px 14px 16px;
+  background: radial-gradient(120% 90% at 50% 40%, var(--lcd-bg2), var(--lcd-bg) 70%);
+  box-shadow: inset 0 0 0 3px #26231a, inset 0 0 0 6px #3b3628, inset 0 6px 18px rgba(0,0,0,.8), 0 1px 0 rgba(255,255,255,.5);
+  color: var(--lcd-fg);
+  font-family: "HRU Mono", "Courier New", monospace; font-weight: 700;
+  text-shadow: 0 0 6px rgba(185,244,124,.45);
+  overflow: hidden; display: flex;
+}
+.lcd-inner { position: relative; z-index: 1; width: 100%; display: flex; flex-direction: column; gap: 10px; }
+.lcd-scan { position: absolute; inset: 0; pointer-events: none; z-index: 2;
+  background: repeating-linear-gradient(180deg, rgba(0,0,0,0) 0 2px, rgba(0,0,0,.18) 2px 3px); border-radius: 12px; }
+.lcd .title { font-size: 20px; line-height: 1.15; letter-spacing: 1px; }
+.lcd .big { font-size: 28px; line-height: 1.1; letter-spacing: 1px; }
+.lcd .huge { font-size: 54px; line-height: 1; letter-spacing: 2px; }
+.lcd .sub { font-size: 13px; color: var(--lcd-dim); letter-spacing: 1px; line-height: 1.35; }
+.lcd .warn { color: var(--lcd-warn); text-shadow: 0 0 6px rgba(255,209,102,.5); }
+.lcd .prompt { font-size: 21px; line-height: 1.22; }
+.lcd .spacer { flex: 1 1 auto; }
+.lcd .blinker::after { content: "_"; animation: blink 1s steps(2) infinite; }
+.lcd .row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+
+.timer { height: 12px; border: 2px solid var(--lcd-dim); border-radius: 3px; padding: 1px; }
+.timer > div { height: 100%; background: var(--lcd-fg); box-shadow: 0 0 8px rgba(185,244,124,.6); transform-origin: left center; }
+
+.lcd input[type=text] {
+  width: 100%; font: inherit; font-size: 24px; letter-spacing: 1px; text-transform: none;
+  color: var(--lcd-fg); background: rgba(185,244,124,.06); border: 2px solid var(--lcd-dim); border-radius: 6px;
+  padding: 10px 10px; outline: none; caret-color: var(--lcd-fg); -webkit-user-select: text; user-select: text;
+}
+.lcd input[type=text]:focus { border-color: var(--lcd-fg); box-shadow: 0 0 10px rgba(185,244,124,.35); }
+.codebox { text-align: center; text-transform: uppercase; letter-spacing: 14px !important; font-size: 40px !important; }
+
+.profiles { display: flex; flex-direction: column; gap: 8px; overflow-y: auto; max-height: 46vh; }
+.profile { display: flex; align-items: center; gap: 10px; padding: 8px; border: 2px solid var(--lcd-dim); border-radius: 8px; color: var(--lcd-fg);
+  background: transparent; font: inherit; font-size: 18px; text-align: left; }
+.profile:active { background: rgba(185,244,124,.12); }
+.profile canvas { width: 44px; height: 44px; border-radius: 4px; flex: none; }
+.profile small { display: block; font-size: 11px; color: var(--lcd-dim); }
+
+.avatar-wrap { display: flex; justify-content: center; }
+.avatar-wrap canvas { width: 132px; height: 132px; border-radius: 8px; box-shadow: 0 0 0 2px var(--lcd-dim); }
+.avatar-rows { display: flex; flex-direction: column; gap: 6px; }
+.avatar-row { display: grid; grid-template-columns: 42px 1fr 42px; align-items: center; gap: 6px; }
+.avatar-row .lab { text-align: center; font-size: 13px; line-height: 1.15; }
+.avatar-row .lab small { display: block; color: var(--lcd-dim); font-size: 10px; letter-spacing: 1px; }
+.arrow { height: 38px; font: inherit; font-size: 18px; color: var(--lcd-fg); background: transparent; border: 2px solid var(--lcd-dim); border-radius: 6px; }
+.arrow:active { background: rgba(185,244,124,.15); }
+
+/* --- Keys --------------------------------------------------------------- */
+.keys { display: flex; flex-direction: column; gap: 10px; padding: 12px 2px 6px; }
+.keys:empty { padding: 0; }
+.key {
+  position: relative; width: 100%; min-height: 58px; border: none; border-radius: 12px; cursor: pointer;
+  font-family: "HRU Sans", sans-serif; font-weight: 700; font-size: 19px; letter-spacing: .5px; text-transform: uppercase;
+  color: #fff; padding: 10px 14px 12px 56px; text-align: left; line-height: 1.15;
+  background: linear-gradient(180deg, rgba(255,255,255,.22), rgba(0,0,0,.08) 55%, rgba(0,0,0,.18)), var(--kc, var(--key-grey));
+  box-shadow: 0 5px 0 rgba(0,0,0,.45), 0 6px 10px rgba(0,0,0,.25), inset 0 2px 0 rgba(255,255,255,.35), inset 0 -2px 0 rgba(0,0,0,.25);
+  text-shadow: 0 1px 1px rgba(0,0,0,.45);
+  transition: transform .05s, box-shadow .05s;
+}
+.key:active, .key.pressed { transform: translateY(4px); box-shadow: 0 1px 0 rgba(0,0,0,.45), inset 0 2px 0 rgba(255,255,255,.2), inset 0 -1px 0 rgba(0,0,0,.25); }
+.key[disabled] { filter: grayscale(.85) brightness(.85); opacity: .65; }
+.key .cap { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); width: 36px; height: 36px; border-radius: 50%;
+  display: grid; place-items: center; font-size: 20px; color: #1b1a14; background: rgba(255,255,255,.88); box-shadow: inset 0 -2px 0 rgba(0,0,0,.2); text-shadow: none; }
+.key.plain { padding-left: 14px; text-align: center; }
+.key.a { --kc: var(--key-red); } .key.b { --kc: var(--key-yellow); color: #1b1a14; text-shadow: none; }
+.key.c { --kc: var(--key-green); } .key.d { --kc: var(--key-blue); }
+.key.go { --kc: var(--burgundy); } .key.ok { --kc: #3e6b2f; } .key.grey { --kc: var(--key-grey); }
+.key.small { min-height: 44px; font-size: 15px; }
+.keyrow { display: flex; gap: 10px; } .keyrow .key { flex: 1; }
+
+.unit-foot { display: flex; justify-content: space-between; gap: 8px; margin-top: 6px; font-size: 8.5px; letter-spacing: 1px; color: #5d5440; }
+.unit-foot #unit-no { white-space: nowrap; flex: none; }
+.unit-foot .prop { text-align: right; }
+
+/* --- Honest system overlay (real status only) ---------------------------- */
+.sysbar { position: fixed; left: 0; right: 0; top: 0; z-index: 50; padding: 12px 16px calc(12px + env(safe-area-inset-top)) ;
+  padding-top: max(12px, env(safe-area-inset-top)); background: var(--sys-bg); color: var(--sys-fg);
+  font-family: -apple-system, "Roboto", "Segoe UI", Arial, sans-serif; text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,.6); }
+.sysbar .sys-title { font-weight: 700; font-size: 16px; letter-spacing: .5px; }
+.sysbar .sys-detail { font-size: 13px; opacity: .85; margin-top: 3px; }
+.sysbar[data-kind="net"] { background: #8b0000; }
+.sysbar[data-kind="hold"] { background: #111; }
+
+.toast { font-size: 14px; color: var(--lcd-warn); }
+.flash { animation: flash .5s ease-out 1; }
+@keyframes flash { from { filter: brightness(2.2); } to { filter: none; } }
