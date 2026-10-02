@@ -131,8 +131,12 @@ func reveal(evt: Dictionary) -> void:
 	_target_vis = 1.0
 
 
-func hide_board() -> void:
+## Graphics leave the frame on the vision mixer's cut (hard) unless a dissolve is asked for.
+func hide_board(dissolve: bool = false) -> void:
 	_target_vis = 0.0
+	if not dissolve:
+		_vis = 0.0
+		queue_redraw()
 
 
 func is_showing() -> bool:
@@ -315,7 +319,7 @@ func _draw_reveal(mon: Rect2, a: float) -> void:
 	var by := mon.end.y - 150.0
 	var slide := (1.0 - k) * -1300.0
 	var band := PackedVector2Array([Vector2(mon.position.x - 60 + slide, by), Vector2(mon.end.x + 40 + slide, by), Vector2(mon.end.x + 10 + slide, by + 112), Vector2(mon.position.x - 90 + slide, by + 112)])
-	draw_polygon(band, PackedColorArray([Color("#c2185b"), Color("#4a148c"), Color("#311b92"), Color("#ad1457")]))
+	draw_polygon(band, PackedColorArray([Color("#c2185b", a), Color("#4a148c", a), Color("#311b92", a), Color("#ad1457", a)]))
 	draw_line(Vector2(mon.position.x - 60 + slide, by), Vector2(mon.end.x + 40 + slide, by), Color(0.95, 0.85, 0.5, a), 5.0)
 	var txt := "IT'S " + _answer.to_upper()
 	if _variant == "scale":

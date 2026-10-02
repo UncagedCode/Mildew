@@ -1,0 +1,155 @@
+{
+ "game": "hole",
+ "items": {
+  "plug_socket": {
+   "file": "File:247 Home Rescue electric plugs.jpg",
+   "fx": 0.5,
+   "fy": 0.5,
+   "zoom": 1.0
+  },
+  "plughole": {
+   "file": "File:Plughole.JPG",
+   "fx": 0.5,
+   "fy": 0.5,
+   "zoom": 1.0
+  },
+  "keyhole": {
+   "file": "File:Detail of south door, Higham 2.JPG",
+   "fx": 0.5,
+   "fy": 0.3,
+   "zoom": 1.0
+  },
+  "lotus_pod": {
+   "file": "File:Lotus seed pod - Motsuji, Hiraizumi, Iwate - DSC04442.jpg",
+   "fx": 0.5,
+   "fy": 0.5,
+   "zoom": 1.0
+  },
+  "shower_head": {
+   "file": "File:Dirty Old Shower Head (54000230920).jpg",
+   "fx": 0.5,
+   "fy": 0.5,
+   "zoom": 1.0
+  },
+  "colander": {
+   "file": "File:White Colander (53504734684).jpg",
+   "fx": 0.5,
+   "fy": 0.5,
+   "zoom": 1.0
+  },
+  "button": {
+   "file": "File:Blue button on blue clothing.jpg",
+   "fx": 0.5,
+   "fy": 0.5,
+   "zoom": 1.0
+  },
+  "crumpet": {
+   "file": "File:Crumpet or Pikelet? (49059515222).jpg",
+   "fx": 0.5,
+   "fy": 0.5,
+   "zoom": 1.0
+  },
+  "pig_snout": {
+   "file": "File:Frozen pig nose.jpg",
+   "fx": 0.5,
+   "fy": 0.5,
+   "zoom": 1.0
+  },
+  "swiss_cheese": {
+   "file": "File:Cheese 33 bg 052406.jpg",
+   "fx": 0.5,
+   "fy": 0.5,
+   "zoom": 1.0
+  },
+  "rabbit_burrow": {
+   "file": "File:Rabbit burrow entrance.jpg",
+   "fx": 0.5,
+   "fy": 0.5,
+   "zoom": 1.0
+  },
+  "manhole": {
+   "file": "File:SEWER - Open Manhole - New Orleans September 2020.jpg",
+   "fx": 0.5,
+   "fy": 0.5,
+   "zoom": 1.0
+  },
+  "trumpet_bell": {
+   "file": "File:Trumpet Bell.jpg",
+   "fx": 0.5,
+   "fy": 0.5,
+   "zoom": 1.0
+  },
+  "woodpecker_tree": {
+   "file": "File:Red-breasted Sapsucker - Novato, California.jpg",
+   "fx": 0.5,
+   "fy": 0.3,
+   "zoom": 1.0
+  },
+  "volcano_crater": {
+   "file": "File:Mount Eden Crater Hollow Auckland.jpg",
+   "fx": 0.5,
+   "fy": 0.5,
+   "zoom": 1.0
+  },
+  "rotary_dial": {
+   "file": "File:Ericofon (German version) Plunger fitted (30261314594).jpg",
+   "fx": 0.5,
+   "fy": 0.5,
+   "zoom": 1.0
+  },
+  "belly_button": {
+   "file": "File:Human navel male.jpg",
+   "fx": 0.5,
+   "fy": 0.5,
+   "zoom": 1.0
+  },
+  "ear": {
+   "file": "File:Lharina\u8033\u6735.jpg",
+   "fx": 0.5,
+   "fy": 0.5,
+   "zoom": 1.0
+  },
+  "pepper_shaker": {
+   "file": "File:Cafe Mondegar, Colaba, Mumbai (4).jpg",
+   "fx": 0.45,
+   "fy": 0.3,
+   "zoom": 1.25
+  },
+  "cave_entrance": {
+   "file": "File:Orua sea cave.jpg",
+   "fx": 0.55,
+   "fy": 0.6,
+   "zoom": 1.0
+  },
+  "sea_sponge": {
+   "file": "File:Sponge 1 Davy Crocker Reef 20230712.jpg",
+   "fx": 0.5,
+   "fy": 0.5,
+   "zoom": 1.0
+  },
+  "drain_outfall": {
+   "file": "File:Water flows out of a run off pipe flooding a low lying area.jpg",
+   "fx": 0.42,
+   "fy": 0.7,
+   "zoom": 1.7
+  },
+  "leaf_stoma": {
+   "file": "File:Stoma under optical microscope.jpg",
+   "fx": 0.5,
+   "fy": 0.5,
+   "zoom": 1.0
+  },
+  "studio_hatch": {
+   "file": "File:Looking up the Personnel Access Hatch. (4271a80a-155d-4519-3eb7-c1a00cf7b92e).JPG",
+   "fx": 0.5,
+   "fy": 0.5,
+   "zoom": 1.0
+  },
+  "whale_blowhole": {
+   "file": "File:Sperm whale blowhole Vincze.jpg",
+   "fx": 0.5,
+   "fy": 0.5,
+   "zoom": 1.0
+  }
+ }
+}

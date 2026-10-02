@@ -169,8 +169,11 @@ def fetch(manifest_path):
     infos = {}
     for i in range(0, len(titles), 40):
         infos.update(file_info(titles[i:i + 40], thumb_width=1920))
-    media = {}
+    out = os.path.splitext(manifest_path)[0] + ".media.json"
+    media = json.load(open(out)) if os.path.exists(out) else {}
     for iid, e in man["items"].items():
+        if iid in media and media[iid].get("original_url") == (infos.get(e["file"]) or {}).get("url") and not os.environ.get("REFETCH"):
+            continue
         inf = infos.get(e["file"])
         if inf is None or not inf["url"]:
             print("MISSING", iid, e["file"])
@@ -178,7 +181,13 @@ def fetch(manifest_path):
         if not licence_ok(inf["licence"]):
             print("LICENCE REJECTED", iid, inf["licence"])
             continue
-        src = inf["thumb"] if (inf["thumb"] and inf["width"] > 1920) else inf["url"]
+        # Wikimedia asks bots for standard thumbnail widths (https://w.wiki/GHai); originals get 429s.
+        std = [w for w in (330, 500, 960, 1280, 1920) if w < inf["width"]]
+        src = inf["url"]
+        if std:
+            m = re.match(r"(https://upload\.wikimedia\.org/wikipedia/commons)/(\w/\w\w)/([^/]+)$", inf["url"])
+            if m:
+                src = "%s/thumb/%s/%s/%dpx-%s" % (m.group(1), m.group(2), m.group(3), std[-1], m.group(3))
         img = cv2.imdecode(np.frombuffer(get_bytes(src), np.uint8), cv2.IMREAD_COLOR)
         if e.get("rotate"):
             img = np.rot90(img, int(e["rotate"]) // 90 * -1).copy()
@@ -206,7 +215,7 @@ def fetch(manifest_path):
             "retrieved": time.strftime("%Y-%m-%d"),
         }
         print("ok", iid, inf["licence"], "-", author[:60])
-    out = os.path.splitext(manifest_path)[0] + ".media.json"
+        json.dump(media, open(out, "w"), indent=1, ensure_ascii=False)
     json.dump(media, open(out, "w"), indent=1, ensure_ascii=False)
     print("wrote", out)
 

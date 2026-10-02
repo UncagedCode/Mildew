@@ -118,3 +118,16 @@ and is **not** implemented until approved.
 **Intent:** a deliberate strange 1990s TV / interactive CD-ROM hybrid — not a downgrade. Priority: PoC looks and feels like Mildew without further paid generation.
 **Pending:** a reference pack (being produced by the user) will supply Graham stills; the GrahamStills renderer is built to consume it. The BBC bug in the reference video must be cropped/removed from anything derived from it.
 **Approval:** given by user.
+
+### 2026-10-02 — D022 Graham as composited alpha cut-outs over the Mildew studio (user approved "option 1")
+**Type:** implementation of D021, approved by user. **Supersedes:** full-frame plate playback as the primary Camera 1 path.
+**Problem:** the ChatGPT reference-pack plates have a baked-in generated studio (and the reference video a BBC bug), so they cannot sit in our own art-bible set, and wide/podium shots could not include Graham.
+**Decision:**
+- Graham states are supplied as transparent PNG cut-outs (`references/graham/cutouts_v1`, `cutouts_v2`, `cutouts_v2/alternates`; masters never modified).
+- `tools/art/import_graham_cutouts.py` registers every frame to the base body `talk_closed` (phase correlation). Talking frames contribute only a feathered lower-face patch and blink frames only an eye-band patch, so the body never shimmers. Output: `assets/graham/cut/*.png` (scaled 0.75, lossy WebP import) + `config/graham_cutouts.json` (frames, semantic states, blinks, variants, camera_motion, talk_cycle, registration report).
+- `GrahamPresenter` drives a `Sprite3D` standing at the lectern inside the 3D studio, so all cameras (cam1 close-up, wides, podium reverses) see the same Graham. Semantic states + fallback chains; Director code never sees filenames. Plate mode (`graham_states.json`) remains the fallback renderer; pack motion excerpts work only in plate mode.
+- Studio restyled after the reference composition but owned: sage/blue panels, chrome trim, curved green MILDEW sign behind Graham, low lectern. No broadcaster branding anywhere.
+- Speech: mouth cycle is capped to short visible bursts (≤3 s) then the edit cuts away while the voice continues (`config/graham_shots.json`).
+- Tests: `tests/unit/test_graham.gd` validates frames exist, every semantic state resolves, no fallback cycles, shot hints reference known states.
+**Known limits:** two cut-outs are misframed (`*_single`) and never used in loops; generated-image service terms must be checked before commercial release.
+**Approval:** given by user ("I agree with 1").

@@ -111,6 +111,11 @@ func opportunity(moment: String, ctx: Dictionary = {}) -> Dictionary:
 			continue
 		var chance: float = base[tier] * temperament * (1.0 + reminder * (1.5 if tier == 0 else 1.0))
 		chance *= float(ctx.get("chance_scale", 1.0))
+		# The interference setting damps how OFTEN a tier fires, not just which item is picked.
+		if str(director.interference_mode) == "supervised_transmission" and tier >= 1:
+			chance *= 0.35
+		elif str(director.interference_mode) == "clean_transmission":
+			chance *= 0.5
 		if director.rng.randf() >= chance:
 			continue
 		var total := 0.0

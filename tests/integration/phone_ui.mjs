@@ -114,14 +114,29 @@ try {
   check(!(await B.locator("text=IDENTIFY YOURSELF").count()), "returning tab resumes as the same contestant (no re-identify)");
   await A.waitForSelector("#sysbar[hidden]", { state: "attached", timeout: 10000 });
   check(true, "banner cleared after reconnect");
+  // --- Hole: early lock on a glimpse, confirm step, locked screen, result ------------------
+  await A.waitForSelector('button:has-text("SHOW ME MORE")', { timeout: 90000 });
+  await shot(A, "13_hole_pick");
+  check(await A.locator(".keygrid button").count() >= 4, "Hole look shows candidate tiles");
+  await A.locator(".keygrid button").first().click();
+  await A.waitForSelector('button:has-text("YES — LOCK IT IN")', { timeout: 5000 });
+  await shot(A, "14_hole_confirm");
+  await A.click('button:has-text("YES — LOCK IT IN")');
+  await A.waitForSelector("text=NO TAKE-BACKS. WATCH THE TELEVISION", { timeout: 5000 });
+  await shot(A, "15_hole_locked");
+  const bm = B.locator('button:has-text("SHOW ME MORE")');
+  if (await bm.count()) await bm.first().click().catch(() => {});
+  await A.waitForSelector("text=YOUR SCORE", { timeout: 60000 });
+  check(await A.locator("text=/CORRECT|WRONG|RIGHT SORT OF THING/").count(), "Hole result screen shown");
+  await shot(A, "16_hole_result");
   // finish
-  for (let i = 0; i < 200; i++) {
+  for (let i = 0; i < 900; i++) {
     for (const p of [A, B]) { const k = p.locator(".key.c"); if (await k.count()) await k.first().click().catch(() => {}); }
     if (await A.locator("text=END OF TRANSMISSION").count()) break;
     await sleep(300);
   }
   check(await A.locator("text=END OF TRANSMISSION").count(), "phone reaches END OF TRANSMISSION");
-  await shot(A, "13_ended_captain");
+  await shot(A, "17_ended_captain");
   check(consoleErrors.length === 0, "no page JS errors: " + consoleErrors.join(" | "));
 } catch (e) {
   check(false, "exception: " + e.message);

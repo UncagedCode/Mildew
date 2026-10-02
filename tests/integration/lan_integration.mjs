@@ -51,7 +51,7 @@ class Phone {
   constructor(host, name, opts = {}) {
     this.host = host; this.name = name; this.opts = opts;
     this.msgs = []; this.errors = []; this.screens = []; this.status = { paused: false };
-    this.player = null; this.resume = ""; this.results = []; this.points = 0; this.answered = new Set();
+    this.player = null; this.resume = ""; this.results = []; this.holeResults = []; this.lastHole = null; this.points = 0; this.answered = new Set();
   }
   connect() {
     return new Promise((resolve, reject) => {
@@ -86,7 +86,21 @@ class Phone {
         const c = Math.floor(Math.random() * m.data.options.length);
         setTimeout(() => this.send({ t: "answer", q: m.data.qid, c }), 50 + Math.random() * 300);
       }
+      if (m.screen === "hole_pick" && !this.opts.silent) {
+        const d = m.data, key = d.qid + ":" + d.stage;
+        if (!this.answered.has(key)) {
+          this.answered.add(key);
+          // gamble on a glimpse sometimes, otherwise ask for a better look; always commit at the end
+          const lock = !d.can_pass || Math.random() < 0.35;
+          setTimeout(() => this.send(lock ? { t: "lock", q: d.qid, s: d.stage, c: Math.floor(Math.random() * d.options.length) }
+                                          : { t: "pass", q: d.qid, s: d.stage }), 50 + Math.random() * 300);
+          if (lock) this.locks = (this.locks || 0) + 1;
+        }
+      }
       if (m.screen === "result") this.results.push(m.data);
+      if (m.screen === "hole_result") {
+        if (!this.lastHole || this.lastHole !== m.data.answer) { this.holeResults.push(m.data); this.lastHole = m.data.answer; }
+      }
       if (m.screen === "lobby" && m.data.captain && this.opts.startAt && m.data.count >= this.opts.startAt && !this.started) {
         this.started = true; setTimeout(() => this.send({ t: "start_show" }), 200);
       }
@@ -142,12 +156,16 @@ await scenario("two_players_full_show", async (h, sc) => {
   const ended = h.events.find((e) => e.e === "show_ended");
   check(sc, !!ended, "host emitted show_ended");
   const qs = h.events.filter((e) => e.e === "question_show").length;
-  check(sc, qs === 3, `three questions (got ${qs})`);
+  check(sc, qs === 2, `two studio-rehearsal questions on a new installation (got ${qs})`);
+  const rounds = h.events.filter((e) => e.e === "hole_reveal").length;
+  check(sc, rounds === 6, `six Hole rounds (got ${rounds})`);
+  check(sc, h.events.some((e) => e.e === "hole_lock"), "phones locked Hole answers over the network");
   for (const ph of [a, b]) {
-    const sum = ph.results.reduce((s, r) => s + r.points, 0);
+    const sum = ph.results.reduce((s, r) => s + r.points, 0) + ph.holeResults.reduce((s, r) => s + r.points, 0);
     const st = ended.standings.find((s) => s.pid === ph.player);
     check(sc, st && st.score === sum, `${ph.name}: server score ${st && st.score} equals sum of result screens ${sum}`);
-    check(sc, ph.results.length === 3, `${ph.name} saw 3 results`);
+    check(sc, ph.results.length === 2, `${ph.name} saw 2 rehearsal results`);
+    check(sc, ph.holeResults.length === 6, `${ph.name} saw 6 Hole results (got ${ph.holeResults.length})`);
   }
   check(sc, a.errors.length === 0 && b.errors.length === 0, `no protocol errors (${a.errors} / ${b.errors})`);
   a.close(); b.close();

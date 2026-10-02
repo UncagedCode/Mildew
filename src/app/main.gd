@@ -615,7 +615,7 @@ func _run_tour() -> void:
 	await _shot("13_hole_reveal")
 	await _wait(2.6)
 	await _shot("14_hole_after_reveal")
-	await _wait_event_where("hole_round", func(e): return e.get("variant") == "scale", 240.0)
+	await _wait_event_where("hole_round", func(e): return e.get("variant") == "scale", 90.0)
 	await _wait_event("hole_stage", 30.0)
 	await _wait(1.4)
 	await _shot("15_hole_scale_round")

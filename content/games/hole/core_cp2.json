@@ -7,7 +7,7 @@
   {
    "id": "hole.belly_button",
    "enabled": true,
-   "quality_status": "draft",
+   "quality_status": "reviewed",
    "familiarity_tier": 1,
    "content_tags": [
     "grossness_2"
@@ -22,12 +22,18 @@
    "media": [
     {
      "asset_path": "res://assets/content/hole/belly_button.jpg",
-     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
-     "creator": "Mildew project",
-     "licence": "project-owned",
+     "source": "Wikimedia Commons",
+     "source_page": "https://commons.wikimedia.org/wiki/File%3AHuman_navel_male.jpg",
+     "original_url": "https://upload.wikimedia.org/wikipedia/commons/8/86/Human_navel_male.jpg",
+     "creator": "BELLO7H",
+     "licence": "CC0",
+     "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
      "attribution_required": false,
+     "attribution": "BELLO7H, CC0, via Wikimedia Commons",
+     "derivative_notes": "cropped to 4:3 and resized to 1600x1200 (tools/content/commons_media.py)",
      "approval_status": "approved",
-     "art_status": "provisional"
+     "art_status": "real_photo",
+     "retrieved": "2026-10-02"
     }
    ],
    "answer": "A belly button",
@@ -75,27 +81,27 @@
    ],
    "stages": [
     {
-     "x": 0.52,
+     "x": 0.5,
      "y": 0.47,
-     "zoom": 5.5
+     "zoom": 4
     },
     {
      "x": 0.5,
-     "y": 0.5,
-     "zoom": 2.7
+     "y": 0.483,
+     "zoom": 2.0
     },
     {
      "x": 0.5,
-     "y": 0.52,
-     "zoom": 1.5
+     "y": 0.494,
+     "zoom": 1.4
     }
    ],
-   "reveal_line": "A belly button. With fluff. Blue fluff. Nobody in this studio is wearing blue."
+   "reveal_line": "A belly button. Somebody's. We don't ask whose. That's the one rule we have."
   },
   {
    "id": "hole.bowling_ball",
-   "enabled": true,
-   "quality_status": "draft",
+   "enabled": false,
+   "quality_status": "placeholder",
    "familiarity_tier": 1,
    "content_tags": [
     "household",
@@ -116,7 +122,7 @@
      "licence": "project-owned",
      "attribution_required": false,
      "approval_status": "approved",
-     "art_status": "provisional"
+     "art_status": "placeholder"
     }
    ],
    "answer": "A bowling ball",
@@ -179,12 +185,13 @@
      "zoom": 1.5
     }
    ],
-   "reveal_line": "A bowling ball. Three holes. Fingers go in there. Don't overthink it."
+   "reveal_line": "A bowling ball. Three holes. Fingers go in there. Don't overthink it.",
+   "_note": "Disabled: procedural illustration only (D020). Needs a licensed real photo (finger holes / golf cup) before re-enabling."
   },
   {
    "id": "hole.button",
    "enabled": true,
-   "quality_status": "draft",
+   "quality_status": "reviewed",
    "familiarity_tier": 1,
    "content_tags": [
     "household",
@@ -200,12 +207,18 @@
    "media": [
     {
      "asset_path": "res://assets/content/hole/button.jpg",
-     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
-     "creator": "Mildew project",
-     "licence": "project-owned",
-     "attribution_required": false,
+     "source": "Wikimedia Commons",
+     "source_page": "https://commons.wikimedia.org/wiki/File%3ABlue_button_on_blue_clothing.jpg",
+     "original_url": "https://upload.wikimedia.org/wikipedia/commons/d/dd/Blue_button_on_blue_clothing.jpg",
+     "creator": "martinak15 from United States",
+     "licence": "CC BY 2.0",
+     "licence_url": "https://creativecommons.org/licenses/by/2.0",
+     "attribution_required": true,
+     "attribution": "martinak15 from United States, CC BY 2.0, via Wikimedia Commons",
+     "derivative_notes": "cropped to 4:3 and resized to 1600x1200 (tools/content/commons_media.py)",
      "approval_status": "approved",
-     "art_status": "provisional"
+     "art_status": "real_photo",
+     "retrieved": "2026-10-02"
     }
    ],
    "answer": "A button",
@@ -253,27 +266,27 @@
    ],
    "stages": [
     {
-     "x": 0.53,
-     "y": 0.45,
-     "zoom": 6.0
+     "x": 0.43,
+     "y": 0.36,
+     "zoom": 5
     },
     {
-     "x": 0.5,
-     "y": 0.48,
-     "zoom": 3.2
+     "x": 0.462,
+     "y": 0.423,
+     "zoom": 2.5
     },
     {
-     "x": 0.5,
-     "y": 0.5,
-     "zoom": 1.7
+     "x": 0.486,
+     "y": 0.472,
+     "zoom": 1.4
     }
    ],
-   "reveal_line": "A button. Off a cardigan. Off MY cardigan, as it happens."
+   "reveal_line": "A button. Off a jumper. Somebody's lost the other ones. Somebody always has."
   },
   {
    "id": "hole.cave_entrance",
    "enabled": true,
-   "quality_status": "draft",
+   "quality_status": "reviewed",
    "familiarity_tier": 1,
    "content_tags": [
     "short",
@@ -289,12 +302,18 @@
    "media": [
     {
      "asset_path": "res://assets/content/hole/cave_entrance.jpg",
-     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
-     "creator": "Mildew project",
-     "licence": "project-owned",
+     "source": "Wikimedia Commons",
+     "source_page": "https://commons.wikimedia.org/wiki/File%3AOrua_sea_cave.jpg",
+     "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Orua_sea_cave.jpg",
+     "creator": "Pseudopanax at English Wikipedia",
+     "licence": "Public domain",
+     "licence_url": "",
      "attribution_required": false,
+     "attribution": "Pseudopanax at English Wikipedia, Public domain, via Wikimedia Commons",
+     "derivative_notes": "cropped to 4:3 and resized to 1600x1200 (tools/content/commons_media.py)",
      "approval_status": "approved",
-     "art_status": "provisional"
+     "art_status": "real_photo",
+     "retrieved": "2026-10-02"
     }
    ],
    "answer": "A cave entrance",
@@ -342,27 +361,27 @@
    ],
    "stages": [
     {
-     "x": 0.33,
-     "y": 0.55,
-     "zoom": 4.5
+     "x": 0.36,
+     "y": 0.8,
+     "zoom": 4
     },
     {
-     "x": 0.42,
-     "y": 0.58,
-     "zoom": 2.2
+     "x": 0.39,
+     "y": 0.72,
+     "zoom": 2.0
     },
     {
-     "x": 0.5,
-     "y": 0.58,
-     "zoom": 1.3
+     "x": 0.47,
+     "y": 0.56,
+     "zoom": 1.4
     }
    ],
-   "reveal_line": "A cave. Big enough to walk into. I wouldn't."
+   "reveal_line": "A sea cave. Big enough to row a boat into. I wouldn't. Nobody comes back out of those in films."
   },
   {
    "id": "hole.colander",
    "enabled": true,
-   "quality_status": "draft",
+   "quality_status": "reviewed",
    "familiarity_tier": 1,
    "content_tags": [
     "household",
@@ -379,12 +398,18 @@
    "media": [
     {
      "asset_path": "res://assets/content/hole/colander.jpg",
-     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
-     "creator": "Mildew project",
-     "licence": "project-owned",
+     "source": "Wikimedia Commons",
+     "source_page": "https://commons.wikimedia.org/wiki/File%3AWhite_Colander_%2853504734684%29.jpg",
+     "original_url": "https://upload.wikimedia.org/wikipedia/commons/4/49/White_Colander_%2853504734684%29.jpg",
+     "creator": "Chris Williams",
+     "licence": "CC0",
+     "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
      "attribution_required": false,
+     "attribution": "Chris Williams, CC0, via Wikimedia Commons",
+     "derivative_notes": "cropped to 4:3 and resized to 1600x1200 (tools/content/commons_media.py)",
      "approval_status": "approved",
-     "art_status": "provisional"
+     "art_status": "real_photo",
+     "retrieved": "2026-10-02"
     }
    ],
    "answer": "A colander",
@@ -432,19 +457,19 @@
    ],
    "stages": [
     {
-     "x": 0.42,
-     "y": 0.55,
-     "zoom": 5.5
-    },
-    {
-     "x": 0.47,
+     "x": 0.45,
      "y": 0.52,
-     "zoom": 2.7
+     "zoom": 6
     },
     {
-     "x": 0.5,
-     "y": 0.5,
-     "zoom": 1.5
+     "x": 0.473,
+     "y": 0.511,
+     "zoom": 3.0
+    },
+    {
+     "x": 0.49,
+     "y": 0.504,
+     "zoom": 1.4
     }
    ],
    "reveal_line": "A colander. For draining pasta. Or, in my mother's house, for wearing."
@@ -452,7 +477,7 @@
   {
    "id": "hole.crumpet",
    "enabled": true,
-   "quality_status": "draft",
+   "quality_status": "reviewed",
    "familiarity_tier": 1,
    "content_tags": [
     "food",
@@ -468,12 +493,18 @@
    "media": [
     {
      "asset_path": "res://assets/content/hole/crumpet.jpg",
-     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
-     "creator": "Mildew project",
-     "licence": "project-owned",
-     "attribution_required": false,
+     "source": "Wikimedia Commons",
+     "source_page": "https://commons.wikimedia.org/wiki/File%3ACrumpet_or_Pikelet%3F_%2849059515222%29.jpg",
+     "original_url": "https://upload.wikimedia.org/wikipedia/commons/5/57/Crumpet_or_Pikelet%3F_%2849059515222%29.jpg",
+     "creator": "It's No Game",
+     "licence": "CC BY 2.0",
+     "licence_url": "https://creativecommons.org/licenses/by/2.0",
+     "attribution_required": true,
+     "attribution": "It's No Game, CC BY 2.0, via Wikimedia Commons",
+     "derivative_notes": "cropped to 4:3 and resized to 1600x1200 (tools/content/commons_media.py)",
      "approval_status": "approved",
-     "art_status": "provisional"
+     "art_status": "real_photo",
+     "retrieved": "2026-10-02"
     }
    ],
    "answer": "A crumpet",
@@ -521,27 +552,27 @@
    ],
    "stages": [
     {
-     "x": 0.56,
-     "y": 0.47,
-     "zoom": 6.0
+     "x": 0.6,
+     "y": 0.5,
+     "zoom": 6
     },
     {
-     "x": 0.53,
+     "x": 0.555,
      "y": 0.5,
      "zoom": 3.0
     },
     {
-     "x": 0.5,
+     "x": 0.52,
      "y": 0.5,
-     "zoom": 1.6
+     "zoom": 1.4
     }
    ],
-   "reveal_line": "A crumpet. Toasted, buttered and staring back at you."
+   "reveal_line": "A crumpet. Well. A woman dressed as a crumpet. At a parade. For bread. I've been to worse parties."
   },
   {
    "id": "hole.drain_outfall",
    "enabled": true,
-   "quality_status": "draft",
+   "quality_status": "reviewed",
    "familiarity_tier": 1,
    "content_tags": [
     "grossness_2",
@@ -557,12 +588,18 @@
    "media": [
     {
      "asset_path": "res://assets/content/hole/drain_outfall.jpg",
-     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
-     "creator": "Mildew project",
-     "licence": "project-owned",
+     "source": "Wikimedia Commons",
+     "source_page": "https://commons.wikimedia.org/wiki/File%3AWater_flows_out_of_a_run_off_pipe_flooding_a_low_lying_area.jpg",
+     "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/27/Water_flows_out_of_a_run_off_pipe_flooding_a_low_lying_area.jpg",
+     "creator": "U.S. Fish and Wildlife Service",
+     "licence": "Public domain",
+     "licence_url": "",
      "attribution_required": false,
+     "attribution": "U.S. Fish and Wildlife Service, Public domain, via Wikimedia Commons",
+     "derivative_notes": "cropped to 4:3 and resized to 1600x1200 (tools/content/commons_media.py)",
      "approval_status": "approved",
-     "art_status": "provisional"
+     "art_status": "real_photo",
+     "retrieved": "2026-10-02"
     }
    ],
    "answer": "A sewer outfall pipe",
@@ -610,27 +647,27 @@
    ],
    "stages": [
     {
-     "x": 0.3,
-     "y": 0.47,
-     "zoom": 4.5
+     "x": 0.33,
+     "y": 0.68,
+     "zoom": 5
     },
     {
-     "x": 0.4,
-     "y": 0.47,
-     "zoom": 2.3
+     "x": 0.407,
+     "y": 0.599,
+     "zoom": 2.5
     },
     {
-     "x": 0.5,
-     "y": 0.5,
-     "zoom": 1.35
+     "x": 0.466,
+     "y": 0.536,
+     "zoom": 1.4
     }
    ],
-   "reveal_line": "A sewer outfall. The green bit is exactly what you think it is."
+   "reveal_line": "A run-off pipe in a marsh. The water's brown because it's been somewhere. Don't ask where."
   },
   {
    "id": "hole.ear",
    "enabled": true,
-   "quality_status": "draft",
+   "quality_status": "reviewed",
    "familiarity_tier": 1,
    "content_tags": [
     "grossness_2"
@@ -645,12 +682,18 @@
    "media": [
     {
      "asset_path": "res://assets/content/hole/ear.jpg",
-     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
-     "creator": "Mildew project",
-     "licence": "project-owned",
+     "source": "Wikimedia Commons",
+     "source_page": "https://commons.wikimedia.org/wiki/File%3ALharina%E8%80%B3%E6%9C%B5.jpg",
+     "original_url": "https://upload.wikimedia.org/wikipedia/commons/d/d6/Lharina%E8%80%B3%E6%9C%B5.jpg",
+     "creator": "Anemone123",
+     "licence": "CC0",
+     "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
      "attribution_required": false,
+     "attribution": "Anemone123, CC0, via Wikimedia Commons",
+     "derivative_notes": "cropped to 4:3 and resized to 1600x1200 (tools/content/commons_media.py)",
      "approval_status": "approved",
-     "art_status": "provisional"
+     "art_status": "real_photo",
+     "retrieved": "2026-10-02"
     }
    ],
    "answer": "An ear",
@@ -699,26 +742,26 @@
    "stages": [
     {
      "x": 0.44,
-     "y": 0.52,
-     "zoom": 5.5
+     "y": 0.42,
+     "zoom": 4
     },
     {
-     "x": 0.47,
-     "y": 0.53,
-     "zoom": 2.6
+     "x": 0.467,
+     "y": 0.456,
+     "zoom": 2.0
     },
     {
-     "x": 0.5,
-     "y": 0.52,
+     "x": 0.488,
+     "y": 0.484,
      "zoom": 1.4
     }
    ],
-   "reveal_line": "An ear. With wax. I'm told that's normal. I'm told a lot of things."
+   "reveal_line": "An ear. Pink, clean, and listening to every word you say."
   },
   {
    "id": "hole.golf_hole",
-   "enabled": true,
-   "quality_status": "draft",
+   "enabled": false,
+   "quality_status": "placeholder",
    "familiarity_tier": 1,
    "content_tags": [
     "short",
@@ -739,7 +782,7 @@
      "licence": "project-owned",
      "attribution_required": false,
      "approval_status": "approved",
-     "art_status": "provisional"
+     "art_status": "placeholder"
     }
    ],
    "answer": "A golf hole",
@@ -802,12 +845,13 @@
      "zoom": 1.45
     }
    ],
-   "reveal_line": "A golf hole. Four and a quarter inches. A lot of men have cried over less."
+   "reveal_line": "A golf hole. Four and a quarter inches. A lot of men have cried over less.",
+   "_note": "Disabled: procedural illustration only (D020). Needs a licensed real photo (finger holes / golf cup) before re-enabling."
   },
   {
    "id": "hole.keyhole",
    "enabled": true,
-   "quality_status": "draft",
+   "quality_status": "reviewed",
    "familiarity_tier": 1,
    "content_tags": [
     "household",
@@ -823,12 +867,18 @@
    "media": [
     {
      "asset_path": "res://assets/content/hole/keyhole.jpg",
-     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
-     "creator": "Mildew project",
-     "licence": "project-owned",
+     "source": "Wikimedia Commons",
+     "source_page": "https://commons.wikimedia.org/wiki/File%3ADetail_of_south_door%2C_Higham_2.JPG",
+     "original_url": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Detail_of_south_door%2C_Higham_2.JPG",
+     "creator": "Poliphilo",
+     "licence": "CC0",
+     "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
      "attribution_required": false,
+     "attribution": "Poliphilo, CC0, via Wikimedia Commons",
+     "derivative_notes": "cropped to 4:3 and resized to 1600x1200 (tools/content/commons_media.py)",
      "approval_status": "approved",
-     "art_status": "provisional"
+     "art_status": "real_photo",
+     "retrieved": "2026-10-02"
     }
    ],
    "answer": "A keyhole",
@@ -876,19 +926,19 @@
    ],
    "stages": [
     {
-     "x": 0.5,
-     "y": 0.47,
-     "zoom": 6.0
+     "x": 0.34,
+     "y": 0.33,
+     "zoom": 5.5
     },
     {
-     "x": 0.5,
-     "y": 0.5,
-     "zoom": 3.0
+     "x": 0.412,
+     "y": 0.407,
+     "zoom": 2.75
     },
     {
-     "x": 0.5,
-     "y": 0.5,
-     "zoom": 1.7
+     "x": 0.468,
+     "y": 0.466,
+     "zoom": 1.4
     }
    ],
    "reveal_line": "A keyhole. We've all looked through one. Some of us professionally."
@@ -896,7 +946,7 @@
   {
    "id": "hole.leaf_stoma",
    "enabled": true,
-   "quality_status": "draft",
+   "quality_status": "reviewed",
    "familiarity_tier": 3,
    "content_tags": [
     "low_energy",
@@ -912,12 +962,18 @@
    "media": [
     {
      "asset_path": "res://assets/content/hole/leaf_stoma.jpg",
-     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
-     "creator": "Mildew project",
-     "licence": "project-owned",
+     "source": "Wikimedia Commons",
+     "source_page": "https://commons.wikimedia.org/wiki/File%3AStoma_under_optical_microscope.jpg",
+     "original_url": "https://upload.wikimedia.org/wikipedia/commons/d/d5/Stoma_under_optical_microscope.jpg",
+     "creator": "Paulssanta02",
+     "licence": "CC0",
+     "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
      "attribution_required": false,
+     "attribution": "Paulssanta02, CC0, via Wikimedia Commons",
+     "derivative_notes": "cropped to 4:3 and resized to 1600x1200 (tools/content/commons_media.py)",
      "approval_status": "approved",
-     "art_status": "provisional"
+     "art_status": "real_photo",
+     "retrieved": "2026-10-02"
     }
    ],
    "answer": "A pore on a leaf",
@@ -965,18 +1021,18 @@
    ],
    "stages": [
     {
-     "x": 0.5,
-     "y": 0.42,
-     "zoom": 5.0
+     "x": 0.47,
+     "y": 0.44,
+     "zoom": 3
     },
     {
-     "x": 0.5,
-     "y": 0.48,
-     "zoom": 2.5
+     "x": 0.483,
+     "y": 0.467,
+     "zoom": 1.8
     },
     {
-     "x": 0.5,
-     "y": 0.5,
+     "x": 0.494,
+     "y": 0.488,
      "zoom": 1.4
     }
    ],
@@ -985,7 +1041,7 @@
   {
    "id": "hole.lotus_pod",
    "enabled": true,
-   "quality_status": "draft",
+   "quality_status": "reviewed",
    "familiarity_tier": 2,
    "content_tags": [
     "unsettling_capable",
@@ -1001,12 +1057,18 @@
    "media": [
     {
      "asset_path": "res://assets/content/hole/lotus_pod.jpg",
-     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
-     "creator": "Mildew project",
-     "licence": "project-owned",
+     "source": "Wikimedia Commons",
+     "source_page": "https://commons.wikimedia.org/wiki/File%3ALotus_seed_pod_-_Motsuji%2C_Hiraizumi%2C_Iwate_-_DSC04442.jpg",
+     "original_url": "https://upload.wikimedia.org/wikipedia/commons/d/de/Lotus_seed_pod_-_Motsuji%2C_Hiraizumi%2C_Iwate_-_DSC04442.jpg",
+     "creator": "Daderot",
+     "licence": "CC0",
+     "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
      "attribution_required": false,
+     "attribution": "Daderot, CC0, via Wikimedia Commons",
+     "derivative_notes": "cropped to 4:3 and resized to 1600x1200 (tools/content/commons_media.py)",
      "approval_status": "approved",
-     "art_status": "provisional"
+     "art_status": "real_photo",
+     "retrieved": "2026-10-02"
     }
    ],
    "answer": "A lotus seed pod",
@@ -1056,17 +1118,17 @@
     {
      "x": 0.6,
      "y": 0.42,
-     "zoom": 5.0
+     "zoom": 6
     },
     {
-     "x": 0.55,
-     "y": 0.47,
-     "zoom": 2.6
+     "x": 0.555,
+     "y": 0.456,
+     "zoom": 3.0
     },
     {
-     "x": 0.5,
-     "y": 0.5,
-     "zoom": 1.5
+     "x": 0.52,
+     "y": 0.484,
+     "zoom": 1.4
     }
    ],
    "reveal_line": "A lotus seed pod. If that made your skin crawl, you're not alone, and you're not excused."
@@ -1074,7 +1136,7 @@
   {
    "id": "hole.manhole",
    "enabled": true,
-   "quality_status": "draft",
+   "quality_status": "reviewed",
    "familiarity_tier": 1,
    "content_tags": [
     "short",
@@ -1090,12 +1152,18 @@
    "media": [
     {
      "asset_path": "res://assets/content/hole/manhole.jpg",
-     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
-     "creator": "Mildew project",
-     "licence": "project-owned",
-     "attribution_required": false,
+     "source": "Wikimedia Commons",
+     "source_page": "https://commons.wikimedia.org/wiki/File%3ASEWER_-_Open_Manhole_-_New_Orleans_September_2020.jpg",
+     "original_url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/SEWER_-_Open_Manhole_-_New_Orleans_September_2020.jpg",
+     "creator": "Bart Everson",
+     "licence": "CC BY 2.0",
+     "licence_url": "https://creativecommons.org/licenses/by/2.0",
+     "attribution_required": true,
+     "attribution": "Bart Everson, CC BY 2.0, via Wikimedia Commons",
+     "derivative_notes": "cropped to 4:3 and resized to 1600x1200 (tools/content/commons_media.py)",
      "approval_status": "approved",
-     "art_status": "provisional"
+     "art_status": "real_photo",
+     "retrieved": "2026-10-02"
     }
    ],
    "answer": "An open manhole",
@@ -1143,19 +1211,19 @@
    ],
    "stages": [
     {
-     "x": 0.39,
-     "y": 0.3,
-     "zoom": 4.5
+     "x": 0.72,
+     "y": 0.44,
+     "zoom": 4
     },
     {
-     "x": 0.45,
-     "y": 0.4,
-     "zoom": 2.2
+     "x": 0.621,
+     "y": 0.467,
+     "zoom": 2.0
     },
     {
-     "x": 0.55,
-     "y": 0.55,
-     "zoom": 1.35
+     "x": 0.544,
+     "y": 0.488,
+     "zoom": 1.4
     }
    ],
    "reveal_line": "An open manhole. If you're watching at home: put the lid back."
@@ -1163,7 +1231,7 @@
   {
    "id": "hole.pepper_shaker",
    "enabled": true,
-   "quality_status": "draft",
+   "quality_status": "reviewed",
    "familiarity_tier": 1,
    "content_tags": [
     "food",
@@ -1180,12 +1248,18 @@
    "media": [
     {
      "asset_path": "res://assets/content/hole/pepper_shaker.jpg",
-     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
-     "creator": "Mildew project",
-     "licence": "project-owned",
+     "source": "Wikimedia Commons",
+     "source_page": "https://commons.wikimedia.org/wiki/File%3ACafe_Mondegar%2C_Colaba%2C_Mumbai_%284%29.jpg",
+     "original_url": "https://upload.wikimedia.org/wikipedia/commons/3/3f/Cafe_Mondegar%2C_Colaba%2C_Mumbai_%284%29.jpg",
+     "creator": "Prof tpms",
+     "licence": "CC0",
+     "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
      "attribution_required": false,
+     "attribution": "Prof tpms, CC0, via Wikimedia Commons",
+     "derivative_notes": "cropped to 4:3 and resized to 1600x1200 (tools/content/commons_media.py)",
      "approval_status": "approved",
-     "art_status": "provisional"
+     "art_status": "real_photo",
+     "retrieved": "2026-10-02"
     }
    ],
    "answer": "A pepper pot",
@@ -1233,27 +1307,27 @@
    ],
    "stages": [
     {
-     "x": 0.47,
-     "y": 0.47,
-     "zoom": 6.0
+     "x": 0.21,
+     "y": 0.35,
+     "zoom": 6
     },
     {
-     "x": 0.5,
-     "y": 0.5,
+     "x": 0.341,
+     "y": 0.417,
      "zoom": 3.0
     },
     {
-     "x": 0.5,
-     "y": 0.5,
-     "zoom": 1.6
+     "x": 0.442,
+     "y": 0.47,
+     "zoom": 1.4
     }
    ],
-   "reveal_line": "A pepper pot. Nine holes. I've counted. I count things when I'm nervous."
+   "reveal_line": "A pepper pot. Holes in the top. I've counted them. I count things when I'm nervous."
   },
   {
    "id": "hole.pig_snout",
    "enabled": true,
-   "quality_status": "draft",
+   "quality_status": "reviewed",
    "familiarity_tier": 1,
    "content_tags": [
     "animals",
@@ -1270,12 +1344,18 @@
    "media": [
     {
      "asset_path": "res://assets/content/hole/pig_snout.jpg",
-     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
-     "creator": "Mildew project",
-     "licence": "project-owned",
+     "source": "Wikimedia Commons",
+     "source_page": "https://commons.wikimedia.org/wiki/File%3AFrozen_pig_nose.jpg",
+     "original_url": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Frozen_pig_nose.jpg",
+     "creator": "Fumikas Sagisavas",
+     "licence": "CC0",
+     "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
      "attribution_required": false,
+     "attribution": "Fumikas Sagisavas, CC0, via Wikimedia Commons",
+     "derivative_notes": "cropped to 4:3 and resized to 1600x1200 (tools/content/commons_media.py)",
      "approval_status": "approved",
-     "art_status": "provisional"
+     "art_status": "real_photo",
+     "retrieved": "2026-10-02"
     }
    ],
    "answer": "A pig's snout",
@@ -1323,27 +1403,27 @@
    ],
    "stages": [
     {
-     "x": 0.44,
-     "y": 0.58,
-     "zoom": 5.5
+     "x": 0.53,
+     "y": 0.27,
+     "zoom": 5
     },
     {
-     "x": 0.47,
-     "y": 0.55,
-     "zoom": 2.7
+     "x": 0.516,
+     "y": 0.373,
+     "zoom": 2.5
     },
     {
-     "x": 0.5,
-     "y": 0.53,
-     "zoom": 1.5
+     "x": 0.506,
+     "y": 0.454,
+     "zoom": 1.4
     }
    ],
-   "reveal_line": "A pig's snout. Tremendous sense of smell. They'd have smelled this studio from Leeds."
+   "reveal_line": "A pig's snout. Frozen. In a pile with about forty others. Somebody ordered those."
   },
   {
    "id": "hole.plug_socket",
    "enabled": true,
-   "quality_status": "draft",
+   "quality_status": "reviewed",
    "familiarity_tier": 1,
    "content_tags": [
     "household",
@@ -1359,12 +1439,18 @@
    "media": [
     {
      "asset_path": "res://assets/content/hole/plug_socket.jpg",
-     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
-     "creator": "Mildew project",
-     "licence": "project-owned",
+     "source": "Wikimedia Commons",
+     "source_page": "https://commons.wikimedia.org/wiki/File%3A247_Home_Rescue_electric_plugs.jpg",
+     "original_url": "https://upload.wikimedia.org/wikipedia/commons/8/82/247_Home_Rescue_electric_plugs.jpg",
+     "creator": "247homerescue",
+     "licence": "CC0",
+     "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
      "attribution_required": false,
+     "attribution": "247homerescue, CC0, via Wikimedia Commons",
+     "derivative_notes": "cropped to 4:3 and resized to 1600x1200 (tools/content/commons_media.py)",
      "approval_status": "approved",
-     "art_status": "provisional"
+     "art_status": "real_photo",
+     "retrieved": "2026-10-02"
     }
    ],
    "answer": "A plug socket",
@@ -1412,19 +1498,19 @@
    ],
    "stages": [
     {
-     "x": 0.43,
-     "y": 0.39,
-     "zoom": 5.2
+     "x": 0.73,
+     "y": 0.57,
+     "zoom": 6
     },
     {
-     "x": 0.47,
-     "y": 0.5,
-     "zoom": 2.6
+     "x": 0.626,
+     "y": 0.538,
+     "zoom": 3.0
     },
     {
-     "x": 0.5,
-     "y": 0.52,
-     "zoom": 1.45
+     "x": 0.546,
+     "y": 0.514,
+     "zoom": 1.4
     }
    ],
    "reveal_line": "A plug socket. Thirteen amps. Please don't put your tongue in it, Steve."
@@ -1432,7 +1518,7 @@
   {
    "id": "hole.plughole",
    "enabled": true,
-   "quality_status": "draft",
+   "quality_status": "reviewed",
    "familiarity_tier": 1,
    "content_tags": [
     "household",
@@ -1448,12 +1534,18 @@
    "media": [
     {
      "asset_path": "res://assets/content/hole/plughole.jpg",
-     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
-     "creator": "Mildew project",
-     "licence": "project-owned",
+     "source": "Wikimedia Commons",
+     "source_page": "https://commons.wikimedia.org/wiki/File%3APlughole.JPG",
+     "original_url": "https://upload.wikimedia.org/wikipedia/commons/4/40/Plughole.JPG",
+     "creator": "Evans1551 at English Wikipedia",
+     "licence": "Public domain",
+     "licence_url": "",
      "attribution_required": false,
+     "attribution": "Evans1551 at English Wikipedia, Public domain, via Wikimedia Commons",
+     "derivative_notes": "cropped to 4:3 and resized to 1600x1200 (tools/content/commons_media.py)",
      "approval_status": "approved",
-     "art_status": "provisional"
+     "art_status": "real_photo",
+     "retrieved": "2026-10-02"
     }
    ],
    "answer": "A plughole",
@@ -1501,27 +1593,27 @@
    ],
    "stages": [
     {
-     "x": 0.53,
-     "y": 0.47,
-     "zoom": 5.5
+     "x": 0.5,
+     "y": 0.68,
+     "zoom": 4.5
     },
     {
      "x": 0.5,
-     "y": 0.5,
-     "zoom": 2.8
+     "y": 0.599,
+     "zoom": 2.25
     },
     {
      "x": 0.5,
-     "y": 0.5,
-     "zoom": 1.6
+     "y": 0.536,
+     "zoom": 1.4
     }
    ],
-   "reveal_line": "A plughole. And a hair. Somebody's hair. Not mine."
+   "reveal_line": "A plughole. And somebody's left the tap running. Not in this studio. We haven't got a tap."
   },
   {
    "id": "hole.rabbit_burrow",
    "enabled": true,
-   "quality_status": "draft",
+   "quality_status": "reviewed",
    "familiarity_tier": 1,
    "content_tags": [
     "animals",
@@ -1537,12 +1629,18 @@
    "media": [
     {
      "asset_path": "res://assets/content/hole/rabbit_burrow.jpg",
-     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
-     "creator": "Mildew project",
-     "licence": "project-owned",
+     "source": "Wikimedia Commons",
+     "source_page": "https://commons.wikimedia.org/wiki/File%3ARabbit_burrow_entrance.jpg",
+     "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/f1/Rabbit_burrow_entrance.jpg",
+     "creator": "Brammers",
+     "licence": "Public domain",
+     "licence_url": "",
      "attribution_required": false,
+     "attribution": "Brammers, Public domain, via Wikimedia Commons",
+     "derivative_notes": "cropped to 4:3 and resized to 1600x1200 (tools/content/commons_media.py)",
      "approval_status": "approved",
-     "art_status": "provisional"
+     "art_status": "real_photo",
+     "retrieved": "2026-10-02"
     }
    ],
    "answer": "A rabbit burrow",
@@ -1590,18 +1688,18 @@
    ],
    "stages": [
     {
-     "x": 0.39,
-     "y": 0.55,
-     "zoom": 5.0
+     "x": 0.55,
+     "y": 0.44,
+     "zoom": 3.5
     },
     {
-     "x": 0.46,
-     "y": 0.57,
-     "zoom": 2.5
+     "x": 0.528,
+     "y": 0.467,
+     "zoom": 1.8
     },
     {
-     "x": 0.5,
-     "y": 0.55,
+     "x": 0.51,
+     "y": 0.488,
      "zoom": 1.4
     }
    ],
@@ -1610,7 +1708,7 @@
   {
    "id": "hole.rotary_dial",
    "enabled": true,
-   "quality_status": "draft",
+   "quality_status": "reviewed",
    "familiarity_tier": 1,
    "content_tags": [
     "household",
@@ -1626,12 +1724,18 @@
    "media": [
     {
      "asset_path": "res://assets/content/hole/rotary_dial.jpg",
-     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
-     "creator": "Mildew project",
-     "licence": "project-owned",
-     "attribution_required": false,
+     "source": "Wikimedia Commons",
+     "source_page": "https://commons.wikimedia.org/wiki/File%3AEricofon_%28German_version%29_Plunger_fitted_%2830261314594%29.jpg",
+     "original_url": "https://upload.wikimedia.org/wikipedia/commons/a/a1/Ericofon_%28German_version%29_Plunger_fitted_%2830261314594%29.jpg",
+     "creator": "tony_duell",
+     "licence": "CC BY 2.0",
+     "licence_url": "https://creativecommons.org/licenses/by/2.0",
+     "attribution_required": true,
+     "attribution": "tony_duell, CC BY 2.0, via Wikimedia Commons",
+     "derivative_notes": "cropped to 4:3 and resized to 1600x1200 (tools/content/commons_media.py)",
      "approval_status": "approved",
-     "art_status": "provisional"
+     "art_status": "real_photo",
+     "retrieved": "2026-10-02"
     }
    ],
    "answer": "A telephone dial",
@@ -1679,18 +1783,18 @@
    ],
    "stages": [
     {
-     "x": 0.69,
-     "y": 0.33,
-     "zoom": 5.0
+     "x": 0.33,
+     "y": 0.56,
+     "zoom": 6
     },
     {
-     "x": 0.62,
-     "y": 0.42,
-     "zoom": 2.5
+     "x": 0.407,
+     "y": 0.533,
+     "zoom": 3.0
     },
     {
-     "x": 0.5,
-     "y": 0.5,
+     "x": 0.466,
+     "y": 0.512,
      "zoom": 1.4
     }
    ],
@@ -1699,7 +1803,7 @@
   {
    "id": "hole.sea_sponge",
    "enabled": true,
-   "quality_status": "draft",
+   "quality_status": "reviewed",
    "familiarity_tier": 2,
    "content_tags": [
     "animals",
@@ -1715,12 +1819,18 @@
    "media": [
     {
      "asset_path": "res://assets/content/hole/sea_sponge.jpg",
-     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
-     "creator": "Mildew project",
-     "licence": "project-owned",
+     "source": "Wikimedia Commons",
+     "source_page": "https://commons.wikimedia.org/wiki/File%3ASponge_1_Davy_Crocker_Reef_20230712.jpg",
+     "original_url": "https://upload.wikimedia.org/wikipedia/commons/0/0c/Sponge_1_Davy_Crocker_Reef_20230712.jpg",
+     "creator": "Jstuby",
+     "licence": "CC0",
+     "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
      "attribution_required": false,
+     "attribution": "Jstuby, CC0, via Wikimedia Commons",
+     "derivative_notes": "cropped to 4:3 and resized to 1600x1200 (tools/content/commons_media.py)",
      "approval_status": "approved",
-     "art_status": "provisional"
+     "art_status": "real_photo",
+     "retrieved": "2026-10-02"
     }
    ],
    "answer": "A sea sponge",
@@ -1768,18 +1878,18 @@
    ],
    "stages": [
     {
-     "x": 0.55,
-     "y": 0.46,
-     "zoom": 5.0
-    },
-    {
      "x": 0.52,
-     "y": 0.5,
-     "zoom": 2.5
+     "y": 0.43,
+     "zoom": 6
     },
     {
-     "x": 0.5,
-     "y": 0.52,
+     "x": 0.511,
+     "y": 0.462,
+     "zoom": 3.0
+    },
+    {
+     "x": 0.504,
+     "y": 0.486,
      "zoom": 1.4
     }
    ],
@@ -1788,7 +1898,7 @@
   {
    "id": "hole.shower_head",
    "enabled": true,
-   "quality_status": "draft",
+   "quality_status": "reviewed",
    "familiarity_tier": 1,
    "content_tags": [
     "household",
@@ -1804,12 +1914,18 @@
    "media": [
     {
      "asset_path": "res://assets/content/hole/shower_head.jpg",
-     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
-     "creator": "Mildew project",
-     "licence": "project-owned",
-     "attribution_required": false,
+     "source": "Wikimedia Commons",
+     "source_page": "https://commons.wikimedia.org/wiki/File%3ADirty_Old_Shower_Head_%2854000230920%29.jpg",
+     "original_url": "https://upload.wikimedia.org/wikipedia/commons/9/9f/Dirty_Old_Shower_Head_%2854000230920%29.jpg",
+     "creator": "Tony Webster",
+     "licence": "CC BY 2.0",
+     "licence_url": "https://creativecommons.org/licenses/by/2.0",
+     "attribution_required": true,
+     "attribution": "Tony Webster, CC BY 2.0, via Wikimedia Commons",
+     "derivative_notes": "cropped to 4:3 and resized to 1600x1200 (tools/content/commons_media.py)",
      "approval_status": "approved",
-     "art_status": "provisional"
+     "art_status": "real_photo",
+     "retrieved": "2026-10-02"
     }
    ],
    "answer": "A shower head",
@@ -1857,19 +1973,19 @@
    ],
    "stages": [
     {
-     "x": 0.6,
-     "y": 0.46,
-     "zoom": 6.0
+     "x": 0.47,
+     "y": 0.45,
+     "zoom": 5
     },
     {
-     "x": 0.56,
-     "y": 0.48,
-     "zoom": 3.0
+     "x": 0.483,
+     "y": 0.473,
+     "zoom": 2.5
     },
     {
-     "x": 0.5,
-     "y": 0.5,
-     "zoom": 1.55
+     "x": 0.494,
+     "y": 0.49,
+     "zoom": 1.4
     }
    ],
    "reveal_line": "A shower head. Limescale and all. We don't have one backstage, before anybody asks."
@@ -1877,7 +1993,7 @@
   {
    "id": "hole.studio_hatch",
    "enabled": true,
-   "quality_status": "draft",
+   "quality_status": "reviewed",
    "familiarity_tier": 3,
    "content_tags": [
     "studio_world",
@@ -1894,12 +2010,18 @@
    "media": [
     {
      "asset_path": "res://assets/content/hole/studio_hatch.jpg",
-     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
-     "creator": "Mildew project",
-     "licence": "project-owned",
+     "source": "Wikimedia Commons",
+     "source_page": "https://commons.wikimedia.org/wiki/File%3ALooking_up_the_Personnel_Access_Hatch._%284271a80a-155d-4519-3eb7-c1a00cf7b92e%29.JPG",
+     "original_url": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Looking_up_the_Personnel_Access_Hatch._%284271a80a-155d-4519-3eb7-c1a00cf7b92e%29.JPG",
+     "creator": "NPS",
+     "licence": "Public domain",
+     "licence_url": "",
      "attribution_required": false,
+     "attribution": "NPS, Public domain, via Wikimedia Commons",
+     "derivative_notes": "cropped to 4:3 and resized to 1600x1200 (tools/content/commons_media.py)",
      "approval_status": "approved",
-     "art_status": "provisional"
+     "art_status": "real_photo",
+     "retrieved": "2026-10-02"
     }
    ],
    "answer": "A hatch",
@@ -1947,19 +2069,19 @@
    ],
    "stages": [
     {
-     "x": 0.63,
-     "y": 0.55,
-     "zoom": 5.0
+     "x": 0.54,
+     "y": 0.3,
+     "zoom": 3.5
     },
     {
-     "x": 0.56,
-     "y": 0.53,
-     "zoom": 2.4
+     "x": 0.522,
+     "y": 0.39,
+     "zoom": 1.8
     },
     {
-     "x": 0.5,
-     "y": 0.53,
-     "zoom": 1.35
+     "x": 0.508,
+     "y": 0.46,
+     "zoom": 1.4
     }
    ],
    "studio_hole": true,
@@ -1968,7 +2090,7 @@
   {
    "id": "hole.swiss_cheese",
    "enabled": true,
-   "quality_status": "draft",
+   "quality_status": "reviewed",
    "familiarity_tier": 1,
    "content_tags": [
     "food",
@@ -1984,12 +2106,18 @@
    "media": [
     {
      "asset_path": "res://assets/content/hole/swiss_cheese.jpg",
-     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
-     "creator": "Mildew project",
-     "licence": "project-owned",
+     "source": "Wikimedia Commons",
+     "source_page": "https://commons.wikimedia.org/wiki/File%3ACheese_33_bg_052406.jpg",
+     "original_url": "https://upload.wikimedia.org/wikipedia/commons/c/c0/Cheese_33_bg_052406.jpg",
+     "creator": "Jon Sullivan",
+     "licence": "Public domain",
+     "licence_url": "",
      "attribution_required": false,
+     "attribution": "Jon Sullivan, Public domain, via Wikimedia Commons",
+     "derivative_notes": "cropped to 4:3 and resized to 1600x1200 (tools/content/commons_media.py)",
      "approval_status": "approved",
-     "art_status": "provisional"
+     "art_status": "real_photo",
+     "retrieved": "2026-10-02"
     }
    ],
    "answer": "Swiss cheese",
@@ -2037,18 +2165,18 @@
    ],
    "stages": [
     {
-     "x": 0.47,
-     "y": 0.6,
-     "zoom": 5.0
+     "x": 0.25,
+     "y": 0.46,
+     "zoom": 6
     },
     {
-     "x": 0.5,
-     "y": 0.55,
-     "zoom": 2.6
+     "x": 0.362,
+     "y": 0.478,
+     "zoom": 3.0
     },
     {
-     "x": 0.5,
-     "y": 0.52,
+     "x": 0.45,
+     "y": 0.492,
      "zoom": 1.4
     }
    ],
@@ -2057,7 +2185,7 @@
   {
    "id": "hole.trumpet_bell",
    "enabled": true,
-   "quality_status": "draft",
+   "quality_status": "reviewed",
    "familiarity_tier": 1,
    "content_tags": [
     "household",
@@ -2073,12 +2201,18 @@
    "media": [
     {
      "asset_path": "res://assets/content/hole/trumpet_bell.jpg",
-     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
-     "creator": "Mildew project",
-     "licence": "project-owned",
+     "source": "Wikimedia Commons",
+     "source_page": "https://commons.wikimedia.org/wiki/File%3ATrumpet_Bell.jpg",
+     "original_url": "https://upload.wikimedia.org/wikipedia/commons/7/7e/Trumpet_Bell.jpg",
+     "creator": "Gdk411 at English Wikipedia (\"User:Gdk411 is the author of this photograph.\")",
+     "licence": "Public domain",
+     "licence_url": "",
      "attribution_required": false,
+     "attribution": "Gdk411 at English Wikipedia (\"User:Gdk411 is the author of this photograph.\"), Public domain, via Wikimedia Commons",
+     "derivative_notes": "cropped to 4:3 and resized to 1600x1200 (tools/content/commons_media.py)",
      "approval_status": "approved",
-     "art_status": "provisional"
+     "art_status": "real_photo",
+     "retrieved": "2026-10-02"
     }
    ],
    "answer": "A trumpet bell",
@@ -2126,19 +2260,19 @@
    ],
    "stages": [
     {
-     "x": 0.62,
-     "y": 0.42,
-     "zoom": 5.0
-    },
-    {
-     "x": 0.56,
+     "x": 0.43,
      "y": 0.47,
-     "zoom": 2.5
+     "zoom": 4
     },
     {
-     "x": 0.5,
-     "y": 0.5,
-     "zoom": 1.45
+     "x": 0.462,
+     "y": 0.483,
+     "zoom": 2.0
+    },
+    {
+     "x": 0.486,
+     "y": 0.494,
+     "zoom": 1.4
     }
    ],
    "reveal_line": "A trumpet. Straight down the business end. Mind your eye."
@@ -2146,7 +2280,7 @@
   {
    "id": "hole.volcano_crater",
    "enabled": true,
-   "quality_status": "draft",
+   "quality_status": "reviewed",
    "familiarity_tier": 1,
    "content_tags": [
     "high_energy",
@@ -2162,12 +2296,18 @@
    "media": [
     {
      "asset_path": "res://assets/content/hole/volcano_crater.jpg",
-     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
-     "creator": "Mildew project",
-     "licence": "project-owned",
+     "source": "Wikimedia Commons",
+     "source_page": "https://commons.wikimedia.org/wiki/File%3AMount_Eden_Crater_Hollow_Auckland.jpg",
+     "original_url": "https://upload.wikimedia.org/wikipedia/commons/0/07/Mount_Eden_Crater_Hollow_Auckland.jpg",
+     "creator": "Ingolfson at English Wikipedia (Original text: Uploader.)",
+     "licence": "Public domain",
+     "licence_url": "",
      "attribution_required": false,
+     "attribution": "Ingolfson at English Wikipedia (Original text: Uploader.), Public domain, via Wikimedia Commons",
+     "derivative_notes": "cropped to 4:3 and resized to 1600x1200 (tools/content/commons_media.py)",
      "approval_status": "approved",
-     "art_status": "provisional"
+     "art_status": "real_photo",
+     "retrieved": "2026-10-02"
     }
    ],
    "answer": "A volcano crater",
@@ -2215,27 +2355,27 @@
    ],
    "stages": [
     {
-     "x": 0.33,
-     "y": 0.47,
-     "zoom": 4.5
+     "x": 0.55,
+     "y": 0.72,
+     "zoom": 3
     },
     {
-     "x": 0.42,
-     "y": 0.5,
-     "zoom": 2.2
+     "x": 0.528,
+     "y": 0.621,
+     "zoom": 1.8
     },
     {
-     "x": 0.48,
-     "y": 0.52,
-     "zoom": 1.3
+     "x": 0.51,
+     "y": 0.544,
+     "zoom": 1.4
     }
    ],
-   "reveal_line": "A volcano. From above. We didn't go. We were never going to go."
+   "reveal_line": "A volcano crater. New Zealand. We didn't go. We were never going to go."
   },
   {
    "id": "hole.whale_blowhole",
    "enabled": true,
-   "quality_status": "draft",
+   "quality_status": "reviewed",
    "familiarity_tier": 2,
    "content_tags": [
     "animals",
@@ -2252,12 +2392,18 @@
    "media": [
     {
      "asset_path": "res://assets/content/hole/whale_blowhole.jpg",
-     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
-     "creator": "Mildew project",
-     "licence": "project-owned",
-     "attribution_required": false,
+     "source": "Wikimedia Commons",
+     "source_page": "https://commons.wikimedia.org/wiki/File%3ASperm_whale_blowhole_Vincze.jpg",
+     "original_url": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Sperm_whale_blowhole_Vincze.jpg",
+     "creator": "Vilmos Vincze",
+     "licence": "CC BY 2.0",
+     "licence_url": "https://creativecommons.org/licenses/by/2.0",
+     "attribution_required": true,
+     "attribution": "Vilmos Vincze, CC BY 2.0, via Wikimedia Commons",
+     "derivative_notes": "cropped to 4:3 and resized to 1600x1200 (tools/content/commons_media.py)",
      "approval_status": "approved",
-     "art_status": "provisional"
+     "art_status": "real_photo",
+     "retrieved": "2026-10-02"
     }
    ],
    "answer": "A whale's blowhole",
@@ -2305,27 +2451,27 @@
    ],
    "stages": [
     {
-     "x": 0.45,
-     "y": 0.42,
-     "zoom": 5.0
+     "x": 0.31,
+     "y": 0.155,
+     "zoom": 5
     },
     {
-     "x": 0.47,
-     "y": 0.47,
+     "x": 0.396,
+     "y": 0.31,
      "zoom": 2.5
     },
     {
-     "x": 0.5,
-     "y": 0.5,
+     "x": 0.462,
+     "y": 0.431,
      "zoom": 1.4
     }
    ],
-   "reveal_line": "A whale's blowhole. Two of them, side by side, like a pair of very wet nostrils."
+   "reveal_line": "A whale's blowhole. A sperm whale. Just the one hole, off to the left, like a nostril somebody fitted wrong."
   },
   {
    "id": "hole.woodpecker_tree",
    "enabled": true,
-   "quality_status": "draft",
+   "quality_status": "reviewed",
    "familiarity_tier": 2,
    "content_tags": [
     "animals",
@@ -2341,12 +2487,18 @@
    "media": [
     {
      "asset_path": "res://assets/content/hole/woodpecker_tree.jpg",
-     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
-     "creator": "Mildew project",
-     "licence": "project-owned",
-     "attribution_required": false,
+     "source": "Wikimedia Commons",
+     "source_page": "https://commons.wikimedia.org/wiki/File%3ARed-breasted_Sapsucker_-_Novato%2C_California.jpg",
+     "original_url": "https://upload.wikimedia.org/wikipedia/commons/b/b0/Red-breasted_Sapsucker_-_Novato%2C_California.jpg",
+     "creator": "Jessica Merz",
+     "licence": "CC BY 2.0",
+     "licence_url": "https://creativecommons.org/licenses/by/2.0",
+     "attribution_required": true,
+     "attribution": "Jessica Merz, CC BY 2.0, via Wikimedia Commons",
+     "derivative_notes": "cropped to 4:3 and resized to 1600x1200 (tools/content/commons_media.py)",
      "approval_status": "approved",
-     "art_status": "provisional"
+     "art_status": "real_photo",
+     "retrieved": "2026-10-02"
     }
    ],
    "answer": "Woodpecker holes in a tree",
@@ -2395,21 +2547,21 @@
    "stages": [
     {
      "x": 0.3,
-     "y": 0.42,
-     "zoom": 5.0
+     "y": 0.32,
+     "zoom": 5
     },
     {
-     "x": 0.4,
-     "y": 0.45,
-     "zoom": 2.4
+     "x": 0.39,
+     "y": 0.401,
+     "zoom": 2.5
     },
     {
-     "x": 0.5,
-     "y": 0.5,
+     "x": 0.46,
+     "y": 0.464,
      "zoom": 1.4
     }
    ],
-   "reveal_line": "Woodpecker holes. Rows of them. Some birds just want to watch the world drill."
+   "reveal_line": "Sapsucker holes. The bird drills them, then comes back and drinks what leaks out. Lovely."
   }
  ]
 }

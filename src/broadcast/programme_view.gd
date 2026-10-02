@@ -38,6 +38,7 @@ func build() -> void:
 	viewport.add_child(hole)       # game boards sit under the graphics package (subtitles, lower-thirds)
 	gfx = GraphicsLayer.new()
 	viewport.add_child(gfx)
+	gfx.bottom_busy = hole.is_showing
 	screen = TextureRect.new()
 	screen.texture = viewport.get_texture()
 	screen.expand_mode = TextureRect.EXPAND_IGNORE_SIZE

@@ -23,6 +23,9 @@ var players := {}                  # pid -> public info (avatars for chips/score
 
 # Subtitles
 var subtitles_enabled := true
+## Returns true while a game graphic owns the lower frame (answer panels, lock strip). Teletext
+## subtitles then move to the top of the picture, as Ceefax 888 did over lower-frame captions.
+var bottom_busy: Callable = Callable()
 var _sub_text := ""
 var _sub_speaker := "graham"
 var _sub_until := 0.0
@@ -286,6 +289,8 @@ func _draw_subtitles() -> void:
 		lines = lines.slice(lines.size() - 3)
 	var fs := 40
 	var y := H - 70.0 - (lines.size() - 1) * 52.0
+	if bottom_busy.is_valid() and bottom_busy.call():
+		y = 62.0
 	for line in lines:
 		var tw := f_mono.get_string_size(line, HORIZONTAL_ALIGNMENT_LEFT, -1, fs).x
 		var x := (W - tw) * 0.5
