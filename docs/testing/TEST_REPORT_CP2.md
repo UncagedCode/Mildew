@@ -52,3 +52,12 @@ Fixes made from visual review:
 ## Not verified (needs hardware)
 
 Install on Android TV; FPS on mid-range TV (programme viewport + Graham Sprite3D + photo decode); offline TTS; real phone browsers; physical QR scan; Wi-Fi drop/rejoin; audio levels of synthesized crowd/sting (not human-auditioned).
+
+## Addendum — 2026-10-02 evening: dev panel, Graham voice system, studio restyle
+
+- Unit: **60 tests, 2569 checks, 0 failures** (adds `test_graham_voice` ×9: index vs factory manifest, five-name bank, case-insensitive lookup, async playback/sequences, missing clips graceful, no TTS in release, intents, Graham bus, subtitle == recording validation, Director preference, pronunciation via name bank).
+- Factory Python tests: 9/9 (adds `test_sync_godot` ×3).
+- Integration: LAN **7/7** (adds `dev_panel_drives_bots_only_show`, 20 checks), phone UI 13/13, dev panel Chromium **10/10**, QR 90/90.
+- Visual: Camera 1 compared side by side with the reference video; renders in `cp2_screens/studio_cam1_d025.jpg`, `studio_cam2_d025.jpg`.
+- APK rebuilt: `mildew-0.1.0-cp2-debug.apk`, SHA-256 `f6ffedf2d977c8095d52462db9f22d6bff8feac70c3756608e991e1df8649781`, 78 MB; pack check includes voice index, dev panel, studio textures. Download branch `claude/apk-builds`.
+- Not verified: actual Graham clips (none in repo yet), device audio through the Graham bus, on-device FPS with the new set.
