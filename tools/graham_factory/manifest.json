@@ -2,6 +2,11 @@
   "version": 1,
   "notes": "Proof-of-concept Graham library. Add semantic lines here; never put API keys in this file.",
   "lines": [
+    {"id": "name_aaron", "mood": "name", "text": "Aaron"},
+    {"id": "name_elijah", "mood": "name", "text": "Elijah"},
+    {"id": "name_grace", "mood": "name", "text": "Grace"},
+    {"id": "name_josh", "mood": "name", "text": "Josh"},
+    {"id": "name_donna", "mood": "name", "text": "Donna"},
     {"id": "welcome_01", "mood": "presenter", "text": "Good evening, ladies and gentlemen, and welcome once again to Mildew!"},
     {"id": "question_01", "mood": "presenter_brisk", "text": "Right — question one."},
     {"id": "correct_01", "mood": "pleased", "text": "That is correct. Well done."},
@@ -20,11 +25,6 @@
     {"id": "and_were_back_01", "mood": "recovered", "text": "And we're back!"},
     {"id": "closing_01", "mood": "closing", "text": "Ladies and gentlemen, that is all we have time for tonight."},
     {"id": "closing_thanks_01", "mood": "closing", "text": "Thank you for joining us..."},
-    {"id": "closing_goodnight_01", "mood": "closing", "text": "and good night."},
-    {"id": "name_aaron", "mood": "name", "text": "Aaron"},
-    {"id": "name_elijah", "mood": "name", "text": "Elijah"},
-    {"id": "name_grace", "mood": "name", "text": "Grace"},
-    {"id": "name_josh", "mood": "name", "text": "Josh"},
-    {"id": "name_donna", "mood": "name", "text": "Donna"}
+    {"id": "closing_goodnight_01", "mood": "closing", "text": "and good night."}
   ]
 }
