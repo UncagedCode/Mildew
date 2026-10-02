@@ -1,0 +1,2415 @@
+{
+ "pack_id": "hole.core",
+ "content_kind": "hole",
+ "game_id": "hole",
+ "_comment": "CP2 Hole library. Identification content (what is this opening?), not factual claims, so no sources are required; reveal lines are Graham's opinions. Images are project-owned procedural illustrations (provisional art). Candidate order is shuffled per round by the server; the first entry is NOT special. 'studio_hole' items are the rare Studio Hole crossover: never explain them.",
+ "items": [
+  {
+   "id": "hole.belly_button",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "grossness_2"
+   ],
+   "director_tags": [
+    "visual"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "weight": 1.0,
+   "image": "res://assets/content/hole/belly_button.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/hole/belly_button.jpg",
+     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
+     "creator": "Mildew project",
+     "licence": "project-owned",
+     "attribution_required": false,
+     "approval_status": "approved",
+     "art_status": "provisional"
+    }
+   ],
+   "answer": "A belly button",
+   "category": "anatomy",
+   "scale": "centimetres",
+   "candidates": [
+    {
+     "label": "A belly button",
+     "category": "anatomy"
+    },
+    {
+     "label": "An ear",
+     "category": "anatomy"
+    },
+    {
+     "label": "A nostril",
+     "category": "anatomy"
+    },
+    {
+     "label": "A pig's snout",
+     "category": "animal"
+    },
+    {
+     "label": "A doughnut",
+     "category": "food"
+    },
+    {
+     "label": "A knot in wood",
+     "category": "nature"
+    },
+    {
+     "label": "A pastry",
+     "category": "food"
+    },
+    {
+     "label": "A sausage end",
+     "category": "food"
+    }
+   ],
+   "safety_net": [
+    "A belly button",
+    "A knot in wood",
+    "A doughnut",
+    "A sausage end"
+   ],
+   "stages": [
+    {
+     "x": 0.52,
+     "y": 0.47,
+     "zoom": 5.5
+    },
+    {
+     "x": 0.5,
+     "y": 0.5,
+     "zoom": 2.7
+    },
+    {
+     "x": 0.5,
+     "y": 0.52,
+     "zoom": 1.5
+    }
+   ],
+   "reveal_line": "A belly button. With fluff. Blue fluff. Nobody in this studio is wearing blue."
+  },
+  {
+   "id": "hole.bowling_ball",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "household",
+    "grossness_0"
+   ],
+   "director_tags": [
+    "visual"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "weight": 1.0,
+   "image": "res://assets/content/hole/bowling_ball.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/hole/bowling_ball.jpg",
+     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
+     "creator": "Mildew project",
+     "licence": "project-owned",
+     "attribution_required": false,
+     "approval_status": "approved",
+     "art_status": "provisional"
+    }
+   ],
+   "answer": "A bowling ball",
+   "category": "sport",
+   "scale": "centimetres",
+   "candidates": [
+    {
+     "label": "A bowling ball",
+     "category": "sport"
+    },
+    {
+     "label": "A face",
+     "category": "anatomy"
+    },
+    {
+     "label": "A planet",
+     "category": "geology"
+    },
+    {
+     "label": "A cannonball",
+     "category": "machinery"
+    },
+    {
+     "label": "A plug socket",
+     "category": "household"
+    },
+    {
+     "label": "A Christmas bauble",
+     "category": "household"
+    },
+    {
+     "label": "A crystal ball",
+     "category": "household"
+    },
+    {
+     "label": "A melon",
+     "category": "food"
+    }
+   ],
+   "safety_net": [
+    "A bowling ball",
+    "A face",
+    "A plug socket",
+    "A Christmas bauble"
+   ],
+   "stages": [
+    {
+     "x": 0.5,
+     "y": 0.39,
+     "zoom": 5.5
+    },
+    {
+     "x": 0.5,
+     "y": 0.45,
+     "zoom": 2.8
+    },
+    {
+     "x": 0.5,
+     "y": 0.5,
+     "zoom": 1.5
+    }
+   ],
+   "reveal_line": "A bowling ball. Three holes. Fingers go in there. Don't overthink it."
+  },
+  {
+   "id": "hole.button",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "household",
+    "grossness_0"
+   ],
+   "director_tags": [
+    "visual"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "weight": 1.0,
+   "image": "res://assets/content/hole/button.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/hole/button.jpg",
+     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
+     "creator": "Mildew project",
+     "licence": "project-owned",
+     "attribution_required": false,
+     "approval_status": "approved",
+     "art_status": "provisional"
+    }
+   ],
+   "answer": "A button",
+   "category": "household",
+   "scale": "centimetres",
+   "candidates": [
+    {
+     "label": "A button",
+     "category": "household"
+    },
+    {
+     "label": "A plug",
+     "category": "household"
+    },
+    {
+     "label": "A pig's snout",
+     "category": "animal"
+    },
+    {
+     "label": "A face",
+     "category": "anatomy"
+    },
+    {
+     "label": "A bowling ball",
+     "category": "sport"
+    },
+    {
+     "label": "A coaster",
+     "category": "household"
+    },
+    {
+     "label": "A plug socket",
+     "category": "household"
+    },
+    {
+     "label": "A mint",
+     "category": "food"
+    }
+   ],
+   "safety_net": [
+    "A button",
+    "A pig's snout",
+    "A bowling ball",
+    "A coaster"
+   ],
+   "stages": [
+    {
+     "x": 0.53,
+     "y": 0.45,
+     "zoom": 6.0
+    },
+    {
+     "x": 0.5,
+     "y": 0.48,
+     "zoom": 3.2
+    },
+    {
+     "x": 0.5,
+     "y": 0.5,
+     "zoom": 1.7
+    }
+   ],
+   "reveal_line": "A button. Off a cardigan. Off MY cardigan, as it happens."
+  },
+  {
+   "id": "hole.cave_entrance",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "short",
+    "grossness_0"
+   ],
+   "director_tags": [
+    "visual"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "weight": 1.0,
+   "image": "res://assets/content/hole/cave_entrance.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/hole/cave_entrance.jpg",
+     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
+     "creator": "Mildew project",
+     "licence": "project-owned",
+     "attribution_required": false,
+     "approval_status": "approved",
+     "art_status": "provisional"
+    }
+   ],
+   "answer": "A cave entrance",
+   "category": "geology",
+   "scale": "enormous",
+   "candidates": [
+    {
+     "label": "A cave entrance",
+     "category": "geology"
+    },
+    {
+     "label": "A pothole",
+     "category": "architecture"
+    },
+    {
+     "label": "A mine shaft",
+     "category": "geology"
+    },
+    {
+     "label": "A rabbit burrow",
+     "category": "animal"
+    },
+    {
+     "label": "A sinkhole",
+     "category": "geology"
+    },
+    {
+     "label": "A badger sett",
+     "category": "animal"
+    },
+    {
+     "label": "A railway tunnel",
+     "category": "architecture"
+    },
+    {
+     "label": "A crater",
+     "category": "geology"
+    }
+   ],
+   "safety_net": [
+    "A cave entrance",
+    "A pothole",
+    "A rabbit burrow",
+    "A railway tunnel"
+   ],
+   "stages": [
+    {
+     "x": 0.33,
+     "y": 0.55,
+     "zoom": 4.5
+    },
+    {
+     "x": 0.42,
+     "y": 0.58,
+     "zoom": 2.2
+    },
+    {
+     "x": 0.5,
+     "y": 0.58,
+     "zoom": 1.3
+    }
+   ],
+   "reveal_line": "A cave. Big enough to walk into. I wouldn't."
+  },
+  {
+   "id": "hole.colander",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "household",
+    "food",
+    "grossness_0"
+   ],
+   "director_tags": [
+    "visual"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "weight": 1.0,
+   "image": "res://assets/content/hole/colander.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/hole/colander.jpg",
+     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
+     "creator": "Mildew project",
+     "licence": "project-owned",
+     "attribution_required": false,
+     "approval_status": "approved",
+     "art_status": "provisional"
+    }
+   ],
+   "answer": "A colander",
+   "category": "household",
+   "scale": "centimetres",
+   "candidates": [
+    {
+     "label": "A colander",
+     "category": "household"
+    },
+    {
+     "label": "A sieve",
+     "category": "household"
+    },
+    {
+     "label": "A satellite dish",
+     "category": "machinery"
+    },
+    {
+     "label": "A speaker grille",
+     "category": "machinery"
+    },
+    {
+     "label": "A lampshade",
+     "category": "household"
+    },
+    {
+     "label": "A cheese grater",
+     "category": "household"
+    },
+    {
+     "label": "A golf ball",
+     "category": "sport"
+    },
+    {
+     "label": "A hat",
+     "category": "household"
+    }
+   ],
+   "safety_net": [
+    "A colander",
+    "A satellite dish",
+    "A speaker grille",
+    "A lampshade"
+   ],
+   "stages": [
+    {
+     "x": 0.42,
+     "y": 0.55,
+     "zoom": 5.5
+    },
+    {
+     "x": 0.47,
+     "y": 0.52,
+     "zoom": 2.7
+    },
+    {
+     "x": 0.5,
+     "y": 0.5,
+     "zoom": 1.5
+    }
+   ],
+   "reveal_line": "A colander. For draining pasta. Or, in my mother's house, for wearing."
+  },
+  {
+   "id": "hole.crumpet",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "food",
+    "grossness_0"
+   ],
+   "director_tags": [
+    "visual"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "weight": 1.0,
+   "image": "res://assets/content/hole/crumpet.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/hole/crumpet.jpg",
+     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
+     "creator": "Mildew project",
+     "licence": "project-owned",
+     "attribution_required": false,
+     "approval_status": "approved",
+     "art_status": "provisional"
+    }
+   ],
+   "answer": "A crumpet",
+   "category": "food",
+   "scale": "centimetres",
+   "candidates": [
+    {
+     "label": "A crumpet",
+     "category": "food"
+    },
+    {
+     "label": "A sponge cake",
+     "category": "food"
+    },
+    {
+     "label": "A pumice stone",
+     "category": "nature"
+    },
+    {
+     "label": "A bath sponge",
+     "category": "household"
+    },
+    {
+     "label": "A lotus seed pod",
+     "category": "nature"
+    },
+    {
+     "label": "Coral",
+     "category": "animal"
+    },
+    {
+     "label": "A pikelet",
+     "category": "food"
+    },
+    {
+     "label": "A cork board",
+     "category": "household"
+    }
+   ],
+   "safety_net": [
+    "A crumpet",
+    "A bath sponge",
+    "A lotus seed pod",
+    "A pumice stone"
+   ],
+   "stages": [
+    {
+     "x": 0.56,
+     "y": 0.47,
+     "zoom": 6.0
+    },
+    {
+     "x": 0.53,
+     "y": 0.5,
+     "zoom": 3.0
+    },
+    {
+     "x": 0.5,
+     "y": 0.5,
+     "zoom": 1.6
+    }
+   ],
+   "reveal_line": "A crumpet. Toasted, buttered and staring back at you."
+  },
+  {
+   "id": "hole.drain_outfall",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "grossness_2",
+    "grossness_3"
+   ],
+   "director_tags": [
+    "visual"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "weight": 1.0,
+   "image": "res://assets/content/hole/drain_outfall.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/hole/drain_outfall.jpg",
+     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
+     "creator": "Mildew project",
+     "licence": "project-owned",
+     "attribution_required": false,
+     "approval_status": "approved",
+     "art_status": "provisional"
+    }
+   ],
+   "answer": "A sewer outfall pipe",
+   "category": "drain_pipe",
+   "scale": "human",
+   "candidates": [
+    {
+     "label": "A sewer outfall pipe",
+     "category": "drain_pipe"
+    },
+    {
+     "label": "A culvert",
+     "category": "drain_pipe"
+    },
+    {
+     "label": "A cannon",
+     "category": "machinery"
+    },
+    {
+     "label": "A tunnel",
+     "category": "architecture"
+    },
+    {
+     "label": "A chimney",
+     "category": "architecture"
+    },
+    {
+     "label": "A well",
+     "category": "architecture"
+    },
+    {
+     "label": "A porthole",
+     "category": "architecture"
+    },
+    {
+     "label": "A mine shaft",
+     "category": "geology"
+    }
+   ],
+   "safety_net": [
+    "A sewer outfall pipe",
+    "A cannon",
+    "A chimney",
+    "A porthole"
+   ],
+   "stages": [
+    {
+     "x": 0.3,
+     "y": 0.47,
+     "zoom": 4.5
+    },
+    {
+     "x": 0.4,
+     "y": 0.47,
+     "zoom": 2.3
+    },
+    {
+     "x": 0.5,
+     "y": 0.5,
+     "zoom": 1.35
+    }
+   ],
+   "reveal_line": "A sewer outfall. The green bit is exactly what you think it is."
+  },
+  {
+   "id": "hole.ear",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "grossness_2"
+   ],
+   "director_tags": [
+    "visual"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "weight": 1.0,
+   "image": "res://assets/content/hole/ear.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/hole/ear.jpg",
+     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
+     "creator": "Mildew project",
+     "licence": "project-owned",
+     "attribution_required": false,
+     "approval_status": "approved",
+     "art_status": "provisional"
+    }
+   ],
+   "answer": "An ear",
+   "category": "anatomy",
+   "scale": "centimetres",
+   "candidates": [
+    {
+     "label": "An ear",
+     "category": "anatomy"
+    },
+    {
+     "label": "A seashell",
+     "category": "animal"
+    },
+    {
+     "label": "A pasta shell",
+     "category": "food"
+    },
+    {
+     "label": "A nostril",
+     "category": "anatomy"
+    },
+    {
+     "label": "A belly button",
+     "category": "anatomy"
+    },
+    {
+     "label": "A walnut",
+     "category": "food"
+    },
+    {
+     "label": "A snail",
+     "category": "animal"
+    },
+    {
+     "label": "A croissant",
+     "category": "food"
+    }
+   ],
+   "safety_net": [
+    "An ear",
+    "A seashell",
+    "A pasta shell",
+    "A croissant"
+   ],
+   "stages": [
+    {
+     "x": 0.44,
+     "y": 0.52,
+     "zoom": 5.5
+    },
+    {
+     "x": 0.47,
+     "y": 0.53,
+     "zoom": 2.6
+    },
+    {
+     "x": 0.5,
+     "y": 0.52,
+     "zoom": 1.4
+    }
+   ],
+   "reveal_line": "An ear. With wax. I'm told that's normal. I'm told a lot of things."
+  },
+  {
+   "id": "hole.golf_hole",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "short",
+    "grossness_0"
+   ],
+   "director_tags": [
+    "visual"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "weight": 1.0,
+   "image": "res://assets/content/hole/golf_hole.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/hole/golf_hole.jpg",
+     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
+     "creator": "Mildew project",
+     "licence": "project-owned",
+     "attribution_required": false,
+     "approval_status": "approved",
+     "art_status": "provisional"
+    }
+   ],
+   "answer": "A golf hole",
+   "category": "sport",
+   "scale": "centimetres",
+   "candidates": [
+    {
+     "label": "A golf hole",
+     "category": "sport"
+    },
+    {
+     "label": "A rabbit hole",
+     "category": "animal"
+    },
+    {
+     "label": "A pothole",
+     "category": "architecture"
+    },
+    {
+     "label": "A mole hill",
+     "category": "animal"
+    },
+    {
+     "label": "A drain",
+     "category": "drain_pipe"
+    },
+    {
+     "label": "A well",
+     "category": "architecture"
+    },
+    {
+     "label": "A snooker pocket",
+     "category": "sport"
+    },
+    {
+     "label": "A crater",
+     "category": "geology"
+    }
+   ],
+   "safety_net": [
+    "A golf hole",
+    "A rabbit hole",
+    "A snooker pocket",
+    "A pothole"
+   ],
+   "stages": [
+    {
+     "x": 0.6,
+     "y": 0.58,
+     "zoom": 5.0
+    },
+    {
+     "x": 0.55,
+     "y": 0.55,
+     "zoom": 2.5
+    },
+    {
+     "x": 0.55,
+     "y": 0.57,
+     "zoom": 1.45
+    }
+   ],
+   "reveal_line": "A golf hole. Four and a quarter inches. A lot of men have cried over less."
+  },
+  {
+   "id": "hole.keyhole",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "household",
+    "grossness_0"
+   ],
+   "director_tags": [
+    "visual"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "weight": 1.0,
+   "image": "res://assets/content/hole/keyhole.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/hole/keyhole.jpg",
+     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
+     "creator": "Mildew project",
+     "licence": "project-owned",
+     "attribution_required": false,
+     "approval_status": "approved",
+     "art_status": "provisional"
+    }
+   ],
+   "answer": "A keyhole",
+   "category": "household",
+   "scale": "centimetres",
+   "candidates": [
+    {
+     "label": "A keyhole",
+     "category": "household"
+    },
+    {
+     "label": "A money box slot",
+     "category": "household"
+    },
+    {
+     "label": "A bottle neck",
+     "category": "household"
+    },
+    {
+     "label": "A cricket bat",
+     "category": "household"
+    },
+    {
+     "label": "A violin",
+     "category": "machinery"
+    },
+    {
+     "label": "A piggy bank",
+     "category": "household"
+    },
+    {
+     "label": "A chess pawn",
+     "category": "household"
+    },
+    {
+     "label": "A gravestone",
+     "category": "architecture"
+    }
+   ],
+   "safety_net": [
+    "A keyhole",
+    "A chess pawn",
+    "A money box slot",
+    "A gravestone"
+   ],
+   "stages": [
+    {
+     "x": 0.5,
+     "y": 0.47,
+     "zoom": 6.0
+    },
+    {
+     "x": 0.5,
+     "y": 0.5,
+     "zoom": 3.0
+    },
+    {
+     "x": 0.5,
+     "y": 0.5,
+     "zoom": 1.7
+    }
+   ],
+   "reveal_line": "A keyhole. We've all looked through one. Some of us professionally."
+  },
+  {
+   "id": "hole.leaf_stoma",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 3,
+   "content_tags": [
+    "low_energy",
+    "grossness_0"
+   ],
+   "director_tags": [
+    "visual"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "weight": 1.0,
+   "image": "res://assets/content/hole/leaf_stoma.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/hole/leaf_stoma.jpg",
+     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
+     "creator": "Mildew project",
+     "licence": "project-owned",
+     "attribution_required": false,
+     "approval_status": "approved",
+     "art_status": "provisional"
+    }
+   ],
+   "answer": "A pore on a leaf",
+   "category": "nature",
+   "scale": "microscopic",
+   "candidates": [
+    {
+     "label": "A pore on a leaf",
+     "category": "nature"
+    },
+    {
+     "label": "A cat's eye",
+     "category": "animal"
+    },
+    {
+     "label": "A frog's skin",
+     "category": "animal"
+    },
+    {
+     "label": "A grape",
+     "category": "food"
+    },
+    {
+     "label": "A peapod",
+     "category": "food"
+    },
+    {
+     "label": "A reptile's pupil",
+     "category": "animal"
+    },
+    {
+     "label": "A kiwi fruit",
+     "category": "food"
+    },
+    {
+     "label": "Moss",
+     "category": "nature"
+    }
+   ],
+   "safety_net": [
+    "A pore on a leaf",
+    "A cat's eye",
+    "A peapod",
+    "A grape"
+   ],
+   "stages": [
+    {
+     "x": 0.5,
+     "y": 0.42,
+     "zoom": 5.0
+    },
+    {
+     "x": 0.5,
+     "y": 0.48,
+     "zoom": 2.5
+    },
+    {
+     "x": 0.5,
+     "y": 0.5,
+     "zoom": 1.4
+    }
+   ],
+   "reveal_line": "A pore on a leaf. It's called a stoma. It's about a hundredth of a millimetre. Plants breathe through them. I'm told."
+  },
+  {
+   "id": "hole.lotus_pod",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "unsettling_capable",
+    "grossness_2"
+   ],
+   "director_tags": [
+    "visual"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "weight": 1.0,
+   "image": "res://assets/content/hole/lotus_pod.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/hole/lotus_pod.jpg",
+     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
+     "creator": "Mildew project",
+     "licence": "project-owned",
+     "attribution_required": false,
+     "approval_status": "approved",
+     "art_status": "provisional"
+    }
+   ],
+   "answer": "A lotus seed pod",
+   "category": "nature",
+   "scale": "centimetres",
+   "candidates": [
+    {
+     "label": "A lotus seed pod",
+     "category": "nature"
+    },
+    {
+     "label": "A shower head",
+     "category": "household"
+    },
+    {
+     "label": "A wasp nest",
+     "category": "animal"
+    },
+    {
+     "label": "A crumpet",
+     "category": "food"
+    },
+    {
+     "label": "A watering can rose",
+     "category": "household"
+    },
+    {
+     "label": "Coral",
+     "category": "animal"
+    },
+    {
+     "label": "A beehive",
+     "category": "animal"
+    },
+    {
+     "label": "A salt shaker",
+     "category": "household"
+    }
+   ],
+   "safety_net": [
+    "A lotus seed pod",
+    "A wasp nest",
+    "A watering can rose",
+    "A shower head"
+   ],
+   "stages": [
+    {
+     "x": 0.6,
+     "y": 0.42,
+     "zoom": 5.0
+    },
+    {
+     "x": 0.55,
+     "y": 0.47,
+     "zoom": 2.6
+    },
+    {
+     "x": 0.5,
+     "y": 0.5,
+     "zoom": 1.5
+    }
+   ],
+   "reveal_line": "A lotus seed pod. If that made your skin crawl, you're not alone, and you're not excused."
+  },
+  {
+   "id": "hole.manhole",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "short",
+    "grossness_1"
+   ],
+   "director_tags": [
+    "visual"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "weight": 1.0,
+   "image": "res://assets/content/hole/manhole.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/hole/manhole.jpg",
+     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
+     "creator": "Mildew project",
+     "licence": "project-owned",
+     "attribution_required": false,
+     "approval_status": "approved",
+     "art_status": "provisional"
+    }
+   ],
+   "answer": "An open manhole",
+   "category": "drain_pipe",
+   "scale": "human",
+   "candidates": [
+    {
+     "label": "An open manhole",
+     "category": "drain_pipe"
+    },
+    {
+     "label": "A loft hatch",
+     "category": "architecture"
+    },
+    {
+     "label": "A lift shaft",
+     "category": "architecture"
+    },
+    {
+     "label": "A trapdoor",
+     "category": "architecture"
+    },
+    {
+     "label": "A mine shaft",
+     "category": "geology"
+    },
+    {
+     "label": "A well",
+     "category": "architecture"
+    },
+    {
+     "label": "A coal chute",
+     "category": "architecture"
+    },
+    {
+     "label": "A ship's hatch",
+     "category": "machinery"
+    }
+   ],
+   "safety_net": [
+    "An open manhole",
+    "A loft hatch",
+    "A trapdoor",
+    "A lift shaft"
+   ],
+   "stages": [
+    {
+     "x": 0.39,
+     "y": 0.3,
+     "zoom": 4.5
+    },
+    {
+     "x": 0.45,
+     "y": 0.4,
+     "zoom": 2.2
+    },
+    {
+     "x": 0.55,
+     "y": 0.55,
+     "zoom": 1.35
+    }
+   ],
+   "reveal_line": "An open manhole. If you're watching at home: put the lid back."
+  },
+  {
+   "id": "hole.pepper_shaker",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "food",
+    "household",
+    "grossness_0"
+   ],
+   "director_tags": [
+    "visual"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "weight": 1.0,
+   "image": "res://assets/content/hole/pepper_shaker.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/hole/pepper_shaker.jpg",
+     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
+     "creator": "Mildew project",
+     "licence": "project-owned",
+     "attribution_required": false,
+     "approval_status": "approved",
+     "art_status": "provisional"
+    }
+   ],
+   "answer": "A pepper pot",
+   "category": "household",
+   "scale": "centimetres",
+   "candidates": [
+    {
+     "label": "A pepper pot",
+     "category": "household"
+    },
+    {
+     "label": "A salt shaker",
+     "category": "household"
+    },
+    {
+     "label": "A shower head",
+     "category": "household"
+    },
+    {
+     "label": "A microphone",
+     "category": "machinery"
+    },
+    {
+     "label": "A doorbell",
+     "category": "household"
+    },
+    {
+     "label": "A pin cushion",
+     "category": "household"
+    },
+    {
+     "label": "A biscuit",
+     "category": "food"
+    },
+    {
+     "label": "A dice",
+     "category": "household"
+    }
+   ],
+   "safety_net": [
+    "A pepper pot",
+    "A microphone",
+    "A dice",
+    "A doorbell"
+   ],
+   "stages": [
+    {
+     "x": 0.47,
+     "y": 0.47,
+     "zoom": 6.0
+    },
+    {
+     "x": 0.5,
+     "y": 0.5,
+     "zoom": 3.0
+    },
+    {
+     "x": 0.5,
+     "y": 0.5,
+     "zoom": 1.6
+    }
+   ],
+   "reveal_line": "A pepper pot. Nine holes. I've counted. I count things when I'm nervous."
+  },
+  {
+   "id": "hole.pig_snout",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "animals",
+    "animal_anatomy",
+    "grossness_1"
+   ],
+   "director_tags": [
+    "visual"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "weight": 1.0,
+   "image": "res://assets/content/hole/pig_snout.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/hole/pig_snout.jpg",
+     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
+     "creator": "Mildew project",
+     "licence": "project-owned",
+     "attribution_required": false,
+     "approval_status": "approved",
+     "art_status": "provisional"
+    }
+   ],
+   "answer": "A pig's snout",
+   "category": "animal",
+   "scale": "centimetres",
+   "candidates": [
+    {
+     "label": "A pig's snout",
+     "category": "animal"
+    },
+    {
+     "label": "A plug",
+     "category": "household"
+    },
+    {
+     "label": "A cow's nose",
+     "category": "animal"
+    },
+    {
+     "label": "A button",
+     "category": "household"
+    },
+    {
+     "label": "A dog's nose",
+     "category": "animal"
+    },
+    {
+     "label": "A human nose",
+     "category": "anatomy"
+    },
+    {
+     "label": "A gammon steak",
+     "category": "food"
+    },
+    {
+     "label": "A pink eraser",
+     "category": "household"
+    }
+   ],
+   "safety_net": [
+    "A pig's snout",
+    "A button",
+    "A human nose",
+    "A cow's nose"
+   ],
+   "stages": [
+    {
+     "x": 0.44,
+     "y": 0.58,
+     "zoom": 5.5
+    },
+    {
+     "x": 0.47,
+     "y": 0.55,
+     "zoom": 2.7
+    },
+    {
+     "x": 0.5,
+     "y": 0.53,
+     "zoom": 1.5
+    }
+   ],
+   "reveal_line": "A pig's snout. Tremendous sense of smell. They'd have smelled this studio from Leeds."
+  },
+  {
+   "id": "hole.plug_socket",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "household",
+    "grossness_0"
+   ],
+   "director_tags": [
+    "visual"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "weight": 1.0,
+   "image": "res://assets/content/hole/plug_socket.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/hole/plug_socket.jpg",
+     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
+     "creator": "Mildew project",
+     "licence": "project-owned",
+     "attribution_required": false,
+     "approval_status": "approved",
+     "art_status": "provisional"
+    }
+   ],
+   "answer": "A plug socket",
+   "category": "household",
+   "scale": "centimetres",
+   "candidates": [
+    {
+     "label": "A plug socket",
+     "category": "household"
+    },
+    {
+     "label": "A light switch",
+     "category": "household"
+    },
+    {
+     "label": "A face",
+     "category": "anatomy"
+    },
+    {
+     "label": "A Lego brick",
+     "category": "household"
+    },
+    {
+     "label": "An air vent",
+     "category": "architecture"
+    },
+    {
+     "label": "A cassette",
+     "category": "machinery"
+    },
+    {
+     "label": "A fuse box",
+     "category": "household"
+    },
+    {
+     "label": "A keyboard",
+     "category": "machinery"
+    }
+   ],
+   "safety_net": [
+    "A plug socket",
+    "A face",
+    "A light switch",
+    "An air vent"
+   ],
+   "stages": [
+    {
+     "x": 0.43,
+     "y": 0.39,
+     "zoom": 5.2
+    },
+    {
+     "x": 0.47,
+     "y": 0.5,
+     "zoom": 2.6
+    },
+    {
+     "x": 0.5,
+     "y": 0.52,
+     "zoom": 1.45
+    }
+   ],
+   "reveal_line": "A plug socket. Thirteen amps. Please don't put your tongue in it, Steve."
+  },
+  {
+   "id": "hole.plughole",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "household",
+    "grossness_1"
+   ],
+   "director_tags": [
+    "visual"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "weight": 1.0,
+   "image": "res://assets/content/hole/plughole.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/hole/plughole.jpg",
+     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
+     "creator": "Mildew project",
+     "licence": "project-owned",
+     "attribution_required": false,
+     "approval_status": "approved",
+     "art_status": "provisional"
+    }
+   ],
+   "answer": "A plughole",
+   "category": "drain_pipe",
+   "scale": "centimetres",
+   "candidates": [
+    {
+     "label": "A plughole",
+     "category": "drain_pipe"
+    },
+    {
+     "label": "A shower drain",
+     "category": "drain_pipe"
+    },
+    {
+     "label": "A fan",
+     "category": "machinery"
+    },
+    {
+     "label": "A ship's porthole",
+     "category": "architecture"
+    },
+    {
+     "label": "A tin of beans",
+     "category": "food"
+    },
+    {
+     "label": "A coin",
+     "category": "household"
+    },
+    {
+     "label": "A bottle top",
+     "category": "household"
+    },
+    {
+     "label": "A speaker",
+     "category": "machinery"
+    }
+   ],
+   "safety_net": [
+    "A plughole",
+    "A fan",
+    "A bottle top",
+    "A speaker"
+   ],
+   "stages": [
+    {
+     "x": 0.53,
+     "y": 0.47,
+     "zoom": 5.5
+    },
+    {
+     "x": 0.5,
+     "y": 0.5,
+     "zoom": 2.8
+    },
+    {
+     "x": 0.5,
+     "y": 0.5,
+     "zoom": 1.6
+    }
+   ],
+   "reveal_line": "A plughole. And a hair. Somebody's hair. Not mine."
+  },
+  {
+   "id": "hole.rabbit_burrow",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "animals",
+    "grossness_0"
+   ],
+   "director_tags": [
+    "visual"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "weight": 1.0,
+   "image": "res://assets/content/hole/rabbit_burrow.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/hole/rabbit_burrow.jpg",
+     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
+     "creator": "Mildew project",
+     "licence": "project-owned",
+     "attribution_required": false,
+     "approval_status": "approved",
+     "art_status": "provisional"
+    }
+   ],
+   "answer": "A rabbit burrow",
+   "category": "animal",
+   "scale": "centimetres",
+   "candidates": [
+    {
+     "label": "A rabbit burrow",
+     "category": "animal"
+    },
+    {
+     "label": "A badger sett",
+     "category": "animal"
+    },
+    {
+     "label": "A fox den",
+     "category": "animal"
+    },
+    {
+     "label": "A mine shaft",
+     "category": "geology"
+    },
+    {
+     "label": "A drainpipe",
+     "category": "drain_pipe"
+    },
+    {
+     "label": "A cave",
+     "category": "geology"
+    },
+    {
+     "label": "A sinkhole",
+     "category": "geology"
+    },
+    {
+     "label": "A golf hole",
+     "category": "sport"
+    }
+   ],
+   "safety_net": [
+    "A rabbit burrow",
+    "A badger sett",
+    "A mine shaft",
+    "A drainpipe"
+   ],
+   "stages": [
+    {
+     "x": 0.39,
+     "y": 0.55,
+     "zoom": 5.0
+    },
+    {
+     "x": 0.46,
+     "y": 0.57,
+     "zoom": 2.5
+    },
+    {
+     "x": 0.5,
+     "y": 0.55,
+     "zoom": 1.4
+    }
+   ],
+   "reveal_line": "A rabbit burrow. Somebody's home. Somebody's very small, very frightened home."
+  },
+  {
+   "id": "hole.rotary_dial",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "household",
+    "grossness_0"
+   ],
+   "director_tags": [
+    "visual"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "weight": 1.0,
+   "image": "res://assets/content/hole/rotary_dial.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/hole/rotary_dial.jpg",
+     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
+     "creator": "Mildew project",
+     "licence": "project-owned",
+     "attribution_required": false,
+     "approval_status": "approved",
+     "art_status": "provisional"
+    }
+   ],
+   "answer": "A telephone dial",
+   "category": "machinery",
+   "scale": "centimetres",
+   "candidates": [
+    {
+     "label": "A telephone dial",
+     "category": "machinery"
+    },
+    {
+     "label": "A clock face",
+     "category": "household"
+    },
+    {
+     "label": "A safe dial",
+     "category": "machinery"
+    },
+    {
+     "label": "A roulette wheel",
+     "category": "household"
+    },
+    {
+     "label": "A bingo machine",
+     "category": "machinery"
+    },
+    {
+     "label": "A compass",
+     "category": "machinery"
+    },
+    {
+     "label": "A tape spool",
+     "category": "machinery"
+    },
+    {
+     "label": "A dartboard",
+     "category": "sport"
+    }
+   ],
+   "safety_net": [
+    "A telephone dial",
+    "A clock face",
+    "A safe dial",
+    "A roulette wheel"
+   ],
+   "stages": [
+    {
+     "x": 0.69,
+     "y": 0.33,
+     "zoom": 5.0
+    },
+    {
+     "x": 0.62,
+     "y": 0.42,
+     "zoom": 2.5
+    },
+    {
+     "x": 0.5,
+     "y": 0.5,
+     "zoom": 1.4
+    }
+   ],
+   "reveal_line": "A telephone dial. Ask your parents. Or ask me; I'm the same age as your parents."
+  },
+  {
+   "id": "hole.sea_sponge",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "animals",
+    "grossness_1"
+   ],
+   "director_tags": [
+    "visual"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "weight": 1.0,
+   "image": "res://assets/content/hole/sea_sponge.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/hole/sea_sponge.jpg",
+     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
+     "creator": "Mildew project",
+     "licence": "project-owned",
+     "attribution_required": false,
+     "approval_status": "approved",
+     "art_status": "provisional"
+    }
+   ],
+   "answer": "A sea sponge",
+   "category": "animal",
+   "scale": "centimetres",
+   "candidates": [
+    {
+     "label": "A sea sponge",
+     "category": "animal"
+    },
+    {
+     "label": "A crumpet",
+     "category": "food"
+    },
+    {
+     "label": "Coral",
+     "category": "animal"
+    },
+    {
+     "label": "A honeycomb",
+     "category": "food"
+    },
+    {
+     "label": "Pumice",
+     "category": "geology"
+    },
+    {
+     "label": "Swiss cheese",
+     "category": "food"
+    },
+    {
+     "label": "A loofah",
+     "category": "household"
+    },
+    {
+     "label": "A meringue",
+     "category": "food"
+    }
+   ],
+   "safety_net": [
+    "A sea sponge",
+    "Pumice",
+    "A meringue",
+    "A crumpet"
+   ],
+   "stages": [
+    {
+     "x": 0.55,
+     "y": 0.46,
+     "zoom": 5.0
+    },
+    {
+     "x": 0.52,
+     "y": 0.5,
+     "zoom": 2.5
+    },
+    {
+     "x": 0.5,
+     "y": 0.52,
+     "zoom": 1.4
+    }
+   ],
+   "reveal_line": "A sea sponge. It's an animal. It hasn't got a face, a brain or a mother. Lucky sod."
+  },
+  {
+   "id": "hole.shower_head",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "household",
+    "grossness_0"
+   ],
+   "director_tags": [
+    "visual"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "weight": 1.0,
+   "image": "res://assets/content/hole/shower_head.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/hole/shower_head.jpg",
+     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
+     "creator": "Mildew project",
+     "licence": "project-owned",
+     "attribution_required": false,
+     "approval_status": "approved",
+     "art_status": "provisional"
+    }
+   ],
+   "answer": "A shower head",
+   "category": "household",
+   "scale": "centimetres",
+   "candidates": [
+    {
+     "label": "A shower head",
+     "category": "household"
+    },
+    {
+     "label": "A watering can rose",
+     "category": "household"
+    },
+    {
+     "label": "A sieve",
+     "category": "household"
+    },
+    {
+     "label": "A loudspeaker",
+     "category": "machinery"
+    },
+    {
+     "label": "A lotus seed pod",
+     "category": "nature"
+    },
+    {
+     "label": "A telephone mouthpiece",
+     "category": "machinery"
+    },
+    {
+     "label": "A hairbrush",
+     "category": "household"
+    },
+    {
+     "label": "A cheese grater",
+     "category": "household"
+    }
+   ],
+   "safety_net": [
+    "A shower head",
+    "A telephone mouthpiece",
+    "A watering can rose",
+    "A loudspeaker"
+   ],
+   "stages": [
+    {
+     "x": 0.6,
+     "y": 0.46,
+     "zoom": 6.0
+    },
+    {
+     "x": 0.56,
+     "y": 0.48,
+     "zoom": 3.0
+    },
+    {
+     "x": 0.5,
+     "y": 0.5,
+     "zoom": 1.55
+    }
+   ],
+   "reveal_line": "A shower head. Limescale and all. We don't have one backstage, before anybody asks."
+  },
+  {
+   "id": "hole.studio_hatch",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 3,
+   "content_tags": [
+    "studio_world",
+    "unsettling_capable",
+    "grossness_0"
+   ],
+   "director_tags": [
+    "visual"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "weight": 0.25,
+   "image": "res://assets/content/hole/studio_hatch.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/hole/studio_hatch.jpg",
+     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
+     "creator": "Mildew project",
+     "licence": "project-owned",
+     "attribution_required": false,
+     "approval_status": "approved",
+     "art_status": "provisional"
+    }
+   ],
+   "answer": "A hatch",
+   "category": "studio",
+   "scale": "human",
+   "candidates": [
+    {
+     "label": "A hatch",
+     "category": "studio"
+    },
+    {
+     "label": "A cupboard door",
+     "category": "architecture"
+    },
+    {
+     "label": "A fuse box",
+     "category": "household"
+    },
+    {
+     "label": "A serving hatch",
+     "category": "architecture"
+    },
+    {
+     "label": "A letterbox",
+     "category": "household"
+    },
+    {
+     "label": "A safe",
+     "category": "machinery"
+    },
+    {
+     "label": "A cat flap",
+     "category": "household"
+    },
+    {
+     "label": "A loft hatch",
+     "category": "architecture"
+    }
+   ],
+   "safety_net": [
+    "A hatch",
+    "A cupboard door",
+    "A serving hatch",
+    "A cat flap"
+   ],
+   "stages": [
+    {
+     "x": 0.63,
+     "y": 0.55,
+     "zoom": 5.0
+    },
+    {
+     "x": 0.56,
+     "y": 0.53,
+     "zoom": 2.4
+    },
+    {
+     "x": 0.5,
+     "y": 0.53,
+     "zoom": 1.35
+    }
+   ],
+   "studio_hole": true,
+   "memory_candidate": true
+  },
+  {
+   "id": "hole.swiss_cheese",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "food",
+    "grossness_1"
+   ],
+   "director_tags": [
+    "visual"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "weight": 1.0,
+   "image": "res://assets/content/hole/swiss_cheese.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/hole/swiss_cheese.jpg",
+     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
+     "creator": "Mildew project",
+     "licence": "project-owned",
+     "attribution_required": false,
+     "approval_status": "approved",
+     "art_status": "provisional"
+    }
+   ],
+   "answer": "Swiss cheese",
+   "category": "food",
+   "scale": "centimetres",
+   "candidates": [
+    {
+     "label": "Swiss cheese",
+     "category": "food"
+    },
+    {
+     "label": "A sponge",
+     "category": "household"
+    },
+    {
+     "label": "The moon",
+     "category": "geology"
+    },
+    {
+     "label": "A crumpet",
+     "category": "food"
+    },
+    {
+     "label": "Pumice",
+     "category": "geology"
+    },
+    {
+     "label": "A honeycomb",
+     "category": "food"
+    },
+    {
+     "label": "A sandstone cliff",
+     "category": "geology"
+    },
+    {
+     "label": "Butter",
+     "category": "food"
+    }
+   ],
+   "safety_net": [
+    "Swiss cheese",
+    "The moon",
+    "Pumice",
+    "A sponge"
+   ],
+   "stages": [
+    {
+     "x": 0.47,
+     "y": 0.6,
+     "zoom": 5.0
+    },
+    {
+     "x": 0.5,
+     "y": 0.55,
+     "zoom": 2.6
+    },
+    {
+     "x": 0.5,
+     "y": 0.52,
+     "zoom": 1.4
+    }
+   ],
+   "reveal_line": "Swiss cheese. The holes are gas from bacteria, which is the sort of thing I'd rather not know before lunch."
+  },
+  {
+   "id": "hole.trumpet_bell",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "household",
+    "grossness_0"
+   ],
+   "director_tags": [
+    "visual"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "weight": 1.0,
+   "image": "res://assets/content/hole/trumpet_bell.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/hole/trumpet_bell.jpg",
+     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
+     "creator": "Mildew project",
+     "licence": "project-owned",
+     "attribution_required": false,
+     "approval_status": "approved",
+     "art_status": "provisional"
+    }
+   ],
+   "answer": "A trumpet bell",
+   "category": "machinery",
+   "scale": "centimetres",
+   "candidates": [
+    {
+     "label": "A trumpet bell",
+     "category": "machinery"
+    },
+    {
+     "label": "A gramophone horn",
+     "category": "machinery"
+    },
+    {
+     "label": "A plughole",
+     "category": "drain_pipe"
+    },
+    {
+     "label": "A funnel",
+     "category": "household"
+    },
+    {
+     "label": "A whirlpool",
+     "category": "nature"
+    },
+    {
+     "label": "A tuba",
+     "category": "machinery"
+    },
+    {
+     "label": "A satellite dish",
+     "category": "machinery"
+    },
+    {
+     "label": "A cymbal",
+     "category": "machinery"
+    }
+   ],
+   "safety_net": [
+    "A trumpet bell",
+    "A funnel",
+    "A whirlpool",
+    "A gramophone horn"
+   ],
+   "stages": [
+    {
+     "x": 0.62,
+     "y": 0.42,
+     "zoom": 5.0
+    },
+    {
+     "x": 0.56,
+     "y": 0.47,
+     "zoom": 2.5
+    },
+    {
+     "x": 0.5,
+     "y": 0.5,
+     "zoom": 1.45
+    }
+   ],
+   "reveal_line": "A trumpet. Straight down the business end. Mind your eye."
+  },
+  {
+   "id": "hole.volcano_crater",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "high_energy",
+    "grossness_0"
+   ],
+   "director_tags": [
+    "visual"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "weight": 1.0,
+   "image": "res://assets/content/hole/volcano_crater.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/hole/volcano_crater.jpg",
+     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
+     "creator": "Mildew project",
+     "licence": "project-owned",
+     "attribution_required": false,
+     "approval_status": "approved",
+     "art_status": "provisional"
+    }
+   ],
+   "answer": "A volcano crater",
+   "category": "geology",
+   "scale": "enormous",
+   "candidates": [
+    {
+     "label": "A volcano crater",
+     "category": "geology"
+    },
+    {
+     "label": "A moon crater",
+     "category": "geology"
+    },
+    {
+     "label": "A plughole",
+     "category": "drain_pipe"
+    },
+    {
+     "label": "A bird's nest",
+     "category": "animal"
+    },
+    {
+     "label": "A meteor crater",
+     "category": "geology"
+    },
+    {
+     "label": "An ant hill",
+     "category": "animal"
+    },
+    {
+     "label": "A spot",
+     "category": "anatomy"
+    },
+    {
+     "label": "A quarry",
+     "category": "geology"
+    }
+   ],
+   "safety_net": [
+    "A volcano crater",
+    "An ant hill",
+    "A spot",
+    "A bird's nest"
+   ],
+   "stages": [
+    {
+     "x": 0.33,
+     "y": 0.47,
+     "zoom": 4.5
+    },
+    {
+     "x": 0.42,
+     "y": 0.5,
+     "zoom": 2.2
+    },
+    {
+     "x": 0.48,
+     "y": 0.52,
+     "zoom": 1.3
+    }
+   ],
+   "reveal_line": "A volcano. From above. We didn't go. We were never going to go."
+  },
+  {
+   "id": "hole.whale_blowhole",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "animals",
+    "animal_anatomy",
+    "grossness_1"
+   ],
+   "director_tags": [
+    "visual"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "weight": 1.0,
+   "image": "res://assets/content/hole/whale_blowhole.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/hole/whale_blowhole.jpg",
+     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
+     "creator": "Mildew project",
+     "licence": "project-owned",
+     "attribution_required": false,
+     "approval_status": "approved",
+     "art_status": "provisional"
+    }
+   ],
+   "answer": "A whale's blowhole",
+   "category": "animal",
+   "scale": "centimetres",
+   "candidates": [
+    {
+     "label": "A whale's blowhole",
+     "category": "animal"
+    },
+    {
+     "label": "A dolphin's blowhole",
+     "category": "animal"
+    },
+    {
+     "label": "A nostril",
+     "category": "anatomy"
+    },
+    {
+     "label": "A wetsuit zip",
+     "category": "household"
+    },
+    {
+     "label": "A seal's ear",
+     "category": "animal"
+    },
+    {
+     "label": "A tyre",
+     "category": "machinery"
+    },
+    {
+     "label": "A slug",
+     "category": "animal"
+    },
+    {
+     "label": "A storm drain",
+     "category": "drain_pipe"
+    }
+   ],
+   "safety_net": [
+    "A whale's blowhole",
+    "A nostril",
+    "A wetsuit zip",
+    "A tyre"
+   ],
+   "stages": [
+    {
+     "x": 0.45,
+     "y": 0.42,
+     "zoom": 5.0
+    },
+    {
+     "x": 0.47,
+     "y": 0.47,
+     "zoom": 2.5
+    },
+    {
+     "x": 0.5,
+     "y": 0.5,
+     "zoom": 1.4
+    }
+   ],
+   "reveal_line": "A whale's blowhole. Two of them, side by side, like a pair of very wet nostrils."
+  },
+  {
+   "id": "hole.woodpecker_tree",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "animals",
+    "grossness_0"
+   ],
+   "director_tags": [
+    "visual"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "weight": 1.0,
+   "image": "res://assets/content/hole/woodpecker_tree.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/hole/woodpecker_tree.jpg",
+     "source": "Project-generated procedural illustration (tools/art/gen_holes.py)",
+     "creator": "Mildew project",
+     "licence": "project-owned",
+     "attribution_required": false,
+     "approval_status": "approved",
+     "art_status": "provisional"
+    }
+   ],
+   "answer": "Woodpecker holes in a tree",
+   "category": "animal",
+   "scale": "centimetres",
+   "candidates": [
+    {
+     "label": "Woodpecker holes in a tree",
+     "category": "animal"
+    },
+    {
+     "label": "Bullet holes",
+     "category": "architecture"
+    },
+    {
+     "label": "Woodworm",
+     "category": "animal"
+    },
+    {
+     "label": "A dartboard",
+     "category": "sport"
+    },
+    {
+     "label": "Termite damage",
+     "category": "animal"
+    },
+    {
+     "label": "A pegboard",
+     "category": "household"
+    },
+    {
+     "label": "Bark beetle tunnels",
+     "category": "animal"
+    },
+    {
+     "label": "A golf course",
+     "category": "sport"
+    }
+   ],
+   "safety_net": [
+    "Woodpecker holes in a tree",
+    "Bullet holes",
+    "A pegboard",
+    "Woodworm"
+   ],
+   "stages": [
+    {
+     "x": 0.3,
+     "y": 0.42,
+     "zoom": 5.0
+    },
+    {
+     "x": 0.4,
+     "y": 0.45,
+     "zoom": 2.4
+    },
+    {
+     "x": 0.5,
+     "y": 0.5,
+     "zoom": 1.4
+    }
+   ],
+   "reveal_line": "Woodpecker holes. Rows of them. Some birds just want to watch the world drill."
+  }
+ ]
+}

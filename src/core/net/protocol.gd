@@ -14,6 +14,8 @@ const C_CREATE_PROFILE := "create_profile"  # {name, speech, avatar, claim_exist
 const C_SELECT_PROFILE := "select_profile"  # {profile_id}
 const C_START_SHOW := "start_show"          # {} (floor captain only)
 const C_ANSWER := "answer"                  # {q, c}
+const C_LOCK := "lock"                      # {q, s, c}  Hole: lock candidate c at reveal stage s (irreversible)
+const C_PASS := "pass"                      # {q, s}     Hole: "show me more" for stage s
 const C_READY := "ready"                    # {}
 const C_PLAY_AGAIN := "play_again"          # {} (floor captain only)
 const C_LEAVE := "leave"                    # {}
@@ -29,8 +31,11 @@ const S_STATUS := "status"          # {paused, reason, detail}
 const S_PONG := "pong"              # {id, st}
 const S_KICKED := "kicked"          # {reason}
 
+## Game actions are routed to the current segment, which validates them against its own state.
+const GAME_ACTIONS := [C_ANSWER, C_LOCK, C_PASS]
+
 const CLIENT_TYPES := [C_HELLO, C_CHECK_NAME, C_SAY_NAME, C_CREATE_PROFILE, C_SELECT_PROFILE,
-	C_START_SHOW, C_ANSWER, C_READY, C_PLAY_AGAIN, C_LEAVE, C_PING]
+	C_START_SHOW, C_ANSWER, C_LOCK, C_PASS, C_READY, C_PLAY_AGAIN, C_LEAVE, C_PING]
 
 # Error codes (stable strings; the controller maps them to on-brand copy).
 const E_BAD_JSON := "bad_json"

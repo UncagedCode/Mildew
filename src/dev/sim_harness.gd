@@ -29,10 +29,21 @@ func oracle(content_id: String) -> int:
 	return int(item.get("correct", -1)) if not item.is_empty() else -1
 
 
+func hole_oracle(content_id: String, variant: String) -> String:
+	var item: Dictionary = session.content.get_item(content_id)
+	if item.is_empty():
+		return ""
+	if variant == "scale":
+		var k := SegHole.SCALE_KEYS.find(str(item.get("scale", "")))
+		return SegHole.SCALE_LABELS[k] if k >= 0 else ""
+	return str(item.get("answer", ""))
+
+
 func add_bot(name: String, personality: String, seed: int = 0) -> FakePlayerBot:
 	var bot := FakePlayerBot.new(name, personality, seed)
 	bot.room_key = session.join_key
 	bot.oracle = oracle
+	bot.hole_oracle = hole_oracle
 	connect_bot(bot)
 	bots.append(bot)
 	return bot

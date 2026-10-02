@@ -17,8 +17,27 @@ const RELATIONSHIP_TRAITS := ["favourite", "irritant", "disappointment", "target
 const LOG_LIMIT := 300
 const LINE_HISTORY := 14
 
+## Format registry (docs/03 "Game tags"). Unimplemented launch games stay listed so the skeleton
+## can show them as future candidates; only `implemented` formats are ever scheduled.
+const FORMATS := {
+	"hole": {"title": "HOLE", "kind": "game", "implemented": true,
+		"tags": ["visual", "trivia", "high-energy", "good-opener", "good-middle", "good-reset", "short", "2-player-safe", "high-content-dependency"]},
+	"studio_rehearsal": {"title": "STUDIO REHEARSAL", "kind": "warmup", "implemented": true, "tags": ["trivia", "short"]},
+	"guess_the_genitals": {"title": "GUESS THE GENITALS", "kind": "game", "implemented": false, "tags": ["visual", "trivia", "gross", "good-opener", "good-finale"]},
+	"real_or_mildew": {"title": "REAL OR MILDEW?", "kind": "game", "implemented": false, "tags": ["trivia", "good-middle", "good-reset"]},
+	"mildew_survey": {"title": "MILDEW SURVEY", "kind": "game", "implemented": false, "tags": ["social", "writing", "good-middle"]},
+	"mouthfeel": {"title": "MOUTHFEEL", "kind": "game", "implemented": false, "tags": ["writing", "gross", "good-middle", "good-finale"]},
+	"police_sketch": {"title": "POLICE SKETCH", "kind": "game", "implemented": false, "tags": ["drawing", "social", "long"]},
+	"do_not_press_that": {"title": "DO NOT PRESS THAT", "kind": "game", "implemented": false, "tags": ["cooperation", "chaotic", "tense"]},
+	"basement": {"title": "THE BASEMENT", "kind": "game", "implemented": false, "tags": ["deduction", "discussion", "long", "unsettling-capable"]},
+}
+
 var rng := RandomNumberGenerator.new()
 var content: ContentDB
+var cfg: MildewConfig = null       # optional; tuning falls back to defaults without it
+var broadcasts_played := 0
+var force := {}                    # dev overrides: hole_variant, hole_item, game
+var games_this_show: Array = []
 
 # --- Hidden axes (0..1). Never shown to players. ---
 var degradation := 0.0
@@ -76,6 +95,7 @@ func begin_session(installation: Dictionary, settings_interference: String) -> v
 	interference_mode = settings_interference
 	announcer_stage = int(installation.get("announcer_stage", 0))
 	var played := int(installation.get("broadcasts_played", 0))
+	broadcasts_played = played
 	# Familiarity: installation experience gradually allows higher tiers (docs/03 Familiarity).
 	familiarity_tier = clampi(1 + played / 3, 1, 5)
 	recent_installation_content = installation.get("recent_content_history", []).duplicate()
@@ -96,6 +116,7 @@ func reset_for_new_show() -> void:
 	relationships.clear()
 	player_stats.clear()
 	used_content.clear()
+	games_this_show.clear()
 	show_time = 0.0
 	for t in TONES:
 		tone[t] = 0.0
@@ -105,44 +126,138 @@ func reset_for_new_show() -> void:
 # Episode planning
 # ---------------------------------------------------------------------------
 
-## Builds the partial episode skeleton. CP1: only the Studio Rehearsal format exists, so the
-## Director resolves the opening slot to it and records the remaining standard-broadcast slots
-## as unresolved (they become live as games land in CP2+).
-func plan_episode(player_ids: Array, question_count: int) -> Array:
+func _cf(path: String, default_value: float) -> float:
+	return cfg.f(path, default_value) if cfg != null else default_value
+
+
+func _ci(path: String, default_value: int) -> int:
+	return cfg.i(path, default_value) if cfg != null else default_value
+
+
+## Builds the partial episode skeleton (docs/03 "Episode planning model"): the opening game is
+## resolved now, later slots stay unresolved candidates. CP2: Hole is the only launch game
+## implemented, so it is resolved into the opening slot; a short Studio Rehearsal warm-up runs
+## only for brand-new installations. Returns the segment descriptors to run.
+func plan_episode(player_ids: Array, _legacy_question_count: int = 0) -> Array:
 	var n := player_ids.size()
+	var opener := choose_game("good-opener", n)
+	var warmup := broadcasts_played < _ci("show.warmup_max_broadcasts", 2)
+	var future: Array = FORMATS.keys().filter(func(k): return not FORMATS[k].implemented)
 	skeleton = [
 		{"slot": "opening", "state": "resolved", "content": "opening_titles + welcome + intros"},
-		{"slot": "game_1", "state": "resolved", "content": "studio_rehearsal"},
+		{"slot": "warmup", "state": "resolved" if warmup else "skipped", "content": "studio_rehearsal" if warmup else "(returning installation)"},
+		{"slot": "game_1", "state": "resolved", "content": opener},
 		{"slot": "interstitial", "state": "unresolved", "content": "(adverts arrive CP8)"},
-		{"slot": "game_2", "state": "unresolved", "content": "(no further formats implemented at CP1)"},
+		{"slot": "game_2", "state": "unresolved", "content": "candidates: %s (not yet implemented)" % ", ".join(future.slice(0, 3))},
 		{"slot": "midpoint_break", "state": "unresolved", "content": "(CP8)"},
 		{"slot": "finale", "state": "unresolved", "content": "(CP8; ~1.5x scoring)"},
-		{"slot": "awards_credits", "state": "resolved", "content": "scores + sign-off (CP1 minimal)"},
+		{"slot": "awards_credits", "state": "resolved", "content": "scores + sign-off"},
 	]
-	var questions := pick_questions("studio_rehearsal", question_count, n)
-	log_decision("SelectGame", "studio_rehearsal", [
-		"only implemented format at CP1",
-		"tags: trivia, short, good-opener, 2-player-safe",
-		"player_count=%d compatible (2..8)" % n,
-		"questions=%s" % str(questions.map(func(q): return q.get("id"))),
-	])
 	var plan: Array = []
 	plan.append({"kind": "opening"})
 	plan.append({"kind": "link", "lines": [["announcer", "sponsor"], ["graham", "show_open"], ["graham", "show_open_2"]], "camera": "cam1"})
 	plan.append({"kind": "intros"})
-	plan.append({"kind": "sting", "game_id": "studio_rehearsal", "title": "STUDIO REHEARSAL"})
-	plan.append({"kind": "link", "lines": [["graham", "rehearsal_intro"]], "camera": "cam1"})
-	for q in questions:
-		plan.append({"kind": "question", "item": q, "game_id": "studio_rehearsal"})
+	if warmup:
+		var qs := pick_items("multiple_choice", "studio_rehearsal", _ci("show.warmup_questions", 2), n)
+		log_decision("Warmup", "studio_rehearsal", ["broadcasts_played=%d < %d" % [broadcasts_played, _ci("show.warmup_max_broadcasts", 2)], "questions=%s" % str(qs.map(func(q): return q.get("id")))])
+		plan.append({"kind": "sting", "game_id": "studio_rehearsal", "title": "STUDIO REHEARSAL"})
+		plan.append({"kind": "link", "lines": [["graham", "rehearsal_intro"]], "camera": "cam1"})
+		for i in qs.size():
+			plan.append({"kind": "question", "item": qs[i], "game_id": "studio_rehearsal", "mid_game": i > 0})
+	plan.append_array(plan_game(opener, n))
 	plan.append({"kind": "scores", "final": true})
 	plan.append({"kind": "sign_off"})
 	return plan
 
 
-## Content selection with repetition control: avoid items used this session, then items in
-## recent installation history; deliberately allow repeats only when the library is exhausted.
-func pick_questions(game_id: String, count: int, player_count: int) -> Array:
-	var pool := content.query("multiple_choice", game_id, familiarity_tier, player_count) if content else []
+## Picks an implemented game for a slot role tag (good-opener / good-middle / good-finale),
+## avoiding games already used this show. Logged with reasons (docs/03 "Director logging").
+func choose_game(role_tag: String, player_count: int) -> String:
+	if force.has("game") and FORMATS.has(force.game) and FORMATS[force.game].implemented:
+		log_decision("SelectGame", force.game, ["forced by developer"])
+		return str(force.game)
+	var cands: Array = []
+	for k in FORMATS.keys():
+		var f: Dictionary = FORMATS[k]
+		if f.kind != "game" or not f.implemented or games_this_show.has(k):
+			continue
+		cands.append(k)
+	if cands.is_empty():
+		cands = ["hole"]
+	cands.sort_custom(func(a, b): return int(FORMATS[a].tags.has(role_tag)) > int(FORMATS[b].tags.has(role_tag)))
+	var pick: String = cands[0]
+	games_this_show.append(pick)
+	log_decision("SelectGame", pick, [
+		"role=%s tags=%s" % [role_tag, ",".join(FORMATS[pick].tags)],
+		"player_count=%d (2-player-safe=%s)" % [player_count, FORMATS[pick].tags.has("2-player-safe")],
+		"implemented candidates=%s" % str(cands),
+		"recent games excluded=%s" % str(games_this_show.slice(0, games_this_show.size() - 1)),
+	])
+	return pick
+
+
+## Expands a game into its segments (sting, rules link, rounds, outro).
+func plan_game(game_id: String, player_count: int) -> Array:
+	var out: Array = []
+	match game_id:
+		"hole":
+			var rounds := _ci("hole.rounds_per_game", 6)
+			var items := pick_hole_items(rounds, player_count)
+			var variants := choose_hole_variants(items)
+			out.append({"kind": "sting", "game_id": "hole", "title": "HOLE"})
+			out.append({"kind": "link", "lines": [["graham", "hole_intro"], ["graham", "hole_rules"]], "camera": "cam1"})
+			for i in items.size():
+				out.append({"kind": "hole_round", "item": items[i], "game_id": "hole", "variant": variants[i],
+					"round": i + 1, "of": items.size(), "mid_game": i > 0})
+			out.append({"kind": "link", "lines": [["graham", "hole_outro"]], "camera": "cam1", "mid_game": false})
+	return out
+
+
+## Hole content: weighted, no repeats within the session, installation-recent items avoided,
+## at most N studio-world holes per game.
+func pick_hole_items(count: int, player_count: int) -> Array:
+	var chosen := pick_items("hole", "hole", count, player_count, _ci("hole.max_studio_holes_per_game", 1))
+	if force.has("hole_item"):
+		var forced: Dictionary = content.get_item(str(force.hole_item)) if content else {}
+		if not forced.is_empty() and not chosen.has(forced):
+			chosen[mini(1, chosen.size() - 1)] = forced
+			used_content[str(forced.get("id"))] = true
+			log_decision("ForceContent", str(forced.get("id")), ["forced by developer"])
+	return chosen
+
+
+func choose_hole_variants(items: Array) -> Array:
+	var variants: Array = []
+	for i in items.size():
+		variants.append("standard")
+	if items.size() < 3:
+		return variants
+	# One SCALE round in the middle of the game, preferring items whose size is surprising.
+	var forced := str(force.get("hole_variant", ""))
+	if forced == "scale" or (forced == "" and rng.randf() < _cf("hole.scale_round_chance", 0.6)):
+		var best := -1
+		for i in range(2, items.size() - 1):
+			if items[i].get("studio_hole", false):
+				continue
+			if best == -1 or (str(items[i].get("scale")) != "centimetres" and str(items[best].get("scale")) == "centimetres"):
+				best = i
+		if best >= 0:
+			variants[best] = "scale"
+			log_decision("Variant", "hole:scale@%d" % (best + 1), ["item=%s scale=%s" % [items[best].get("id"), items[best].get("scale")]])
+	# ADVANCED OPEN GUESS: no safety net, only for seasoned installations (docs/04 Hole variants).
+	if forced == "open" or (forced == "" and familiarity_tier >= _ci("hole.open_round_min_familiarity", 4) and rng.randf() < _cf("hole.open_round_chance", 0.5)):
+		for i in range(items.size() - 1, 0, -1):
+			if variants[i] == "standard" and not items[i].get("studio_hole", false):
+				variants[i] = "open"
+				log_decision("Variant", "hole:open@%d" % (i + 1), ["familiarity_tier=%d" % familiarity_tier])
+				break
+	return variants
+
+
+## Generic content selection with repetition control: never repeat within a session; avoid
+## installation-recent items; weighted by item "weight"; deliberate repeats only when exhausted.
+func pick_items(kind: String, game_id: String, count: int, player_count: int, max_studio: int = 99) -> Array:
+	var pool := content.query(kind, game_id, familiarity_tier, player_count) if content else []
 	var fresh: Array = []
 	var stale: Array = []
 	for item in pool:
@@ -153,23 +268,55 @@ func pick_questions(game_id: String, count: int, player_count: int) -> Array:
 			stale.append(item)
 		else:
 			fresh.append(item)
-	_shuffle(fresh)
-	_shuffle(stale)
-	var chosen := fresh.slice(0, count)
-	if chosen.size() < count:
-		chosen.append_array(stale.slice(0, count - chosen.size()))
+	_weighted_shuffle(fresh)
+	_weighted_shuffle(stale)
+	var ordered := fresh + stale
+	var chosen: Array = []
+	var studio := 0
+	for item in ordered:
+		if chosen.size() >= count:
+			break
+		if item.get("studio_hole", false):
+			if studio >= max_studio:
+				continue
+			studio += 1
+		chosen.append(item)
+	if chosen.size() > fresh.size():
 		log_decision("ContentRepeat", game_id, ["fresh pool exhausted (%d fresh); reusing installation-recent items" % fresh.size()])
 	for item in chosen:
 		used_content[str(item.get("id"))] = true
+	log_decision("SelectContent", game_id, ["picked=%s" % str(chosen.map(func(q): return q.get("id"))),
+		"pool=%d fresh=%d tier<=%d" % [pool.size(), fresh.size(), familiarity_tier]])
 	return chosen
 
 
-func _shuffle(arr: Array) -> void:
+## Back-compat (CP1 tests): rehearsal question picking.
+func pick_questions(game_id: String, count: int, player_count: int) -> Array:
+	return pick_items("multiple_choice", game_id, count, player_count)
+
+
+## Efraimidis-Spirakis weighted random order (weight from item.weight, default 1).
+func _weighted_shuffle(arr: Array) -> void:
+	var keyed: Array = []
+	for it in arr:
+		var w := maxf(0.0001, float(it.get("weight", 1.0)))
+		keyed.append([pow(rng.randf(), 1.0 / w), it])
+	keyed.sort_custom(func(a, b): return a[0] > b[0])
+	arr.clear()
+	for k in keyed:
+		arr.append(k[1])
+
+
+func shuffle(arr: Array) -> void:
 	for i in range(arr.size() - 1, 0, -1):
 		var j := rng.randi_range(0, i)
 		var tmp = arr[i]
 		arr[i] = arr[j]
 		arr[j] = tmp
+
+
+func _shuffle(arr: Array) -> void:
+	shuffle(arr)
 
 
 # ---------------------------------------------------------------------------
@@ -329,6 +476,89 @@ func on_question_result(results: Array, answer_window: float) -> Dictionary:
 	degradation = clampf(degradation + rng.randf_range(0.0, 0.02), 0, 1)
 	log_decision("QuestionReaction", plan.category, reasons)
 	return plan
+
+
+## Hole round outcome -> Graham reaction plan + relationship/tone updates.
+## results: [{pid, answered(locked), correct, partial, stage, points}]
+func on_hole_result(results: Array, item: Dictionary, variant: String) -> Dictionary:
+	var correct: Array = results.filter(func(r): return r.correct)
+	var locked: Array = results.filter(func(r): return r.answered)
+	var reasons: Array = ["locked=%d/%d" % [locked.size(), results.size()], "correct=%d" % correct.size(), "variant=%s" % variant]
+	for r in results:
+		var s := stats(r.pid)
+		if r.answered:
+			s.answered += 1
+			s.missed_streak = 0
+		else:
+			s.missed_streak += 1
+		if r.correct:
+			s.correct += 1
+			s.correct_streak += 1
+			s.wrong_streak = 0
+			_bump(r.pid, "favourite", 0.03 + 0.03 * (4 - mini(int(r.stage), 4)) / 3.0)
+			if int(r.stage) == 1:
+				_bump(r.pid, "interesting", 0.08)
+		elif r.answered:
+			s.wrong_streak += 1
+			s.correct_streak = 0
+			if int(r.stage) == 1 and not r.get("partial", false):
+				_bump(r.pid, "target", 0.05)   # confidently wrong from a glimpse: Graham remembers
+			_bump(r.pid, "disappointment", 0.04 * s.wrong_streak)
+		else:
+			_bump(r.pid, "irritant", 0.05)
+	var plan := {"category": "", "ctx": {}, "extra": []}
+	if item.get("studio_hole", false):
+		set_mood("rattled", 25.0, "studio hole revealed")
+		pressure = clampf(pressure + 0.06, 0, 1)
+		degradation = clampf(degradation + 0.03, 0, 1)
+		_tone("unsettling", 0.2)
+		log_decision("HoleReaction", "studio_hole", reasons)
+		return plan  # no commentary: never explain it, just move on
+	if locked.is_empty():
+		plan.category = "hole_nobody_locked"
+		set_mood("irritated", 30.0, "nobody locked in")
+	elif correct.is_empty():
+		plan.category = "hole_nobody_right"
+		plan.ctx = {"answer": str(item.get("answer", ""))}
+		set_mood("amused" if rng.randf() < 0.6 else "irritated", 25.0, "nobody right")
+		_tone("comedy", 0.25)
+	elif correct.size() == results.size() and results.size() > 1:
+		plan.category = "hole_all_correct"
+		_tone("competitive", 0.1)
+	elif correct.size() == 1 and results.size() > 2:
+		plan.category = "hole_single_correct"
+		plan.ctx = {"pid": correct[0].pid}
+		_tone("competitive", 0.2)
+	# Extras: first-glance genius, confident early failure, partial credit (max two).
+	var glance: Array = correct.filter(func(r): return int(r.stage) == 1)
+	if not glance.is_empty() and rng.randf() < 0.8:
+		plan.extra.append({"category": "hole_first_glance", "ctx": {"pid": glance[0].pid}})
+		reasons.append("first_glance %s" % glance[0].pid)
+	var early_wrong: Array = results.filter(func(r): return r.answered and not r.correct and not r.get("partial", false) and int(r.stage) == 1)
+	if not early_wrong.is_empty() and plan.extra.size() < 2 and rng.randf() < 0.6:
+		plan.extra.append({"category": "hole_early_wrong", "ctx": {"pid": early_wrong[0].pid}})
+		reasons.append("early_wrong %s" % early_wrong[0].pid)
+	var partial: Array = results.filter(func(r): return r.get("partial", false))
+	if not partial.is_empty() and plan.extra.size() < 2 and rng.randf() < 0.5:
+		plan.extra.append({"category": "hole_partial", "ctx": {"pid": partial[0].pid}})
+	for r in results:
+		var s := stats(r.pid)
+		if s.missed_streak >= 2 and not s.afk_called and plan.extra.size() < 2:
+			s.afk_called = true
+			plan.extra.append({"category": "afk_player", "ctx": {"pid": r.pid}})
+			reasons.append("afk %s" % r.pid)
+			break
+	_tone("gross", 0.05 * float(_grossness(item)))
+	degradation = clampf(degradation + rng.randf_range(0.0, 0.015), 0, 1)
+	log_decision("HoleReaction", plan.category if plan.category != "" else "(reveal line only)", reasons)
+	return plan
+
+
+static func _grossness(item: Dictionary) -> int:
+	for t in item.get("content_tags", []):
+		if str(t).begins_with("grossness_"):
+			return int(str(t).substr(10))
+	return 0
 
 
 func on_player_lost(pid: String) -> void:

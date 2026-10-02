@@ -55,6 +55,7 @@ func _init(p_cfg: MildewConfig, p_store: SaveStore, p_content: ContentDB, seed: 
 	store = p_store
 	content = p_content
 	director = Director.new(content, seed)
+	director.cfg = cfg
 	if seed == 0:
 		_rng.randomize()
 	else:
@@ -202,9 +203,10 @@ func _handle(conn_id: int, msg: Dictionary) -> void:
 			_on_leave(conn_id)
 		Protocol.C_READY:
 			pass  # used by later checkpoints (commercial break early resume)
-		Protocol.C_ANSWER:
-			_on_game_action(conn_id, msg)
 		_:
+			if Protocol.GAME_ACTIONS.has(t):
+				_on_game_action(conn_id, msg)
+				return
 			_invalid(conn_id, Protocol.E_UNKNOWN_TYPE)
 
 
@@ -546,8 +548,9 @@ func _advance() -> void:
 	if prev != null:
 		prev.finish()  # may end the show (sign-off)
 		var allow: bool = prev.allows_late_join_after
-		# Never integrate late joiners when the next segment continues a game in progress.
-		if allow and not _segments.is_empty() and str(_segments[0].kind) == "question" and prev.kind != "link":
+		# Never integrate late joiners when the next segment continues a game in progress
+		# (the planner marks every segment after a game's first round as mid_game).
+		if allow and not _segments.is_empty() and bool(_segments[0].get("mid_game", false)):
 			allow = false
 		if allow:
 			_integrate_waiting()

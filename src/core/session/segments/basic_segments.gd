@@ -16,6 +16,8 @@ static func make(desc: Dictionary, session) -> Segment:
 			return SegSting.new(desc).setup(session)
 		"question":
 			return SegQuestion.new(desc).setup(session)
+		"hole_round":
+			return SegHole.new(desc).setup(session)
 		"scores":
 			return SegScores.new(desc).setup(session)
 		"sign_off":

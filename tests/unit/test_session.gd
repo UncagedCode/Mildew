@@ -20,15 +20,19 @@ func test_two_player_full_show() -> void:
 	a.auto_start_at_count = 2
 	check(h.run_until(_ended(h), 400.0), "2-player show reaches the end")
 	check_eq(h.session.phase, SessionServer.Phase.ENDED, "phase ENDED (not closed)")
-	check_eq(h.events_of("question_show").size(), 3, "three rehearsal questions asked")
-	check_eq(h.events_of("reveal").size(), 3, "three reveals")
+	var warm := h.session.cfg.i("show.warmup_questions", 2)
+	var rounds := h.session.cfg.i("hole.rounds_per_game", 6)
+	check_eq(h.events_of("question_show").size(), warm, "new installation gets the rehearsal warm-up")
+	check_eq(h.events_of("reveal").size(), warm, "warm-up reveals")
+	check_eq(h.events_of("hole_round").size(), rounds, "a full game of Hole")
+	check_eq(h.events_of("hole_reveal").size(), rounds, "every Hole round revealed")
 	check(h.events_of("sign_off").size() == 1, "sign-off reached")
 	var st := h.session.standings()
 	check_eq(st.size(), 2, "two players in standings")
 	check(int(st[0].score) >= int(st[1].score), "standings sorted")
 	for s in st:
 		check(int(s.score) >= 0, "no negative score")
-		check(int(s.score) <= 3 * (1150 + 50), "score within max bound")
+		check(int(s.score) <= warm * (1150 + 50) + rounds * 1500, "score within max bound")
 	check(a.errors_received.is_empty() and b.errors_received.is_empty(), "bots got no errors: %s %s" % [a.errors_received, b.errors_received])
 
 
@@ -215,7 +219,8 @@ func test_late_join_waits_for_boundary() -> void:
 	check(not c.screens_seen.has("question"), "late joiner never injected mid-game")
 	check(h.run_until(func(): return pc.status == PlayerState.Status.ACTIVE, 300.0), "late joiner integrated at a game boundary")
 	var q_count_at_integration := h.events_of("question_show").size()
-	check_eq(q_count_at_integration, 3, "integrated only after the rehearsal game finished")
+	check_eq(q_count_at_integration, h.session.cfg.i("show.warmup_questions", 2), "integrated only after the rehearsal warm-up finished")
+	check_eq(h.events_of("hole_round").size(), 0, "...and before the next game began")
 	check(h.run_until(_ended(h), 300.0), "show completes")
 
 

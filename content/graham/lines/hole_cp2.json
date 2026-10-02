@@ -1,0 +1,402 @@
+{
+ "pack_id": "graham.hole_cp2",
+ "content_kind": "graham_lines",
+ "speaker": "graham",
+ "_comment": "Graham's Hole line pools (CP2). Professional presenter language; humour from the mismatch. Insertion slots: {name} {count} {answer} {points}.",
+ "items": [
+  {
+   "id": "g.hole_intro.1",
+   "category": "hole_intro",
+   "text": "Our first game tonight. It's called Hole. I didn't name it.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_intro.2",
+   "category": "hole_intro",
+   "text": "Time for Hole. A simple game. Some of you will still struggle.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_intro.3",
+   "category": "hole_intro",
+   "text": "Hole. The game where we show you an opening and you tell us what it belongs to.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_rules.1",
+   "category": "hole_rules",
+   "text": "We start very close. Lock in early and it's worth fifteen hundred. Wait, and it's worth less. Once you've locked, you've locked.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_rules.2",
+   "category": "hole_rules",
+   "text": "The closer the look when you lock in, the more it's worth. Fifteen hundred at first glance, five hundred if you need it spelled out.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_rules.3",
+   "category": "hole_rules",
+   "text": "Lock in on your unit whenever you're sure. You can't change your mind. This isn't a democracy.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_round_start.1",
+   "category": "hole_round_start",
+   "text": "Hole number {count}. Have a good look.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_round_start.2",
+   "category": "hole_round_start",
+   "text": "Here's your first look.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_round_start.3",
+   "category": "hole_round_start",
+   "text": "Next hole.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_round_start.4",
+   "category": "hole_round_start",
+   "text": "Right. What's this?",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_round_start.5",
+   "category": "hole_round_start",
+   "text": "Look closely. Not too closely.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_stage_more.1",
+   "category": "hole_stage_more",
+   "text": "Pulling back a little. Now worth {points}.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_stage_more.2",
+   "category": "hole_stage_more",
+   "text": "A bit more for you.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_stage_more.3",
+   "category": "hole_stage_more",
+   "text": "Wider. If that helps.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_stage_more.4",
+   "category": "hole_stage_more",
+   "text": "Camera two, pull out. Gently.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_last_look.1",
+   "category": "hole_last_look",
+   "text": "Last look. Lock in now or forever hold your peace.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_last_look.2",
+   "category": "hole_last_look",
+   "text": "That's as much as you're getting.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_safety_net.1",
+   "category": "hole_safety_net",
+   "text": "For those still dithering, multiple choice. Five hundred points.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_safety_net.2",
+   "category": "hole_safety_net",
+   "text": "Here are some options, for the cowards.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_safety_net.3",
+   "category": "hole_safety_net",
+   "text": "Multiple choice. No shame in it. Some shame in it.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_early_lock.1",
+   "category": "hole_early_lock",
+   "text": "{name} has locked in already. On that?",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_early_lock.2",
+   "category": "hole_early_lock",
+   "text": "{name}'s committed. Bold.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_early_lock.3",
+   "category": "hole_early_lock",
+   "text": "And {name} is in. From a smudge.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_reveal.1",
+   "category": "hole_reveal",
+   "text": "It's {answer}.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_reveal.2",
+   "category": "hole_reveal",
+   "text": "It was {answer}.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_reveal.3",
+   "category": "hole_reveal",
+   "text": "That, ladies and gentlemen, was {answer}.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_first_glance.1",
+   "category": "hole_first_glance",
+   "text": "{name} got that from the first look. I'd like to know how.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_first_glance.2",
+   "category": "hole_first_glance",
+   "text": "{name}, you recognised that instantly. We'll be talking about that later.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_first_glance.3",
+   "category": "hole_first_glance",
+   "text": "First glance, {name}. That's either a gift or a warning sign.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_early_wrong.1",
+   "category": "hole_early_wrong",
+   "text": "{name} locked in early and was wrong. I admire the confidence. Not the result.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_early_wrong.2",
+   "category": "hole_early_wrong",
+   "text": "{name}. Fifteen hundred points, gone, on a hunch.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_early_wrong.3",
+   "category": "hole_early_wrong",
+   "text": "{name}, you looked at that and thought, yes. You were wrong.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_partial.1",
+   "category": "hole_partial",
+   "text": "{name}, right sort of thing. I'll give you something for that.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_partial.2",
+   "category": "hole_partial",
+   "text": "Close enough for a few points, {name}. Not close enough for my respect.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_nobody_right.1",
+   "category": "hole_nobody_right",
+   "text": "Nobody. Not one of you knew {answer}.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_nobody_right.2",
+   "category": "hole_nobody_right",
+   "text": "None of you. Remarkable.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_nobody_right.3",
+   "category": "hole_nobody_right",
+   "text": "Not a single correct answer. We'll edit that out.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_nobody_locked.1",
+   "category": "hole_nobody_locked",
+   "text": "Nobody locked in. Nobody. It's not a spectator sport.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_nobody_locked.2",
+   "category": "hole_nobody_locked",
+   "text": "Not one answer. I've seen more participation at a funeral.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_all_correct.1",
+   "category": "hole_all_correct",
+   "text": "All of you. Everybody knows what that is. Says a lot.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_all_correct.2",
+   "category": "hole_all_correct",
+   "text": "Full marks all round. Don't get used to it.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_single_correct.1",
+   "category": "hole_single_correct",
+   "text": "Only {name} got it. Well done, {name}.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_single_correct.2",
+   "category": "hole_single_correct",
+   "text": "{name}, the only one. Take a bow. Don't, actually. We're short of time.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_scale_intro.1",
+   "category": "hole_scale_intro",
+   "text": "This one's a scale round. Not what it is. How big it is.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_scale_intro.2",
+   "category": "hole_scale_intro",
+   "text": "Something different. Tell me how big this hole is.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_scale_reveal.1",
+   "category": "hole_scale_reveal",
+   "text": "The answer: {answer}.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_scale_reveal.2",
+   "category": "hole_scale_reveal",
+   "text": "Size-wise: {answer}.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_open_intro.1",
+   "category": "hole_open_intro",
+   "text": "No multiple choice this time. You either know your holes or you don't.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_open_intro.2",
+   "category": "hole_open_intro",
+   "text": "Advanced round. No safety net. Grown-ups only.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_studio_reveal.1",
+   "category": "hole_studio_reveal",
+   "text": "Right.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_studio_reveal.2",
+   "category": "hole_studio_reveal",
+   "text": "We'll move on.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_studio_reveal.3",
+   "category": "hole_studio_reveal",
+   "text": "That's... yes. Next.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_outro.1",
+   "category": "hole_outro",
+   "text": "That was Hole. Some of you should be very proud. One of you should be watched.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_outro.2",
+   "category": "hole_outro",
+   "text": "And that's the end of Hole. I'll never look at a crumpet the same way.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_outro.3",
+   "category": "hole_outro",
+   "text": "That's Hole. Thank you. Wash your hands.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.hole_studio_reveal.silent",
+   "category": "hole_studio_reveal",
+   "text": "...",
+   "silent": true,
+   "enabled": true,
+   "quality_status": "draft",
+   "weight": 1.5
+  }
+ ]
+}

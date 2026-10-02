@@ -7,7 +7,7 @@ extends RefCounted
 ## "Oracle" knowledge (correct answers) is injected by dev tooling only; real phones never
 ## receive answers.
 
-const PERSONALITIES := ["fast_random", "high_accuracy", "terrible", "afk", "horse", "cautious"]
+const PERSONALITIES := ["fast_random", "high_accuracy", "terrible", "afk", "horse", "cautious", "risk_taker"]
 
 var name := "Bot"
 var personality := "fast_random"
@@ -16,6 +16,8 @@ var player_id := ""
 var resume_token := ""
 var room_key := ""
 var oracle: Callable              # func(qid_base: String) -> int (correct index) or -1
+var hole_oracle: Callable         # func(content_id: String, variant: String) -> String (answer label)
+var hole_handled := {}            # "qid:stage" -> true
 var rng := RandomNumberGenerator.new()
 var outbox: Array = []            # [{at, msg}]
 var now := 0.0
@@ -83,11 +85,70 @@ func _on_screen(screen: String, data: Dictionary) -> void:
 			var delay := _delay(window)
 			if delay < window:
 				_queue(delay, {"t": Protocol.C_ANSWER, "q": qid, "c": choice})
+		"hole_pick":
+			_on_hole_pick(data)
 		"ended":
 			if data.get("captain", false) and auto_play_again and not _again_sent:
 				_again_sent = true
 				_start_sent = false
 				_queue(1.0, {"t": Protocol.C_PLAY_AGAIN})
+
+
+## Hole: decide at which reveal stage to gamble (docs/10 personalities: risk-taker, cautious...).
+func _on_hole_pick(data: Dictionary) -> void:
+	var qid := str(data.get("qid", ""))
+	var stage := int(data.get("stage", 1))
+	var key := "%s:%d" % [qid, stage]
+	if hole_handled.has(key) or personality == "afk":
+		return
+	hole_handled[key] = true
+	var options: Array = data.get("options", [])
+	var window := float(data.get("total_ms", 8000)) / 1000.0
+	var final_stage := int(data.get("final_stage", 4))
+	var lock_stage := 2
+	var accuracy := 0.5
+	match personality:
+		"risk_taker":
+			lock_stage = 1
+			accuracy = 0.45
+		"high_accuracy":
+			lock_stage = 2
+			accuracy = 0.85
+		"cautious":
+			lock_stage = final_stage
+			accuracy = 0.95
+		"terrible":
+			lock_stage = rng.randi_range(1, 2)
+			accuracy = 0.1
+		"horse":
+			lock_stage = 2
+			accuracy = 0.3
+		_:
+			lock_stage = rng.randi_range(1, final_stage)
+			accuracy = 0.4
+	if stage < lock_stage:
+		if data.get("can_pass", false) and rng.randf() < 0.7:
+			_queue(rng.randf_range(0.4, minf(2.0, window * 0.5)), {"t": Protocol.C_PASS, "q": qid, "s": stage})
+		return
+	var answer := ""
+	if hole_oracle.is_valid():
+		answer = str(hole_oracle.call(qid.split("#")[0], str(data.get("variant", "standard"))))
+	var idx := options.find(answer)
+	var choice := rng.randi_range(0, maxi(0, options.size() - 1))
+	if idx >= 0 and rng.randf() < accuracy:
+		choice = idx
+	elif idx >= 0 and options.size() > 1:
+		while choice == idx:
+			choice = rng.randi_range(0, options.size() - 1)
+	if personality == "horse":
+		for i in options.size():
+			var o := str(options[i]).to_lower()
+			if o.contains("horse") or o.contains("pig") or o.contains("whale") or o.contains("cow"):
+				choice = i
+				break
+	var delay := rng.randf_range(0.5, maxf(0.6, window * 0.6))
+	if delay < window:
+		_queue(delay, {"t": Protocol.C_LOCK, "q": qid, "s": stage, "c": choice})
 
 
 func _choose(qid: String, options: Array) -> int:

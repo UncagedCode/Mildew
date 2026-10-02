@@ -166,6 +166,12 @@ func add_fake_player(personality: String = "") -> FakePlayerBot:
 	var bot := FakePlayerBot.new(name, personality)
 	bot.room_key = session.join_key
 	bot.oracle = func(content_id: String) -> int: return int(content.get_item(content_id).get("correct", -1))
+	bot.hole_oracle = func(content_id: String, variant: String) -> String:
+		var it: Dictionary = content.get_item(content_id)
+		if variant == "scale":
+			var k := SegHole.SCALE_KEYS.find(str(it.get("scale", "")))
+			return SegHole.SCALE_LABELS[k] if k >= 0 else ""
+		return str(it.get("answer", ""))
 	_connect_bot(bot)
 	return bot
 

@@ -63,6 +63,8 @@ func validate(db: ContentDB, release_mode: bool = false) -> bool:
 			match kind:
 				"multiple_choice":
 					_validate_multiple_choice(item, where, release_mode)
+				"hole":
+					_validate_hole(item, where, release_mode)
 				"graham_lines", "announcer_lines":
 					_validate_line(item, where, moods)
 				_:
@@ -107,6 +109,94 @@ func _validate_multiple_choice(item: Dictionary, where: String, release_mode: bo
 			errors.append("%s: duplicate option '%s'" % [where, o])
 		lowered[k] = true
 	_validate_factual(item, where, release_mode)
+
+
+func _validate_hole(item: Dictionary, where: String, release_mode: bool) -> void:
+	_validate_common_game(item, where)
+	var cats: Array = _tags.get("hole_categories", [])
+	var scales: Array = _tags.get("hole_scales", [])
+	var img := str(item.get("image", ""))
+	if img == "":
+		errors.append("%s: hole item missing image" % where)
+	elif not ResourceLoader.exists(img) and not FileAccess.file_exists(img):
+		errors.append("%s: missing referenced asset %s" % [where, img])
+	var answer := str(item.get("answer", "")).strip_edges()
+	if answer == "":
+		errors.append("%s: missing correct answer" % where)
+	if not cats.has(item.get("category")):
+		errors.append("%s: unknown hole category '%s'" % [where, str(item.get("category"))])
+	if not scales.has(item.get("scale")):
+		errors.append("%s: invalid scale '%s'" % [where, str(item.get("scale"))])
+	var labels: Array = []
+	var cands = item.get("candidates")
+	if typeof(cands) != TYPE_ARRAY or cands.size() < 4 or cands.size() > 10:
+		errors.append("%s: candidates must have 4-10 entries" % where)
+	else:
+		for c in cands:
+			if typeof(c) != TYPE_DICTIONARY or str(c.get("label", "")).strip_edges() == "":
+				errors.append("%s: candidate missing label" % where)
+				continue
+			var lab := str(c.label)
+			if labels.has(lab):
+				errors.append("%s: duplicate candidate '%s'" % [where, lab])
+			labels.append(lab)
+			if not cats.has(c.get("category")):
+				errors.append("%s: candidate '%s' has unknown category '%s'" % [where, lab, str(c.get("category"))])
+			elif lab == answer and str(c.category) != str(item.get("category")):
+				errors.append("%s: answer candidate category differs from item category" % where)
+		if answer != "" and not labels.has(answer):
+			errors.append("%s: answer '%s' is not among the candidates" % [where, answer])
+	var net = item.get("safety_net")
+	if typeof(net) != TYPE_ARRAY or net.size() != 4:
+		errors.append("%s: safety_net must have exactly 4 options" % where)
+	else:
+		var seen := {}
+		for o in net:
+			if seen.has(o):
+				errors.append("%s: duplicate safety_net option '%s'" % [where, o])
+			seen[o] = true
+			if not labels.has(o):
+				errors.append("%s: safety_net option '%s' is not a candidate" % [where, o])
+		if not net.has(answer):
+			errors.append("%s: safety_net does not contain the answer" % where)
+	var stages = item.get("stages")
+	if typeof(stages) != TYPE_ARRAY or stages.size() != 3:
+		errors.append("%s: stages must define 3 reveal crops" % where)
+	else:
+		var prev_zoom := 1.0e9
+		for st in stages:
+			if typeof(st) != TYPE_DICTIONARY:
+				errors.append("%s: malformed stage" % where)
+				continue
+			var z := float(st.get("zoom", 0))
+			var sx := float(st.get("x", -1))
+			var sy := float(st.get("y", -1))
+			if z < 1.0 or sx < 0.0 or sx > 1.0 or sy < 0.0 or sy > 1.0:
+				errors.append("%s: stage crop out of range %s" % [where, str(st)])
+			if z >= prev_zoom:
+				errors.append("%s: each reveal stage must be wider than the last" % where)
+			prev_zoom = z
+	if typeof(item.get("weight", 1.0)) not in [TYPE_INT, TYPE_FLOAT] or float(item.get("weight", 1.0)) <= 0.0:
+		errors.append("%s: weight must be a positive number" % where)
+	var rl := str(item.get("reveal_line", ""))
+	if rl.count("{") != rl.count("}"):
+		errors.append("%s: unbalanced insertion slot braces" % where)
+	_validate_media(item, where, release_mode)
+	_validate_factual(item, where, release_mode)
+
+
+## Every shipped image needs provenance/licence metadata, factual or not (docs/07).
+func _validate_media(item: Dictionary, where: String, release_mode: bool) -> void:
+	var media = item.get("media", [])
+	if typeof(media) != TYPE_ARRAY or media.is_empty():
+		errors.append("%s: image without media/licence metadata" % where)
+		return
+	for m in media:
+		for k in ["asset_path", "source", "licence", "approval_status"]:
+			if typeof(m) != TYPE_DICTIONARY or str(m.get(k, "")).strip_edges() == "":
+				errors.append("%s: media missing '%s' (licence metadata)" % [where, k])
+		if typeof(m) == TYPE_DICTIONARY and release_mode and str(m.get("approval_status")) != "approved":
+			errors.append("%s: media not approved for release" % where)
 
 
 func _validate_factual(item: Dictionary, where: String, release_mode: bool) -> void:
