@@ -904,6 +904,9 @@ def run(names):
         if field is not None:  # microscope field stop
             img = (img.astype(np.float32) * field[..., None]).astype(np.uint8)
         save(img, os.path.join(OUT, name + ".jpg"))
+        imp = os.path.join(OUT, name + ".jpg.import")
+        if not os.path.exists(imp):  # lossy WebP in the pack keeps the APK small (~0.3 MB/image)
+            open(imp, "w").write('[remap]\n\nimporter="texture"\ntype="CompressedTexture2D"\n\n[params]\n\ncompress/mode=1\ncompress/lossy_quality=0.85\nmipmaps/generate=false\n')
         stages[name] = [{"x": a, "y": b, "zoom": z} for a, b, z in st]
         print("rendered", name)
     json.dump(stages, open(stages_path, "w"), indent=1, sort_keys=True)

@@ -204,7 +204,7 @@ func plan_game(game_id: String, player_count: int) -> Array:
 			var rounds := _ci("hole.rounds_per_game", 6)
 			var items := pick_hole_items(rounds, player_count)
 			var variants := choose_hole_variants(items)
-			out.append({"kind": "sting", "game_id": "hole", "title": "HOLE"})
+			out.append({"kind": "sting", "game_id": "hole", "title": "HOLE!", "style": "hole", "seconds": 4.2})
 			out.append({"kind": "link", "lines": [["graham", "hole_intro"], ["graham", "hole_rules"]], "camera": "cam1"})
 			for i in items.size():
 				out.append({"kind": "hole_round", "item": items[i], "game_id": "hole", "variant": variants[i],

@@ -15,9 +15,9 @@ dest_files=["res://.godot/imported/sea_sponge.jpg-6308a9f4d35db8302f0fb5b92f3c91
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
-compress/lossy_quality=0.7
+compress/lossy_quality=0.85
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1

@@ -10,6 +10,7 @@ const PROG_H := 1080
 var viewport: SubViewport
 var studio: StudioSet
 var gfx: GraphicsLayer
+var hole: HoleBoard
 var screen: TextureRect
 var material_crt: ShaderMaterial
 var _target := Rect2(240, 0, 1440, 1080)
@@ -27,6 +28,8 @@ func build() -> void:
 	studio = StudioSet.new()
 	viewport.add_child(studio)
 	studio.build()
+	hole = HoleBoard.new()
+	viewport.add_child(hole)       # game boards sit under the graphics package (subtitles, lower-thirds)
 	gfx = GraphicsLayer.new()
 	viewport.add_child(gfx)
 	screen = TextureRect.new()

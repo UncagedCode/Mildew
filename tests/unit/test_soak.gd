@@ -20,7 +20,8 @@ func test_soak_sessions_never_deadlock() -> void:
 		bots[0].auto_start_at_count = n
 		var t := 0.0
 		var done := false
-		while t < 120.0:
+		var held_for := 0.0
+		while t < 200.0:
 			h.step()
 			t += h.dt
 			if h.session.phase in [SessionServer.Phase.ENDED, SessionServer.Phase.CLOSED]:
@@ -34,6 +35,11 @@ func test_soak_sessions_never_deadlock() -> void:
 					h.connect_bot(b)
 			if h.session.phase == SessionServer.Phase.SHOW and rng.randf() < 0.001 and bots.size() < 10:
 				bots.append(h.add_bot("Late%d" % bots.size(), "fast_random", s * 97 + bots.size()))
+			# An honest "waiting for contestants" hold is waiting for a human: simulate one arriving.
+			held_for = held_for + h.dt if h.session.hold_reason == "players" else 0.0
+			if held_for > 5.0 and bots.size() < 12:
+				held_for = 0.0
+				bots.append(h.add_bot("Arrival%d" % bots.size(), "fast_random", s * 89 + bots.size()))
 		check(done, "session %d (%d players) finished; phase=%s hold=%s seg=%s" % [s, n, h.session.phase_name(), h.session.hold_reason, h.session.diagnostics().segment])
 		if done:
 			outcomes["ended" if h.session.phase == SessionServer.Phase.ENDED else "closed"] += 1

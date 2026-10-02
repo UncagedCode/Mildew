@@ -264,7 +264,109 @@ def applause(sec, density, name, swell=0.25):
     write(name, master(buf + wash, 0.8, tape=True))
 
 
+def gen_hole_sting():
+    """HOLE! — ridiculous mystery slide-whistle dive, timpani, then a huge trumpet stab (docs/02)."""
+    buf = np.zeros(int(4.2 * SR))
+    t = t_axis(1.0)
+    f = 1900 * (300 / 1900) ** (t / t[-1]) * (1 + 0.03 * np.sin(2 * np.pi * 7 * t))
+    ph = 2 * np.pi * np.cumsum(f) / SR
+    whistle = (np.sin(ph) + 0.15 * np.sin(2 * ph)) * env_adsr(len(t), 0.02, 0.1, 0.9, 0.1) * 0.22
+    mix_into(buf, whistle, 0.0)
+    tt = t_axis(1.4)
+    timp = np.sin(2 * np.pi * 70 * tt * (1 + 0.15 * np.exp(-tt * 30))) * np.exp(-tt * 3.2) * 0.7
+    mix_into(buf, timp, 1.0)
+    mix_into(buf, timp * 0.8, 1.18)
+    mix_into(buf, chord([58, 65, 70, 74, 77, 82], 2.6, vel=1.6, bright=1.2), 1.36)
+    mix_into(buf, chord([46, 58], 2.6, fn=bass, vel=1.2), 1.36)
+    mix_into(buf, cymbal(2.6, 1.0), 1.36)
+    mix_into(buf, kick(1.4), 1.36)
+    mix_into(buf, snare(1.1), 1.36)
+    write("sting_hole.wav", master(buf))
+
+
+def _voice(f0, sec, formants, glide=None, am=None):
+    """One crude formant-synthesised voice: jittery sawtooth through vowel resonators."""
+    t = t_axis(sec)
+    n = len(t)
+    f = f0 * (1 + 0.012 * np.sin(2 * np.pi * (4 + rng.random() * 2) * t + rng.random() * 6))
+    if glide is not None:
+        f = f * glide(t)
+    ph = np.cumsum(f) / SR
+    saw = 2 * (ph - np.floor(ph + 0.5))
+    out = np.zeros(n)
+    for fc, bw, g in formants:
+        lo, hi = max(40, fc - bw / 2), min(SR / 2 - 100, fc + bw / 2)
+        b, a = butter(2, [lo / (SR / 2), hi / (SR / 2)], btype="band")
+        out += lfilter(b, a, saw) * g
+    if am is not None:
+        out *= am(t)
+    return out
+
+
+def crowd(name, sec, voices, formants_fn, contour, glide=None, am=None, gain=0.8, breath=0.0):
+    n = int(sec * SR)
+    buf = np.zeros(n)
+    for _ in range(voices):
+        f0 = rng.uniform(105, 150) if rng.random() < 0.5 else rng.uniform(190, 280)
+        start = rng.uniform(0, 0.12)
+        v = _voice(f0, sec - start, formants_fn(), glide, am)
+        mix_into(buf, v * rng.uniform(0.5, 1.0), start)
+    t = np.arange(n) / SR
+    buf *= contour(t)
+    if breath > 0:
+        nb = lfilter(*butter(2, [500 / (SR / 2), 4000 / (SR / 2)], btype="band"), rng.standard_normal(n))
+        buf += nb * breath * contour(t)
+    buf /= max(1e-6, np.abs(buf).max())
+    write(name, master(buf * 0.7, gain, tape=True))
+
+
+def gen_crowd():
+    oo = lambda: [(300, 120, 1.0), (870, 160, 0.4), (2240, 300, 0.1)]
+    aa = lambda: [(730, 160, 1.0), (1090, 200, 0.6), (2440, 300, 0.15)]
+    # "Ooooh!" — impressed: rises then settles
+    crowd("crowd_ooh.wav", 1.9, 36, oo, lambda t: np.clip(t / 0.25, 0, 1) * np.clip((1.9 - t) / 0.9, 0, 1),
+          glide=lambda t: 1 + 0.25 * np.sin(np.pi * np.clip(t / 1.4, 0, 1)))
+    # "Awww" — sympathetic / disappointed: falls
+    crowd("crowd_aww.wav", 1.7, 36, aa, lambda t: np.clip(t / 0.15, 0, 1) * np.clip((1.7 - t) / 1.0, 0, 1),
+          glide=lambda t: 1.25 - 0.4 * np.clip(t / 1.5, 0, 1))
+    # Laugh — chuckling bursts at ~5 Hz, slightly out of phase per voice
+    def laugh_am(t):
+        rate = rng.uniform(4.2, 5.6)
+        return np.clip(np.sin(2 * np.pi * rate * t + rng.random() * 6), 0, 1) ** 2
+    crowd("crowd_laugh.wav", 2.4, 30, aa, lambda t: np.clip(t / 0.1, 0, 1) * np.clip((2.4 - t) / 1.4, 0, 1),
+          glide=lambda t: 1.15 - 0.15 * np.clip(t / 2.0, 0, 1), am=laugh_am, breath=0.2)
+    # Gasp — sharp collective inhalation (mostly breath noise)
+    n = int(0.9 * SR)
+    t = np.arange(n) / SR
+    nb = lfilter(*butter(2, [900 / (SR / 2), 6000 / (SR / 2)], btype="band"), rng.standard_normal(n))
+    write("crowd_gasp.wav", master(nb * np.clip(t / 0.06, 0, 1) * np.exp(-t * 4.5) * 0.6, 0.6, tape=True))
+
+
+def gen_production():
+    # Camera zoom servo (each Hole stage pull-back)
+    t = t_axis(0.6)
+    f = 180 + 120 * t / t[-1]
+    ph = np.cumsum(f) / SR
+    whir = (2 * (ph - np.floor(ph + 0.5))) * 0.15 + rng.standard_normal(len(t)) * 0.04
+    whir = lfilter(*butter(2, [150 / (SR / 2), 2500 / (SR / 2)], btype="band"), whir)
+    write("zoom_servo.wav", master(whir * env_adsr(len(t), 0.05, 0.1, 0.8, 0.2), 0.45, tape=True))
+    # Mic pop / knock (Tier 0)
+    t = t_axis(0.35)
+    pop = np.sin(2 * np.pi * 60 * t) * np.exp(-t * 18) * 0.9 + rng.standard_normal(len(t)) * np.exp(-t * 90) * 0.4
+    write("mic_pop.wav", master(lfilter(*butter(2, 1800 / (SR / 2)), pop), 0.8, tape=False))
+    # Feedback squeal (Tier 0, short)
+    t = t_axis(0.7)
+    squeal = np.sin(2 * np.pi * 2900 * t * (1 + 0.004 * np.sin(2 * np.pi * 6 * t))) * env_adsr(len(t), 0.15, 0.1, 0.9, 0.2) * 0.25
+    write("feedback.wav", master(squeal, 0.45, tape=False))
+
+
 if __name__ == "__main__":
+    import sys
+    if len(sys.argv) > 1 and sys.argv[1] == "cp2":
+        gen_hole_sting()
+        gen_crowd()
+        gen_production()
+        raise SystemExit
     gen_opening()
     gen_lobby_bed()
     gen_sting()

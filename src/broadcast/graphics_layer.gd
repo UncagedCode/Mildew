@@ -58,6 +58,7 @@ var _sb_title := "THE SCORES"
 var _st_t := -1.0
 var _st_dur := 4.0
 var _st_title := ""
+var _st_style := ""
 
 # Slate / menu
 var _slate := ""
@@ -176,8 +177,9 @@ func hide_scores() -> void:
 	_sb_target = 0.0
 
 
-func play_sting(title: String, seconds: float) -> void:
+func play_sting(title: String, seconds: float, style: String = "") -> void:
 	_st_title = title
+	_st_style = style
 	_st_t = 0.0
 	_st_dur = seconds
 
@@ -392,6 +394,9 @@ func _draw_scores(vis: float) -> void:
 
 
 func _draw_sting() -> void:
+	if _st_style == "hole":
+		_draw_sting_hole()
+		return
 	var p := _st_t / _st_dur
 	var fade := smoothstep(0.0, 0.08, p) * (1.0 - smoothstep(0.85, 1.0, p))
 	var c := Vector2(W * 0.5, H * 0.5)
@@ -412,6 +417,34 @@ func _draw_sting() -> void:
 	for w in words:
 		_shadow_text(f_display, Vector2(-W * 0.5, y), w, HORIZONTAL_ALIGNMENT_CENTER, W, fs, Color(1, 1, 1, fade), 10)
 		y += fs * 1.0
+	draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
+
+
+## HOLE!: black beat -> a hole punches open -> rings tunnel outward -> title on the brass hit.
+func _draw_sting_hole() -> void:
+	var t := _st_t * (4.2 / maxf(0.5, _st_dur))   # authored against the 4.2 s audio sting
+	var fade := 1.0 - smoothstep(3.7, 4.2, t)
+	var c := Vector2(W * 0.5, H * 0.5)
+	draw_rect(Rect2(0, 0, W, H), Color(0, 0, 0, fade))
+	if t < 0.25:
+		return  # a beat of black
+	# purple field with the zooming ring tunnel
+	draw_rect(Rect2(0, 0, W, H), Color(0.16, 0.02, 0.26, fade))
+	var speed := 1.0 + 3.0 * smoothstep(0.3, 1.36, t)
+	for i in 18:
+		var r := fmod(t * 140.0 * speed + i * 70.0, 1260.0)
+		var col := Color("#ff4fa3") if i % 3 == 0 else (Color("#ffd23f") if i % 3 == 1 else Color("#3ec9c1"))
+		draw_arc(c, r, 0, TAU, 96, Color(col, 0.55 * fade * smoothstep(0.0, 120.0, r)), 22.0)
+	# the hole itself: dives open with the slide whistle, slams on the timpani
+	var hr := lerpf(10.0, 330.0, smoothstep(0.25, 1.0, t)) * (1.0 + 0.06 * exp(-maxf(0.0, t - 1.0) * 8.0) * sin((t - 1.0) * 40.0))
+	draw_circle(c, hr + 18.0, Color(0.98, 0.85, 0.2, fade))
+	draw_circle(c, hr, Color(0.02, 0.0, 0.04, fade))
+	if t < 1.36:
+		return
+	var k := t - 1.36
+	var bounce := 1.0 + 0.35 * exp(-k * 6.0) * sin(k * 24.0)
+	draw_set_transform(c, -0.08 + 0.03 * sin(t * 3.0), Vector2(bounce, bounce))
+	_shadow_text(f_display, Vector2(-W * 0.5, 52), _st_title, HORIZONTAL_ALIGNMENT_CENTER, W, 190, Color(1, 1, 1, fade), 12)
 	draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
 
 

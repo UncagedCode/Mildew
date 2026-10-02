@@ -73,15 +73,19 @@ class SegIntros extends Segment:
 class SegSting extends Segment:
 	var game_id := ""
 	var title := ""
+	var style := ""
+	var seconds := 0.0
 
 	func _init(desc: Dictionary) -> void:
 		kind = "sting"
 		game_id = str(desc.get("game_id", ""))
 		title = str(desc.get("title", ""))
+		style = str(desc.get("style", ""))
+		seconds = float(desc.get("seconds", 0.0))
 
 	func start() -> void:
-		duration = session.cfg.f("show.sting_seconds", 4.5)
-		session.emit_tv({"e": "sting", "game_id": game_id, "title": title, "duration": duration})
+		duration = seconds if seconds > 0.0 else session.cfg.f("show.sting_seconds", 4.5)
+		session.emit_tv({"e": "sting", "game_id": game_id, "title": title, "style": style, "duration": duration})
 
 
 class SegScores extends Segment:

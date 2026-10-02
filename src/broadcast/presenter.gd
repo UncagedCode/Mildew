@@ -11,6 +11,7 @@ var sys: SystemLayer
 var audio: AudioDesk
 var voice: VoiceService
 var view: ProgrammeView
+var hole: HoleBoard
 
 var _sync_timer := 0.0
 var _game_title := ""
@@ -39,6 +40,8 @@ func _process(delta: float) -> void:
 		for p in plist:
 			pmap[p.pid] = p
 		gfx.players = pmap
+		if hole:
+			hole.players = pmap
 		sys.contestants = plist.filter(func(p): return p.status == "active" and p.connected).size()
 		studio.graham.set_pressure(host.session.director.pressure)
 		if not studio.graham.is_speaking():
@@ -72,6 +75,9 @@ func _on_event(evt: Dictionary) -> void:
 			gfx.dog_visible = false
 		"segment":
 			gfx.dog_visible = true
+			if str(evt.kind) != "hole_round" and hole and hole.is_showing():
+				hole.hide_board()
+				_in_question = false
 			if str(evt.kind) == "intros":
 				audio.applause("medium")
 				studio.cut_to("cam2", false)
@@ -84,9 +90,43 @@ func _on_event(evt: Dictionary) -> void:
 			audio.applause("small")
 		"sting":
 			_game_title = str(evt.title)
-			gfx.play_sting(_game_title, float(evt.duration) / maxf(host.session.time_scale, 0.001))
-			audio.play("sting_game")
-			audio.play("whoosh", -6.0)
+			var style := str(evt.get("style", ""))
+			gfx.play_sting(_game_title, float(evt.duration) / maxf(host.session.time_scale, 0.001), style)
+			if style == "hole":
+				audio.play("sting_hole")
+				get_tree().create_timer(1.36 / maxf(1.0, host.session.time_scale)).timeout.connect(func(): audio.applause("medium"))
+			else:
+				audio.play("sting_game")
+				audio.play("whoosh", -6.0)
+		# ---------------- HOLE ----------------
+		"hole_round":
+			_in_question = false
+			hole.prepare_round(evt)
+			for pid in studio.podiums.keys():
+				studio.light_podium(pid, false)
+			studio.cut_to("cam1")
+		"hole_stage":
+			_in_question = true
+			hole.set_stage(evt)
+			if int(evt.stage) == 1:
+				audio.play("whoosh", -4.0)
+				studio.graham.set_activity("reading")
+			else:
+				audio.play("zoom_servo", -6.0)
+			if evt.get("safety_net", false):
+				audio.play("whoosh", -6.0)
+		"hole_lock":
+			hole.add_lock(str(evt.pid), int(evt.stage), int(evt.of))
+			studio.light_podium(str(evt.pid), true)
+			audio.play("lock", -6.0)
+			if int(evt.stage) == 1:
+				audio.crowd("ooh", -10.0)   # somebody's gambling on a glimpse
+		"hole_closed":
+			hole.close_locks()
+			studio.graham.set_activity("idle")
+		"hole_reveal":
+			hole.reveal(evt)
+			_hole_reaction(evt)
 		"question_show":
 			_in_question = true
 			for pid in studio.podiums.keys():
@@ -170,7 +210,49 @@ func _on_event(evt: Dictionary) -> void:
 			sys.hold_reason = ""
 
 
+## Audience + podium response to a Hole reveal; then cut back to Graham for his verdict.
+func _hole_reaction(evt: Dictionary) -> void:
+	var outcome: Dictionary = evt.get("outcome", {})
+	var right := 0
+	var first_glance := 0
+	var locked := 0
+	for pid in outcome.keys():
+		var o: Dictionary = outcome[pid]
+		if str(o.get("label", "")) != "":
+			locked += 1
+		if o.get("correct", false):
+			right += 1
+			if int(o.get("stage", 0)) == 1:
+				first_glance += 1
+		if int(o.get("points", 0)) > 0:
+			studio.flash_podium(pid, "+%s" % PodiumScreen._fmt(int(o.points)))
+	var scale := maxf(1.0, host.session.time_scale)
+	get_tree().create_timer(0.9 / scale).timeout.connect(func():
+		if evt.get("studio_hole", false):
+			audio.silence_audience()   # nobody claps for that
+			return
+		audio.play("correct" if right > 0 else "wrong")
+		if first_glance > 0:
+			audio.crowd("ooh")
+			audio.applause("medium")
+		elif right == 0 and locked > 0:
+			audio.crowd("aww")
+		elif right == 0:
+			pass  # deliberate silence
+		elif right == outcome.size():
+			audio.applause("medium")
+		else:
+			audio.applause("small"))
+	get_tree().create_timer(4.2 / scale).timeout.connect(func():
+		if host.session and host.session.phase == SessionServer.Phase.SHOW and hole.is_showing():
+			hole.hide_board()
+			_in_question = false
+			studio.cut_to("cam1"))
+
+
 func _lobby() -> void:
+	if hole:
+		hole.hide_board()
 	gfx.hide_slate()
 	gfx.hide_scores()
 	gfx.hide_question()
