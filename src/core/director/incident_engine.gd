@@ -67,8 +67,8 @@ func opportunity(moment: String, ctx: Dictionary = {}) -> Dictionary:
 				director.force.erase("incident")
 				director.log_decision("Incident", forced, ["forced by developer", "moment=%s" % moment])
 				return _fire(it, moment, ctx, now)
-	var base := {0: 0.10, 1: 0.035}
-	var tier_cd := {0: 40.0, 1: 150.0}
+	var base := {0: 0.05, 1: 0.008}
+	var tier_cd := {0: 40.0, 1: 240.0}
 	var quiet_for := now - last_any
 	# Comedy-saturation safeguard: a long completely normal stretch invites a cheap reminder.
 	var reminder := clampf((quiet_for - 200.0) / 200.0, 0.0, 1.0)

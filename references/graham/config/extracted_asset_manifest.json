@@ -1,0 +1,101 @@
+[
+  {
+    "id": "neutral_front",
+    "source": "1000063891.mp4",
+    "timestamp_seconds": 0.05,
+    "class_": "canonical",
+    "note": "Neutral front-facing anchor. Best identity reference.",
+    "still": "assets/stills/canonical/neutral_front.png",
+    "face_crop": "assets/face_crops/neutral_front_face.png"
+  },
+  {
+    "id": "restrained_smile",
+    "source": "1000063891.mp4",
+    "timestamp_seconds": 0.55,
+    "class_": "canonical",
+    "note": "Small controlled presenter smile.",
+    "still": "assets/stills/canonical/restrained_smile.png",
+    "face_crop": "assets/face_crops/restrained_smile_face.png"
+  },
+  {
+    "id": "presenter_smile",
+    "source": "1000063891.mp4",
+    "timestamp_seconds": 1.05,
+    "class_": "canonical",
+    "note": "Standard on-air smile; use sparingly compared with restrained smile.",
+    "still": "assets/stills/canonical/presenter_smile.png",
+    "face_crop": "assets/face_crops/presenter_smile_face.png"
+  },
+  {
+    "id": "presenting_speaking",
+    "source": "1000063891.mp4",
+    "timestamp_seconds": 3.55,
+    "class_": "canonical",
+    "note": "Front-facing mid-speech presenter state.",
+    "still": "assets/stills/canonical/presenting_speaking.png",
+    "face_crop": "assets/face_crops/presenting_speaking_face.png"
+  },
+  {
+    "id": "irritated_turn",
+    "source": "1000063891.mp4",
+    "timestamp_seconds": 5.15,
+    "class_": "canonical",
+    "note": "Beginning off-camera irritation; useful reaction transition.",
+    "still": "assets/stills/canonical/irritated_turn.png",
+    "face_crop": "assets/face_crops/irritated_turn_face.png"
+  },
+  {
+    "id": "irritated_hold",
+    "source": "1000063891.mp4",
+    "timestamp_seconds": 6.1,
+    "class_": "canonical",
+    "note": "Strongest usable annoyed/off-camera state.",
+    "still": "assets/stills/canonical/irritated_hold.png",
+    "face_crop": "assets/face_crops/irritated_hold_face.png"
+  },
+  {
+    "id": "return_tense",
+    "source": "1000063891.mp4",
+    "timestamp_seconds": 7.4,
+    "class_": "canonical",
+    "note": "Back toward camera before smile fully returns.",
+    "still": "assets/stills/canonical/return_tense.png",
+    "face_crop": "assets/face_crops/return_tense_face.png"
+  },
+  {
+    "id": "recovered_presenter",
+    "source": "1000063891.mp4",
+    "timestamp_seconds": 7.6,
+    "class_": "canonical",
+    "note": "Recovered but still restrained presenter expression.",
+    "still": "assets/stills/canonical/recovered_presenter.png",
+    "face_crop": "assets/face_crops/recovered_presenter_face.png"
+  },
+  {
+    "id": "reading_cards",
+    "source": "1000063891.mp4",
+    "timestamp_seconds": 9.55,
+    "class_": "canonical",
+    "note": "Looking down at cue cards; useful for hiding dynamic speech/cuts.",
+    "still": "assets/stills/canonical/reading_cards.png",
+    "face_crop": "assets/face_crops/reading_cards_face.png"
+  },
+  {
+    "id": "presenting_gesture",
+    "source": "1000063888.mp4",
+    "timestamp_seconds": 2.55,
+    "class_": "supplementary",
+    "note": "Earlier generation provides a usable one-hand presenting gesture.",
+    "still": "assets/stills/supplementary/presenting_gesture.png",
+    "face_crop": "assets/face_crops/presenting_gesture_face.png"
+  },
+  {
+    "id": "open_hand_gesture",
+    "source": "1000063888.mp4",
+    "timestamp_seconds": 8.05,
+    "class_": "supplementary",
+    "note": "Broader open-hand gesture; more cheerful than canonical final performance.",
+    "still": "assets/stills/supplementary/open_hand_gesture.png",
+    "face_crop": "assets/face_crops/open_hand_gesture_face.png"
+  }
+]

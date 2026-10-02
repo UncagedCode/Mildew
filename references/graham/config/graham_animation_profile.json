@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "reference_resolution": [960, 720],
+  "broadcast_aspect_ratio": "4:3",
+  "camera_motion_profiles": {
+    "none": {
+      "max_scale_delta": 0.0,
+      "max_translation_px": 0,
+      "duration_seconds": [1.0, 4.0]
+    },
+    "quiet": {
+      "max_scale_delta": 0.003,
+      "max_translation_px": 2,
+      "duration_seconds": [4.0, 8.0]
+    },
+    "standard": {
+      "max_scale_delta": 0.006,
+      "max_translation_px": 3,
+      "duration_seconds": [3.0, 7.0]
+    }
+  },
+  "short_dissolve_ms": [80, 160],
+  "speech_cycle": {
+    "frame_change_hz": [5, 8],
+    "max_visible_seconds_without_cutaway": 1.5,
+    "avoid_immediate_repeat": true
+  },
+  "normal_still_shot_seconds": [1.0, 4.0],
+  "recommended_internal_broadcast_resolutions": [
+    [960, 720],
+    [768, 576]
+  ],
+  "target_broadcast_cadence_fps": 25,
+  "notes": [
+    "Camera motion represents live operator imperfection, not body breathing.",
+    "Do not apply independent breathing until alpha-cutout character assets exist.",
+    "Readability outranks analogue degradation."
+  ]
+}

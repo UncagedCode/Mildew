@@ -1,0 +1,115 @@
+{
+  "version": 1,
+  "canonical_reference": "reference/video/graham_canonical_reference_clean_4x3.mp4",
+  "default_state": "neutral",
+  "states": {
+    "neutral": {
+      "asset": "assets/stills/canonical/neutral_front.png",
+      "fallback": null,
+      "camera_motion": "quiet",
+      "recommended_hold_seconds": [0.8, 4.0],
+      "visible_speech": false,
+      "notes": "Deadpan, waiting, deliberate stare, pre-cue."
+    },
+    "restrained_smile": {
+      "asset": "assets/stills/canonical/restrained_smile.png",
+      "fallback": "neutral",
+      "camera_motion": "quiet",
+      "recommended_hold_seconds": [0.8, 4.0],
+      "visible_speech": false,
+      "notes": "Default friendly on-air state."
+    },
+    "presenter_smile": {
+      "asset": "assets/stills/canonical/presenter_smile.png",
+      "fallback": "restrained_smile",
+      "camera_motion": "standard",
+      "recommended_hold_seconds": [0.5, 2.5],
+      "visible_speech": false,
+      "notes": "Broad applause/reveal smile. Use as punctuation, not default."
+    },
+    "presenting": {
+      "asset": "assets/stills/canonical/presenting_speaking.png",
+      "fallback": "restrained_smile",
+      "speech_cycle": [
+        "assets/stills/speech_cycle/speech_01.png",
+        "assets/stills/speech_cycle/speech_02.png",
+        "assets/stills/speech_cycle/speech_03.png",
+        "assets/stills/speech_cycle/speech_04.png"
+      ],
+      "camera_motion": "standard",
+      "recommended_hold_seconds": [0.4, 1.5],
+      "visible_speech": true,
+      "notes": "Start/end of spoken lines; cut away during longer dynamic speech."
+    },
+    "reading_cards": {
+      "asset": "assets/stills/canonical/reading_cards.png",
+      "fallback": "neutral",
+      "camera_motion": "quiet",
+      "recommended_hold_seconds": [0.8, 5.0],
+      "visible_speech": false,
+      "notes": "Natural cover for delays, score setup and transitions."
+    },
+    "irritated_turn": {
+      "asset": "assets/stills/canonical/irritated_turn.png",
+      "fallback": "irritated_hold",
+      "camera_motion": "none",
+      "recommended_hold_seconds": [0.3, 1.2],
+      "visible_speech": false,
+      "notes": "Beginning off-camera reaction."
+    },
+    "irritated_hold": {
+      "asset": "assets/stills/canonical/irritated_hold.png",
+      "fallback": "neutral",
+      "camera_motion": "none",
+      "recommended_hold_seconds": [0.6, 3.0],
+      "visible_speech": false,
+      "notes": "Rare strong irritation."
+    },
+    "return_tense": {
+      "asset": "assets/stills/canonical/return_tense.png",
+      "fallback": "neutral",
+      "camera_motion": "quiet",
+      "recommended_hold_seconds": [0.3, 1.2],
+      "visible_speech": true,
+      "notes": "Back toward camera while irritation remains."
+    },
+    "recovered_presenter": {
+      "asset": "assets/stills/canonical/recovered_presenter.png",
+      "fallback": "restrained_smile",
+      "camera_motion": "quiet",
+      "recommended_hold_seconds": [0.5, 3.0],
+      "visible_speech": true,
+      "notes": "Post-irritation professional recovery."
+    },
+    "presenting_gesture": {
+      "asset": "assets/stills/supplementary/presenting_gesture.png",
+      "fallback": "presenting",
+      "camera_motion": "standard",
+      "recommended_hold_seconds": [0.4, 1.5],
+      "visible_speech": true,
+      "supplementary": true,
+      "notes": "Gesture from earlier generation; canonical face/style takes precedence if recreated."
+    },
+    "open_hand_gesture": {
+      "asset": "assets/stills/supplementary/open_hand_gesture.png",
+      "fallback": "presenting_gesture",
+      "camera_motion": "standard",
+      "recommended_hold_seconds": [0.4, 1.2],
+      "visible_speech": true,
+      "supplementary": true,
+      "notes": "Energetic gesture; use sparingly."
+    },
+    "disappointed": {"asset": null, "fallback": "neutral", "missing": true},
+    "amused": {"asset": null, "fallback": "restrained_smile", "missing": true},
+    "rattled": {"asset": null, "fallback": "return_tense", "missing": true},
+    "angry": {"asset": null, "fallback": "irritated_hold", "missing": true},
+    "stare": {"asset": null, "fallback": "neutral", "missing": true},
+    "off_air": {"asset": null, "fallback": "reading_cards", "missing": true}
+  },
+  "motion_reference_only": {
+    "irritated_turn_hold": "reference/motion/irritated_turn_hold.mp4",
+    "recover_to_camera": "reference/motion/recover_to_camera.mp4",
+    "read_cards": "reference/motion/read_cards.mp4",
+    "presenting_hand_gesture": "reference/motion/presenting_hand_gesture.mp4"
+  }
+}

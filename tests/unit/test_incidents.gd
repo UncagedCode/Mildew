@@ -55,7 +55,7 @@ func test_incidents_are_sparse_and_respect_cooldowns() -> void:
 		if t1.is_empty():
 			clean_sessions += 1
 		for i in range(1, t1.size()):
-			check(t1[i].t - t1[i - 1].t >= 150.0, "Tier 1 never clusters (seed %d)" % seed)
+			check(t1[i].t - t1[i - 1].t >= 240.0, "Tier 1 never clusters (seed %d)" % seed)
 		for i in range(1, t0.size()):
 			check(t0[i].t - t0[i - 1].t >= 40.0, "Tier 0 tier cooldown (seed %d)" % seed)
 		var last := {}
@@ -65,12 +65,12 @@ func test_incidents_are_sparse_and_respect_cooldowns() -> void:
 				check(f.t - last[f.id] >= cd, "per-incident cooldown %s" % f.id)
 			last[f.id] = f.t
 		check(fired.size() <= 30, "a 45-minute show is never spammed (seed %d: %d)" % [seed, fired.size()])
-	var avg0 := totals[0] / 60.0
-	var avg1 := totals[1] / 60.0
+	var avg0: float = totals[0] / 60.0
+	var avg1: float = totals[1] / 60.0
 	print("      avg per 45 min: tier0=%.1f tier1=%.1f; sessions with no tier1=%d/60" % [avg0, avg1, clean_sessions])
-	check(avg0 >= 2.0 and avg0 <= 16.0, "Tier 0 production mess is reasonably available (%.1f)" % avg0)
-	check(avg1 >= 0.5 and avg1 <= 6.0, "Tier 1 is occasional (%.1f)" % avg1)
-	check(clean_sessions >= 2, "some sessions are unusually clean (%d)" % clean_sessions)
+	check(avg0 >= 2.0 and avg0 <= 12.0, "Tier 0 production mess is reasonably available (%.1f)" % avg0)
+	check(avg1 >= 0.5 and avg1 <= 3.5, "Tier 1 is occasional (%.1f)" % avg1)
+	check(clean_sessions >= 3, "some sessions are unusually clean (%d)" % clean_sessions)
 	check(avg1 < avg0, "odd things are rarer than cheap television")
 
 
