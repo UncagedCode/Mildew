@@ -1,0 +1,253 @@
+{
+ "_comment": "How Graham is SHOWN for a line category (D021/D022, pack LOW_BUDGET_BROADCAST_RECIPES). lead = state shown as the line starts; settle = state after speaking; talk=false holds the lead face (deadpan) instead of the mouth cycle; cutaway = where the broadcast may cut while the voice continues ('subject' = the contestant the line is about); return = chance of cutting back to Graham for a reaction after the line. Unlisted categories use 'default'.",
+ "default": {
+  "lead": "",
+  "settle": "",
+  "talk": true,
+  "cutaway": [
+   "cam2",
+   "cam3"
+  ],
+  "return": 0.35
+ },
+ "show_open": {
+  "lead": "presenter_smile",
+  "settle": "restrained_smile",
+  "cutaway": [
+   "cam2"
+  ],
+  "return": 0.6
+ },
+ "show_open_2": {
+  "lead": "",
+  "settle": "restrained_smile",
+  "cutaway": [
+   "cam2"
+  ]
+ },
+ "intro_player": {
+  "talk": true,
+  "cutaway": [
+   "subject"
+  ],
+  "return": 0.0
+ },
+ "intro_returning": {
+  "talk": true,
+  "cutaway": [
+   "subject"
+  ],
+  "return": 0.0
+ },
+ "winner": {
+  "lead": "presenter_smile",
+  "settle": "presenter_smile",
+  "cutaway": [
+   "subject"
+  ],
+  "return": 0.5
+ },
+ "sign_off": {
+  "lead": "restrained_smile",
+  "settle": "presenter_smile",
+  "cutaway": [
+   "cam2"
+  ],
+  "return": 0.0
+ },
+ "scores_intro": {
+  "lead": "reading_cards",
+  "settle": "reading_cards",
+  "cutaway": []
+ },
+ "all_wrong": {
+  "lead": "neutral",
+  "settle": "neutral",
+  "talk": false,
+  "cutaway": [],
+  "return": 0.0
+ },
+ "nobody_answered": {
+  "lead": "disappointed",
+  "settle": "disappointed",
+  "talk": false,
+  "cutaway": []
+ },
+ "hole_nobody_right": {
+  "lead": "neutral",
+  "settle": "neutral",
+  "talk": false,
+  "cutaway": []
+ },
+ "hole_nobody_locked": {
+  "lead": "disappointed",
+  "settle": "reading_cards",
+  "talk": false,
+  "cutaway": []
+ },
+ "hole_early_wrong": {
+  "lead": "neutral",
+  "settle": "neutral",
+  "talk": false,
+  "cutaway": [
+   "subject"
+  ],
+  "return": 0.6
+ },
+ "hole_first_glance": {
+  "lead": "look_off",
+  "settle": "neutral",
+  "talk": false,
+  "cutaway": [
+   "subject"
+  ],
+  "return": 0.4
+ },
+ "fast_correct": {
+  "lead": "look_off",
+  "settle": "neutral",
+  "talk": false,
+  "cutaway": [
+   "subject"
+  ]
+ },
+ "single_correct": {
+  "lead": "restrained_smile",
+  "cutaway": [
+   "subject"
+  ]
+ },
+ "hole_single_correct": {
+  "lead": "restrained_smile",
+  "cutaway": [
+   "subject"
+  ]
+ },
+ "hole_partial": {
+  "lead": "amused",
+  "cutaway": [
+   "subject"
+  ]
+ },
+ "afk_player": {
+  "lead": "podium_glance",
+  "settle": "disappointed",
+  "talk": false,
+  "cutaway": [
+   "subject"
+  ],
+  "return": 0.6
+ },
+ "reconnect_lost": {
+  "lead": "reading_cards",
+  "settle": "reading_cards",
+  "cutaway": []
+ },
+ "reconnect_mid": {
+  "lead": "neutral",
+  "settle": "reading_cards",
+  "cutaway": []
+ },
+ "reconnect_back": {
+  "lead": "restrained_smile",
+  "cutaway": [
+   "subject"
+  ]
+ },
+ "reconnect_failed": {
+  "lead": "irritated_hold",
+  "settle": "return_tense",
+  "talk": false,
+  "cutaway": []
+ },
+ "all_gone": {
+  "lead": "irritated_front",
+  "settle": "irritated_front",
+  "talk": false,
+  "cutaway": []
+ },
+ "waiting_players": {
+  "lead": "reading_cards",
+  "settle": "neutral",
+  "cutaway": []
+ },
+ "late_join": {
+  "lead": "podium_glance",
+  "cutaway": [
+   "subject"
+  ]
+ },
+ "hole_studio_reveal": {
+  "lead": "stare",
+  "settle": "return_tense",
+  "talk": false,
+  "cutaway": []
+ },
+ "hole_not_that_one": {
+  "lead": "irritated_turn",
+  "settle": "return_tense",
+  "talk": false,
+  "cutaway": []
+ },
+ "incident_mic_pop": {
+  "lead": "embarrassed",
+  "settle": "recovered_presenter",
+  "cutaway": []
+ },
+ "incident_feedback": {
+  "lead": "rattled",
+  "settle": "recovered_presenter",
+  "cutaway": []
+ },
+ "incident_wrong_camera": {
+  "lead": "look_off_left",
+  "settle": "restrained_smile",
+  "cutaway": []
+ },
+ "incident_early_applause": {
+  "lead": "look_off",
+  "settle": "restrained_smile",
+  "talk": false,
+  "cutaway": []
+ },
+ "incident_wrong_name": {
+  "lead": "",
+  "settle": "embarrassed",
+  "cutaway": [
+   "subject"
+  ]
+ },
+ "hole_intro": {
+  "lead": "presenter_smile",
+  "cutaway": [
+   "cam2"
+  ]
+ },
+ "hole_rules": {
+  "lead": "presenting_gesture",
+  "settle": "restrained_smile",
+  "cutaway": [
+   "cam2",
+   "cam3"
+  ]
+ },
+ "hole_outro": {
+  "lead": "",
+  "settle": "restrained_smile",
+  "cutaway": [
+   "cam2"
+  ]
+ },
+ "rehearsal_intro": {
+  "lead": "reading_cards",
+  "settle": "restrained_smile",
+  "cutaway": [
+   "cam3"
+  ]
+ },
+ "lobby_empty": {
+  "lead": "reading_cards",
+  "settle": "reading_cards",
+  "cutaway": []
+ }
+}

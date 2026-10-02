@@ -365,6 +365,7 @@ func line(speaker: String, category: String, ctx: Dictionary = {}) -> Dictionary
 		"text": text,
 		"speech": speech,
 		"mood": graham_mood,
+		"pid": str(ctx.get("pid", "")),
 		"silent": bool(picked.get("silent", false)),
 		"audio": picked.get("audio", null),
 	}

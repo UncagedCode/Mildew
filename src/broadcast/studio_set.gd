@@ -15,8 +15,8 @@ const PODIUM_Z := 0.9
 
 var cameras := {}
 var current_cam := ""
-var graham: GrahamPuppet
-var graham_viewport: SubViewport
+var graham                         # GrahamPresenter (assigned by ProgrammeView)
+var graham_sprite: Sprite3D        # Graham's photographic cut-out, standing at his mark (D022)
 var podiums := {}               # pid -> {node, screen: PodiumScreen, lamp: MeshInstance3D, target: Vector3}
 var _drift := {}                # cam -> base transform (handheld cams)
 var _t := 0.0
@@ -43,6 +43,7 @@ func build() -> void:
 	_logo_mat.shader = load("res://assets/shaders/chrome.gdshader")
 	_build_environment()
 	_build_set()
+	_build_corridor()
 	_build_graham()
 	_build_cameras()
 	_build_titles_rig()
@@ -99,9 +100,9 @@ func _build_environment() -> void:
 	var we := WorldEnvironment.new()
 	var env := Environment.new()
 	env.background_mode = Environment.BG_COLOR
-	env.background_color = Color(0.05, 0.02, 0.09)
+	env.background_color = Color(0.06, 0.08, 0.2)
 	env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
-	env.ambient_light_color = Color(0.55, 0.42, 0.62)
+	env.ambient_light_color = Color(0.55, 0.52, 0.62)
 	env.ambient_light_energy = 0.55
 	env.tonemap_mode = Environment.TONE_MAPPER_FILMIC
 	we.environment = env
@@ -139,8 +140,9 @@ func _build_set() -> void:
 	_box(Vector3(17, 0.06, 0.08), Vector3(1.2, 0.31, 2.16), _mat(Color(0.9, 0.78, 0.4), 0.2, 0.9))
 	# Back wall: loud gradient panels in gold MDF frames
 	var bd := load("res://assets/shaders/backdrop.gdshader")
-	var palettes := [[Color(0.32, 0.08, 0.52), Color(0.05, 0.42, 0.5)], [Color(0.55, 0.1, 0.4), Color(0.25, 0.08, 0.45)],
-		[Color(0.06, 0.4, 0.45), Color(0.3, 0.1, 0.5)]]
+	# Reference set (references/graham): curved sage-green MDF panels, chrome trim, blue cyc behind.
+	var palettes := [[Color(0.47, 0.6, 0.42), Color(0.3, 0.44, 0.3)], [Color(0.16, 0.24, 0.55), Color(0.08, 0.12, 0.34)],
+		[Color(0.52, 0.64, 0.46), Color(0.33, 0.46, 0.33)]]
 	for i in 7:
 		var x := -8.4 + i * 2.8
 		var z := -4.6 - 0.5 * pow((x - 1.2) / 8.0, 2.0) * 4.0
@@ -157,9 +159,9 @@ func _build_set() -> void:
 		panel.position = Vector3(x, 3.25, z)
 		panel.rotation.y = -atan((x - 1.2) / 18.0)
 		add_child(panel)
-		var gold := _mat(Color(0.85, 0.68, 0.3), 0.25, 0.85)
-		_box(Vector3(2.7, 0.12, 0.12), panel.position + Vector3(0, 3.25, 0.06), gold)
-		_box(Vector3(0.12, 6.5, 0.12), panel.position + Vector3(-1.35, 0, 0.06), gold)
+		var trim := _mat(Color(0.82, 0.84, 0.88), 0.18, 0.95)
+		_box(Vector3(2.7, 0.12, 0.12), panel.position + Vector3(0, 3.25, 0.06), trim)
+		_box(Vector3(0.12, 6.5, 0.12), panel.position + Vector3(-1.35, 0, 0.06), trim)
 	# Giant extruded chrome MILDEW logo
 	var logo := _text3d("MILDEW", _font_display, 260, 0.35, 0.012, _logo_mat, self)
 	logo.position = Vector3(1.2, 4.6, -3.8)
@@ -211,30 +213,107 @@ func _build_set() -> void:
 			leaf.position = Vector3(px + _rng.randf_range(-0.35, 0.35), 1.5 + _rng.randf_range(0.0, 0.9), 1.4 + _rng.randf_range(-0.3, 0.3))
 			leaf.rotation = Vector3(_rng.randf_range(-0.6, 0.6), _rng.randf(), _rng.randf_range(-0.6, 0.6))
 			add_child(leaf)
-	# Graham's lectern: burgundy MDF, gold trim, chrome M
-	var desk_mat := _mat(Color(0.42, 0.1, 0.16), 0.45, 0.1)
-	_box(Vector3(2.4, 1.15, 0.9), GRAHAM_POS + Vector3(0, 0.88, 0.35), desk_mat)
-	_box(Vector3(2.6, 0.08, 1.05), GRAHAM_POS + Vector3(0, 1.48, 0.35), _mat(Color(0.85, 0.68, 0.3), 0.25, 0.85))
-	var m := _text3d("M", _font_display, 200, 0.12, 0.004, _logo_mat, self)
-	m.position = GRAHAM_POS + Vector3(0, 0.95, 0.84)
+	# Graham's mark: curved green MILDEW sign behind him (as in the reference set) and a low
+	# sage lectern in front whose top hides the cut-out's crop line.
+	var sign_mat := _mat(Color(0.5, 0.62, 0.44), 0.7)
+	var sign := MeshInstance3D.new()
+	var cyl := CylinderMesh.new()
+	cyl.top_radius = 3.2
+	cyl.bottom_radius = 3.2
+	cyl.height = 1.5
+	cyl.radial_segments = 48
+	sign.mesh = cyl
+	sign.material_override = sign_mat
+	sign.position = GRAHAM_POS + Vector3(0, 1.95, -3.75)
+	add_child(sign)
+	var chrome := _mat(Color(0.85, 0.86, 0.9), 0.15, 0.95)
+	for dy in [0.78, -0.78]:
+		var ring := MeshInstance3D.new()
+		var tor := TorusMesh.new()
+		tor.inner_radius = 3.16
+		tor.outer_radius = 3.3
+		tor.rings = 48
+		ring.mesh = tor
+		ring.material_override = chrome
+		ring.position = sign.position + Vector3(0, dy, 0)
+		add_child(ring)
+	var gold_letters := _mat(Color(0.98, 0.72, 0.22), 0.35, 0.3, 0.15)
+	var word := _text3d("MILDEW", _font_display, 72, 0.1, 0.006, gold_letters, self)
+	word.position = GRAHAM_POS + Vector3(0, 1.84, -0.47)
+	word.rotation_degrees = Vector3(0, 0, 2)
+	var word_shadow := _text3d("MILDEW", _font_display, 72, 0.03, 0.006, _mat(Color(0.45, 0.2, 0.05)), self)
+	word_shadow.position = word.position + Vector3(0.03, -0.035, -0.05)
+	word_shadow.rotation_degrees = Vector3(0, 0, 2)
+	var desk_mat := _mat(Color(0.46, 0.58, 0.42), 0.55)
+	_box(Vector3(1.9, 0.98, 0.7), GRAHAM_POS + Vector3(0, 0.49, 0.5), desk_mat)
+	_box(Vector3(2.0, 0.05, 0.8), GRAHAM_POS + Vector3(0, 1.0, 0.5), chrome)
+	var m := _text3d("M", _font_display, 160, 0.08, 0.004, _logo_mat, self)
+	m.position = GRAHAM_POS + Vector3(0, 0.55, 0.88)
+
+
+## Service corridor behind Studio C (recurring backstage location; docs/02 "Recurring rooms").
+## Breeze block, scuffed lino, one fluorescent tube that flickers, a fire door, and a dark open
+## doorway at the far end. Lives off-set (x -40) so only its own cameras ever see it.
+const CORRIDOR := Vector3(-40, 0, 0)
+var _tube_mat: StandardMaterial3D
+var _tube_light: OmniLight3D
+
+
+func _build_corridor() -> void:
+	var o := CORRIDOR
+	var block := _mat(Color(0.62, 0.62, 0.58), 0.95)
+	var lino := _mat(Color(0.33, 0.35, 0.3), 0.6)
+	var paint := _mat(Color(0.45, 0.5, 0.42), 0.8)   # institutional green dado
+	_box(Vector3(2.4, 0.05, 14), o + Vector3(0, 0, -6), lino)
+	_box(Vector3(2.4, 0.05, 14), o + Vector3(0, 2.7, -6), _mat(Color(0.7, 0.7, 0.66), 0.9))
+	for side in [-1, 1]:
+		_box(Vector3(0.2, 2.7, 14), o + Vector3(side * 1.2, 1.35, -6), block)
+		_box(Vector3(0.22, 1.0, 14), o + Vector3(side * 1.19, 0.5, -6), paint)
+		for i in 14:   # mortar lines
+			_box(Vector3(0.21, 0.015, 14), o + Vector3(side * 1.19, 1.05 + i * 0.12, -6), _mat(Color(0.5, 0.5, 0.47), 1.0))
+	# far wall with a dark open doorway
+	_box(Vector3(2.4, 2.7, 0.2), o + Vector3(-0.75, 1.35, -13), block)
+	_box(Vector3(2.4, 2.7, 0.2), o + Vector3(1.75, 1.35, -13), block)
+	_box(Vector3(0.9, 0.6, 0.2), o + Vector3(0.5, 2.4, -13), block)
+	_box(Vector3(0.9, 2.1, 0.1), o + Vector3(0.5, 1.05, -13.6), _mat(Color(0.0, 0.0, 0.0), 1.0))
+	_box(Vector3(0.06, 2.1, 0.25), o + Vector3(0.03, 1.05, -13), _mat(Color(0.3, 0.3, 0.3), 0.6, 0.5))
+	# fire door (closed) on the left, with push bar and sign
+	_box(Vector3(0.05, 2.0, 1.0), o + Vector3(-1.08, 1.0, -5), _mat(Color(0.55, 0.2, 0.15), 0.6))
+	_box(Vector3(0.06, 0.06, 0.8), o + Vector3(-1.04, 1.0, -5), _mat(Color(0.75, 0.75, 0.75), 0.3, 0.8))
+	# fluorescent tube
+	_tube_mat = _mat(Color(0.9, 1.0, 0.95), 0.3, 0.0, 2.5)
+	_box(Vector3(0.1, 0.05, 1.3), o + Vector3(0, 2.62, -4), _tube_mat)
+	_tube_light = OmniLight3D.new()
+	_tube_light.light_color = Color(0.85, 1.0, 0.9)
+	_tube_light.light_energy = 1.6
+	_tube_light.omni_range = 9.0
+	_tube_light.position = o + Vector3(0, 2.4, -4)
+	add_child(_tube_light)
+	var far := OmniLight3D.new()
+	far.light_color = Color(0.8, 0.85, 0.8)
+	far.light_energy = 0.35
+	far.omni_range = 6.0
+	far.position = o + Vector3(0, 2.3, -10)
+	add_child(far)
+	_cam("cam_corridor", o + Vector3(0.35, 1.7, 0.6), o + Vector3(0.1, 1.2, -13), 55.0, true)
+	_cam("cam_doorway", o + Vector3(0.6, 1.35, -9.5), o + Vector3(0.5, 1.05, -13.6), 32.0, true)
+	# a camera left pointing at the studio floor (wrong-camera grammar)
+	_cam("cam_floor", Vector3(-1.5, 2.2, 6.0), Vector3(-0.8, 0.0, 4.2), 40.0, true)
 
 
 func _build_graham() -> void:
-	graham_viewport = SubViewport.new()
-	graham_viewport.size = Vector2i(512, 640)
-	graham_viewport.transparent_bg = true
-	graham_viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
-	add_child(graham_viewport)
-	graham = GrahamPuppet.new()
-	graham_viewport.add_child(graham)
-	var spr := Sprite3D.new()
-	spr.texture = graham_viewport.get_texture()
-	spr.pixel_size = 0.0036
-	spr.shaded = false
-	spr.double_sided = false
-	spr.position = GRAHAM_POS + Vector3(0, 2.12, 0.0)
-	spr.modulate = Color(1.0, 0.97, 0.95)
-	add_child(spr)
+	# Photographic cut-out (1086x1448 master, imported at 815x1086). Frame height ≈ 1.17 m:
+	# top of head ≈ 1.80 m, crop line ≈ 0.65 m (hidden by the lectern top at 1.0 m).
+	graham_sprite = Sprite3D.new()
+	graham_sprite.pixel_size = 0.00108
+	graham_sprite.shaded = false
+	graham_sprite.double_sided = false
+	graham_sprite.alpha_cut = SpriteBase3D.ALPHA_CUT_DISABLED
+	graham_sprite.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR
+	graham_sprite.centered = true
+	graham_sprite.offset = Vector2(0, 543)          # pivot at the bottom edge (breathing scales from the waist)
+	graham_sprite.position = GRAHAM_POS + Vector3(0, 0.65, 0.0)
+	add_child(graham_sprite)
 
 
 func _cam(name: String, pos: Vector3, target: Vector3, fov: float, handheld: bool = false) -> Camera3D:
@@ -249,7 +328,8 @@ func _cam(name: String, pos: Vector3, target: Vector3, fov: float, handheld: boo
 
 
 func _build_cameras() -> void:
-	_cam("cam1", GRAHAM_POS + Vector3(0.15, 2.3, 3.9), GRAHAM_POS + Vector3(0, 2.15, 0), 30.0)
+	# Camera 1: Graham medium close-up (head, tie, cards, lectern edge at the bottom).
+	_cam("cam1", GRAHAM_POS + Vector3(0.04, 1.62, 2.75), GRAHAM_POS + Vector3(0, 1.47, 0), 22.0)
 	_cam("cam2", Vector3(-0.3, 4.4, 13.5), Vector3(-0.3, 2.3, -1.5), 56.0)
 	_cam("cam3", Vector3(-2.2, 2.3, 7.0), Vector3(3.4, 1.2, 0.6), 40.0, true)
 	_cam("cam4", Vector3(8.5, 0.9, 7.5), Vector3(0.5, 3.5, -3.5), 52.0, true)
@@ -492,6 +572,10 @@ func _process(delta: float) -> void:
 		_animate_titles(delta)
 	if _ident_logo:
 		_ident_logo.rotation.y = sin(_t * 0.6) * 0.25
+	if _tube_light and current_cam in ["cam_corridor", "cam_doorway"]:
+		var on := not (sin(_t * 23.0) > 0.86 or sin(_t * 3.1 + 1.0) > 0.97)   # cheap tube flicker
+		_tube_light.light_energy = 1.6 if on else 0.15
+		_tube_mat.emission_energy_multiplier = 2.5 if on else 0.1
 
 
 func _animate_titles(delta: float) -> void:

@@ -139,6 +139,7 @@ func _build_presentation() -> void:
 	presenter.attach(host)
 	dev = DevOverlay.new()
 	dev.host = host
+	dev.graham = view.graham
 	dev.visible = false
 	root.add_child(dev)
 	get_tree().root.size_changed.connect(_fit)
@@ -418,6 +419,8 @@ func _refresh_pause() -> void:
 				{"key": "remove_bot", "label": "REMOVE FAKE PLAYER", "desc": ""},
 				{"key": "timescale", "label": "TIMESCALE", "value": "x%.0f" % (host.session.time_scale if host.session else 1.0), "desc": "Accelerates all server timers."},
 				{"key": "overlay", "label": "TOGGLE DIAGNOSTICS OVERLAY", "desc": "Network + Director state (also F3)."},
+				{"key": "gallery", "label": "GRAHAM GALLERY: NEXT STATE", "desc": "Cuts to Camera 1 and steps through every Graham state with its fallback chain (F11)."},
+				{"key": "graham_speak", "label": "GRAHAM: SPEECH BURST", "desc": "Plays the talking cycle on Camera 1 (F12)."},
 				{"key": "back", "label": "BACK", "desc": ""},
 			]
 	sys.pause_selected = menu_sel
@@ -488,6 +491,14 @@ func _dev_action(key: String) -> void:
 			host.session.time_scale = 1.0 if host.session.time_scale > 1.0 else 4.0
 		"overlay":
 			dev.visible = not dev.visible
+		"gallery":
+			dev.visible = true
+			dev.page = 3
+			view.studio._do_cut("cam1")
+			dev.gallery_next(1)
+		"graham_speak":
+			view.studio._do_cut("cam1")
+			view.graham.speak(3.0)
 		"start":
 			host.session.start_show()
 
@@ -495,7 +506,14 @@ func _dev_action(key: String) -> void:
 func _dev_key(code: int) -> bool:
 	match code:
 		KEY_F4:
-			dev.page = (dev.page + 1) % 3
+			dev.page = (dev.page + 1) % DevOverlay.PAGES
+		KEY_F11:
+			dev.page = 3
+			view.studio._do_cut("cam1")
+			dev.gallery_next(1)
+		KEY_F12:
+			view.studio._do_cut("cam1")
+			view.graham.speak(3.0)
 		KEY_F5:
 			_dev_action("add_bot")
 		KEY_F6:

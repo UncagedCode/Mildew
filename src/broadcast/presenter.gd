@@ -58,6 +58,8 @@ func _on_event(evt: Dictionary) -> void:
 			_lobby()
 		"say":
 			_say(evt)
+		"incident":
+			_incident(evt)
 		"player_joined":
 			audio.applause("small")
 			var info: Dictionary = evt.get("info", {})
@@ -272,18 +274,161 @@ func _say(evt: Dictionary) -> void:
 	var dur := float(evt.get("duration", 2.0))
 	var sub_speaker := "test" if evt.get("pronunciation_test", false) else speaker
 	if not evt.get("silent", false):
-		gfx.show_subtitle(text if speaker == "graham" else "ANNOUNCER: " + text, sub_speaker, dur)
+		var shown := text
+		if speaker == "announcer":
+			shown = "ANNOUNCER: " + text
+		elif speaker == "floor":
+			shown = "(OFF MIC) " + text
+		gfx.show_subtitle(shown, sub_speaker, dur)
 	voice.speak(speaker, str(evt.get("speech", text)), evt)
-	if speaker == "graham":
-		studio.graham.set_mood(str(evt.get("mood", "relaxed")))
-		if evt.get("silent", false):
-			studio.graham.set_activity("stare")
-		else:
-			studio.graham.speak(dur)
-		# Ordinary grammar: talking Graham is usually on Cam 1, unless graphics own the frame.
-		if not _in_question and _say_cam_cooldown <= 0.0 and host.session.phase != SessionServer.Phase.LOBBY:
-			if studio.current_cam != "cam_titles" and studio.current_cam != "cam_podium":
-				studio.cut_to("cam1" if _rng.randf() < 0.85 else "cam2")
-				_say_cam_cooldown = 2.5
-		elif host.session.phase == SessionServer.Phase.LOBBY and _rng.randf() < 0.5:
-			studio.cut_to("cam1" if studio.current_cam != "cam1" else "cam2")
+	if speaker != "graham":
+		return
+	_shot_graham_line(evt, dur)
+
+
+# ---------------------------------------------------------------------------
+# Graham editing grammar (D021/D022; pack GRAHAM_PERFORMANCE_AND_EDITING_RULES):
+# a line starts on Graham (Camera 1) in the state its category calls for; long lines cut away to
+# the contestant / wide / podiums while the voice continues; sometimes we come back for a reaction.
+# If a game graphic owns the frame, the voice simply plays over it.
+# ---------------------------------------------------------------------------
+
+var _shots := {}
+var _shot_seq := 0
+
+
+func _shot_hint(category: String) -> Dictionary:
+	if _shots.is_empty():
+		var f := FileAccess.open("res://config/graham_shots.json", FileAccess.READ)
+		if f:
+			var d = JSON.parse_string(f.get_as_text())
+			if typeof(d) == TYPE_DICTIONARY:
+				_shots = d
+	var h: Dictionary = (_shots.get("default", {}) as Dictionary).duplicate()
+	h.merge(_shots.get(category, {}), true)
+	return h
+
+
+func _shot_graham_line(evt: Dictionary, dur: float) -> void:
+	var g = studio.graham
+	var cat := str(evt.get("category", ""))
+	var hint := _shot_hint(cat)
+	g.set_mood(str(evt.get("mood", "relaxed")))
+	if evt.get("silent", false):
+		g.set_state("stare", "cut")
+		if host.session.phase != SessionServer.Phase.LOBBY and not _graphic_owns_frame():
+			studio.cut_to("cam1", false)
+		return
+	var lead := str(hint.get("lead", ""))
+	var settle := str(hint.get("settle", ""))
+	if _graphic_owns_frame() or studio.current_cam in ["cam_titles", "cam_ident"]:
+		# Voice over the graphic; quietly put Graham in the right state for when we come back.
+		if lead != "":
+			g.set_state(lead, "cut")
+		elif settle != "":
+			g.set_state(settle, "cut")
+		return
+	if host.session.phase == SessionServer.Phase.LOBBY:
+		# Lobby monitor: Graham chatting to the room; keep him on camera, mouth moving briefly.
+		if studio.current_cam != "cam1" and _rng.randf() < 0.6:
+			studio.cut_to("cam1", false)
+		g.speak(dur, settle)
+		return
+	_shot_seq += 1
+	var seq := _shot_seq
+	var scale := maxf(1.0, host.session.time_scale)
+	if studio.current_cam != "cam1" and studio.current_cam != "cam_podium":
+		studio.cut_to("cam1")
+	elif studio.current_cam == "cam_podium" and _say_cam_cooldown <= 0.0:
+		studio.cut_to("cam1")
+	if lead != "":
+		g.set_state(lead, "cut")
+	var visible_for := dur
+	if bool(hint.get("talk", true)):
+		visible_for = g.speak(dur, settle)
+	else:
+		visible_for = minf(dur, _rng.randf_range(0.9, 1.8))
+		if settle != "":
+			get_tree().create_timer(maxf(0.2, dur) / scale).timeout.connect(func(): g.set_state(settle, "auto"))
+	var cutaways: Array = hint.get("cutaway", [])
+	if dur > visible_for + 0.6 and not cutaways.is_empty():
+		var target := str(cutaways[_rng.randi_range(0, cutaways.size() - 1)])
+		var pid := str(evt.get("pid", ""))
+		get_tree().create_timer(visible_for / scale).timeout.connect(func():
+			if seq != _shot_seq or _graphic_owns_frame():
+				return
+			if target == "subject" and pid != "" and studio.podiums.has(pid):
+				studio.frame_podium(pid)
+			elif target != "subject":
+				studio.cut_to(target)
+			else:
+				studio.cut_to("cam2"))
+		var back := float(hint.get("return", 0.35))
+		if _rng.randf() < back:
+			get_tree().create_timer((dur + 0.35) / scale).timeout.connect(func():
+				if seq != _shot_seq or _graphic_owns_frame():
+					return
+				g.set_state(settle if settle != "" else ("reading_cards" if _rng.randf() < 0.4 else "restrained_smile"), "cut")
+				studio.cut_to("cam1", false))
+	_say_cam_cooldown = 1.5
+
+
+# ---------------------------------------------------------------------------
+# Broadcast irregularities (Tier 0/1). Presentation only; never touches real status UI (D006)
+# and never covers an active question/timer (docs/01 #97).
+# ---------------------------------------------------------------------------
+
+func _incident(evt: Dictionary) -> void:
+	var p: Dictionary = evt.get("params", {})
+	var dur := float(evt.get("duration", 1.5))
+	var g = studio.graham
+	var back := studio.current_cam if studio.current_cam in ["cam1", "cam2", "cam3", "cam4"] else "cam1"
+	var later := func(t: float, f: Callable): get_tree().create_timer(t).timeout.connect(f)
+	match str(evt.get("effect")):
+		"mic_pop":
+			audio.play("mic_pop", -2.0)
+		"feedback":
+			audio.play("feedback", -12.0)
+		"lower_third_typo":
+			gfx.show_lower_third(str(p.get("typo", "")), "CONTESTANT No. %d" % int(p.get("number", 0)), dur * 0.45)
+			later.call(dur * 0.45, func(): gfx.show_lower_third(str(p.get("name", "")), "CONTESTANT No. %d" % int(p.get("number", 0)), dur * 0.55))
+		"early_applause":
+			audio.applause("small")
+			later.call(0.7, func(): audio.silence_audience())
+		"late_cut":
+			if not _graphic_owns_frame():
+				studio._do_cut("cam4")
+				later.call(minf(0.7, dur), func(): studio._do_cut(back))
+		"wrong_camera":
+			if not _graphic_owns_frame():
+				studio._do_cut("cam1")
+				g.set_state("look_off_left", "cut")
+		"signal_tear":
+			gfx.signal_tear(minf(0.6, dur))
+			audio.play("static_burst", -14.0)
+		"empty_corridor":
+			if not _graphic_owns_frame():
+				studio._do_cut("cam_corridor")
+				later.call(dur, func(): studio._do_cut(back))
+		"hole_doorway":
+			if not _graphic_owns_frame():
+				studio._do_cut("cam_doorway")
+				audio.duck(true)
+				later.call(dur, func():
+					audio.duck(false)
+					g.set_state("irritated_turn", "cut")
+					studio._do_cut("cam1"))
+		"production_caption":
+			gfx.production_caption(str(p.get("caption", "")), dur)
+		"wrong_audience_reaction":
+			audio.applause("big")
+		"floor_shot":
+			if not _graphic_owns_frame():
+				studio._do_cut("cam_floor")
+				later.call(dur, func(): studio._do_cut(back))
+		"off_mic_cue", "wrong_name":
+			pass  # carried by the line itself
+
+
+func _graphic_owns_frame() -> bool:
+	return _in_question or (hole != null and hole.is_showing()) or gfx.is_question_visible()

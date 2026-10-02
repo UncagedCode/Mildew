@@ -72,6 +72,11 @@ var dog_visible := true
 # Confetti
 var _confetti: Array = []
 
+# Irregularities (fictional, inside the programme only)
+var _tear_until := -1.0
+var _cap_text := ""
+var _cap_until := -1.0
+
 
 func _ready() -> void:
 	f_display = load("res://assets/fonts/InterDisplay-BlackItalic.otf")
@@ -202,6 +207,17 @@ func confetti(count: int = 160) -> void:
 			"r": rng.randf() * TAU, "w": rng.randf_range(-8, 8), "c": cols[i % cols.size()], "s": rng.randf_range(8, 16)})
 
 
+## Brief analogue signal tear (cheap TV, Tier 0). Never used while a question is up.
+func signal_tear(seconds: float) -> void:
+	_tear_until = _t + seconds
+
+
+## A production-monitor caption leaking to air (Tier 1).
+func production_caption(text: String, seconds: float) -> void:
+	_cap_text = text
+	_cap_until = _t + seconds
+
+
 func is_question_visible() -> bool:
 	return _q_target > 0.0
 
@@ -231,6 +247,18 @@ func _draw() -> void:
 		draw_string(f_serif, Vector2(W - 210, 78), "Sallow", HORIZONTAL_ALIGNMENT_LEFT, -1, 40, Color(1, 1, 1, 0.42))
 	if subtitles_enabled and _t < _sub_until and _sub_text != "":
 		_draw_subtitles()
+	if _t < _cap_until and _cap_text != "":
+		var cw := f_mono.get_string_size(_cap_text, HORIZONTAL_ALIGNMENT_LEFT, -1, 26).x
+		draw_rect(Rect2(64, 96, cw + 28, 42), Color(0, 0, 0, 0.85))
+		draw_string(f_mono, Vector2(78, 126), _cap_text, HORIZONTAL_ALIGNMENT_LEFT, -1, 26, Color(1, 1, 1, 0.9))
+	if _t < _tear_until:
+		var rng := RandomNumberGenerator.new()
+		rng.seed = int(_t * 50.0)
+		for i in 7:
+			var y := rng.randf() * H
+			var hh := rng.randf_range(6.0, 40.0)
+			draw_rect(Rect2(rng.randf_range(-60, 60), y, W + 120, hh), Color(1, 1, 1, rng.randf_range(0.08, 0.28)))
+			draw_rect(Rect2(0, y + hh, W, 3), Color(0, 0, 0, 0.4))
 
 
 func _grad_rect(r: Rect2, top: Color, bottom: Color) -> void:

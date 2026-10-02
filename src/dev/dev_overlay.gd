@@ -3,8 +3,11 @@ extends Control
 ## Development-only Director/network diagnostics (docs/10). Never available in release builds.
 
 var host: MildewHost
+var graham: GrahamPresenter
 var f_mono: Font
-var page := 0                 # 0 network, 1 director, 2 logs
+var page := 0                 # 0 network, 1 director, 2 logs, 3 Graham gallery
+const PAGES := 4
+var gallery_i := 0
 
 
 func _ready() -> void:
@@ -24,9 +27,12 @@ func _line(y: float, text: String, col := Color(0.7, 1, 0.7)) -> float:
 
 
 func _draw() -> void:
-	draw_rect(Rect2(0, 0, 1920, 1080), Color(0, 0, 0, 0.82))
+	draw_rect(Rect2(0, 0, 1920 if page != 3 else 700, 1080), Color(0, 0, 0, 0.82))
 	var y := 34.0
-	y = _line(y, "MILDEW DEV OVERLAY  [F3 toggle · F4 page · F5 add bot · F6 remove bot · F7 drop bot · F8 reconnect bot · F9 timescale · F10 start]  page %d/3" % (page + 1), Color(1, 1, 0.3))
+	y = _line(y, "MILDEW DEV OVERLAY  [F3 toggle · F4 page · F5 add bot · F6 remove bot · F7 drop bot · F8 reconnect bot · F9 timescale · F10 start · F11/F12 gallery]  page %d/%d" % [page + 1, PAGES], Color(1, 1, 0.3))
+	if page == 3:
+		_draw_gallery(y)
+		return
 	if host == null or host.session == null:
 		_line(y, "host not running")
 		return
@@ -72,3 +78,35 @@ func _draw() -> void:
 			y = _line(y, "HOST LOG", Color(1, 1, 0.3))
 			for l in host.log_lines.slice(maxi(0, host.log_lines.size() - 44)):
 				y = _line(y, "  " + str(l))
+
+
+## Graham gallery (pack GRAHAM_GODOT_IMPLEMENTATION "Development debug controls"): every semantic
+## state, what it resolves to, its fallback chain and blink/variant frames. F11 = show next state
+## on Camera 1, F12 = speech burst. The overlay is translucent on this page so Graham stays visible.
+func gallery_next(dir: int = 1) -> String:
+	if graham == null:
+		return ""
+	var states := graham.all_states()
+	gallery_i = (gallery_i + dir + states.size()) % states.size()
+	var st: String = states[gallery_i]
+	graham.set_state(st, "cut")
+	return st
+
+
+func _draw_gallery(y: float) -> void:
+	if graham == null:
+		_line(y, "no presenter")
+		return
+	y = _line(y, "GRAHAM GALLERY  mode=%s  shown=%s  speaking=%s  ready=%s" % [graham.mode, graham.current_state(), graham.is_speaking(), graham.is_ready()], Color(1, 1, 0.3))
+	var states := graham.all_states()
+	var cut_states: Dictionary = graham.cut.get("states", {})
+	for i in states.size():
+		var st: String = states[i]
+		var chain := graham.fallback_chain(st)
+		var e: Dictionary = cut_states.get(st, {})
+		var info := "frame=%s" % e.get("frame", "-") if not e.is_empty() else "MISSING -> " + " -> ".join(chain.slice(1))
+		if e.has("blink"):
+			info += "  blink=%s" % str(e.blink)
+		if e.has("variants"):
+			info += "  variants=%s" % str(e.variants)
+		y = _line(y, "%s %-20s %s" % [">" if i == gallery_i else " ", st, info], Color(1, 1, 1) if i == gallery_i else Color(0.7, 1, 0.7))
