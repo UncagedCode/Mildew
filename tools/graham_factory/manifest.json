@@ -20,6 +20,11 @@
     {"id": "and_were_back_01", "mood": "recovered", "text": "And we're back!"},
     {"id": "closing_01", "mood": "closing", "text": "Ladies and gentlemen, that is all we have time for tonight."},
     {"id": "closing_thanks_01", "mood": "closing", "text": "Thank you for joining us..."},
-    {"id": "closing_goodnight_01", "mood": "closing", "text": "and good night."}
+    {"id": "closing_goodnight_01", "mood": "closing", "text": "and good night."},
+    {"id": "name_aaron", "mood": "name", "text": "Aaron"},
+    {"id": "name_elijah", "mood": "name", "text": "Elijah"},
+    {"id": "name_grace", "mood": "name", "text": "Grace"},
+    {"id": "name_josh", "mood": "name", "text": "Josh"},
+    {"id": "name_donna", "mood": "name", "text": "Donna"}
   ]
 }
