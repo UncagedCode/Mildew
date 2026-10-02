@@ -17,7 +17,10 @@ var cameras := {}
 var current_cam := ""
 var graham                         # GrahamPresenter (assigned by ProgrammeView)
 var graham_sprite: Sprite3D        # Graham's photographic cut-out, standing at his mark (D022)
-var podiums := {}               # pid -> {node, screen: PodiumScreen, lamp: MeshInstance3D, target: Vector3}
+var podiums := {}               # pid -> {node, screen: PodiumScreen, lamp: MeshInstance3D, face, target: Vector3}
+var framed_pid := ""            # contestant in the podium close-up (plates use it too)
+var par_lenses: Array = []      # [MeshInstance3D, Color] for plate light hotspots
+var foreground_nodes: Array = []  # set pieces in front of Graham (stand-in plate foreground layer)
 var _drift := {}                # cam -> base transform (handheld cams)
 var _t := 0.0
 var _rng := RandomNumberGenerator.new()
@@ -273,6 +276,8 @@ func _par_can(pos: Vector3, colour: Color, rot_deg: Vector3, scale_: float = 1.0
 	lens.position = Vector3(0, 0, 0.19)
 	root.add_child(lens)
 	if lit:
+		par_lenses.append([lens, colour])
+	if lit:
 		var l := SpotLight3D.new()
 		l.light_color = colour
 		l.light_energy = 1.2
@@ -300,9 +305,8 @@ func _build_presenter_area(green: Material, blue: Material, cream: Material, chr
 	sign_spot.light_energy = 2.2
 	sign_spot.spot_range = 8.0
 	sign_spot.spot_angle = 28.0
-	sign_spot.position = g + Vector3(0, 3.4, 0.5)
 	add_child(sign_spot)
-	sign_spot.look_at(g + Vector3(0, 1.5, -3.3), Vector3.UP)
+	sign_spot.look_at_from_position(g + Vector3(0, 3.4, 0.5), g + Vector3(0, 1.5, -3.3), Vector3.UP)
 	var cols := [Color(1.0, 0.85, 0.25), Color(0.25, 0.55, 1.0), Color(1.0, 0.3, 0.55), Color(1.0, 0.97, 0.9),
 		Color(0.08, 0.08, 0.08), Color(1.0, 0.3, 0.55), Color(0.25, 0.55, 1.0), Color(0.35, 1.0, 0.45)]
 	for i in cols.size():
@@ -339,10 +343,11 @@ func _build_presenter_area(green: Material, blue: Material, cream: Material, chr
 	add_child(rim)
 	_box(Vector3(0.8, 0.42, 0.6), g + Vector3(-1.2, 0.21, -1.55), _mat(Color(0.12, 0.32, 0.22), 0.7))
 	# Graham's low desk: dark edge only just visible at the bottom of Camera 1, like the reference.
-	_box(Vector3(1.7, 0.7, 0.6), g + Vector3(0, 0.35, 0.45), _mat(Color(0.16, 0.17, 0.2), 0.5))
-	_box(Vector3(1.78, 0.04, 0.68), g + Vector3(0, 0.72, 0.45), chrome)
+	foreground_nodes.append(_box(Vector3(1.7, 0.7, 0.6), g + Vector3(0, 0.35, 0.45), _mat(Color(0.16, 0.17, 0.2), 0.5)))
+	foreground_nodes.append(_box(Vector3(1.78, 0.04, 0.68), g + Vector3(0, 0.72, 0.45), chrome))
 	var m := _text3d("M", _font_display, 120, 0.06, 0.004, _logo_mat, self)
 	m.position = g + Vector3(0, 0.38, 0.76)
+	foreground_nodes.append(m)
 
 
 ## Service corridor behind Studio C (recurring backstage location; docs/02 "Recurring rooms").
@@ -572,7 +577,7 @@ func _add_podium(p: Dictionary) -> void:
 	face.position = Vector3(0, 1.87, 0.205)
 	root.add_child(face)
 	root.scale = Vector3(0.01, 0.01, 0.01)
-	podiums[p.pid] = {"node": root, "screen": screen, "lamp": lamp, "target": Vector3.ZERO, "colour": col}
+	podiums[p.pid] = {"node": root, "screen": screen, "lamp": lamp, "face": face, "target": Vector3.ZERO, "colour": col}
 
 
 func _layout_podiums() -> void:
@@ -628,6 +633,7 @@ func _do_cut(name: String) -> void:
 func frame_podium(pid: String) -> void:
 	if not podiums.has(pid):
 		return
+	framed_pid = pid
 	var t: Vector3 = podiums[pid].target
 	var c: Camera3D = cameras["cam_podium"]
 	c.look_at_from_position(t + Vector3(-0.7, 2.0, 3.1), t + Vector3(0, 1.75, 0), Vector3.UP)

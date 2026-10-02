@@ -12,6 +12,7 @@ var studio: StudioSet
 var gfx: GraphicsLayer
 var hole: HoleBoard
 var graham: GrahamPresenter
+var plates: PlateStage
 var screen: TextureRect
 var material_crt: ShaderMaterial
 var _target := Rect2(240, 0, 1440, 1080)
@@ -34,6 +35,11 @@ func build() -> void:
 	viewport.add_child(graham)         # plate-mode fallback draws here; composited mode drives a 3D sprite
 	graham.attach_sprite(studio.graham_sprite)
 	studio.graham = graham
+	plates = PlateStage.new()          # photographic plates over (and instead of) the 3D studio (D026)
+	plates.studio = studio
+	plates.graham = graham
+	plates.viewport = viewport
+	viewport.add_child(plates)
 	hole = HoleBoard.new()
 	viewport.add_child(hole)       # game boards sit under the graphics package (subtitles, lower-thirds)
 	gfx = GraphicsLayer.new()

@@ -118,6 +118,9 @@
       <div class="row"><button id="ovl" data-cmd="overlay">OVERLAY</button></div>
       <div class="seg" id="pages"></div>
       <div class="row"><button data-cmd="graham_gallery">GRAHAM: NEXT STATE</button><button data-cmd="graham_speak">GRAHAM: TALK</button></div>
+      <div class="row"><span class="dim">Camera</span><div class="seg" id="cams"></div></div>
+      <div class="row"><button id="hot" data-cmd="plate_hotspots">PLATE HOTSPOTS</button></div>
+      <p class="hint" id="platestat"></p>
     </div>
   </section>
 
@@ -221,6 +224,7 @@
     chipRow($("speeds"), cat.timescales, (v) => "×" + v, (v) => send("timescale", { value: v }));
     chipRow($("variants"), ["", ...cat.hole_variants], (v) => v || "auto", (v) => send("force", { key: "hole_variant", value: v }));
     chipRow($("interf"), cat.interference, (v) => v.split("_")[0].toUpperCase(), (v) => send("interference", { value: v }));
+    chipRow($("cams"), ["cam1", "cam2", "cam3", "cam4"], (v) => v.replace("cam", "CAM "), (v) => send("cut", { value: v }));
     chipRow($("pages"), [0, 1, 2, 3, 4], (v) => ["NET", "DIRECTOR", "LOG", "GALLERY", "VOICE"][v], (v) => send("overlay", { page: v }));
     const it = $("item"); it.length = 1;
     for (const i of cat.hole_items) it.add(new Option(`${i.label}${i.tier > 1 ? "  (tier " + i.tier + ")" : ""}`, i.id));
@@ -243,7 +247,9 @@
     mark($("variants"), st.force.hole_variant || "");
     mark($("interf"), st.director.interference);
     mark($("pages"), app.overlay ? app.overlay_page : -1);
-    $("ovl").classList.toggle("on", !!app.overlay); $("ovl").textContent = app.overlay ? "OVERLAY ON" : "OVERLAY OFF";
+    $("ovl").classList.toggle("on", !!app.overlay);
+    $("hot").classList.toggle("on", !!app.plate_hotspots);
+    $("platestat").textContent = "On air: " + (app.plate ? "plate " + app.plate : "3D studio (no plate for this camera)"); $("ovl").textContent = app.overlay ? "OVERLAY ON" : "OVERLAY OFF";
     if (document.activeElement !== $("item")) $("item").value = st.force.hole_item || "";
     if (document.activeElement !== $("incident")) $("incident").value = st.force.incident || "";
     const f = Object.entries(st.force); $("forced").textContent = f.length ? "Waiting to use: " + f.map(([k, v]) => `${k}=${v}`).join(", ") : "Nothing forced.";

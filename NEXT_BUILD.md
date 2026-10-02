@@ -57,6 +57,11 @@ Survey/Mouthfeel (CP4), Police Sketch (CP5), adverts and commercial break (CP8),
 
 ## Carried over from CP2
 
+- **Studio plates (D026):** when the ChatGPT batch arrives (`references/studio/REQUEST_plates_v1.md`): save to
+  `assets/studio/plates/`, author hotspots per plate in `config/studio_plates.json` (Graham anchor/height from the
+  with/without pair, eight screen quads, lamp quads, rig lights, foreground mask for the presenter table), check on the
+  TV with dev panel → PLATE HOTSPOTS, then remove the stand-ins.
+
 - **Graham audio:** import the 19-line development library + 5 names: put the mp3s in
   `tools/graham_factory/generated_audio/` (or any folder) and run `python tools/graham_factory/sync_godot.py [--source DIR]`;
   approve reviewed takes with `--approve id…`. Audition on the TV via the Voice Browser. Re-generate drifting takes

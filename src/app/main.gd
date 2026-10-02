@@ -671,6 +671,16 @@ func _dev_remote(cmd: String, args: Dictionary) -> Dictionary:
 			if secs >= 0.0:
 				return {"ok": true, "msg": "playing %s (%.1f s)" % [what, secs]}
 			return {"ok": false, "msg": "no local clip for %s%s" % [what, " — dev TTS fallback used" if g.last_mode == "dev_tts" else ""]}
+		"plate_hotspots":
+			if view == null:
+				return {"ok": false, "msg": "no TV display"}
+			view.plates.show_hotspots = not view.plates.show_hotspots
+			return {"ok": true, "msg": "plate hotspots %s (plate: %s)" % ["on" if view.plates.show_hotspots else "off", view.plates.active if view.plates.active != "" else "3D"]}
+		"cut":
+			if view == null or not view.studio.cameras.has(str(args.get("value", ""))):
+				return {"ok": false, "msg": "unknown camera"}
+			view.studio._do_cut(str(args.value))
+			return {"ok": true, "msg": "cut to %s (plate: %s)" % [args.value, view.plates.active if view.plates.active != "" else "3D"]}
 		"restart":
 			# New broadcast with the same TV: end and immediately begin again (dev sockets reconnect).
 			call_deferred("_dev_restart")
@@ -692,7 +702,8 @@ func _dev_remote_state() -> Dictionary:
 	if g != null and g.index != null:
 		for id in g.index.ids():
 			vlist.append({"id": id, "status": g.index.status(id) if g.index.has_clip(id) else "missing", "text": g.index.text(id)})
-	return {"voice": g.diagnostics() if g != null else {}, "voice_list": vlist, "voice_names": g.index.names.keys() if g != null and g.index != null else [],
+	return {"plate": view.plates.active if view != null and view.plates != null else "", "plate_hotspots": view.plates.show_hotspots if view != null and view.plates != null else false,
+		"voice": g.diagnostics() if g != null else {}, "voice_list": vlist, "voice_names": g.index.names.keys() if g != null and g.index != null else [],
 		"voice_intents": g.intents.keys().filter(func(k): return not str(k).begins_with("_")) if g != null else [],
 		"screen": state, "fps": Engine.get_frames_per_second(), "overlay": dev.visible if dev != null else false, "overlay_page": dev.page if dev != null else 0,
 		"pause_open": _pause_open}
