@@ -1,0 +1,14 @@
+{
+  "presenter": "[warm British game-show host, practised smile, confident studio projection]",
+  "presenter_brisk": "[brisk professional game-show host, confidently moving the programme along]",
+  "pleased": "[practised game-show warmth, lightly pleased]",
+  "excited": "[buoyant game-show host building studio excitement without shouting]",
+  "teasing": "[smiling British game-show presenter, playfully teasing the contestant for the audience]",
+  "disappointed": "[same presenter, mildly disappointed but professionally restrained]",
+  "irritated": "[same television presenter, smile gone, restrained irritation]",
+  "angry": "[same television presenter, controlled anger, firm rather than theatrical]",
+  "rattled": "[same presenter, briefly unsettled and trying to regain professional composure]",
+  "recovered": "[professional game-show presenter, smile returning slightly too quickly]",
+  "off_air": "[same man speaking naturally off-air, tired and no longer performing for the audience]",
+  "closing": "[warm polished British game-show host delivering his familiar end-of-show sign-off]"
+}

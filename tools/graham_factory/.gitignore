@@ -1,0 +1,5 @@
+.env
+.graham_state.json
+generated_audio/
+__pycache__/
+*.pyc
