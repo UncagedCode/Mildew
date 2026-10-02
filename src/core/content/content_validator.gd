@@ -11,7 +11,11 @@ var warnings: Array[String] = []
 var _tags: Dictionary = {}
 
 
+var _release := false
+
+
 func validate(db: ContentDB, release_mode: bool = false) -> bool:
+	_release = release_mode
 	errors.clear()
 	warnings.clear()
 	_tags = MildewConfig._read_json(TAGS_PATH)
@@ -265,6 +269,20 @@ func _validate_line(item: Dictionary, where: String, moods: Array) -> void:
 		if not moods.has(m):
 			errors.append("%s: unknown mood '%s'" % [where, m])
 	var text := str(item.get("text", ""))
+	# Authored Graham audio (D024): ids must exist, and the subtitle must be exactly what was recorded.
+	if item.has("audio"):
+		var vidx := GrahamVoiceIndex.shared()
+		var ids := GrahamVoiceIndex.line_ids(item.get("audio"))
+		var recorded: Array = []
+		for id in ids:
+			if not vidx.has_id(id):
+				errors.append("%s: unknown Graham voice id '%s'" % [where, id])
+			else:
+				recorded.append(vidx.text(id))
+				if _release and vidx.status(id) != "approved":
+					warnings.append("%s: voice clip '%s' is %s, not approved for release" % [where, id, vidx.status(id)])
+		if recorded.size() == ids.size() and not ids.is_empty() and " ".join(recorded) != text:
+			errors.append("%s: subtitle text differs from the recorded voice text \"%s\"" % [where, " ".join(recorded)])
 	# Unbalanced braces indicate a broken insertion slot.
 	if text.count("{") != text.count("}"):
 		errors.append("%s: unbalanced insertion slot braces" % where)

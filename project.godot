@@ -14,6 +14,10 @@ boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
 run/low_processor_mode=false
 
+[autoload]
+
+GrahamVoice="*res://src/audio/graham_voice_service.gd"
+
 [audio]
 
 general/text_to_speech=true

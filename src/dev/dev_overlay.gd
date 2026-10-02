@@ -5,9 +5,12 @@ extends Control
 var host: MildewHost
 var graham: GrahamPresenter
 var f_mono: Font
-var page := 0                 # 0 network, 1 director, 2 logs, 3 Graham gallery
-const PAGES := 4
+var voice: GrahamVoiceService     # GrahamVoice autoload (voice browser page)
+var page := 0                 # 0 network, 1 director, 2 logs, 3 Graham gallery, 4 voice browser
+const PAGES := 5
+const VOICE_PAGE := 4
 var gallery_i := 0
+var voice_sel := 0
 
 
 func _ready() -> void:
@@ -32,6 +35,9 @@ func _draw() -> void:
 	y = _line(y, "MILDEW DEV OVERLAY  [F3 toggle · F4 page · F5 add bot · F6 remove bot · F7 drop bot · F8 reconnect bot · F9 timescale · F10 start · F11/F12 gallery]  page %d/%d" % [page + 1, PAGES], Color(1, 1, 0.3))
 	if page == 3:
 		_draw_gallery(y)
+		return
+	if page == VOICE_PAGE:
+		_draw_voice(y)
 		return
 	if host == null or host.session == null:
 		_line(y, "host not running")
@@ -110,3 +116,49 @@ func _draw_gallery(y: float) -> void:
 		if e.has("variants"):
 			info += "  variants=%s" % str(e.variants)
 		y = _line(y, "%s %-20s %s" % [">" if i == gallery_i else " ", st, info], Color(1, 1, 1) if i == gallery_i else Color(0.7, 1, 0.7))
+
+
+## Developer Voice Browser (CLAUDE_INTEGRATION.md task 7): every semantic voice id, its status
+## and text. Remote: pause → DEVELOPER TOOLS → VOICE BROWSER (◀ ▶ select, OK play). Phone: /dev panel.
+func voice_ids() -> Array:
+	return voice.index.ids() if voice and voice.index else []
+
+
+func voice_step(dir: int) -> String:
+	var ids := voice_ids()
+	if ids.is_empty():
+		return ""
+	voice_sel = (voice_sel + dir + ids.size()) % ids.size()
+	return str(ids[voice_sel])
+
+
+func voice_play_selected() -> float:
+	var ids := voice_ids()
+	if ids.is_empty():
+		return -1.0
+	return voice.say(str(ids[clampi(voice_sel, 0, ids.size() - 1)]))
+
+
+func _draw_voice(y: float) -> void:
+	y = _line(y, "GRAHAM VOICE BROWSER  (local authored clips · no cloud speech)", Color(1, 1, 0.3))
+	if voice == null or voice.index == null:
+		_line(y, "GrahamVoice autoload not available")
+		return
+	var dg := voice.diagnostics()
+	var c: Dictionary = dg.counts
+	y = _line(y, "approved %d · development %d · missing %d · playing: %s · dev TTS fallback: %s (used %d) · bus: %s" % [c.approved, c.development, c.missing,
+		dg.playing if dg.playing != "" else "-", "on" if dg.dev_tts_fallback else "off", dg.fallbacks, GrahamVoiceService.BUS], Color(1, 0.8, 0.4))
+	y += 6.0
+	var ids := voice_ids()
+	for i in ids.size():
+		var id: String = ids[i]
+		var st := voice.index.status(id)
+		var col := Color(0.55, 1, 0.55) if st == "approved" else (Color(1, 0.85, 0.4) if st == "development" else Color(1, 0.45, 0.4))
+		if i == voice_sel:
+			draw_rect(Rect2(24, y - 16, 1872, 21), Color(1, 1, 1, 0.12))
+		var mark := "▶" if dg.playing == id else (">" if i == voice_sel else " ")
+		y = _line(y, "%s %-22s %-11s %s" % [mark, id, st.to_upper(), voice.index.text(id)], col)
+	y += 8.0
+	var names: Array = voice.index.names.keys()
+	names.sort()
+	_line(y, "name bank: %s   recent missing: %s" % [", ".join(names), ", ".join(dg.missing)], Color(0.7, 0.85, 1))

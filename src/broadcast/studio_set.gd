@@ -97,23 +97,33 @@ func _text3d(text: String, font: Font, font_size: int, depth: float, pixel: floa
 # ---------------------------------------------------------------------------
 
 func _build_environment() -> void:
+	# Warm, soft, slightly flat 1990s studio light (reference): a big frontal key, gentle fill,
+	# coloured PAR spill on the set, a touch of haze. Graham's cut-out is unshaded (lit in the photo).
 	var we := WorldEnvironment.new()
 	var env := Environment.new()
 	env.background_mode = Environment.BG_COLOR
-	env.background_color = Color(0.06, 0.08, 0.2)
+	env.background_color = Color(0.05, 0.07, 0.16)
 	env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
-	env.ambient_light_color = Color(0.55, 0.52, 0.62)
-	env.ambient_light_energy = 0.55
+	env.ambient_light_color = Color(0.62, 0.58, 0.55)
+	env.ambient_light_energy = 0.42
 	env.tonemap_mode = Environment.TONE_MAPPER_FILMIC
+	env.tonemap_exposure = 1.05
+	env.glow_enabled = true
+	env.glow_intensity = 0.55
+	env.glow_bloom = 0.08
+	env.glow_hdr_threshold = 1.1
+	env.adjustment_enabled = true
+	env.adjustment_saturation = 0.92
+	env.adjustment_contrast = 1.02
 	we.environment = env
 	add_child(we)
 	var key := DirectionalLight3D.new()
-	key.light_color = Color(1.0, 0.92, 0.82)
-	key.light_energy = 0.75
-	key.rotation_degrees = Vector3(-38, 12, 0)
+	key.light_color = Color(1.0, 0.9, 0.78)
+	key.light_energy = 0.85
+	key.rotation_degrees = Vector3(-30, 8, 0)
 	add_child(key)
-	for spec in [[Vector3(-7, 5, 4), Color(1.0, 0.3, 0.75), 2.2], [Vector3(8, 5, 4), Color(0.2, 0.85, 0.95), 2.2],
-			[Vector3(0, 6, -3), Color(0.7, 0.4, 1.0), 2.5], [GRAHAM_POS + Vector3(0, 3.5, 3.5), Color(1.0, 0.85, 0.7), 1.6]]:
+	for spec in [[Vector3(-7, 5, 4), Color(1.0, 0.45, 0.7), 1.2], [Vector3(8, 5, 4), Color(0.4, 0.7, 1.0), 1.2],
+			[Vector3(2, 6, -2), Color(0.85, 0.75, 1.0), 1.4], [GRAHAM_POS + Vector3(0, 3.2, 2.5), Color(1.0, 0.88, 0.72), 1.5]]:
 		var l := OmniLight3D.new()
 		l.position = spec[0]
 		l.light_color = spec[1]
@@ -122,12 +132,43 @@ func _build_environment() -> void:
 		add_child(l)
 
 
+func _tex_mat(path: String, uv: Vector2 = Vector2.ONE, rough: float = 0.85, tint: Color = Color.WHITE) -> StandardMaterial3D:
+	var m := _mat(tint, rough)
+	m.albedo_texture = load(path)
+	m.uv1_scale = Vector3(uv.x, uv.y, 1)
+	m.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+	return m
+
+
+## Brushed "chrome" trim. True metal reads black without reflections to pick up, so this is a bright
+## polished grey with a hot specular and a faint self-lit sheen, which is how studio trim reads on tape.
+func _chrome() -> StandardMaterial3D:
+	var m := _mat(Color(0.8, 0.81, 0.84), 0.22, 0.25)
+	m.metallic_specular = 0.9
+	m.emission_enabled = true
+	m.emission = Color(0.55, 0.56, 0.6)
+	m.emission_energy_multiplier = 0.18
+	return m
+
+
+func _quad(size: Vector2, pos: Vector3, rot_y: float, mat: Material, parent: Node = self) -> MeshInstance3D:
+	var mi := MeshInstance3D.new()
+	var q := QuadMesh.new()
+	q.size = size
+	mi.mesh = q
+	mi.material_override = mat
+	mi.position = pos
+	mi.rotation.y = rot_y
+	parent.add_child(mi)
+	return mi
+
+
+## Studio C after the reference video (references/graham): sponge-painted sage flats on a painted
+## blue wall, chrome-banded MILDEW signs, coloured PAR cans, navy ring carpet. Textures are owned
+## (tools/art/gen_studio_ref.py). No broadcaster branding anywhere.
 func _build_set() -> void:
-	# Carpet floor
-	var carpet := _mat(Color.WHITE, 0.95)
-	carpet.albedo_texture = load("res://assets/textures/carpet.png")
-	carpet.uv1_scale = Vector3(6, 4, 1)
-	carpet.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+	var studio := "res://assets/textures/studio/"
+	var carpet := _tex_mat(studio + "carpet_navy.png", Vector2(15, 10), 0.95, Color(0.82, 0.82, 0.86))
 	var floor_mesh := MeshInstance3D.new()
 	var plane := PlaneMesh.new()
 	plane.size = Vector2(30, 20)
@@ -135,120 +176,173 @@ func _build_set() -> void:
 	floor_mesh.material_override = carpet
 	floor_mesh.position = Vector3(1, 0, 0)
 	add_child(floor_mesh)
-	# Stage riser with chrome nosing
-	_box(Vector3(17, 0.3, 5.5), Vector3(1.2, 0.15, -0.6), _mat(Color(0.08, 0.32, 0.36), 0.5))
-	_box(Vector3(17, 0.06, 0.08), Vector3(1.2, 0.31, 2.16), _mat(Color(0.9, 0.78, 0.4), 0.2, 0.9))
-	# Back wall: loud gradient panels in gold MDF frames
-	var bd := load("res://assets/shaders/backdrop.gdshader")
-	# Reference set (references/graham): curved sage-green MDF panels, chrome trim, blue cyc behind.
-	var palettes := [[Color(0.47, 0.6, 0.42), Color(0.3, 0.44, 0.3)], [Color(0.16, 0.24, 0.55), Color(0.08, 0.12, 0.34)],
-		[Color(0.52, 0.64, 0.46), Color(0.33, 0.46, 0.33)]]
+	var green := _tex_mat(studio + "sponge_green.png", Vector2(1, 2))
+	var blue := _tex_mat(studio + "wall_blue.png", Vector2(3, 1), 0.9, Color(0.62, 0.66, 0.8))
+	var cream := _tex_mat(studio + "cream.png", Vector2(1, 3))
+	var chrome := _chrome()
+	# Contestant riser (low, carpeted edge with a chrome nosing)
+	_box(Vector3(12.5, 0.24, 4.5), Vector3(3.4, 0.12, -0.2), _mat(Color(0.12, 0.2, 0.42), 0.7))
+	_box(Vector3(12.5, 0.05, 0.07), Vector3(3.4, 0.25, 2.05), chrome)
+	# Painted blue back wall across the whole studio
+	_quad(Vector2(30, 8), Vector3(1, 4, -7.2), 0.0, blue)
+	# Sage sponge-painted flats with chrome edges, gently curving round the contestant area
+	var green_dark := _tex_mat(studio + "sponge_green.png", Vector2(1, 2), 0.85, Color(0.78, 0.86, 0.78))
 	for i in 7:
-		var x := -8.4 + i * 2.8
-		var z := -4.6 - 0.5 * pow((x - 1.2) / 8.0, 2.0) * 4.0
-		var sm := ShaderMaterial.new()
-		sm.shader = bd
-		var pal: Array = palettes[i % palettes.size()]
-		sm.set_shader_parameter("top", pal[0])
-		sm.set_shader_parameter("bottom", pal[1])
-		var panel := MeshInstance3D.new()
-		var q := QuadMesh.new()
-		q.size = Vector2(2.6, 6.5)
-		panel.mesh = q
-		panel.material_override = sm
-		panel.position = Vector3(x, 3.25, z)
-		panel.rotation.y = -atan((x - 1.2) / 18.0)
-		add_child(panel)
-		var trim := _mat(Color(0.82, 0.84, 0.88), 0.18, 0.95)
-		_box(Vector3(2.7, 0.12, 0.12), panel.position + Vector3(0, 3.25, 0.06), trim)
-		_box(Vector3(0.12, 6.5, 0.12), panel.position + Vector3(-1.35, 0, 0.06), trim)
-	# Giant extruded chrome MILDEW logo
-	var logo := _text3d("MILDEW", _font_display, 260, 0.35, 0.012, _logo_mat, self)
-	logo.position = Vector3(1.2, 4.6, -3.8)
-	logo.rotation_degrees = Vector3(0, 0, 3)
-	var logo_shadow := _text3d("MILDEW", _font_display, 260, 0.05, 0.012, _mat(Color(0.05, 0.0, 0.08)), self)
-	logo_shadow.position = Vector3(1.32, 4.48, -4.05)
-	logo_shadow.rotation_degrees = Vector3(0, 0, 3)
-	# Mildew green "spores" stuck on the set (cheap foam decoration)
-	for i in 14:
-		var s := MeshInstance3D.new()
-		var sp := SphereMesh.new()
-		sp.radius = _rng.randf_range(0.08, 0.22)
-		sp.height = sp.radius * 2.0
-		s.mesh = sp
-		s.material_override = _mat(Color(0.45, 0.7, 0.25), 0.4, 0.0, 0.25)
-		s.position = Vector3(_rng.randf_range(-7.5, 9.5), _rng.randf_range(0.8, 6.0), -4.5)
-		add_child(s)
-	# Curtains
-	var cm := _mat(Color.WHITE, 0.9)
-	cm.albedo_texture = load("res://assets/textures/curtain.png")
-	cm.uv1_scale = Vector3(2, 1, 1)
-	for side in [-1, 1]:
-		var c := MeshInstance3D.new()
-		var cq := QuadMesh.new()
-		cq.size = Vector2(4.0, 7.5)
-		c.mesh = cq
-		c.material_override = cm
-		c.position = Vector3(1.2 + side * 10.6, 3.75, -3.0)
-		c.rotation.y = -side * 0.6
-		add_child(c)
-	# Lighting trusses with lamp cans
-	var truss := _mat(Color(0.15, 0.15, 0.17), 0.5, 0.6)
-	_box(Vector3(20, 0.25, 0.25), Vector3(1.2, 7.2, 1.5), truss)
-	_box(Vector3(20, 0.25, 0.25), Vector3(1.2, 7.2, -2.0), truss)
-	for i in 9:
-		var lamp_col: Color = [Color(1, 0.3, 0.7), Color(0.2, 0.9, 1.0), Color(1, 0.85, 0.4)][i % 3]
-		_box(Vector3(0.35, 0.45, 0.35), Vector3(-7.5 + i * 2.2, 6.85, 1.5), _mat(Color(0.1, 0.1, 0.1)))
-		_box(Vector3(0.26, 0.05, 0.26), Vector3(-7.5 + i * 2.2, 6.6, 1.5), _mat(lamp_col, 0.3, 0.0, 3.0))
-	# Plastic plants in pots
-	for px in [-7.6, 9.8]:
-		_box(Vector3(0.7, 0.8, 0.7), Vector3(px, 0.7, 1.4), _mat(Color(0.75, 0.6, 0.3), 0.4, 0.3))
-		for k in 7:
-			var leaf := MeshInstance3D.new()
-			var lm := SphereMesh.new()
-			lm.radius = 0.35
-			lm.height = 1.2
-			leaf.mesh = lm
-			leaf.material_override = _mat(Color(0.18, 0.55, 0.22), 0.2)
-			leaf.position = Vector3(px + _rng.randf_range(-0.35, 0.35), 1.5 + _rng.randf_range(0.0, 0.9), 1.4 + _rng.randf_range(-0.3, 0.3))
-			leaf.rotation = Vector3(_rng.randf_range(-0.6, 0.6), _rng.randf(), _rng.randf_range(-0.6, 0.6))
-			add_child(leaf)
-	# Graham's mark: curved green MILDEW sign behind him (as in the reference set) and a low
-	# sage lectern in front whose top hides the cut-out's crop line.
-	var sign_mat := _mat(Color(0.5, 0.62, 0.44), 0.7)
-	var sign := MeshInstance3D.new()
+		var x := -1.4 + i * 1.95
+		var z := -4.4 - 0.18 * pow((x - 3.4) / 3.0, 2.0)
+		var rot := -atan((x - 3.4) / 14.0)
+		var flat := _box(Vector3(1.96, 4.0, 0.12), Vector3(x, 2.0, z), green if i % 2 == 0 else green_dark)
+		flat.rotation.y = rot
+		_box(Vector3(0.05, 4.0, 0.16), Vector3(x - 0.98, 2.0, z + 0.02), chrome).rotation.y = rot
+		_box(Vector3(1.98, 0.08, 0.18), Vector3(x, 4.02, z + 0.02), chrome).rotation.y = rot
+	# Big MILDEW sign over the contestants (same artwork as Graham's)
+	_sign(Vector3(3.4, 5.0, -4.1), Vector2(5.4, 2.0))
+	# Lighting trusses with PAR cans and coloured lenses (they appear at the top of Graham's shot too)
+	var truss := _mat(Color(0.12, 0.12, 0.13), 0.45, 0.7)
+	_box(Vector3(18, 0.18, 0.18), Vector3(2.0, 6.6, 1.2), truss)
+	for i in 10:
+		_par_can(Vector3(-6.0 + i * 1.75, 6.3, 1.2), PAR_COLOURS[i % PAR_COLOURS.size()], Vector3(-35, 0, 0))
+	_build_presenter_area(green, blue, cream, chrome)
+
+
+const PAR_COLOURS := [Color(1.0, 0.85, 0.25), Color(0.25, 0.55, 1.0), Color(1.0, 0.3, 0.55), Color(1.0, 0.97, 0.9),
+	Color(0.15, 0.15, 0.15), Color(1.0, 0.3, 0.55), Color(0.25, 0.55, 1.0), Color(0.35, 1.0, 0.45)]
+
+
+## A sign: sponge-painted face with the lettering baked in, chrome bands top and bottom. With
+## wrap > 0 the outer 15% each side folds forward (the reference sign wraps round the presenter).
+func _sign(centre: Vector3, size: Vector2, rot_y: float = 0.0, wrap: float = 0.0) -> Node3D:
+	var root := Node3D.new()
+	root.position = centre
+	root.rotation.y = rot_y
+	add_child(root)
+	var chrome := _chrome()
+	var parts := [[0.0, 1.0]] if wrap <= 0.0 else [[0.0, 0.15], [0.15, 0.85], [0.85, 1.0]]
+	for part in parts:
+		var u0: float = part[0]
+		var u1: float = part[1]
+		var w := size.x * (u1 - u0)
+		var seg := Node3D.new()
+		root.add_child(seg)
+		if wrap > 0.0 and u0 == 0.0:
+			seg.position = Vector3(-size.x * 0.35, 0, 0)
+			seg.rotation.y = wrap
+			seg.position += Vector3(-w * 0.5 * cos(wrap), 0, w * 0.5 * sin(wrap))
+		elif wrap > 0.0 and u1 == 1.0:
+			seg.position = Vector3(size.x * 0.35, 0, 0)
+			seg.rotation.y = -wrap
+			seg.position += Vector3(w * 0.5 * cos(wrap), 0, w * 0.5 * sin(wrap))
+		else:
+			seg.position = Vector3((u0 + u1 - 1.0) * 0.5 * size.x, 0, 0)
+		var face := _tex_mat("res://assets/textures/studio/sign_face.png", Vector2(u1 - u0, 1.0), 0.75)
+		face.uv1_offset = Vector3(u0, 0, 0)
+		_box(Vector3(w, size.y, 0.14), Vector3(0, 0, -0.08), _mat(Color(0.3, 0.38, 0.27), 0.8), seg)
+		_quad(Vector2(w, size.y), Vector3.ZERO, 0.0, face, seg)
+		for dy in [size.y * 0.5, -size.y * 0.5]:
+			_box(Vector3(w + 0.02, size.y * 0.055, 0.2), Vector3(0, dy, 0.0), chrome, seg)
+	return root
+
+
+## A PAR can on a yoke: black body, glowing coloured lens, a soft cone of coloured light.
+func _par_can(pos: Vector3, colour: Color, rot_deg: Vector3, scale_: float = 1.0) -> void:
+	var root := Node3D.new()
+	root.position = pos
+	root.rotation_degrees = rot_deg
+	root.scale = Vector3.ONE * scale_
+	add_child(root)
+	var body := MeshInstance3D.new()
 	var cyl := CylinderMesh.new()
-	cyl.top_radius = 3.2
-	cyl.bottom_radius = 3.2
-	cyl.height = 1.5
-	cyl.radial_segments = 48
-	sign.mesh = cyl
-	sign.material_override = sign_mat
-	sign.position = GRAHAM_POS + Vector3(0, 1.95, -3.75)
-	add_child(sign)
-	var chrome := _mat(Color(0.85, 0.86, 0.9), 0.15, 0.95)
-	for dy in [0.78, -0.78]:
-		var ring := MeshInstance3D.new()
-		var tor := TorusMesh.new()
-		tor.inner_radius = 3.16
-		tor.outer_radius = 3.3
-		tor.rings = 48
-		ring.mesh = tor
-		ring.material_override = chrome
-		ring.position = sign.position + Vector3(0, dy, 0)
-		add_child(ring)
-	var gold_letters := _mat(Color(0.98, 0.72, 0.22), 0.35, 0.3, 0.15)
-	var word := _text3d("MILDEW", _font_display, 72, 0.1, 0.006, gold_letters, self)
-	word.position = GRAHAM_POS + Vector3(0, 1.84, -0.47)
-	word.rotation_degrees = Vector3(0, 0, 2)
-	var word_shadow := _text3d("MILDEW", _font_display, 72, 0.03, 0.006, _mat(Color(0.45, 0.2, 0.05)), self)
-	word_shadow.position = word.position + Vector3(0.03, -0.035, -0.05)
-	word_shadow.rotation_degrees = Vector3(0, 0, 2)
-	var desk_mat := _mat(Color(0.46, 0.58, 0.42), 0.55)
-	_box(Vector3(1.9, 0.98, 0.7), GRAHAM_POS + Vector3(0, 0.49, 0.5), desk_mat)
-	_box(Vector3(2.0, 0.05, 0.8), GRAHAM_POS + Vector3(0, 1.0, 0.5), chrome)
-	var m := _text3d("M", _font_display, 160, 0.08, 0.004, _logo_mat, self)
-	m.position = GRAHAM_POS + Vector3(0, 0.55, 0.88)
+	cyl.top_radius = 0.13
+	cyl.bottom_radius = 0.15
+	cyl.height = 0.36
+	cyl.radial_segments = 20
+	body.mesh = cyl
+	body.material_override = _mat(Color(0.06, 0.06, 0.07), 0.4, 0.6)
+	body.rotation_degrees = Vector3(90, 0, 0)
+	root.add_child(body)
+	var lit := colour.v > 0.3
+	var lens := MeshInstance3D.new()
+	var disc := CylinderMesh.new()
+	disc.top_radius = 0.12
+	disc.bottom_radius = 0.12
+	disc.height = 0.02
+	disc.radial_segments = 20
+	lens.mesh = disc
+	lens.material_override = _mat(colour, 0.2, 0.0, 1.7 if lit else 0.0)
+	lens.rotation_degrees = Vector3(90, 0, 0)
+	lens.position = Vector3(0, 0, 0.19)
+	root.add_child(lens)
+	if lit:
+		var l := SpotLight3D.new()
+		l.light_color = colour
+		l.light_energy = 1.2
+		l.spot_range = 9.0
+		l.spot_angle = 22.0
+		l.position = Vector3(0, 0, 0.25)
+		root.add_child(l)
+
+
+## Graham's corner, built to the reference composition (cam1 medium shot): a sign 3.3 m behind
+## him, a row of PAR cans just inside the top of frame, angled green flats on the left, a cream
+## pillar with a red-framed monitor on the right, a chrome-rimmed round table at his waist and a
+## green box step. His low desk (top 0.72 m) hides the cut-out's crop line in wide shots.
+func _build_presenter_area(green: Material, blue: Material, cream: Material, chrome: Material) -> void:
+	var g := GRAHAM_POS
+	_quad(Vector2(9, 6), g + Vector3(0, 3, -4.7), 0.0, blue)                           # painted wall behind
+	_sign(g + Vector3(0, 1.55, -3.3), Vector2(2.5, 1.15), 0.0, deg_to_rad(32))
+	_box(Vector3(2.0, 0.96, 0.2), g + Vector3(0, 0.48, -3.42), green)                   # flat under the sign
+	_box(Vector3(5.2, 1.2, 0.1), g + Vector3(0, 3.45, -4.75), _mat(Color(0.015, 0.015, 0.025), 1.0))   # black lighting pelmet
+	_box(Vector3(5.2, 0.04, 0.14), g + Vector3(0, 2.86, -4.72), _chrome())
+	# lamp bar just inside the top of the frame
+	_box(Vector3(4.6, 0.06, 0.06), g + Vector3(0, 2.86, -4.6), _mat(Color(0.1, 0.1, 0.11), 0.4, 0.7))
+	var sign_spot := SpotLight3D.new()
+	sign_spot.light_color = Color(1.0, 0.9, 0.75)
+	sign_spot.light_energy = 2.2
+	sign_spot.spot_range = 8.0
+	sign_spot.spot_angle = 28.0
+	sign_spot.position = g + Vector3(0, 3.4, 0.5)
+	add_child(sign_spot)
+	sign_spot.look_at(g + Vector3(0, 1.5, -3.3), Vector3.UP)
+	var cols := [Color(1.0, 0.85, 0.25), Color(0.25, 0.55, 1.0), Color(1.0, 0.3, 0.55), Color(1.0, 0.97, 0.9),
+		Color(0.08, 0.08, 0.08), Color(1.0, 0.3, 0.55), Color(0.25, 0.55, 1.0), Color(0.35, 1.0, 0.45)]
+	for i in cols.size():
+		_par_can(g + Vector3(-1.75 + i * 0.5, 2.7, -4.6), cols[i], Vector3(-10, 0, 0), 0.62)
+	# angled green flats, left
+	var f1 := _box(Vector3(1.3, 3.2, 0.1), g + Vector3(-2.2, 1.6, -3.0), green)
+	f1.rotation.y = deg_to_rad(40)
+	var f2 := _box(Vector3(0.9, 2.6, 0.1), g + Vector3(-1.6, 1.3, -3.9), green)
+	f2.rotation.y = deg_to_rad(-10)
+	# cream pillar with a red-framed CRT monitor, right
+	_box(Vector3(0.9, 3.4, 0.6), g + Vector3(1.45, 1.7, -2.7), cream)
+	_box(Vector3(0.6, 0.5, 0.08), g + Vector3(1.3, 1.72, -2.37), _mat(Color(0.7, 0.12, 0.1), 0.35))
+	_box(Vector3(0.48, 0.38, 0.06), g + Vector3(1.3, 1.72, -2.33), _mat(Color(0.2, 0.22, 0.23), 0.15, 0.0, 0.25))
+	_box(Vector3(0.05, 3.4, 0.62), g + Vector3(0.98, 1.7, -2.7), chrome)
+	# round table behind him with a chrome rim, and a green box step
+	var tab := MeshInstance3D.new()
+	var tc := CylinderMesh.new()
+	tc.top_radius = 0.85
+	tc.bottom_radius = 0.85
+	tc.height = 1.0
+	tc.radial_segments = 40
+	tab.mesh = tc
+	tab.material_override = green
+	tab.position = g + Vector3(0, 0.5, -1.25)
+	add_child(tab)
+	var rim := MeshInstance3D.new()
+	var tor := TorusMesh.new()
+	tor.inner_radius = 0.84
+	tor.outer_radius = 0.885
+	tor.rings = 40
+	rim.mesh = tor
+	rim.material_override = chrome
+	rim.position = g + Vector3(0, 1.01, -1.25)
+	add_child(rim)
+	_box(Vector3(0.8, 0.42, 0.6), g + Vector3(-1.2, 0.21, -1.55), _mat(Color(0.12, 0.32, 0.22), 0.7))
+	# Graham's low desk: dark edge only just visible at the bottom of Camera 1, like the reference.
+	_box(Vector3(1.7, 0.7, 0.6), g + Vector3(0, 0.35, 0.45), _mat(Color(0.16, 0.17, 0.2), 0.5))
+	_box(Vector3(1.78, 0.04, 0.68), g + Vector3(0, 0.72, 0.45), chrome)
+	var m := _text3d("M", _font_display, 120, 0.06, 0.004, _logo_mat, self)
+	m.position = g + Vector3(0, 0.38, 0.76)
 
 
 ## Service corridor behind Studio C (recurring backstage location; docs/02 "Recurring rooms").
@@ -329,7 +423,9 @@ func _cam(name: String, pos: Vector3, target: Vector3, fov: float, handheld: boo
 
 func _build_cameras() -> void:
 	# Camera 1: Graham medium close-up (head, tie, cards, lectern edge at the bottom).
-	_cam("cam1", GRAHAM_POS + Vector3(0.04, 1.62, 2.75), GRAHAM_POS + Vector3(0, 1.47, 0), 22.0)
+	# Camera 1: Graham medium shot as in the reference — head near the top, cards at the bottom,
+	# the sign behind him and coloured PAR cans just inside the top of frame.
+	_cam("cam1", GRAHAM_POS + Vector3(0.02, 1.45, 2.45), GRAHAM_POS + Vector3(0, 1.40, 0), 24.0)
 	_cam("cam2", Vector3(-0.3, 4.4, 13.5), Vector3(-0.3, 2.3, -1.5), 56.0)
 	_cam("cam3", Vector3(-2.2, 2.3, 7.0), Vector3(3.4, 1.2, 0.6), 40.0, true)
 	_cam("cam4", Vector3(8.5, 0.9, 7.5), Vector3(0.5, 3.5, -3.5), 52.0, true)

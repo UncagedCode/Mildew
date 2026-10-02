@@ -57,6 +57,11 @@ Survey/Mouthfeel (CP4), Police Sketch (CP5), adverts and commercial break (CP8),
 
 ## Carried over from CP2
 
+- **Graham audio:** import the 19-line development library + 5 names: put the mp3s in
+  `tools/graham_factory/generated_audio/` (or any folder) and run `python tools/graham_factory/sync_godot.py [--source DIR]`;
+  approve reviewed takes with `--approve id…`. Audition on the TV via the Voice Browser. Re-generate drifting takes
+  only with `generate.py regenerate <id>` (no full-library regeneration).
+
 - Find licensed photos for `hole.bowling_ball` (finger holes) and `hole.golf_hole` (cup), then re-enable.
 - Human audition of synthesized stings/crowd audio.
 - Check the generated-image service terms for Graham cut-outs before any commercial release.
@@ -76,5 +81,6 @@ Install: `adb install -r mildew-0.1.0-cp2-debug.apk` (or sideload via a file man
    use the multiple choice. Check the photos look sharp and the pull-back is smooth.
 7. Mid-game, turn one phone's Wi-Fi off for ~10 s, then on: the TV holds with an honest banner and resumes.
 8. Press BACK on the remote → TRANSMISSION PAUSED → RESUME / END TRANSMISSION.
-9. Pause → DEVELOPER TOOLS → TOGGLE DIAGNOSTICS OVERLAY: note FPS on Graham's close-up, the Hole board and the scoreboard.
+9. Open `http://<tv-ip>:8080/dev` on a phone, enter the PIN shown under the TV's join panel: add bots, start a show,
+   watch the FPS pill during Graham's close-up, the Hole board and the scoreboard. (Pause → DEVELOPER TOOLS still works on the remote.)
 10. Report: install result (any signature/parse error?), FPS, whether TTS spoke, any phone browser that failed, anything that looked wrong.

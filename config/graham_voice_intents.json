@@ -1,0 +1,16 @@
+{
+ "_comment": "Intent -> authored Graham clips (D024). GrahamVoice.say_intent(intent, {mood}) picks an available clip, preferring ones whose moods include the current Graham mood. 'sequence' plays several ids back to back. Edit freely; no gameplay code changes needed.",
+ "welcome": [{"id": "welcome_01"}],
+ "first_question": [{"id": "question_01"}],
+ "question_six": [{"id": "question_six_01"}],
+ "correct_answer": [{"id": "correct_01"}, {"id": "reluctant_praise_01", "moods": ["irritated", "amused"]}],
+ "mystified": [{"id": "mystified_01"}],
+ "wrong_answer": [{"id": "wrong_01"}, {"id": "oh_dear_01"}, {"id": "insult_pathetic_01", "moods": ["irritated", "angry", "amused"]}],
+ "takes_lead": [{"id": "takes_lead_01"}],
+ "move_on": [{"id": "move_on_01"}],
+ "incident_stop": [{"id": "incident_stop_01"}],
+ "recovery": [{"id": "recovery_right_01"}, {"id": "and_were_back_01"}],
+ "back_from_break": [{"id": "and_were_back_01"}],
+ "off_air": [{"id": "off_air_still_on_01"}, {"id": "off_air_warning_01"}],
+ "sign_off": [{"sequence": ["closing_01", "closing_thanks_01", "closing_goodnight_01"]}]
+}

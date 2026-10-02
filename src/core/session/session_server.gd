@@ -56,6 +56,7 @@ func _init(p_cfg: MildewConfig, p_store: SaveStore, p_content: ContentDB, seed: 
 	content = p_content
 	director = Director.new(content, seed)
 	director.cfg = cfg
+	director.voice = GrahamVoiceIndex.shared()
 	if seed == 0:
 		_rng.randomize()
 	else:
@@ -335,6 +336,13 @@ func _on_say_name(conn_id: int, msg: Dictionary) -> void:
 		return  # ignore button-mashing; not an error
 	c.last_say = session_time
 	var line := director.line("graham", "pronounce", {"name": speech, "speech_name": speech})
+	var vidx := GrahamVoiceIndex.shared()
+	if not line.is_empty() and vidx.has_name(speech):
+		# Name bank (D024): Graham says exactly the recorded name; the subtitle matches the audio.
+		line["text"] = "%s." % speech.strip_edges().capitalize()
+		line["speech"] = line["text"]
+		line["audio"] = vidx.name_id(speech)
+		line["voice_name"] = ""
 	if not line.is_empty():
 		line["pronunciation_test"] = true
 		emit_say(line, speech_seconds(line))

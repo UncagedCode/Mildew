@@ -264,7 +264,18 @@
     key("YES, THAT'S ME", "ok plain", () => { send({ t: "create_profile", name: prof.name, claim: prof.id }); showMessage("RESTORING RECORDS", "WELCOME BACK."); });
     key("NO — DIFFERENT PERSON", "grey plain", () => { S.wizard.name = ""; wizardName("PLEASE USE A NAME WE CAN TELL APART (E.G. " + prof.name.toUpperCase() + " B)."); });
   }
+  // D024: Graham only says names he has a recording of (name bank). Unknown names skip the check;
+  // debug builds may still use the device voice as a flagged developer fallback.
+  function graham_knows(name) {
+    const n = String(name || "").trim().toLowerCase().replace(/[^\p{L}\p{N} '\-]/gu, "").trim();
+    return ((window.MILDEW_CONFIG || {}).voiceNames || []).includes(n);
+  }
   function wizardPronounce(first) {
+    const cfgv = window.MILDEW_CONFIG || {};
+    if (!graham_knows(S.wizard.speech) && !cfgv.devTts) {
+      if (first && graham_knows(S.wizard.name)) { S.wizard.speech = S.wizard.name; }
+      else { return wizardAvatar(); }   // nothing to check: Graham will read it from his cards
+    }
     clear();
     lcd.appendChild(el("div", "sub", "PRONUNCIATION CHECK"));
     lcd.appendChild(el("div", "big", "LISTEN TO YOUR TELEVISION."));
@@ -272,7 +283,11 @@
     lcd.appendChild(el("div", "sub", "PRESENTER WILL SAY: \"" + S.wizard.speech.toUpperCase() + "\""));
     if (first) send({ t: "say_name", speech: S.wizard.speech });
     key("YES", "ok plain", () => wizardAvatar());
-    key("NO — SPELL IT HOW IT SOUNDS", "grey plain", () => wizardSpell());
+    if (cfgv.devTts && !graham_knows(S.wizard.speech)) lcd.appendChild(el("div", "sub warn", "DEVELOPER BUILD: SYSTEM VOICE, NOT GRAHAM."));
+    if (cfgv.devTts) key("NO — SPELL IT HOW IT SOUNDS", "grey plain", () => wizardSpell());
+    // Rejecting Graham's recording: store a speech form that matches no recording ("-name"), so he
+    // never says the wrong name for this contestant. The displayed name is unaffected.
+    else key("NO — THAT'S NOT IT", "grey plain", () => { S.wizard.speech = "-" + S.wizard.name; wizardAvatar(); });
     key("SAY IT AGAIN", "grey plain small", () => send({ t: "say_name", speech: S.wizard.speech }));
   }
   function wizardSpell() {

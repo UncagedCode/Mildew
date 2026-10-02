@@ -39,6 +39,9 @@ blinks, breathing, mouth cycle and TV editing that cuts away while he keeps talk
 | Photographic Graham (D021/D022) | VERIFIED (render) | `tools/art/import_graham_cutouts.py`, `config/graham_cutouts.json`, `graham_presenter.gd`, `studio_set.gd` | `test_graham`, gallery `docs/testing/graham_gallery.jpg`, tour | 25 semantic states; dev gallery (F11/F12) |
 | TV editing grammar | IMPLEMENTED | `presenter.gd` `_shot_graham_line`, `config/graham_shots.json` | tour | speech continues over cutaways/graphics |
 | Subtitle placement over game graphics | VERIFIED | `graphics_layer.gd` `bottom_busy` | tour | |
+| Phone dev panel (D023) | VERIFIED | `src/net/mildew_host.gd` (dev socket/PIN/state), `src/app/main.gd` `_dev_remote`, `devpanel/dev.html` | LAN scenario (20 checks), Chromium `dev_panel_ui.mjs` (10) | debug builds only; `/dev` + TV PIN |
+| Graham local voice (D024) | IMPLEMENTED (no audio yet) | `src/audio/graham_voice_service.gd` (autoload `GrahamVoice`), `src/core/voice/graham_voice_index.gd`, `config/graham_voice_index.json`, `config/graham_voice_intents.json`, `default_bus_layout.tres`, `content/graham/lines/voice_dev.json`, `tools/graham_factory/sync_godot.py` | `test_graham_voice` (9 tests), factory Python tests (9) | 24 ids indexed (19 lines + 5 names), all `missing` until the mp3s are supplied; then `development` |
+| Studio restyle after reference (D025) | IMPLEMENTED | `studio_set.gd`, `tools/art/gen_studio_ref.py`, `assets/textures/studio/` | side-by-side renders vs reference, tour | Camera 1 matches the reference composition |
 | APK | IMPLEMENTED | `build/mildew-0.1.0-cp2-debug.apk` | signature, manifest, pack listing | **device install pending** |
 
 **CP2 gate:** full Hole game lobby→scoreboard ✅ · 2–8 simulation ✅ · no repeat within game ✅ · APK ✅ (container) ·
@@ -93,7 +96,10 @@ reconnect works ✅ · server rejects invalid actions ✅ · APK runs on target 
 - Photographic Graham in the 3D studio on all cameras; dev Graham gallery.
 - Viewer Information Service: picture credits for every real photo.
 
+- Phone dev panel at `http://<tv>:8080/dev` (debug builds, PIN on the TV): bots, start/pause, speed, forcing, overlay, Graham voice browser, live Director feed.
+
 ## Partially working
+- Graham's authored voice: system complete, but no clips are in the repo yet (factory output is git-ignored). Until imported, Graham is subtitle-only in release builds; debug builds read missing lines with the device voice, marked `[DEV TTS]`.
 - Graham voice: device offline TTS (untested on device).
 - Graham motion excerpts only in plate mode (cut mode has stills + compositing animation).
 - Same-name verification vote (D014). Android TV banner art (D008).
@@ -129,6 +135,7 @@ Unchanged from CP1 (verified in container); Hole adds `lock`/`pass` actions. Rea
 - Approved factual items: 0 (Hole reveal facts are light; CP3 brings sourced factual content). Validation errors: 0.
 
 ## Art/audio status
+- Studio C restyled after the Graham reference video (D025): wrap-round sponge-painted sign (Fraunces OFL lettering, baked), PAR cans, green flats, cream pillar + red-framed monitor, chrome-rimmed table, navy ring carpet, warmer grade.
 - Graham: photographic alpha cut-outs (user-supplied, generated), composited — provisional pending licence review.
 - Hole imagery: real licensed photos. Studio: restyled set (sage/blue panels, chrome, curved MILDEW sign) — procedural.
 - Audio: synthesized sting/crowd/servo/mic pop — provisional, not human-auditioned.

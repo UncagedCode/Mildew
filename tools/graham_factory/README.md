@@ -116,3 +116,19 @@ Godot should ask for semantic dialogue intents. Game logic must not know about E
 The generator deliberately keeps utterances short to reduce v4 repetition glitches. If an output contains a doubled word, use `regenerate <id>`; the rest of the library remains untouched.
 
 A future optional local transcription QA pass can be added using an offline Whisper implementation without consuming cloud credits.
+
+## Getting approved audio into the game (`sync_godot.py`)
+
+```sh
+python sync_godot.py                          # copy generated_audio/<id>.mp3 into the game, rebuild the index
+python sync_godot.py --source ~/storage/downloads/graham   # or any folder of <id>.mp3 files
+python sync_godot.py --approve correct_01 name_aaron        # promote reviewed takes to release status
+python sync_godot.py --check                  # report only
+```
+
+Clips land in `assets/audio/graham/` and are listed in `config/graham_voice_index.json`
+(`missing` / `development` / `approved`). New or changed takes are always `development` until
+approved. The game plays them through `GrahamVoice.say(id)` / `say_name(name)`; it never contacts
+ElevenLabs. Lines in `content/graham/lines/voice_dev.json` reference these ids and must match the
+manifest text exactly (the content validator enforces it). Debug builds have a Voice Browser
+(pause → DEVELOPER TOOLS → VOICE BROWSER, or the phone `/dev` panel).

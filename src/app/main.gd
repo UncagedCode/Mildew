@@ -131,6 +131,7 @@ func _build_presentation() -> void:
 	voice = VoiceService.new()
 	add_child(voice)
 	voice.enabled = bool(store.get_setting("voice", true))
+	_apply_voice_settings()
 	view.gfx.subtitles_enabled = bool(store.get_setting("subtitles", true))
 	presenter = Presenter.new()
 	presenter.studio = view.studio
@@ -144,6 +145,7 @@ func _build_presentation() -> void:
 	presenter.attach(host)
 	dev = DevOverlay.new()
 	dev.host = host
+	dev.voice = _graham_voice()
 	dev.graham = view.graham
 	dev.visible = false
 	root.add_child(dev)
@@ -221,6 +223,28 @@ func _viewer_items() -> Array:
 	return items
 
 
+func _graham_voice() -> GrahamVoiceService:
+	return get_node_or_null("/root/GrahamVoice") as GrahamVoiceService
+
+
+func _apply_voice_settings() -> void:
+	var g := _graham_voice()
+	if g == null:
+		return
+	g.enabled = bool(store.get_setting("voice", true))
+	g.dev_tts_fallback = dev_build and bool(store.get_setting("dev_tts_fallback", true))
+	if voice:
+		voice.graham = g
+
+
+func _voice_describe() -> String:
+	var g := _graham_voice()
+	if g == null or g.index == null:
+		return ""
+	var c: Dictionary = g.index.counts()
+	return "Recordings: %d approved, %d development, %d not yet recorded." % [c.approved, c.development, c.missing]
+
+
 func _settings_items() -> Array:
 	var inter := str(store.get_setting("interference", "standard_transmission"))
 	var labels := {"standard_transmission": "STANDARD TRANSMISSION", "supervised_transmission": "SUPERVISED TRANSMISSION", "clean_transmission": "CLEAN TRANSMISSION"}
@@ -228,12 +252,15 @@ func _settings_items() -> Array:
 		{"key": "interference", "label": "TRANSMISSION", "value": labels.get(inter, inter),
 			"desc": "Controls unexpected fictional broadcast interruptions, unusual controller messages and unsettling audiovisual events. Standard is the intended experience; Supervised reduces them; Clean suppresses them where possible. Real connection problems are always shown plainly."},
 		{"key": "subtitles", "label": "SUBTITLES", "value": "ON" if store.get_setting("subtitles", true) else "OFF", "desc": "Teletext-style subtitles for the presenter and announcer."},
-		{"key": "voice", "label": "PRESENTER VOICE", "value": "ON" if store.get_setting("voice", true) else "OFF", "desc": "Uses this device's offline text-to-speech: " + (voice.describe() if voice else "n/a")},
+		{"key": "voice", "label": "PRESENTER VOICE", "value": "ON" if store.get_setting("voice", true) else "OFF", "desc": "Graham's recorded voice. Lines he has no recording for are shown as subtitles. " + _voice_describe()},
 		{"key": "reset_players", "label": "RESET PLAYERS", "desc": "Deletes all contestant profiles on this television. Broadcast history is kept."},
 		{"key": "reset_history", "label": "RESET BROADCAST HISTORY", "desc": "Clears what this installation has seen (familiarity, history). Contestant profiles are kept."},
 		{"key": "reset_all", "label": "RESET MILDEW", "desc": "Erases everything: profiles, history and the installation itself. Cannot be undone."},
 		{"key": "back", "label": "BACK", "desc": ""},
 	]
+	if dev_build:
+		items.insert(3, {"key": "dev_tts_fallback", "label": "DEV: TTS FOR MISSING CLIPS", "value": "ON" if store.get_setting("dev_tts_fallback", true) else "OFF",
+			"desc": "Debug builds only. When Graham has no recording for a line, the device's system voice reads it, marked [DEV TTS] on screen. Never used in release builds."})
 	if _confirm != "":
 		for it in items:
 			if it.key == _confirm:
@@ -266,6 +293,10 @@ func _apply_setting(key: String, dir: int) -> bool:
 		"voice":
 			store.set_setting("voice", not bool(store.get_setting("voice", true)))
 			voice.enabled = bool(store.get_setting("voice", true))
+			_apply_voice_settings()
+		"dev_tts_fallback":
+			store.set_setting("dev_tts_fallback", not bool(store.get_setting("dev_tts_fallback", true)))
+			_apply_voice_settings()
 		"reset_players", "reset_history", "reset_all":
 			if dir != 0:
 				return false
@@ -445,6 +476,8 @@ func _refresh_pause() -> void:
 				{"key": "overlay", "label": "TOGGLE DIAGNOSTICS OVERLAY", "desc": "Network + Director state (also F3)."},
 				{"key": "gallery", "label": "GRAHAM GALLERY: NEXT STATE", "desc": "Cuts to Camera 1 and steps through every Graham state with its fallback chain (F11)."},
 				{"key": "graham_speak", "label": "GRAHAM: SPEECH BURST", "desc": "Plays the talking cycle on Camera 1 (F12)."},
+				{"key": "voice_browser", "label": "VOICE BROWSER", "value": dev.voice_ids()[dev.voice_sel] if not dev.voice_ids().is_empty() else "-",
+					"desc": "◀ ▶ choose a Graham clip, OK to play it. Missing clips are listed in red; nothing is synthesised."},
 				{"key": "back", "label": "BACK", "desc": ""},
 			]
 	sys.pause_selected = menu_sel
@@ -490,6 +523,15 @@ func _pause_input(up: bool, down: bool, left: bool, right: bool, ok: bool) -> vo
 				return
 			_settings_menu(sys)
 		"dev":
+			if key == "voice_browser":
+				dev.visible = true
+				dev.page = DevOverlay.VOICE_PAGE
+				if left or right:
+					dev.voice_step(-1 if left else 1)
+				elif ok:
+					dev.voice_play_selected()
+				_refresh_pause()
+				return
 			if not ok and key != "timescale":
 				return
 			_dev_action(key)
@@ -606,6 +648,29 @@ func _dev_remote(cmd: String, args: Dictionary) -> Dictionary:
 				return {"ok": false, "msg": "no TV display"}
 			_dev_action("graham_speak")
 			return {"ok": true, "msg": "speech burst"}
+		"voice_play", "voice_name", "voice_intent", "voice_stop", "voice_reload":
+			var g := _graham_voice()
+			if g == null:
+				return {"ok": false, "msg": "GrahamVoice not available"}
+			match cmd:
+				"voice_stop":
+					g.stop()
+					return {"ok": true, "msg": "stopped"}
+				"voice_reload":
+					g.reload_index()
+					return {"ok": true, "msg": "voice index reloaded: %s" % g.index.counts()}
+			var secs := -1.0
+			var what := str(args.get("value", ""))
+			match cmd:
+				"voice_play":
+					secs = g.say(what)
+				"voice_name":
+					secs = g.say_name(what)
+				"voice_intent":
+					secs = g.say_intent(what, {"mood": s.director.graham_mood})
+			if secs >= 0.0:
+				return {"ok": true, "msg": "playing %s (%.1f s)" % [what, secs]}
+			return {"ok": false, "msg": "no local clip for %s%s" % [what, " — dev TTS fallback used" if g.last_mode == "dev_tts" else ""]}
 		"restart":
 			# New broadcast with the same TV: end and immediately begin again (dev sockets reconnect).
 			call_deferred("_dev_restart")
@@ -622,7 +687,14 @@ func _dev_restart() -> void:
 
 
 func _dev_remote_state() -> Dictionary:
-	return {"screen": state, "fps": Engine.get_frames_per_second(), "overlay": dev.visible if dev != null else false, "overlay_page": dev.page if dev != null else 0,
+	var g := _graham_voice()
+	var vlist: Array = []
+	if g != null and g.index != null:
+		for id in g.index.ids():
+			vlist.append({"id": id, "status": g.index.status(id) if g.index.has_clip(id) else "missing", "text": g.index.text(id)})
+	return {"voice": g.diagnostics() if g != null else {}, "voice_list": vlist, "voice_names": g.index.names.keys() if g != null and g.index != null else [],
+		"voice_intents": g.intents.keys().filter(func(k): return not str(k).begins_with("_")) if g != null else [],
+		"screen": state, "fps": Engine.get_frames_per_second(), "overlay": dev.visible if dev != null else false, "overlay_page": dev.page if dev != null else 0,
 		"pause_open": _pause_open}
 
 

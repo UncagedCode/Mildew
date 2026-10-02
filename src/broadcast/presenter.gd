@@ -274,14 +274,18 @@ func _say(evt: Dictionary) -> void:
 	var text := str(evt.get("text", ""))
 	var dur := float(evt.get("duration", 2.0))
 	var sub_speaker := "test" if evt.get("pronunciation_test", false) else speaker
+	var spoken: Dictionary = voice.speak(speaker, str(evt.get("speech", text)), evt) if voice else {}
 	if not evt.get("silent", false):
 		var shown := text
 		if speaker == "announcer":
 			shown = "ANNOUNCER: " + text
 		elif speaker == "floor":
 			shown = "(OFF MIC) " + text
+		elif str(spoken.get("mode", "")) == "dev_tts":
+			shown = "[DEV TTS] " + text      # developer fallback must be obvious (D024)
+		# An authored clip may run longer than the estimated reading time.
+		dur = maxf(dur, float(spoken.get("seconds", -1.0)) + 0.4)
 		gfx.show_subtitle(shown, sub_speaker, dur)
-	voice.speak(speaker, str(evt.get("speech", text)), evt)
 	if speaker != "graham":
 		return
 	_shot_graham_line(evt, dur)

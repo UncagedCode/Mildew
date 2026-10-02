@@ -1,0 +1,43 @@
+[gd_resource type="AudioBusLayout" load_steps=5 format=3]
+
+[sub_resource type="AudioEffectHighPassFilter" id="AudioEffectHighPassFilter_graham"]
+resource_name = "HighPass"
+cutoff_hz = 130.0
+
+[sub_resource type="AudioEffectLowPassFilter" id="AudioEffectLowPassFilter_graham"]
+resource_name = "LowPass"
+cutoff_hz = 7200.0
+resonance = 0.6
+
+[sub_resource type="AudioEffectEQ6" id="AudioEffectEQ6_graham"]
+resource_name = "EQ6"
+band_db/32_hz = -12.0
+band_db/100_hz = -3.0
+band_db/320_hz = 1.0
+band_db/1000_hz = 2.0
+band_db/3200_hz = 2.5
+band_db/10000_hz = -6.0
+
+[sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_graham"]
+resource_name = "Compressor"
+threshold = -18.0
+ratio = 4.0
+gain = 3.0
+attack_us = 2000.0
+release_ms = 120.0
+
+[resource]
+bus/1/name = &"Graham"
+bus/1/solo = false
+bus/1/mute = false
+bus/1/bypass_fx = false
+bus/1/volume_db = 0.0
+bus/1/send = &"Master"
+bus/1/effect/0/effect = SubResource("AudioEffectHighPassFilter_graham")
+bus/1/effect/0/enabled = true
+bus/1/effect/1/effect = SubResource("AudioEffectEQ6_graham")
+bus/1/effect/1/enabled = true
+bus/1/effect/2/effect = SubResource("AudioEffectLowPassFilter_graham")
+bus/1/effect/2/enabled = true
+bus/1/effect/3/effect = SubResource("AudioEffectCompressor_graham")
+bus/1/effect/3/enabled = true

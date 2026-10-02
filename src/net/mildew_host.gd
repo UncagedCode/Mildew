@@ -170,6 +170,10 @@ func _config_js() -> Dictionary:
 		"wsPort": ws.port, "protocol": Protocol.VERSION,
 		"pingMs": cfg.i("network.client_ping_interval_ms", 2000),
 		"maxName": cfg.i("lobby.max_display_name_chars", 16),
+		# D024: names Graham has a recording for; the pronunciation check only runs for these
+		# (or, in debug builds, through the flagged system-TTS developer fallback).
+		"voiceNames": GrahamVoiceIndex.shared().spoken_names(),
+		"devTts": dev_enabled and bool(store.get_setting("dev_tts_fallback", true)) if store else false,
 	})
 	return {"status": 200, "type": "text/javascript; charset=utf-8", "body": js.to_utf8_buffer()}
 

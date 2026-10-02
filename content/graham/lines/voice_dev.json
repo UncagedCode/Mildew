@@ -1,0 +1,182 @@
+{
+ "pack_id": "graham.voice_dev",
+ "content_kind": "graham_lines",
+ "speaker": "graham",
+ "_comment": "Graham lines that have authored recordings (D024). Text MUST equal tools/graham_factory/manifest.json exactly so subtitles match the audio; 'audio' is a semantic voice id or an ordered list. The validator enforces this. The Director prefers these when the clips are present.",
+ "items": [
+  {
+   "id": "g.voice.welcome_01.1",
+   "category": "show_open",
+   "text": "Good evening, ladies and gentlemen, and welcome once again to Mildew!",
+   "audio": "welcome_01",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.voice.correct_01.1",
+   "category": "single_correct",
+   "text": "That is correct. Well done.",
+   "audio": "correct_01",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.voice.correct_01.2",
+   "category": "hole_single_correct",
+   "text": "That is correct. Well done.",
+   "audio": "correct_01",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.voice.wrong_01.1",
+   "category": "all_wrong",
+   "text": "No. I'm afraid that's completely wrong.",
+   "audio": "wrong_01",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.voice.wrong_01.2",
+   "category": "hole_nobody_right",
+   "text": "No. I'm afraid that's completely wrong.",
+   "audio": "wrong_01",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.voice.oh_dear_01.1",
+   "category": "all_wrong",
+   "text": "Oh dear.",
+   "audio": "oh_dear_01",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.voice.oh_dear_01.2",
+   "category": "hole_nobody_right",
+   "text": "Oh dear.",
+   "audio": "oh_dear_01",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.voice.oh_dear_01.3",
+   "category": "hole_early_wrong",
+   "text": "Oh dear.",
+   "audio": "oh_dear_01",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.voice.insult_pathetic_01.1",
+   "category": "all_wrong",
+   "text": "That was absolutely pathetic.",
+   "audio": "insult_pathetic_01",
+   "enabled": true,
+   "quality_status": "draft",
+   "moods": [
+    "irritated",
+    "angry",
+    "amused"
+   ]
+  },
+  {
+   "id": "g.voice.insult_pathetic_01.2",
+   "category": "hole_nobody_right",
+   "text": "That was absolutely pathetic.",
+   "audio": "insult_pathetic_01",
+   "enabled": true,
+   "quality_status": "draft",
+   "moods": [
+    "irritated",
+    "angry",
+    "amused"
+   ]
+  },
+  {
+   "id": "g.voice.mystified_01.1",
+   "category": "fast_correct",
+   "text": "I don't know how you knew that.",
+   "audio": "mystified_01",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.voice.mystified_01.2",
+   "category": "hole_first_glance",
+   "text": "I don't know how you knew that.",
+   "audio": "mystified_01",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.voice.reluctant_praise_01.1",
+   "category": "hole_all_correct",
+   "text": "Well done. Eventually.",
+   "audio": "reluctant_praise_01",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.voice.reluctant_praise_01.2",
+   "category": "some_correct",
+   "text": "Well done. Eventually.",
+   "audio": "reluctant_praise_01",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.voice.move_on_01.1",
+   "category": "nobody_answered",
+   "text": "Right. Let's just move on.",
+   "audio": "move_on_01",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.voice.move_on_01.2",
+   "category": "hole_nobody_locked",
+   "text": "Right. Let's just move on.",
+   "audio": "move_on_01",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.voice.recovery_right_01.1",
+   "category": "incident_feedback",
+   "text": "Right...",
+   "audio": "recovery_right_01",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.voice.recovery_right_01.2",
+   "category": "incident_mic_pop",
+   "text": "Right...",
+   "audio": "recovery_right_01",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.voice.and_were_back_01.1",
+   "category": "reconnect_back",
+   "text": "And we're back!",
+   "audio": "and_were_back_01",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.voice.closing_sequence.1",
+   "category": "sign_off",
+   "text": "Ladies and gentlemen, that is all we have time for tonight. Thank you for joining us... and good night.",
+   "audio": [
+    "closing_01",
+    "closing_thanks_01",
+    "closing_goodnight_01"
+   ],
+   "enabled": true,
+   "quality_status": "draft"
+  }
+ ]
+}

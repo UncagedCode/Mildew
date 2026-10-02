@@ -122,6 +122,17 @@
   </section>
 
   <section>
+    <h2>GRAHAM VOICE <span id="vcount" class="dim"></span></h2>
+    <div class="body">
+      <p class="hint">Local recordings only — tap to play on the TV. Green = approved, amber = development, red = not recorded yet.</p>
+      <div class="row"><input id="vname" placeholder="Test a name (e.g. Aaron)" style="flex:1 1 140px;min-height:44px;font:inherit;background:var(--chip);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:8px"><button id="vnamebtn">SAY NAME</button></div>
+      <div class="row"><select id="vintent"><option value="">Play an intent…</option></select><button data-cmd="voice_stop">STOP</button><button data-cmd="voice_reload">RELOAD INDEX</button></div>
+      <p class="hint" id="vstatus"></p>
+      <div class="feed" id="voicelist" style="max-height:340px"></div>
+    </div>
+  </section>
+
+  <section>
     <h2>DIRECTOR</h2>
     <div class="body">
       <div class="kv" id="director"></div>
@@ -192,6 +203,9 @@
   $("addbots").onclick = () => send("add_bot", { personality: $("persona").value, count: Number($("botcount").value) });
   $("restart").onclick = () => { if (confirm("End this broadcast and open a fresh lobby?")) send("restart"); };
   $("item").onchange = (e) => send("force", { key: "hole_item", value: e.target.value });
+  $("vnamebtn").onclick = () => { const v = $("vname").value.trim(); if (v) send("voice_name", { value: v }); };
+  $("vintent").onchange = (e) => { if (e.target.value) send("voice_intent", { value: e.target.value }); e.target.value = ""; };
+  $("voicelist").addEventListener("click", (e) => { const r = e.target.closest("[data-vid]"); if (r) send("voice_play", { value: r.dataset.vid }); });
   $("incident").onchange = (e) => send("force", { key: "incident", value: e.target.value });
 
   function chipRow(el, values, labelFn, onTap) {
@@ -207,7 +221,7 @@
     chipRow($("speeds"), cat.timescales, (v) => "×" + v, (v) => send("timescale", { value: v }));
     chipRow($("variants"), ["", ...cat.hole_variants], (v) => v || "auto", (v) => send("force", { key: "hole_variant", value: v }));
     chipRow($("interf"), cat.interference, (v) => v.split("_")[0].toUpperCase(), (v) => send("interference", { value: v }));
-    chipRow($("pages"), [0, 1, 2, 3], (v) => ["NETWORK", "DIRECTOR", "LOG", "GALLERY"][v], (v) => send("overlay", { page: v }));
+    chipRow($("pages"), [0, 1, 2, 3, 4], (v) => ["NET", "DIRECTOR", "LOG", "GALLERY", "VOICE"][v], (v) => send("overlay", { page: v }));
     const it = $("item"); it.length = 1;
     for (const i of cat.hole_items) it.add(new Option(`${i.label}${i.tier > 1 ? "  (tier " + i.tier + ")" : ""}`, i.id));
     const inc = $("incident"); inc.length = 1;
@@ -241,6 +255,14 @@
       `<td class="${p.connected ? "" : "dim"}">${p.connected ? p.status.toLowerCase() : "offline"}</td><td class="n">${p.score.toLocaleString("en-GB")}</td></tr>`).join("")
       || '<tr><td class="dim">Nobody yet.</td></tr>';
 
+    const v = app.voice || {}, vc = v.counts || {};
+    $("vcount").textContent = `${vc.approved || 0} approved · ${vc.development || 0} dev · ${vc.missing || 0} missing`;
+    $("vstatus").textContent = `Playing: ${v.playing || "—"} · dev TTS fallback ${v.dev_tts_fallback ? "on" : "off"} (used ${v.fallbacks || 0}) · names: ${(app.voice_names || []).join(", ")}`;
+    const vi = $("vintent");
+    if (vi.length === 1 && (app.voice_intents || []).length) for (const k of app.voice_intents) vi.add(new Option(k.replace(/_/g, " "), k));
+    const colour = { approved: "var(--green)", development: "var(--amber)", missing: "var(--red)" };
+    $("voicelist").innerHTML = (app.voice_list || []).map((x) =>
+      `<div data-vid="${esc(x.id)}" style="cursor:pointer;padding:8px 0"><b style="color:${colour[x.status] || "var(--dim)"}">${x.id === v.playing ? "▶ " : ""}${esc(x.id)}</b> <span class="dim">${esc(x.status)}</span><br>${esc(x.text)}</div>`).join("");
     const d = st.director;
     const kv = [["Graham", d.mood], ["Pressure", d.pressure.toFixed(2)], ["Degradation", d.degradation.toFixed(2)],
       ["Complicity", d.complicity.toFixed(2)], ["Familiarity", "tier " + d.familiarity], ["Show time", Math.round(d.show_time) + " s"],

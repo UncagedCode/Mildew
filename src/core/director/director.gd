@@ -39,6 +39,7 @@ var broadcasts_played := 0
 var force := {}                    # dev overrides: hole_variant, hole_item, game
 var games_this_show: Array = []
 var incidents: IncidentEngine
+var voice: GrahamVoiceIndex = null   # authored Graham clips (D024); voiced lines are preferred when present
 
 # --- Hidden axes (0..1). Never shown to players. ---
 var degradation := 0.0
@@ -352,11 +353,11 @@ func line(speaker: String, category: String, ctx: Dictionary = {}) -> Dictionary
 	var choice_pool := fresh if not fresh.is_empty() else eligible
 	var total := 0.0
 	for it in choice_pool:
-		total += float(it.get("weight", 1.0))
+		total += _line_weight(it)
 	var roll := rng.randf() * total
 	var picked: Dictionary = choice_pool[0]
 	for it in choice_pool:
-		roll -= float(it.get("weight", 1.0))
+		roll -= _line_weight(it)
 		if roll <= 0.0:
 			picked = it
 			break
@@ -375,7 +376,17 @@ func line(speaker: String, category: String, ctx: Dictionary = {}) -> Dictionary
 		"pid": str(ctx.get("pid", "")),
 		"silent": bool(picked.get("silent", false)),
 		"audio": picked.get("audio", null),
+		# A line that opens with the contestant's name can at least have the name spoken (name bank).
+		"voice_name": str(ctx.get("speech_name", ctx.get("name", ""))) if str(picked.get("text", "")).begins_with("{name}") else "",
 	}
+
+
+## Lines with a real recording are preferred over subtitle-only alternatives in the same pool.
+func _line_weight(it: Dictionary) -> float:
+	var w := float(it.get("weight", 1.0))
+	if voice != null and it.has("audio") and voice.all_present(GrahamVoiceIndex.line_ids(it.get("audio"))):
+		w *= float(cfg.get_value("voice.authored_line_weight_boost", 3.0)) if cfg else 3.0
+	return w
 
 
 func _fill(text: String, ctx: Dictionary, speech: bool) -> String:
