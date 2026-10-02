@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "product": {
+    "name": "Mildew",
+    "engine_family": "Godot 4.x",
+    "primary_host": "Android TV",
+    "secondary_host_note": "Preserve host portability for possible Xbox Series X Developer Mode or other stronger host later.",
+    "min_players": 2,
+    "max_players": 8,
+    "controller_orientation": "portrait",
+    "offline_core_multiplayer": true
+  },
+  "broadcast": {
+    "reference_output_width": 1920,
+    "reference_output_height": 1080,
+    "fictional_program_aspect_ratio": "4:3",
+    "target_normal_fps": 60,
+    "acceptable_heavy_transition_fps": 30,
+    "standard_duration_minutes": 45,
+    "quick_duration_minutes": 20,
+    "full_duration_minutes_min": 90,
+    "intentional_overrun_minutes_max": 5,
+    "midpoint_break_seconds": 90,
+    "reconnect_timeout_seconds": 30
+  },
+  "scoring": {
+    "typical_min_points": 500,
+    "typical_max_points": 1500,
+    "finale_multiplier": 1.5,
+    "speed_bonus_fraction_max": 0.15,
+    "rot_decreases_during_session": false
+  },
+  "hole": {
+    "lock_stage_1_points": 1500,
+    "lock_stage_2_points": 1100,
+    "lock_stage_3_points": 750,
+    "final_multiple_choice_points": 500,
+    "unlock_after_lock": false
+  },
+  "guess_the_genitals": {
+    "standard_correct_points": 1000,
+    "speed_bonus_max": 150,
+    "hard_or_final_points_min": 1250,
+    "hard_or_final_points_max": 1500,
+    "human_genital_content_allowed": false
+  },
+  "interference": {
+    "default_player_setting": "standard_transmission",
+    "standard_transmission_means_full_repertoire": true,
+    "catalogue_hidden_incidents": false,
+    "phone_message_history": false
+  },
+  "content_quality_states": [
+    "placeholder",
+    "draft",
+    "reviewed",
+    "approved"
+  ],
+  "familiarity_tiers": [1, 2, 3, 4, 5],
+  "incident_tiers": [0, 1, 2, 3, 4],
+  "poc_content_targets": {
+    "guess_the_genitals": [15, 20],
+    "hole": [20, 30],
+    "real_or_mildew": [30, 40],
+    "mildew_survey": [40, 60],
+    "police_sketch": [30, 40],
+    "do_not_press_that": [8, 12],
+    "basement": [6, 8],
+    "mouthfeel": [40, 60],
+    "adverts": [8, 12],
+    "recurring_rooms": [4, 5]
+  },
+  "long_term_content_targets": {
+    "guess_the_genitals": [60, 100],
+    "hole": [80, 120],
+    "real_or_mildew_min": 150,
+    "mildew_survey_min": 200,
+    "police_sketch_min": 150,
+    "do_not_press_that": [30, 50],
+    "basement": [25, 40],
+    "mouthfeel_min": 200,
+    "adverts_min": 20
+  }
+}

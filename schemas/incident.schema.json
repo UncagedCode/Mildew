@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "mildew://schemas/incident.schema.json",
+  "title": "Mildew Broadcast Incident",
+  "type": "object",
+  "required": ["id", "enabled", "quality_status", "tier", "target", "rarity_weight", "cooldown_seconds"],
+  "properties": {
+    "id": {"type": "string", "minLength": 1},
+    "enabled": {"type": "boolean"},
+    "quality_status": {"enum": ["placeholder", "draft", "reviewed", "approved"]},
+    "tier": {"type": "integer", "minimum": 0, "maximum": 4},
+    "target": {
+      "enum": ["tv_video", "tv_audio", "single_phone", "multiple_phones", "all_phones", "graham", "announcer", "audience", "scoreboard", "room", "game_injection", "mixed"]
+    },
+    "rarity_weight": {"type": "number", "minimum": 0},
+    "cooldown_seconds": {"type": "number", "minimum": 0},
+    "min_players": {"type": "integer", "minimum": 2, "maximum": 8},
+    "max_players": {"type": "integer", "minimum": 2, "maximum": 8},
+    "minimum_familiarity": {"type": "integer", "minimum": 1, "maximum": 5},
+    "degradation_range": {"$ref": "#/$defs/range01"},
+    "pressure_range": {"$ref": "#/$defs/range01"},
+    "complicity_range": {"$ref": "#/$defs/range01"},
+    "requires_flags": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "forbids_flags": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "sets_flags": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "allowed_games": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "forbidden_games": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "follow_up_pool": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "persistence": {"enum": ["none", "session", "player", "installation"]},
+    "installation_seed_specific": {"type": "boolean"},
+    "payload": {"type": "object"}
+  },
+  "$defs": {
+    "range01": {
+      "type": "object",
+      "properties": {
+        "min": {"type": "number", "minimum": 0, "maximum": 1},
+        "max": {"type": "number", "minimum": 0, "maximum": 1}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": true
+}

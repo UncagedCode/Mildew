@@ -1,0 +1,13 @@
+# Godot
+.godot/
+*.import.tmp
+/android/
+# Build outputs (APKs are attached to releases / delivered separately; see PROGRESS.md)
+/build/
+*.apk
+*.aab
+*.idsig
+# Test artefacts
+/tests/output/
+__pycache__/
+node_modules/

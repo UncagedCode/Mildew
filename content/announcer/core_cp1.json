@@ -1,0 +1,15 @@
+{
+  "pack_id": "announcer.core_cp1",
+  "content_kind": "announcer_lines",
+  "speaker": "announcer",
+  "_comment": "Announcer stage 0 (purely functional continuity voice). Calm, formal, reassuring. Later stages are gated by installation announcer_stage.",
+  "items": [
+    {"id": "a.show_open.1", "category": "show_open", "text": "This is Mildew.", "enabled": true, "quality_status": "draft", "stage": 0},
+    {"id": "a.show_open.2", "category": "show_open", "text": "And now on Sallow, it's Mildew.", "enabled": true, "quality_status": "draft", "stage": 0},
+    {"id": "a.sponsor.1", "category": "sponsor", "text": "Mildew is sponsored tonight by DampAway.", "enabled": true, "quality_status": "draft", "stage": 0},
+    {"id": "a.sponsor.2", "category": "sponsor", "text": "Mildew is brought to you by MEAT-O. Now containing meat.", "enabled": true, "quality_status": "draft", "stage": 0},
+    {"id": "a.paused.1", "category": "paused", "text": "Transmission will resume shortly.", "enabled": true, "quality_status": "draft", "stage": 0},
+    {"id": "a.closedown.1", "category": "closedown", "text": "That was Mildew. Thank you for watching.", "enabled": true, "quality_status": "draft", "stage": 0},
+    {"id": "a.standby.1", "category": "standby", "text": "Please stand by.", "enabled": true, "quality_status": "draft", "stage": 0}
+  ]
+}

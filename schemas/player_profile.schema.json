@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "mildew://schemas/player_profile.schema.json",
+  "title": "Mildew Local Player Profile",
+  "type": "object",
+  "required": ["profile_id", "display_name", "speech_name", "avatar", "games_played", "wins", "lifetime_rot"],
+  "properties": {
+    "profile_id": {"type": "string", "minLength": 1},
+    "display_name": {"type": "string", "minLength": 1, "maxLength": 32},
+    "speech_name": {"type": "string", "minLength": 1, "maxLength": 64},
+    "avatar": {"type": "object"},
+    "games_played": {"type": "integer", "minimum": 0},
+    "wins": {"type": "integer", "minimum": 0},
+    "lifetime_rot": {"type": "integer", "minimum": 0},
+    "memorable_outcomes": {"type": "array", "items": {"type": "object"}},
+    "selected_prizes": {"type": "array", "items": {"type": "object"}},
+    "persistent_titles": {"type": "array", "items": {"type": "object"}},
+    "graham_traces": {"type": "array", "items": {"type": "object"}},
+    "schema_version": {"type": "integer", "minimum": 1}
+  },
+  "additionalProperties": true
+}

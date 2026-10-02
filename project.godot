@@ -1,0 +1,48 @@
+; Mildew — Godot 4.7.2-stable project (engine version pinned; see DECISIONS.md)
+config_version=5
+
+[application]
+
+config/name="Mildew"
+config/description="A forgotten late-1990s British game show that somehow still broadcasts."
+config/version="0.1.0-cp1"
+run/main_scene="res://src/app/main.tscn"
+config/features=PackedStringArray("4.7", "GL Compatibility")
+config/icon="res://assets/textures/icon.png"
+config/quit_on_go_back=false
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/show_image=false
+run/low_processor_mode=false
+
+[audio]
+
+general/text_to_speech=true
+
+[debug]
+
+gdscript/warnings/untyped_declaration=0
+gdscript/warnings/inferred_declaration=0
+gdscript/warnings/unsafe_property_access=0
+gdscript/warnings/unsafe_method_access=0
+gdscript/warnings/unsafe_call_argument=0
+gdscript/warnings/integer_division=0
+gdscript/warnings/narrowing_conversion=0
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/window_width_override=1280
+window/size/window_height_override=720
+window/stretch/mode="canvas_items"
+window/stretch/aspect="keep"
+window/handheld/orientation=4
+window/vsync/vsync_mode=1
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
+anti_aliasing/quality/msaa_3d=1
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "mildew://schemas/game_content_common.schema.json",
+  "title": "Mildew Common Game Content Fields",
+  "type": "object",
+  "required": ["id", "enabled", "quality_status", "familiarity_tier", "content_tags", "min_players", "max_players"],
+  "properties": {
+    "id": {"type": "string", "minLength": 1},
+    "enabled": {"type": "boolean"},
+    "quality_status": {"enum": ["placeholder", "draft", "reviewed", "approved"]},
+    "familiarity_tier": {"type": "integer", "minimum": 1, "maximum": 5},
+    "content_tags": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "min_players": {"type": "integer", "minimum": 2, "maximum": 8},
+    "max_players": {"type": "integer", "minimum": 2, "maximum": 8},
+    "expected_duration_seconds": {"type": "integer", "minimum": 1},
+    "memory_candidate": {"type": "boolean"},
+    "recent_repeat_cooldown_sessions": {"type": "integer", "minimum": 0},
+    "director_tags": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "_comment": "Implementation/runtime tuning. Product-level values live in design_constants.json and must not be duplicated here.",
+  "network": {
+    "http_port": 8080,
+    "ws_port": 8081,
+    "port_search_span": 10,
+    "max_message_bytes": 4096,
+    "max_messages_per_second": 30,
+    "client_ping_interval_ms": 2000,
+    "client_silence_timeout_ms": 9000,
+    "http_request_timeout_ms": 10000,
+    "http_max_request_bytes": 8192,
+    "room_code_alphabet": "BCDFGHJKLMNPQRSTVWXZ",
+    "room_code_length": 4
+  },
+  "lobby": {
+    "disconnected_player_grace_seconds": 45,
+    "max_display_name_chars": 16,
+    "max_speech_name_chars": 40
+  },
+  "show": {
+    "rehearsal_question_count": 3,
+    "question_read_seconds": 3.0,
+    "question_answer_seconds": 20.0,
+    "question_lock_seconds": 1.4,
+    "question_reveal_seconds": 6.5,
+    "scoreboard_seconds": 8.0,
+    "opening_titles_seconds": 9.0,
+    "sting_seconds": 4.5,
+    "intro_seconds_per_player": 3.6,
+    "words_per_second_speech": 2.6,
+    "speech_padding_seconds": 0.7
+  },
+  "dev": {
+    "fake_player_names": ["Horse Bot", "Kevin (Bot)", "Dawn (Bot)", "Big Clive (Bot)", "Sandra (Bot)", "Neville (Bot)", "Trish (Bot)", "Moth (Bot)"]
+  }
+}

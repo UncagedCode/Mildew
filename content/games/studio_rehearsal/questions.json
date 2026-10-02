@@ -1,0 +1,88 @@
+{
+  "pack_id": "studio_rehearsal.core",
+  "content_kind": "multiple_choice",
+  "game_id": "studio_rehearsal",
+  "_comment": "Checkpoint 1 'one simple test question' set. Fictional, non-factual warm-up material presented as a studio rehearsal; scored with the normal 1,000 + capped speed bonus scale. Not one of the eight launch games.",
+  "items": [
+    {
+      "id": "rehearsal.cow",
+      "enabled": true, "quality_status": "draft", "familiarity_tier": 1,
+      "content_tags": ["fictional", "rehearsal", "animals", "short"],
+      "min_players": 2, "max_players": 8,
+      "prompt": "Which of these is a cow?",
+      "options": ["A cow", "A kettle", "Some wet bread", "A tax disc"],
+      "correct": 0, "points": 1000,
+      "reveal_line": "It was the cow. It's always the cow."
+    },
+    {
+      "id": "rehearsal.badger_fridge",
+      "enabled": true, "quality_status": "draft", "familiarity_tier": 1,
+      "content_tags": ["fictional", "rehearsal", "household", "food", "short"],
+      "min_players": 2, "max_players": 8,
+      "prompt": "Which of these should NOT be kept in a fridge?",
+      "options": ["Milk", "Cheese", "A live badger", "Yoghurt"],
+      "correct": 2, "points": 1000,
+      "reveal_line": "The badger. He's fine. He's in the green room."
+    },
+    {
+      "id": "rehearsal.which_graham",
+      "enabled": true, "quality_status": "draft", "familiarity_tier": 1,
+      "content_tags": ["fictional", "rehearsal", "studio_world", "short"],
+      "min_players": 2, "max_players": 8,
+      "prompt": "Which of these is Graham Mildew?",
+      "options": ["A man", "Graham Mildew", "Another man", "A coat"],
+      "correct": 1, "points": 1000,
+      "reveal_line": "It was me. I'm Graham Mildew. I've been here the whole time."
+    },
+    {
+      "id": "rehearsal.horse_legs",
+      "enabled": true, "quality_status": "draft", "familiarity_tier": 1,
+      "content_tags": ["fictional", "rehearsal", "animals", "short"],
+      "min_players": 2, "max_players": 8,
+      "prompt": "How many legs does a horse have?",
+      "options": ["Four", "Three", "Nine", "It depends on the horse"],
+      "correct": 0, "points": 1000,
+      "reveal_line": "Four. Write that down."
+    },
+    {
+      "id": "rehearsal.programme_name",
+      "enabled": true, "quality_status": "draft", "familiarity_tier": 1,
+      "content_tags": ["fictional", "rehearsal", "studio_world", "short"],
+      "min_players": 2, "max_players": 8,
+      "prompt": "What is the name of this programme?",
+      "options": ["Damp", "Spore Wars", "Mildew", "Moist"],
+      "correct": 2, "points": 1000,
+      "reveal_line": "Mildew. It says it on the wall. It's quite a large wall."
+    },
+    {
+      "id": "rehearsal.sandwich",
+      "enabled": true, "quality_status": "draft", "familiarity_tier": 1,
+      "content_tags": ["fictional", "rehearsal", "food", "short"],
+      "min_players": 2, "max_players": 8,
+      "prompt": "Which of these belongs in a sandwich?",
+      "options": ["A hamster", "A ham radio", "Ham", "Hamlet"],
+      "correct": 2, "points": 1000,
+      "reveal_line": "Ham. Just ham. Don't overthink it."
+    },
+    {
+      "id": "rehearsal.wet",
+      "enabled": true, "quality_status": "draft", "familiarity_tier": 1,
+      "content_tags": ["fictional", "rehearsal", "household", "short"],
+      "min_players": 2, "max_players": 8,
+      "prompt": "Which of these is wet?",
+      "options": ["A brick", "Sand", "A dry flannel", "Water"],
+      "correct": 3, "points": 1000,
+      "reveal_line": "Water. Our researchers checked."
+    },
+    {
+      "id": "rehearsal.studio_floor",
+      "enabled": true, "quality_status": "draft", "familiarity_tier": 1,
+      "content_tags": ["fictional", "rehearsal", "studio_world", "short"],
+      "min_players": 2, "max_players": 8,
+      "prompt": "What should you do if you find a damp patch in the studio?",
+      "options": ["Tell the floor manager", "Lick it", "Name it", "Ignore it and smile"],
+      "correct": 3, "points": 1000,
+      "reveal_line": "Ignore it and smile. That's the house style."
+    }
+  ]
+}

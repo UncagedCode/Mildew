@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "mildew://schemas/basement_case.schema.json",
+  "title": "Mildew Basement Case",
+  "type": "object",
+  "required": ["id", "enabled", "quality_status", "setup", "evidence", "theories", "reveal", "min_players", "max_players"],
+  "properties": {
+    "id": {"type": "string"},
+    "enabled": {"type": "boolean"},
+    "quality_status": {"enum": ["placeholder", "draft", "reviewed", "approved"]},
+    "setup": {"type": "string"},
+    "min_players": {"type": "integer", "minimum": 2, "maximum": 8},
+    "max_players": {"type": "integer", "minimum": 2, "maximum": 8},
+    "evidence": {"type": "array", "minItems": 2, "items": {"type": "object", "required": ["id", "text"], "properties": {"id": {"type": "string"}, "text": {"type": "string"}, "reliability": {"enum": ["reliable", "unreliable", "ambiguous"]}, "unique_sensitive": {"type": "boolean"}}}},
+    "investigations": {"type": "array", "items": {"type": "object"}},
+    "theories": {"type": "array", "minItems": 2, "items": {"type": "object", "required": ["id", "text", "score_fraction"], "properties": {"id": {"type": "string"}, "text": {"type": "string"}, "score_fraction": {"type": "number", "minimum": 0, "maximum": 1}}}},
+    "reveal": {"type": "string"},
+    "partially_unresolved": {"type": "boolean"},
+    "recurring_world_refs": {"type": "array", "items": {"type": "string"}},
+    "incident_hooks": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": true
+}
