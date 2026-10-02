@@ -436,6 +436,10 @@ func _build_cameras() -> void:
 	_cam("cam4", Vector3(8.5, 0.9, 7.5), Vector3(0.5, 3.5, -3.5), 52.0, true)
 	_cam("cam_logo", Vector3(1.4, 2.6, 6.5), Vector3(1.4, 3.3, -3.8), 50.0, true)
 	_cam("cam_podium", Vector3(2, 2, 4), Vector3(2, 1.2, 0.9), 26.0)
+	# Audience reaction cutaways exist only as photographic plates (D026); these cameras just give the
+	# cut grammar a name to cut to (the 3D view behind them is never shown while a plate is mapped).
+	_cam("cam_audience", Vector3(1, 3, 14), Vector3(1, 2, 20), 40.0)
+	_cam("cam_audience_meh", Vector3(1, 3, 14), Vector3(1, 2, 20), 40.0)
 
 
 func _build_titles_rig() -> void:

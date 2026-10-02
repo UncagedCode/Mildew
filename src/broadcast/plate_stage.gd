@@ -29,6 +29,7 @@ var _drift_t := 0.0
 var _drift_len := 5.0
 var _fg: Control
 var _glow: Control
+var _soft: Texture2D                   # radial falloff for glows (no visible rings)
 
 
 func _ready() -> void:
@@ -49,6 +50,18 @@ func _ready() -> void:
 	_glow.material = add
 	_glow.draw.connect(_draw_glow)
 	add_child(_glow)
+	var g := Gradient.new()
+	g.set_color(0, Color(1, 1, 1, 1))
+	g.set_color(1, Color(1, 1, 1, 0))
+	g.add_point(0.35, Color(1, 1, 1, 0.45))
+	var gt := GradientTexture2D.new()
+	gt.gradient = g
+	gt.fill = GradientTexture2D.FILL_RADIAL
+	gt.fill_from = Vector2(0.5, 0.5)
+	gt.fill_to = Vector2(1.0, 0.5)
+	gt.width = 128
+	gt.height = 128
+	_soft = gt
 	if studio != null and not studio.cut_made.is_connected(_on_cut):
 		studio.cut_made.connect(_on_cut)
 		_on_cut(str(studio.current_cam))
@@ -242,9 +255,8 @@ func _draw_glow() -> void:
 		var col := Color(1.0, 0.75, 0.3, 0.55)
 		_glow.draw_polygon(pts, PackedColorArray([col, col, col, col]))
 		var cen := (pts[0] + pts[2]) * 0.5
-		var r := pts[0].distance_to(pts[1]) * 0.45
-		for i in 4:
-			_glow.draw_circle(cen, r * (1.0 - i * 0.2), Color(1.0, 0.7, 0.25, 0.05))
+		var r := pts[0].distance_to(pts[1]) * 0.8
+		_glow.draw_texture_rect(_soft, Rect2(cen - Vector2(r, r * 0.6), Vector2(r * 2, r * 1.2)), false, Color(1.0, 0.75, 0.35, 0.35))
 	# Rig lights: a living bloom with the odd tired flicker.
 	for i in spec.get("lights", []).size():
 		var li: Dictionary = spec.lights[i]
@@ -254,8 +266,8 @@ func _draw_glow() -> void:
 		var flick := 0.85 + 0.15 * sin(_t * 1.7 + i * 2.1)
 		if fmod(_t + i * 3.7, 23.0) < 0.12:
 			flick *= 0.35
-		for k in 5:
-			_glow.draw_circle(p, r * (1.0 + k * 0.7), Color(col, 0.06 * flick))
+		var rr := r * 3.2
+		_glow.draw_texture_rect(_soft, Rect2(p - Vector2(rr, rr), Vector2(rr * 2, rr * 2)), false, Color(col, 0.22 * flick))
 
 
 func _draw_hotspots(spec: Dictionary) -> void:

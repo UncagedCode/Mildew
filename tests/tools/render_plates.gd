@@ -4,8 +4,8 @@ extends SceneTree
 ## Writes assets/studio/plates/standin_*.jpg (+ _fg.png foreground layers) and config/studio_plates.json.
 ## Real photographic plates replace these entries (same schema; hotspots authored by hand).
 
-const OUT := "res://assets/studio/plates/"
-const MAP := "res://config/studio_plates.json"
+const OUT := "res://assets/studio/plates_standin/"
+const MAP := "res://config/studio_plates_standin.json"   # never overwrites the real plate map
 const W := 1440.0
 const H := 1080.0
 var view: ProgrammeView

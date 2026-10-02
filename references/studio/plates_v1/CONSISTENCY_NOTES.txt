@@ -1,0 +1,31 @@
+MILDEW studio plates — batch v1
+
+All eleven files were derived from one generated contact sheet so the colour palette,
+set dressing and general studio identity remain as consistent as possible.
+
+Known consistency / fidelity limits:
+- cam1_presenter_empty was generated alongside cam1_presenter_with_graham rather than
+  produced as a true pixel-level object-removal edit. Its framing is very close, but
+  not guaranteed pixel-identical.
+- The original attached Graham/reference frame was not available as a usable image
+  target in this chat, so Graham here is an approximation rather than a locked likeness.
+- Fine set details can drift slightly between plates: exact podium panel/lamp ordering,
+  sign proportions/swoosh, small lighting-rig details, and prop placement.
+- The source contact-sheet cells were wider than 4:3. To preserve the full set content,
+  each plate was normalized to exactly 1600×1200 by extending edge material above/below
+  rather than cropping away podiums or furniture.
+- Audience and backstage plates are intentionally different spaces but use the same
+  late-1990s production-world treatment.
+
+Files:
+cam1_presenter_with_graham.png
+cam1_presenter_empty.png
+wide_master.png
+podium_row.png
+podium_closeup.png
+presenter_wide.png
+audience_clapping.png
+audience_unimpressed.png
+floor_wrong_camera.png
+corridor.png
+corridor_doorway.png

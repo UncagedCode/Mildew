@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bi1u3eojt6p8d"
-path="res://.godot/imported/standin_floor_wrong_camera.jpg-7d44d926fe57dcab4630f30d95c4a664.ctex"
+uid="uid://bq4tuuhkra1ya"
+path="res://.godot/imported/presenter_wide_fg.png-ddde3d093b2d8868a2751b8d4199d824.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/studio/plates/standin_floor_wrong_camera.jpg"
-dest_files=["res://.godot/imported/standin_floor_wrong_camera.jpg-7d44d926fe57dcab4630f30d95c4a664.ctex"]
+source_file="res://assets/studio/plates/presenter_wide_fg.png"
+dest_files=["res://.godot/imported/presenter_wide_fg.png-ddde3d093b2d8868a2751b8d4199d824.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cfopjiqph7rh1"
-path="res://.godot/imported/standin_corridor.jpg-90a9b800da26052eb665fd210798302d.ctex"
+uid="uid://bxwp2rsp2stso"
+path="res://.godot/imported/wide_master.jpg-49e153d834f7f90e91c3146e17e6a08a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/studio/plates/standin_corridor.jpg"
-dest_files=["res://.godot/imported/standin_corridor.jpg-90a9b800da26052eb665fd210798302d.ctex"]
+source_file="res://assets/studio/plates/wide_master.jpg"
+dest_files=["res://.godot/imported/wide_master.jpg-49e153d834f7f90e91c3146e17e6a08a.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvwqah1cyi6la"
-path="res://.godot/imported/standin_wide_master.jpg-44562dd72db63f2c11ebaaba897badf7.ctex"
+uid="uid://bhp24ts2xcqkw"
+path="res://.godot/imported/cam1_presenter_empty.jpg-81c2c166c24e963b61e12e5d801d5fa7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/studio/plates/standin_wide_master.jpg"
-dest_files=["res://.godot/imported/standin_wide_master.jpg-44562dd72db63f2c11ebaaba897badf7.ctex"]
+source_file="res://assets/studio/plates/cam1_presenter_empty.jpg"
+dest_files=["res://.godot/imported/cam1_presenter_empty.jpg-81c2c166c24e963b61e12e5d801d5fa7.ctex"]
 
 [params]
 

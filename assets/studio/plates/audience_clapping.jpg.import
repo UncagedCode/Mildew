@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xd41scdk3ce5"
-path="res://.godot/imported/standin_podium_closeup.jpg-8717914c63e903cbf4bd71a0ec6e190f.ctex"
+uid="uid://dy1eu5axxrmxb"
+path="res://.godot/imported/audience_clapping.jpg-34c84823972b627c54ef520d02b8d11d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/studio/plates/standin_podium_closeup.jpg"
-dest_files=["res://.godot/imported/standin_podium_closeup.jpg-8717914c63e903cbf4bd71a0ec6e190f.ctex"]
+source_file="res://assets/studio/plates/audience_clapping.jpg"
+dest_files=["res://.godot/imported/audience_clapping.jpg-34c84823972b627c54ef520d02b8d11d.ctex"]
 
 [params]
 

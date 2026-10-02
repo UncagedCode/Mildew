@@ -23,3 +23,6 @@ Third-party imagery: HOLE uses permissively licensed Wikimedia Commons photograp
   Status per clip in `config/graham_voice_index.json`. **Generated-audio licence/redistribution terms must be
   confirmed before release.** No runtime cloud speech.
 - `tests/fixtures/voice/*.wav` — synthetic test tones (project-owned, tests only, not exported).
+
+## Studio plates (D026)
+- `assets/studio/plates/*` — prepared from the user-supplied ChatGPT batch `references/studio/plates_v1/` (AI-generated photoreal studio, audience and backstage plates). **Generated-image terms must be confirmed before release.** Audience plates depict invented, non-real people.

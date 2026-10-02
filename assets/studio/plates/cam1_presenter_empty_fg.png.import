@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvkn4o1xc2t0k"
-path="res://.godot/imported/standin_cam1.jpg-5bd8a12a8627b1828ea7c0661a18ae14.ctex"
+uid="uid://b61lhbyswuhbg"
+path="res://.godot/imported/cam1_presenter_empty_fg.png-55271c2b2613ff7a691f64228cb075f8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/studio/plates/standin_cam1.jpg"
-dest_files=["res://.godot/imported/standin_cam1.jpg-5bd8a12a8627b1828ea7c0661a18ae14.ctex"]
+source_file="res://assets/studio/plates/cam1_presenter_empty_fg.png"
+dest_files=["res://.godot/imported/cam1_presenter_empty_fg.png-55271c2b2613ff7a691f64228cb075f8.ctex"]
 
 [params]
 

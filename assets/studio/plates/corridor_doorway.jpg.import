@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://t4x3ehhgl0qd"
-path="res://.godot/imported/standin_presenter_wide_fg.png-f9b92bff6da8ff89ac09b77ba76be134.ctex"
+uid="uid://bi6i7dieddt07"
+path="res://.godot/imported/corridor_doorway.jpg-de2fe8a3beaaa6c715e22038f99a4bdb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/studio/plates/standin_presenter_wide_fg.png"
-dest_files=["res://.godot/imported/standin_presenter_wide_fg.png-f9b92bff6da8ff89ac09b77ba76be134.ctex"]
+source_file="res://assets/studio/plates/corridor_doorway.jpg"
+dest_files=["res://.godot/imported/corridor_doorway.jpg-de2fe8a3beaaa6c715e22038f99a4bdb.ctex"]
 
 [params]
 

@@ -245,10 +245,18 @@ func _hole_reaction(evt: Dictionary) -> void:
 			audio.applause("medium")
 		else:
 			audio.applause("small"))
+	var crowd_cam := ""
+	if not evt.get("studio_hole", false):
+		if first_glance > 0 or (right > 0 and right == outcome.size()):
+			crowd_cam = "cam_audience" if _rng.randf() < 0.45 else ""
+		elif right == 0:
+			crowd_cam = "cam_audience_meh" if _rng.randf() < 0.5 else ""
 	get_tree().create_timer(4.2 / scale).timeout.connect(func():
 		if host.session and host.session.phase == SessionServer.Phase.SHOW and hole.is_showing():
 			hole.hide_board()
 			_in_question = false
+			if crowd_cam != "" and _audience_cutaway(crowd_cam, 1.4 / scale):
+				return
 			studio.cut_to("cam1"))
 
 
@@ -433,6 +441,17 @@ func _incident(evt: Dictionary) -> void:
 				later.call(dur, func(): studio._do_cut(back))
 		"off_mic_cue", "wrong_name":
 			pass  # carried by the line itself
+
+
+## Audience reaction cutaway (photographic plate only), then back to Graham. False if unavailable.
+func _audience_cutaway(cam: String, seconds: float) -> bool:
+	if view == null or view.plates == null or view.plates.plate_for_camera(cam) == "":
+		return false
+	studio._do_cut(cam)
+	get_tree().create_timer(seconds).timeout.connect(func():
+		if studio.current_cam == cam:
+			studio.cut_to("cam1", false))
+	return true
 
 
 func _graphic_owns_frame() -> bool:

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bi5mji02qxph3"
-path="res://.godot/imported/standin_corridor_doorway.jpg-5b6bae7ff9000d7cb59efb064c18a9e7.ctex"
+uid="uid://b6aeocx6yhrjm"
+path="res://.godot/imported/podium_closeup.jpg-2a326b23ffd813a598ba5235ac9d8dc6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/studio/plates/standin_corridor_doorway.jpg"
-dest_files=["res://.godot/imported/standin_corridor_doorway.jpg-5b6bae7ff9000d7cb59efb064c18a9e7.ctex"]
+source_file="res://assets/studio/plates/podium_closeup.jpg"
+dest_files=["res://.godot/imported/podium_closeup.jpg-2a326b23ffd813a598ba5235ac9d8dc6.ctex"]
 
 [params]
 
