@@ -76,6 +76,8 @@ func start() -> void:
 		final_stage = 3
 		stage_lengths[3] = cfg.f("hole.open_final_stage_seconds", 11.0)
 	duration = 1.0e9
+	var pc: int = session._connected_active_count()
+	var inc: Dictionary = session.director.incidents.opportunity("hole_round_start", {"game": "hole", "players": pc})
 	session.emit_tv({"e": "hole_round", "qid": qid, "item_id": item.get("id"), "image": item.get("image", ""),
 		"stages": item.get("stages", []), "round": round_no, "of": round_count, "variant": variant,
 		"studio_hole": bool(item.get("studio_hole", false)), "final_stage": final_stage})
@@ -84,7 +86,16 @@ func start() -> void:
 		cat = "hole_scale_intro"
 	elif variant == "open":
 		cat = "hole_open_intro"
-	say_at(0.2, "graham", cat, {"count": round_no})
+	var t0 := 0.2
+	if not inc.is_empty():
+		# e.g. the wrong-camera cut to a dark service doorway: "Not that one." Then straight on.
+		SegIncident.emit_incident(session, inc, inc.get("params", {}))
+		var lt := 0.4 + float(inc.get("duration", 1.5))
+		for l in inc.get("lines", []):
+			lt = say_at(lt, str(l[0]), str(l[1])) + 0.2
+		t0 = lt + 0.2
+		intro_t += t0
+	say_at(t0, "graham", cat, {"count": round_no})
 	session.push_screens()
 
 
@@ -179,6 +190,12 @@ func _begin_stage(s: int) -> void:
 	if is_net:
 		evt["options"] = net
 	session.emit_tv(evt)
+	if s >= 2 and s < 4:
+		var inc: Dictionary = session.director.incidents.opportunity("hole_stage", {"game": "hole", "players": participants.size()})
+		if not inc.is_empty():
+			SegIncident.emit_incident(session, inc, inc.get("params", {}))
+			for l in inc.get("lines", []):
+				say_at(elapsed + 0.6, str(l[0]), str(l[1]))
 	if s >= 2:
 		var cat := "hole_safety_net" if is_net else ("hole_last_look" if s == final_stage else "hole_stage_more")
 		say_at(elapsed + 0.15, "graham", cat, {"points": fmt_points(stage_points(s))})
@@ -259,7 +276,30 @@ func _reveal() -> void:
 		t = say_at(t, "graham", reaction.category, reaction.ctx) + 0.3
 	for extra in reaction.get("extra", []):
 		t = say_at(t, "graham", extra.category, extra.ctx) + 0.3
+	if not item.get("studio_hole", false):
+		var correct_pids: Array = results.filter(func(r): return r.correct).map(func(r): return r.pid)
+		var ictx := {"game": "hole", "players": participants.size(), "nobody_right": "yes" if correct_pids.is_empty() and not locks.is_empty() else ""}
+		if not correct_pids.is_empty():
+			ictx["pid"] = correct_pids[0]
+			ictx["other_name"] = _wrong_name_for(str(correct_pids[0]))
+		var inc: Dictionary = session.director.incidents.opportunity("hole_reveal", ictx)
+		if not inc.is_empty():
+			var fire_at := 0.9 if inc.effect in ["wrong_audience_reaction", "mic_pop"] else t
+			at(fire_at, func(): SegIncident.emit_incident(session, inc, inc.get("params", {})))
+			for l in inc.get("lines", []):
+				t = say_at(maxf(t, fire_at + 0.3), str(l[0]), str(l[1]), ictx) + 0.3
 	reveal_end = elapsed + maxf(reveal_min, t + 0.6)
+
+
+## Graham's wrong name: another contestant's name, or a stock wrong name if there's nobody else.
+func _wrong_name_for(pid: String) -> String:
+	var others: Array = []
+	for p in session.active_players_sorted():
+		if p.player_id != pid:
+			others.append(p.display_name)
+	if not others.is_empty() and session.director.rng.randf() < 0.7:
+		return others[session.director.rng.randi_range(0, others.size() - 1)]
+	return ["Steve", "Clive", "Dawn", "Neil"][session.director.rng.randi_range(0, 3)]
 
 
 func _category_of(label: String) -> String:

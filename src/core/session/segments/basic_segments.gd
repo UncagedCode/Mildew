@@ -20,6 +20,8 @@ static func make(desc: Dictionary, session) -> Segment:
 			return SegHole.new(desc).setup(session)
 		"scores":
 			return SegScores.new(desc).setup(session)
+		"incident":
+			return SegIncident.new(desc).setup(session)
 		"sign_off":
 			return SegSignOff.new(desc).setup(session)
 	push_error("Unknown segment kind %s" % desc.get("kind"))

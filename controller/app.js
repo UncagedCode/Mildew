@@ -327,7 +327,11 @@
     switch (name) {
       case "lobby": return scrLobby(d);
       case "watch": return scrWatch(d.caption || "PLEASE WATCH YOUR TELEVISION");
-      case "get_ready": buzz(25); return scrWatch(d.caption || "QUESTION INCOMING", true);
+      case "get_ready": buzz(25); return scrWatch(d.caption || "QUESTION INCOMING", true, d.header);
+      case "hole_pick": return scrHolePick(d);
+      case "hole_locked": return scrHoleLocked(d);
+      case "hole_waiting": return scrWatch(d.caption || "WAITING FOR A BETTER LOOK", false, d.header);
+      case "hole_result": return scrHoleResult(d);
       case "question": return scrQuestion(d);
       case "locked": return scrLocked(d);
       case "result": return scrResult(d);
@@ -389,6 +393,94 @@
         send({ t: "answer", q: d.qid, c: i });
       }, caps[i]);
     });
+  }
+
+  // ---------------- HOLE ----------------
+  const fmt = (n) => Number(n || 0).toLocaleString("en-GB");
+  function holeTimer(d) {
+    const bar = el("div", "timer"); const fill = el("div"); bar.appendChild(fill); lcd.appendChild(bar);
+    const total = Math.max(1, d.total_ms || 8000), end = performance.now() + (d.remaining_ms || 0);
+    const tick = () => {
+      const left = Math.max(0, end - performance.now());
+      fill.style.transform = "scaleX(" + (left / total).toFixed(3) + ")";
+      if (left > 0) S.timerRAF = requestAnimationFrame(tick);
+    };
+    tick();
+  }
+  function scrHolePick(d) {
+    clear();
+    const look = d.safety_net ? "MULTIPLE CHOICE" : "LOOK " + d.stage + " OF " + (d.final_stage === 4 ? 3 : d.final_stage);
+    lcd.appendChild(el("div", "sub", (d.header || "HOLE") + " · " + look));
+    lcd.appendChild(el("div", "title", d.prompt || "WHAT IS THIS HOLE?"));
+    lcd.appendChild(el("div", "big", "LOCK NOW: " + fmt(d.points) + " PTS"));
+    holeTimer(d);
+    if (d.can_pass) lcd.appendChild(el("div", "sub", "WAIT FOR A WIDER LOOK AND IT'S WORTH " + fmt(d.next_points) + ". ONCE LOCKED, IT'S LOCKED."));
+    const lock = (i) => {
+      if (S.status.paused) { toast("TRANSMISSION IS ON HOLD."); return; }
+      for (const k of keys.querySelectorAll(".key")) k.disabled = true;
+      send({ t: "lock", q: d.qid, s: d.stage, c: i });
+      S.holeConfirm = null;
+    };
+    if (d.safety_net) {
+      buzz([30, 40, 30]);
+      const caps = ["A", "B", "C", "D"], cls = ["a", "b", "c", "d"];
+      (d.options || []).forEach((opt, i) => key(opt, cls[i], (btn) => { btn.classList.add("pressed"); lock(i); }, caps[i]));
+      return;
+    }
+    if (d.stage === 1) buzz([30, 40, 30]); else buzz(20);
+    // Pending confirmation survives a reveal advancing underneath it (points update).
+    const pend = S.holeConfirm;
+    if (pend && pend.qid === d.qid && (d.options || []).indexOf(pend.label) >= 0) return holeConfirm(d, pend.label, lock);
+    const grid = el("div", "keygrid"); keys.appendChild(grid);
+    (d.options || []).forEach((opt) => {
+      const b = el("button", "key small plain grey");
+      b.textContent = opt;
+      b.addEventListener("click", (ev) => { ev.preventDefault(); buzz(15); S.holeConfirm = { qid: d.qid, label: opt }; holeConfirm(d, opt, lock); });
+      grid.appendChild(b);
+    });
+    if (d.can_pass) key("SHOW ME MORE", "plain", (b) => { b.disabled = true; send({ t: "pass", q: d.qid, s: d.stage }); }).classList.add("d");
+  }
+  function holeConfirm(d, label, lock) {
+    clear();
+    lcd.appendChild(el("div", "sub", (d.header || "HOLE") + " · LOOK " + d.stage));
+    lcd.appendChild(el("div", "title", "LOCK IN"));
+    lcd.appendChild(el("div", "big", label.toUpperCase()));
+    lcd.appendChild(el("div", "title", "FOR " + fmt(d.points) + " PTS?"));
+    holeTimer(d);
+    lcd.appendChild(el("div", "sub warn", "NO TAKE-BACKS."));
+    key("YES — LOCK IT IN", "go plain", (b) => { b.classList.add("pressed"); lock((d.options || []).indexOf(label)); });
+    key("NO, GO BACK", "grey plain small", () => { S.holeConfirm = null; scrHolePick(d); });
+  }
+  function scrHoleLocked(d) {
+    clear();
+    S.holeConfirm = null;
+    lcd.appendChild(el("div", "sub", (d.header || "HOLE") + " · LOCKED AT " + (d.stage >= 4 ? "MULTIPLE CHOICE" : "LOOK " + d.stage)));
+    lcd.appendChild(el("div", "big", String(d.label || "").toUpperCase()));
+    lcd.appendChild(el("div", "title", "WORTH " + fmt(d.points) + " IF YOU'RE RIGHT"));
+    lcd.appendChild(el("div", "spacer"));
+    lcd.appendChild(el("div", "sub blinker", "NO TAKE-BACKS. WATCH THE TELEVISION"));
+  }
+  function scrHoleResult(d) {
+    clear();
+    const where = d.stage ? (d.stage >= 4 ? "MULTIPLE CHOICE" : "LOOK " + d.stage) : "";
+    if (d.correct) {
+      buzz([20, 30, 60]);
+      lcd.appendChild(el("div", "huge", "CORRECT"));
+      lcd.appendChild(el("div", "big", "+" + fmt(d.points)));
+      lcd.appendChild(el("div", "sub", "LOCKED AT " + where));
+    } else if (d.partial) {
+      buzz([20, 60]);
+      lcd.appendChild(el("div", "big warn", "RIGHT SORT OF THING"));
+      lcd.appendChild(el("div", "big", "+" + fmt(d.points)));
+      lcd.appendChild(el("div", "title", "IT WAS: " + String(d.answer || "").toUpperCase()));
+    } else {
+      buzz(200);
+      lcd.appendChild(el("div", "huge warn", d.label ? "WRONG" : "NOTHING"));
+      lcd.appendChild(el("div", "title", "IT WAS: " + String(d.answer || "").toUpperCase()));
+      if (d.label) lcd.appendChild(el("div", "sub", "YOU SAID: " + String(d.label).toUpperCase() + " (" + where + ")"));
+    }
+    lcd.appendChild(el("div", "spacer"));
+    lcd.appendChild(el("div", "sub", "YOUR SCORE: " + fmt(d.score)));
   }
 
   function scrLocked(d) {

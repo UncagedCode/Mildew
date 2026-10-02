@@ -1,0 +1,153 @@
+{
+ "pack_id": "incidents.tier1.cp2",
+ "content_kind": "incident",
+ "_comment": "Tier 1: odd. Wrong cameras, wrong names, production notes leaking to air. Never explained. Presentation only.",
+ "items": [
+  {
+   "id": "t1.empty_corridor",
+   "enabled": true,
+   "quality_status": "draft",
+   "tier": 1,
+   "target": "tv_video",
+   "rarity_weight": 1.0,
+   "cooldown_seconds": 900,
+   "min_players": 2,
+   "max_players": 8,
+   "persistence": "none",
+   "moments": [
+    "boundary"
+   ],
+   "payload": {
+    "effect": "empty_corridor",
+    "duration": 1.6
+   }
+  },
+  {
+   "id": "t1.hole_doorway",
+   "enabled": true,
+   "quality_status": "draft",
+   "tier": 1,
+   "target": "tv_video",
+   "rarity_weight": 1.2,
+   "cooldown_seconds": 1800,
+   "min_players": 2,
+   "max_players": 8,
+   "persistence": "none",
+   "moments": [
+    "hole_round_start"
+   ],
+   "payload": {
+    "effect": "hole_doorway",
+    "duration": 2.0,
+    "lines": [
+     [
+      "graham",
+      "hole_not_that_one"
+     ]
+    ]
+   },
+   "allowed_games": [
+    "hole"
+   ]
+  },
+  {
+   "id": "t1.wrong_name",
+   "enabled": true,
+   "quality_status": "draft",
+   "tier": 1,
+   "target": "graham",
+   "rarity_weight": 0.8,
+   "cooldown_seconds": 900,
+   "min_players": 2,
+   "max_players": 8,
+   "persistence": "none",
+   "moments": [
+    "hole_reveal"
+   ],
+   "payload": {
+    "effect": "wrong_name",
+    "duration": 0.5,
+    "lines": [
+     [
+      "graham",
+      "incident_wrong_name"
+     ]
+    ]
+   },
+   "needs": [
+    "pid",
+    "other_name"
+   ]
+  },
+  {
+   "id": "t1.production_caption",
+   "enabled": true,
+   "quality_status": "draft",
+   "tier": 1,
+   "target": "tv_video",
+   "rarity_weight": 0.9,
+   "cooldown_seconds": 700,
+   "min_players": 2,
+   "max_players": 8,
+   "persistence": "none",
+   "moments": [
+    "boundary",
+    "hole_stage"
+   ],
+   "payload": {
+    "effect": "production_caption",
+    "duration": 2.4,
+    "captions": [
+     "CAM 4 NOT CLEAR",
+     "VT 3 \u2014 NOT READY",
+     "GRAHAM: 2 MINS",
+     "CORRIDOR LIGHTS?",
+     "STAND BY STUDIO C",
+     "WHO HAS THE KEYS",
+     "DO NOT CUT TO 4"
+    ]
+   }
+  },
+  {
+   "id": "t1.wrong_audience_reaction",
+   "enabled": true,
+   "quality_status": "draft",
+   "tier": 1,
+   "target": "audience",
+   "rarity_weight": 0.7,
+   "cooldown_seconds": 900,
+   "min_players": 2,
+   "max_players": 8,
+   "persistence": "none",
+   "moments": [
+    "hole_reveal"
+   ],
+   "payload": {
+    "effect": "wrong_audience_reaction",
+    "duration": 1.0
+   },
+   "needs": [
+    "nobody_right"
+   ]
+  },
+  {
+   "id": "t1.floor_shot",
+   "enabled": true,
+   "quality_status": "draft",
+   "tier": 1,
+   "target": "tv_video",
+   "rarity_weight": 0.7,
+   "cooldown_seconds": 700,
+   "min_players": 2,
+   "max_players": 8,
+   "persistence": "none",
+   "moments": [
+    "boundary"
+   ],
+   "payload": {
+    "effect": "floor_shot",
+    "duration": 1.3
+   }
+  }
+ ]
+}

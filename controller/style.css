@@ -141,6 +141,8 @@ body {
 .key.go { --kc: var(--burgundy); } .key.ok { --kc: #3e6b2f; } .key.grey { --kc: var(--key-grey); }
 .key.small { min-height: 44px; font-size: 15px; }
 .keyrow { display: flex; gap: 10px; } .keyrow .key { flex: 1; }
+.keygrid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.keygrid .key { min-height: 52px; font-size: 14px; padding: 8px 8px 10px; line-height: 1.1; }
 
 .unit-foot { display: flex; justify-content: space-between; gap: 8px; margin-top: 6px; font-size: 8.5px; letter-spacing: 1px; color: #5d5440; }
 .unit-foot #unit-no { white-space: nowrap; flex: none; }

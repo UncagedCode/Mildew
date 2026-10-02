@@ -38,6 +38,7 @@ var cfg: MildewConfig = null       # optional; tuning falls back to defaults wit
 var broadcasts_played := 0
 var force := {}                    # dev overrides: hole_variant, hole_item, game
 var games_this_show: Array = []
+var incidents: IncidentEngine
 
 # --- Hidden axes (0..1). Never shown to players. ---
 var degradation := 0.0
@@ -76,6 +77,7 @@ func _init(p_content: ContentDB = null, seed: int = 0) -> void:
 	for t in TONES:
 		tone[t] = 0.0
 	_index_lines()
+	incidents = IncidentEngine.new(self)
 
 
 func _index_lines() -> void:
@@ -120,6 +122,7 @@ func reset_for_new_show() -> void:
 	show_time = 0.0
 	for t in TONES:
 		tone[t] = 0.0
+	incidents.reset_for_new_show()
 
 
 # ---------------------------------------------------------------------------
@@ -372,7 +375,7 @@ func _fill(text: String, ctx: Dictionary, speech: bool) -> String:
 	var answer := str(ctx.get("answer", ""))
 	return text.replace("{name}", name).replace("{secs}", str(ctx.get("secs", ""))) \
 		.replace("{answer}", answer).replace("{count}", str(ctx.get("count", ""))) \
-		.replace("{points}", str(ctx.get("points", "")))
+		.replace("{points}", str(ctx.get("points", ""))).replace("{other}", str(ctx.get("other_name", "")))
 
 
 # ---------------------------------------------------------------------------
@@ -627,5 +630,6 @@ func snapshot() -> Dictionary:
 		"relationships": relationships.duplicate(true),
 		"skeleton": skeleton.duplicate(true),
 		"used_content": used_content.keys(),
+		"incidents": {"temperament": incidents.temperament, "count": incidents.count_by_tier.duplicate(), "log": incidents.fired_log.duplicate()},
 		"show_time": show_time,
 	}

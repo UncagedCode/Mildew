@@ -65,6 +65,8 @@ func validate(db: ContentDB, release_mode: bool = false) -> bool:
 					_validate_multiple_choice(item, where, release_mode)
 				"hole":
 					_validate_hole(item, where, release_mode)
+				"incident":
+					_validate_incident(item, where)
 				"graham_lines", "announcer_lines":
 					_validate_line(item, where, moods)
 				_:
@@ -186,6 +188,31 @@ func _validate_hole(item: Dictionary, where: String, release_mode: bool) -> void
 
 
 ## Every shipped image needs provenance/licence metadata, factual or not (docs/07).
+func _validate_incident(item: Dictionary, where: String) -> void:
+	var targets := ["tv_video", "tv_audio", "single_phone", "multiple_phones", "all_phones", "graham", "announcer", "audience", "scoreboard", "room", "game_injection", "mixed"]
+	var tier = item.get("tier")
+	if typeof(tier) not in [TYPE_INT, TYPE_FLOAT] or int(tier) < 0 or int(tier) > 4:
+		errors.append("%s: invalid incident tier %s" % [where, str(tier)])
+	if not targets.has(item.get("target")):
+		errors.append("%s: invalid incident target %s" % [where, str(item.get("target"))])
+	if float(item.get("rarity_weight", -1)) < 0.0:
+		errors.append("%s: rarity_weight must be >= 0" % where)
+	if float(item.get("cooldown_seconds", -1)) < 0.0:
+		errors.append("%s: cooldown_seconds must be >= 0" % where)
+	var moments: Array = item.get("moments", [])
+	if moments.is_empty():
+		errors.append("%s: incident has no moments" % where)
+	for m in moments:
+		if not IncidentEngine.MOMENTS.has(m):
+			errors.append("%s: unknown incident moment '%s'" % [where, m])
+	var payload: Dictionary = item.get("payload", {})
+	if not IncidentEngine.EFFECTS.has(payload.get("effect")):
+		errors.append("%s: unknown incident effect '%s'" % [where, str(payload.get("effect"))])
+	for fu in item.get("follow_up_pool", []):
+		if str(fu) == str(item.get("id")):
+			errors.append("%s: incident lists itself as a follow-up (circular)" % where)
+
+
 func _validate_media(item: Dictionary, where: String, release_mode: bool) -> void:
 	var media = item.get("media", [])
 	if typeof(media) != TYPE_ARRAY or media.is_empty():

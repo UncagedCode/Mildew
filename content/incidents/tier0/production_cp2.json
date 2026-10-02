@@ -1,0 +1,196 @@
+{
+ "pack_id": "incidents.tier0.cp2",
+ "content_kind": "incident",
+ "_comment": "Tier 0: normal cheap-television production mess. Common-ish, low cost, often comedic. Presentation only.",
+ "items": [
+  {
+   "id": "t0.mic_pop",
+   "enabled": true,
+   "quality_status": "draft",
+   "tier": 0,
+   "target": "tv_audio",
+   "rarity_weight": 1.0,
+   "cooldown_seconds": 400,
+   "min_players": 2,
+   "max_players": 8,
+   "persistence": "none",
+   "moments": [
+    "boundary",
+    "hole_reveal"
+   ],
+   "payload": {
+    "effect": "mic_pop",
+    "duration": 2.2,
+    "lines": [
+     [
+      "graham",
+      "incident_mic_pop"
+     ]
+    ]
+   },
+   "clean_safe": true
+  },
+  {
+   "id": "t0.feedback",
+   "enabled": true,
+   "quality_status": "draft",
+   "tier": 0,
+   "target": "tv_audio",
+   "rarity_weight": 0.6,
+   "cooldown_seconds": 600,
+   "min_players": 2,
+   "max_players": 8,
+   "persistence": "none",
+   "moments": [
+    "boundary"
+   ],
+   "payload": {
+    "effect": "feedback",
+    "duration": 2.4,
+    "lines": [
+     [
+      "graham",
+      "incident_feedback"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "t0.lower_third_typo",
+   "enabled": true,
+   "quality_status": "draft",
+   "tier": 0,
+   "target": "tv_video",
+   "rarity_weight": 1.0,
+   "cooldown_seconds": 500,
+   "min_players": 2,
+   "max_players": 8,
+   "persistence": "none",
+   "moments": [
+    "boundary"
+   ],
+   "payload": {
+    "effect": "lower_third_typo",
+    "duration": 3.2
+   },
+   "clean_safe": true
+  },
+  {
+   "id": "t0.early_applause",
+   "enabled": true,
+   "quality_status": "draft",
+   "tier": 0,
+   "target": "audience",
+   "rarity_weight": 0.8,
+   "cooldown_seconds": 500,
+   "min_players": 2,
+   "max_players": 8,
+   "persistence": "none",
+   "moments": [
+    "hole_stage"
+   ],
+   "payload": {
+    "effect": "early_applause",
+    "duration": 1.5,
+    "lines": [
+     [
+      "graham",
+      "incident_early_applause"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "t0.late_cut",
+   "enabled": true,
+   "quality_status": "draft",
+   "tier": 0,
+   "target": "tv_video",
+   "rarity_weight": 1.2,
+   "cooldown_seconds": 180,
+   "min_players": 2,
+   "max_players": 8,
+   "persistence": "none",
+   "moments": [
+    "boundary",
+    "hole_reveal"
+   ],
+   "payload": {
+    "effect": "late_cut",
+    "duration": 1.2
+   },
+   "clean_safe": true
+  },
+  {
+   "id": "t0.wrong_camera",
+   "enabled": true,
+   "quality_status": "draft",
+   "tier": 0,
+   "target": "graham",
+   "rarity_weight": 0.9,
+   "cooldown_seconds": 500,
+   "min_players": 2,
+   "max_players": 8,
+   "persistence": "none",
+   "moments": [
+    "boundary"
+   ],
+   "payload": {
+    "effect": "wrong_camera",
+    "duration": 2.6,
+    "lines": [
+     [
+      "graham",
+      "incident_wrong_camera"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "t0.off_mic_cue",
+   "enabled": true,
+   "quality_status": "draft",
+   "tier": 0,
+   "target": "tv_audio",
+   "rarity_weight": 0.9,
+   "cooldown_seconds": 450,
+   "min_players": 2,
+   "max_players": 8,
+   "persistence": "none",
+   "moments": [
+    "boundary"
+   ],
+   "payload": {
+    "effect": "off_mic_cue",
+    "duration": 2.6,
+    "lines": [
+     [
+      "floor",
+      "floor_cue"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "t0.signal_tear",
+   "enabled": true,
+   "quality_status": "draft",
+   "tier": 0,
+   "target": "tv_video",
+   "rarity_weight": 0.7,
+   "cooldown_seconds": 400,
+   "min_players": 2,
+   "max_players": 8,
+   "persistence": "none",
+   "moments": [
+    "boundary",
+    "hole_reveal"
+   ],
+   "payload": {
+    "effect": "signal_tear",
+    "duration": 0.8
+   },
+   "clean_safe": true
+  }
+ ]
+}

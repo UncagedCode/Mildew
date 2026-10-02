@@ -554,6 +554,14 @@ func _advance() -> void:
 			allow = false
 		if allow:
 			_integrate_waiting()
+		# Broadcast irregularity opportunity between segments (presentation-only; never blocks).
+		if phase == Phase.SHOW and not _segments.is_empty() and prev.kind != "incident":
+			var nxt: Dictionary = _segments[0]
+			if str(nxt.get("kind")) not in ["sign_off"]:
+				var inc: Dictionary = director.incidents.opportunity("boundary", {"game": str(nxt.get("game_id", "")),
+					"players": _connected_active_count(), "next": str(nxt.get("kind"))})
+				if not inc.is_empty():
+					_segments.push_front({"kind": "incident", "incident": inc})
 	if phase != Phase.SHOW:
 		return
 	if _segments.is_empty():
