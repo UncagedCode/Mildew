@@ -99,3 +99,13 @@ and is **not** implemented until approved.
 ### 2026-10-02 — D019 Provisional procedural assets
 **Decision:** carpet, curtains, flare, icon (`tools/art/gen_textures.py`) and the whole audio kit (`tools/audio/gen_audio.py`: opening theme, lobby bed, sting, ident chime, UI sounds, three applause layers) are generated procedurally — owned, no licensing risk, on-brand. All are **provisional** and tracked in PROGRESS.md.
 **Approval:** not required.
+
+### 2026-10-02 — D020 Art direction clarified by the user: assets must look real
+**Type:** user direction (creative). **Source:** user, 2026-10-02: "Most things should appear real even if they are generated"; Hole images in particular should be real photos.
+**Decision:** the target look for content imagery, Graham, studio and audio is *photographic/realistic* (then degraded by the 1998 broadcast treatment), not illustrated or cartoon. Generated assets are acceptable only if they read as real footage/photos.
+**Consequences:**
+- Hole / Guess the Genitals / Real or Mildew? imagery: real licensed photographs (Wikimedia Commons, PD/CC0/CC-BY preferred; licence + attribution metadata required) fetched by a reproducible script. Procedural illustrations from D019/`gen_holes.py` are **placeholders only** and must be replaced. Blocker: build environment needs `commons.wikimedia.org` (search + licence metadata) in addition to `upload.wikimedia.org`.
+- Graham: the procedural puppet (D010) is a placeholder. Target is a photoreal presenter (filmed actor, or AI-generated photoreal stills/loops produced outside this environment). Implementation: a frame/loop-based presenter renderer that loads per-state media (idle, speaking, moods...) behind the existing presenter API, so real assets can be dropped in.
+- Studio/rooms: move toward realistic PBR materials, photo-sourced textures and lighting.
+- Audio: synthesized crowd/music remain placeholders; real recorded/licensed audio preferred.
+**Approval:** given by user.
