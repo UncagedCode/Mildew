@@ -131,3 +131,10 @@ and is **not** implemented until approved.
 - Tests: `tests/unit/test_graham.gd` validates frames exist, every semantic state resolves, no fallback cycles, shot hints reference known states.
 **Known limits:** two cut-outs are misframed (`*_single`) and never used in loops; generated-image service terms must be checked before commercial release.
 **Approval:** given by user ("I agree with 1").
+
+### 2026-10-02 — D023 Phone dev panel (debug builds only)
+**Type:** user direction (tooling). **Source:** user: the debug tools needed a keyboard; wants to connect a phone as a debugger, add bots and watch them play.
+**Decision:** the TV host serves `http://<tv>:<port>/dev` **only when `OS.is_debug_build()`**. The page asks for a 4-digit PIN shown on the TV (under the lobby join panel, in the corner during the show, and in pause → DEVELOPER TOOLS); the PIN is random per app run (`--dev-pin` fixes it for tests). After the PIN, the phone's WebSocket is detached from the game session (never a player, never counted) and accepts dev commands: add/remove/drop/reconnect bots (with personality), start show, pause/resume (opens the real TV pause menu), timescale, force next Hole variant / item / incident, transmission setting, TV overlay pages, Graham gallery/talk, restart transmission. The TV pushes state twice a second: phase, segment, holds, players, FPS, Director axes, recent decisions, incidents and a live event feed.
+**Rules kept:** dev tools are never required (everything also on the remote/keyboard); release builds register no `/dev` route; three wrong PINs close the socket; a forced Hole variant now lands on the first eligible round (it previously waited until round 3+).
+**Tests:** LAN scenario `dev_panel_drives_bots_only_show` (20 checks) and Chromium `tests/integration/dev_panel_ui.mjs` (10 checks).
+**Approval:** not required (dev tooling; no product behaviour change).

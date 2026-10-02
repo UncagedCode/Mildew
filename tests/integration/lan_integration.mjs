@@ -247,6 +247,42 @@ await scenario("invalid_actions_and_everyone_leaves", async (h, sc) => {
 });
 
 fs.mkdirSync(path.join(ROOT, "tests/output"), { recursive: true });
+await scenario("dev_panel_drives_bots_only_show", async (h, sc) => {
+  const page = await httpGet(h.port, "/dev");
+  check(sc, page.status === 200 && page.body.includes("MILDEW · DEV PANEL"), "GET /dev serves the panel in a debug build");
+  check(sc, /^\d{4}$/.test(h.ready.dev_pin || ""), "host reports a 4-digit dev PIN");
+  const dev = new WebSocket(`ws://127.0.0.1:${h.wsPort}`);
+  const got = [];
+  dev.onmessage = (ev) => got.push(JSON.parse(ev.data));
+  await new Promise((r) => (dev.onopen = r));
+  const wrong = h.ready.dev_pin === "0000" ? "1111" : "0000";
+  dev.send(JSON.stringify({ t: "dev_hello", pin: wrong }));
+  await sleep(300);
+  check(sc, got.some((m) => m.t === "dev_denied") && !got.some((m) => m.t === "dev_welcome"), "wrong PIN refused");
+  dev.send(JSON.stringify({ t: "dev_hello", pin: h.ready.dev_pin }));
+  const until = async (pred, ms = 8000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (pred()) return true; await sleep(50); } return false; };
+  check(sc, await until(() => got.some((m) => m.t === "dev_welcome")), "right PIN accepted");
+  const welcome = got.find((m) => m.t === "dev_welcome");
+  check(sc, welcome && welcome.catalogue.hole_items.length >= 20 && welcome.catalogue.incidents.length >= 10, "catalogue lists Hole items and incidents");
+  const last = () => got.filter((m) => m.t === "dev_state").at(-1);
+  const result = async (cmd, args) => { const n = got.length; dev.send(JSON.stringify({ t: "dev", cmd, args })); await until(() => got.slice(n).some((m) => m.t === "dev_result" && m.cmd === cmd)); return got.slice(n).find((m) => m.t === "dev_result" && m.cmd === cmd); };
+  check(sc, !(await result("start_show", {})).ok, "start refused with nobody in the studio");
+  check(sc, (await result("add_bot", { count: 3, personality: "risk_taker" })).ok, "add 3 bots");
+  check(sc, await until(() => last() && last().players.length === 3 && last().players.every((p) => p.fake)), "state shows exactly the 3 bots (dev socket is never a player)");
+  check(sc, (await result("force", { key: "hole_variant", value: "scale" })).ok, "force a SCALE round");
+  check(sc, (await result("force", { key: "incident", value: "t0.mic_pop" })).ok, "force an incident");
+  check(sc, !(await result("force", { key: "nonsense", value: "x" })).ok, "unknown force key refused");
+  check(sc, (await result("timescale", { value: 8 })).ok, "set timescale");
+  check(sc, (await result("start_show", {})).ok, "bots-only show started from the panel");
+  check(sc, await until(() => last() && last().phase === "show"), "state reports the show");
+  check(sc, await until(() => h.events.some((e) => e.e === "hole_round" && e.variant === "scale"), 60000), "forced SCALE variant used");
+  check(sc, (await result("pause", { on: true })).ok && await until(() => last().manual_pause), "pause from the panel");
+  check(sc, (await result("pause", { on: false })).ok && await until(() => !last().manual_pause), "resume from the panel");
+  check(sc, await until(() => h.events.some((e) => e.e === "show_ended"), 120000), "bots-only show completes");
+  check(sc, await until(() => last().events.length > 5 && last().decisions.length > 0), "live feed and Director decisions streamed");
+  dev.close();
+});
+
 fs.writeFileSync(path.join(ROOT, "tests/output/integration_results.json"), JSON.stringify(results, null, 2));
 const failed = results.filter((r) => !r.pass);
 console.log(`\n${results.length} scenarios, ${failed.length} failed`);

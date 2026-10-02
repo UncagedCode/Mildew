@@ -25,6 +25,16 @@ var log_lines: Array = []
 var _ws_to_conn := {}
 var _conn_to_ws := {}
 var _bots := {}          # conn_id -> FakePlayerBot
+
+# --- Phone dev panel (debug builds only; D023) ---
+var dev_enabled := false         # set by the app: OS.is_debug_build()
+var dev_pin := ""                # 4 digits shown on the TV; stable for the app run
+var dev_handler: Callable        # (cmd: String, args: Dictionary) -> {ok: bool, msg: String}
+var dev_extra: Callable          # () -> Dictionary of app-level state (TV screen, overlay)
+var _dev_ws := {}                # ws_id -> true (authenticated dev sockets)
+var _dev_fail := {}              # ws_id -> wrong PIN attempts
+var _dev_push := 0.0
+var _dev_events: Array = []      # recent TV events, compact
 var _offline_bots: Array = []
 var _bot_counter := 0
 
@@ -56,6 +66,11 @@ func begin(seed: int = 0, bind_address: String = "*") -> bool:
 	http.max_request_bytes = cfg.i("network.http_max_request_bytes", 8192)
 	http.request_timeout_ms = cfg.i("network.http_request_timeout_ms", 10000)
 	http.dynamic_routes = {"/config.js": _config_js, "/api/info": _api_info, "/api/avatar": _api_avatar}
+	if dev_enabled:
+		if dev_pin == "":
+			dev_pin = "%04d" % randi_range(0, 9999)
+		http.dynamic_routes["/dev"] = _dev_page
+		session.tv_event.connect(_dev_note_event)
 	if not ws.client_connected.is_connected(_on_ws_connected):
 		ws.client_connected.connect(_on_ws_connected)
 		ws.client_text.connect(_on_ws_text)
@@ -83,6 +98,8 @@ func stop() -> void:
 	_conn_to_ws.clear()
 	_bots.clear()
 	_offline_bots.clear()
+	_dev_ws.clear()
+	_dev_fail.clear()
 	running = false
 
 
@@ -93,6 +110,11 @@ func _process(delta: float) -> void:
 	ws.poll()
 	_tick_bots(delta)
 	session.tick(delta)
+	if not _dev_ws.is_empty():
+		_dev_push -= delta
+		if _dev_push <= 0.0:
+			_dev_push = 0.5
+			_dev_broadcast_state()
 
 
 # --- WebSocket <-> session ---------------------------------------------------
@@ -104,12 +126,20 @@ func _on_ws_connected(ws_id: int, addr: String) -> void:
 
 
 func _on_ws_text(ws_id: int, text: String) -> void:
+	if _dev_ws.has(ws_id):
+		_dev_message(ws_id, text)
+		return
+	if dev_enabled and text.length() < 256 and text.contains("dev_hello"):
+		_dev_hello(ws_id, text)
+		return
 	var cid = _ws_to_conn.get(ws_id)
 	if cid != null:
 		session.receive_text(cid, text)
 
 
 func _on_ws_disconnected(ws_id: int, code: int, reason: String) -> void:
+	_dev_ws.erase(ws_id)
+	_dev_fail.erase(ws_id)
 	var cid = _ws_to_conn.get(ws_id)
 	_ws_to_conn.erase(ws_id)
 	if cid != null:
@@ -246,3 +276,127 @@ func diagnostics() -> Dictionary:
 	d["http_rejected"] = http.requests_rejected
 	d["fake_players"] = _bots.size()
 	return d
+
+
+# --- Phone dev panel (debug builds only) -------------------------------------------
+# A phone opens http://<tv>:<port>/dev, enters the PIN shown on the TV, and drives the developer
+# tools over the normal WebSocket port. Dev sockets are detached from the game session (they are
+# never players) and the route does not exist in release builds.
+
+func _dev_page() -> Dictionary:
+	var body := FileAccess.get_file_as_bytes("res://devpanel/dev.html")
+	if body.is_empty():
+		return {"status": 404, "type": "text/plain", "body": "Not found".to_utf8_buffer()}
+	return {"status": 200, "type": "text/html; charset=utf-8", "body": body}
+
+
+func _dev_hello(ws_id: int, text: String) -> void:
+	var m = JSON.parse_string(text)
+	if typeof(m) != TYPE_DICTIONARY or str(m.get("t", "")) != "dev_hello":
+		return
+	if str(m.get("pin", "")) != dev_pin:
+		_dev_fail[ws_id] = int(_dev_fail.get(ws_id, 0)) + 1
+		ws.send_text(ws_id, JSON.stringify({"t": "dev_denied", "msg": "Wrong PIN. It is shown on the TV lobby screen."}))
+		if int(_dev_fail[ws_id]) >= 3:
+			ws.close(ws_id, 4003, "dev pin")
+		return
+	var cid = _ws_to_conn.get(ws_id)
+	if cid != null:
+		_ws_to_conn.erase(ws_id)
+		_conn_to_ws.erase(cid)
+		session.disconnect_client(cid, "dev_panel")   # never a player
+	_dev_ws[ws_id] = true
+	_log("dev panel connected (ws %d)" % ws_id)
+	ws.send_text(ws_id, JSON.stringify({"t": "dev_welcome", "catalogue": _dev_catalogue()}))
+	ws.send_text(ws_id, JSON.stringify(_dev_state()))
+
+
+func _dev_message(ws_id: int, text: String) -> void:
+	var m = JSON.parse_string(text)
+	if typeof(m) != TYPE_DICTIONARY:
+		return
+	if str(m.get("t", "")) == "ping":
+		ws.send_text(ws_id, JSON.stringify({"t": "pong"}))
+		return
+	if str(m.get("t", "")) != "dev":
+		return
+	var cmd := str(m.get("cmd", ""))
+	var args: Dictionary = m.get("args", {}) if typeof(m.get("args")) == TYPE_DICTIONARY else {}
+	var r: Dictionary = {"ok": false, "msg": "no handler"}
+	if dev_handler.is_valid():
+		r = dev_handler.call(cmd, args)
+	_log("dev %s %s -> %s" % [cmd, JSON.stringify(args), r.get("msg", "")])
+	if _dev_ws.has(ws_id):   # a restart command may have closed every socket
+		ws.send_text(ws_id, JSON.stringify({"t": "dev_result", "cmd": cmd, "ok": bool(r.get("ok", false)), "msg": str(r.get("msg", ""))}))
+	_dev_broadcast_state()
+
+
+func _dev_note_event(e: Dictionary) -> void:
+	var kind := str(e.get("e", ""))
+	if kind in ["podium", "ping", "answered", "player_rtt"]:
+		return
+	var detail := ""
+	match kind:
+		"say":
+			detail = "%s: %s" % [e.get("speaker", ""), str(e.get("text", "")).left(80)]
+		"incident":
+			detail = "%s (tier %s)" % [e.get("id", ""), e.get("tier", "")]
+		"hole_round":
+			detail = "%s · %s" % [e.get("variant", ""), e.get("item_id", "")]
+		"hole_lock":
+			detail = "%s at look %s" % [e.get("pid", ""), e.get("stage", "")]
+		"hole_reveal":
+			detail = str(e.get("answer", ""))
+		"hold":
+			detail = str(e.get("reason", "")) if str(e.get("reason", "")) != "" else "released"
+		"sting":
+			detail = str(e.get("game_id", e.get("title", "")))
+	_dev_events.append({"t": snappedf(session.session_time if session else 0.0, 0.1), "e": kind, "d": detail})
+	if _dev_events.size() > 40:
+		_dev_events.pop_front()
+
+
+func _dev_catalogue() -> Dictionary:
+	var items: Array = []
+	for it in content.query("hole", "", 5, 0):
+		items.append({"id": it.id, "label": str(it.get("answer", it.id)), "tier": int(it.get("familiarity_tier", 1))})
+	var incs: Array = []
+	for it in content.query("incident", "", 5, 0):
+		incs.append({"id": it.id, "tier": int(it.get("tier", 0)), "moments": it.get("moments", [])})
+	return {"personalities": FakePlayerBot.PERSONALITIES, "hole_items": items, "hole_variants": ["standard", "scale", "open"],
+		"incidents": incs, "interference": ["standard_transmission", "supervised_transmission", "clean_transmission"],
+		"timescales": [1, 2, 4, 8]}
+
+
+func _dev_state() -> Dictionary:
+	var ps: Array = []
+	if session:
+		for p in session.players.values():
+			ps.append({"pid": p.player_id, "name": p.display_name, "score": p.score, "connected": p.connected,
+				"fake": p.is_fake, "status": PlayerState.Status.keys()[p.status], "number": p.number})
+	var d: Dictionary = session.director.snapshot() if session and session.director else {}
+	var st := {
+		"t": "dev_state", "phase": session.phase_name() if session else "none",
+		"segment": session._current.kind if session and session._current != null else "",
+		"segments_left": session._segments.size() if session else 0,
+		"hold": session.hold_reason if session else "", "manual_pause": session.manual_pause if session else false,
+		"time_scale": session.time_scale if session else 1.0, "room": session.room_code if session else "",
+		"players": ps, "bots_online": _bots.size(), "bots_offline": _offline_bots.size(),
+		"force": session.director.force.duplicate() if session else {},
+		"director": {"mood": d.get("graham_mood", ""), "pressure": d.get("pressure", 0.0), "degradation": d.get("degradation", 0.0),
+			"complicity": d.get("complicity", 0.0), "familiarity": d.get("familiarity_tier", 1), "interference": d.get("interference_mode", ""),
+			"show_time": d.get("show_time", 0.0), "incidents": d.get("incidents", {}).get("log", []).slice(-8)},
+		"decisions": session.director.decision_log.slice(-10) if session else [],
+		"events": _dev_events.slice(-25),
+	}
+	if dev_extra.is_valid():
+		st["app"] = dev_extra.call()
+	return st
+
+
+func _dev_broadcast_state() -> void:
+	if _dev_ws.is_empty():
+		return
+	var txt := JSON.stringify(_dev_state())
+	for wid in _dev_ws.keys():
+		ws.send_text(wid, txt)

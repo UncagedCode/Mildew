@@ -235,8 +235,15 @@ func choose_hole_variants(items: Array) -> Array:
 		variants.append("standard")
 	if items.size() < 3:
 		return variants
-	# One SCALE round in the middle of the game, preferring items whose size is surprising.
 	var forced := str(force.get("hole_variant", ""))
+	# Developer force (dev panel / tour): the very first eligible round, so it can be watched now.
+	if forced in ["scale", "open"]:
+		for i in items.size():
+			if not items[i].get("studio_hole", false):
+				variants[i] = forced
+				log_decision("Variant", "hole:%s@%d" % [forced, i + 1], ["forced by developer"])
+				return variants
+	# One SCALE round in the middle of the game, preferring items whose size is surprising.
 	if forced == "scale" or (forced == "" and rng.randf() < _cf("hole.scale_round_chance", 0.6)):
 		var best := -1
 		for i in range(2, items.size() - 1):

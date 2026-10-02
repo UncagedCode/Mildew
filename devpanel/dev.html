@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mildew Dev Panel</title>
+<script src="/config.js"></script>
+<style>
+  :root {
+    --bg: #101014; --card: #1b1b22; --line: #2c2c36; --text: #e9e6dc; --dim: #8d8a80;
+    --amber: #ffb547; --green: #5fd38a; --red: #ff6b5b; --blue: #6aa8ff; --chip: #262631;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.35 ui-monospace, "DejaVu Sans Mono", Menlo, Consolas, monospace; }
+  body { padding: 0 12px calc(24px + env(safe-area-inset-bottom)); }
+  header { position: sticky; top: 0; z-index: 5; background: var(--bg); padding: 12px 0 8px; border-bottom: 1px solid var(--line); }
+  h1 { font-size: 16px; margin: 0; letter-spacing: .08em; color: var(--amber); }
+  h1 small { color: var(--dim); font-weight: normal; letter-spacing: 0; }
+  .status { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .pill { background: var(--chip); border-radius: 999px; padding: 3px 9px; font-size: 13px; white-space: nowrap; }
+  .pill.ok { color: var(--green); } .pill.bad { color: var(--red); } .pill.warn { color: var(--amber); }
+  section { background: var(--card); border: 1px solid var(--line); border-radius: 10px; margin-top: 12px; }
+  section > h2 { margin: 0; font-size: 13px; letter-spacing: .1em; color: var(--dim); padding: 10px 12px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
+  .body { padding: 10px 12px 12px; }
+  .row { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0; align-items: center; }
+  button, select { font: inherit; color: var(--text); background: var(--chip); border: 1px solid var(--line); border-radius: 8px; min-height: 44px; padding: 8px 12px; }
+  button { flex: 1 1 auto; cursor: pointer; }
+  button:active { transform: translateY(1px); }
+  button.primary { background: #3a2a10; border-color: #7a5520; color: var(--amber); }
+  button.danger { background: #3a1614; border-color: #7a2c26; color: var(--red); }
+  button.on { background: #173524; border-color: #2f7a4c; color: var(--green); }
+  button[disabled] { opacity: .45; }
+  select { flex: 1 1 140px; min-width: 0; }
+  .seg { display: flex; gap: 6px; flex: 1 1 100%; }
+  .seg button { flex: 1; padding: 8px 4px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  td { padding: 5px 4px; border-top: 1px solid var(--line); }
+  td.n { text-align: right; } .dim { color: var(--dim); }
+  .feed { max-height: 260px; overflow-y: auto; font-size: 12px; }
+  .feed div { padding: 3px 0; border-top: 1px solid var(--line); }
+  .feed b { color: var(--blue); font-weight: normal; }
+  .kv { display: grid; grid-template-columns: auto 1fr; gap: 3px 12px; font-size: 13px; }
+  .kv span:nth-child(odd) { color: var(--dim); }
+  #login { max-width: 360px; margin: 18vh auto 0; text-align: center; }
+  #login input { font: 32px ui-monospace, monospace; letter-spacing: .4em; width: 100%; text-align: center; background: var(--card); color: var(--amber); border: 1px solid var(--line); border-radius: 10px; padding: 10px; margin: 16px 0; }
+  #toast { position: fixed; left: 12px; right: 12px; bottom: calc(14px + env(safe-area-inset-bottom)); background: #26262f; border: 1px solid var(--line); border-radius: 10px; padding: 12px; opacity: 0; transition: opacity .2s; pointer-events: none; z-index: 10; }
+  #toast.show { opacity: 1; } #toast.err { color: var(--red); }
+  .hint { color: var(--dim); font-size: 12px; margin: 4px 0 0; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<div id="login">
+  <h1>MILDEW · DEV PANEL</h1>
+  <p class="hint">Debug builds only. Enter the 4-digit PIN shown under the join panel on the TV lobby screen.</p>
+  <input id="pin" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="····">
+  <button class="primary" id="go" style="width:100%">CONNECT</button>
+  <p class="hint" id="loginmsg"></p>
+</div>
+
+<div id="app" hidden>
+  <header>
+    <h1>MILDEW · DEV <small id="room"></small></h1>
+    <div class="status">
+      <span class="pill" id="link">LINK</span>
+      <span class="pill" id="phase">—</span>
+      <span class="pill" id="segment"></span>
+      <span class="pill" id="hold"></span>
+      <span class="pill" id="fps"></span>
+    </div>
+  </header>
+
+  <section>
+    <h2>SHOW</h2>
+    <div class="body">
+      <div class="row">
+        <button class="primary" data-cmd="start_show">START SHOW</button>
+        <button id="pausebtn" data-cmd="pause">PAUSE</button>
+      </div>
+      <div class="row"><span class="dim">Speed</span><div class="seg" id="speeds"></div></div>
+      <div class="row"><button class="danger" id="restart">RESTART TRANSMISSION</button></div>
+      <p class="hint">Restart ends this broadcast and opens a fresh lobby; this panel reconnects by itself.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>CONTESTANTS <span id="pcount" class="dim"></span></h2>
+    <div class="body">
+      <table id="players"></table>
+      <div class="row" style="margin-top:10px">
+        <select id="persona"><option value="">random personality</option></select>
+        <select id="botcount"><option>1</option><option>2</option><option>3</option><option>4</option><option>7</option></select>
+      </div>
+      <div class="row"><button class="primary" id="addbots">ADD BOTS</button><button data-cmd="remove_bot">REMOVE BOT</button></div>
+      <div class="row"><button data-cmd="drop_bot">DROP A BOT'S CONNECTION</button><button data-cmd="reconnect_bot">RECONNECT IT</button></div>
+      <p class="hint">Bots join over the real protocol and play by themselves. Dropping one tests the 30-second reconnect hold.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>FORCE NEXT</h2>
+    <div class="body">
+      <div class="row"><span class="dim">Hole variant</span><div class="seg" id="variants"></div></div>
+      <div class="row"><select id="item"><option value="">Hole item: Director's choice</option></select></div>
+      <div class="row"><select id="incident"><option value="">Incident: Director's choice</option></select></div>
+      <p class="hint" id="forced">Nothing forced.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>TRANSMISSION</h2>
+    <div class="body"><div class="seg" id="interf"></div></div>
+  </section>
+
+  <section>
+    <h2>TV DIAGNOSTICS</h2>
+    <div class="body">
+      <div class="row"><button id="ovl" data-cmd="overlay">OVERLAY</button></div>
+      <div class="seg" id="pages"></div>
+      <div class="row"><button data-cmd="graham_gallery">GRAHAM: NEXT STATE</button><button data-cmd="graham_speak">GRAHAM: TALK</button></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>DIRECTOR</h2>
+    <div class="body">
+      <div class="kv" id="director"></div>
+      <p class="hint" style="margin-top:10px">Recent decisions</p>
+      <div class="feed" id="decisions"></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>LIVE FEED</h2>
+    <div class="body"><div class="feed" id="events"></div></div>
+  </section>
+</div>
+<div id="toast"></div>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const CFG = window.MILDEW_CONFIG || {};
+  const store = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+                  set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
+  let ws = null, pin = store.get("mildew_dev_pin") || "", cat = null, st = null, authed = false, retry = 0, pingT = null;
+
+  function toast(msg, err) {
+    const t = $("toast"); t.textContent = msg; t.className = "show" + (err ? " err" : "");
+    clearTimeout(toast.h); toast.h = setTimeout(() => t.className = "", 2200);
+  }
+  function send(cmd, args) {
+    if (!ws || ws.readyState !== 1) { toast("Not connected", true); return; }
+    ws.send(JSON.stringify({ t: "dev", cmd, args: args || {} }));
+  }
+  function setLink(ok, text) { const l = $("link"); l.textContent = text; l.className = "pill " + (ok ? "ok" : "bad"); }
+
+  function connect() {
+    const port = CFG.wsPort || (Number(location.port || 80) + 1);
+    ws = new WebSocket(`ws://${location.hostname}:${port}`);
+    ws.onopen = () => { ws.send(JSON.stringify({ t: "dev_hello", pin })); };
+    ws.onmessage = (ev) => {
+      const m = JSON.parse(ev.data);
+      if (m.t === "dev_welcome") {
+        authed = true; retry = 0; store.set("mildew_dev_pin", pin); cat = m.catalogue; buildStatic();
+        $("login").hidden = true; $("app").hidden = false; setLink(true, "LINK OK");
+        clearInterval(pingT); pingT = setInterval(() => ws.readyState === 1 && ws.send('{"t":"ping"}'), 5000);
+      } else if (m.t === "dev_denied") {
+        authed = false; $("login").hidden = false; $("app").hidden = true; $("loginmsg").textContent = m.msg;
+      } else if (m.t === "dev_state") { st = m; render(); }
+      else if (m.t === "dev_result") { toast(m.msg, !m.ok); }
+    };
+    ws.onclose = () => {
+      clearInterval(pingT);
+      if (!authed) return;          // wrong PIN: stay on the login screen
+      setLink(false, "RECONNECTING…");
+      retry = Math.min(retry + 1, 6);
+      setTimeout(connect, 600 * retry);
+    };
+  }
+
+  $("go").onclick = () => { pin = $("pin").value.trim(); if (pin.length !== 4) { $("loginmsg").textContent = "Four digits."; return; } connect(); };
+  $("pin").addEventListener("keydown", (e) => { if (e.key === "Enter") $("go").click(); });
+  if (pin) { $("pin").value = pin; connect(); }
+
+  document.addEventListener("click", (e) => {
+    const b = e.target.closest("button[data-cmd]"); if (!b) return;
+    const args = b.dataset.args ? JSON.parse(b.dataset.args) : {};
+    if (b.dataset.cmd === "pause") args.on = !(st && st.manual_pause);
+    send(b.dataset.cmd, args);
+  });
+  $("addbots").onclick = () => send("add_bot", { personality: $("persona").value, count: Number($("botcount").value) });
+  $("restart").onclick = () => { if (confirm("End this broadcast and open a fresh lobby?")) send("restart"); };
+  $("item").onchange = (e) => send("force", { key: "hole_item", value: e.target.value });
+  $("incident").onchange = (e) => send("force", { key: "incident", value: e.target.value });
+
+  function chipRow(el, values, labelFn, onTap) {
+    el.innerHTML = "";
+    for (const v of values) {
+      const b = document.createElement("button"); b.textContent = labelFn(v); b.dataset.v = v;
+      b.onclick = () => onTap(v); el.appendChild(b);
+    }
+  }
+  function buildStatic() {
+    const ps = $("persona"); ps.length = 1;
+    for (const p of cat.personalities) ps.add(new Option(p.replace("_", " "), p));
+    chipRow($("speeds"), cat.timescales, (v) => "×" + v, (v) => send("timescale", { value: v }));
+    chipRow($("variants"), ["", ...cat.hole_variants], (v) => v || "auto", (v) => send("force", { key: "hole_variant", value: v }));
+    chipRow($("interf"), cat.interference, (v) => v.split("_")[0].toUpperCase(), (v) => send("interference", { value: v }));
+    chipRow($("pages"), [0, 1, 2, 3], (v) => ["NETWORK", "DIRECTOR", "LOG", "GALLERY"][v], (v) => send("overlay", { page: v }));
+    const it = $("item"); it.length = 1;
+    for (const i of cat.hole_items) it.add(new Option(`${i.label}${i.tier > 1 ? "  (tier " + i.tier + ")" : ""}`, i.id));
+    const inc = $("incident"); inc.length = 1;
+    for (const i of cat.incidents) inc.add(new Option(`T${i.tier} · ${i.id.replace(/^t\d\./, "")}`, i.id));
+  }
+  const esc = (s) => String(s).replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[c]);
+  function mark(el, cur) { for (const b of el.children) b.classList.toggle("on", String(b.dataset.v) === String(cur)); }
+
+  function render() {
+    $("room").textContent = st.room ? "· ROOM " + st.room : "";
+    const ph = $("phase"); ph.textContent = st.phase.toUpperCase(); ph.className = "pill " + (st.phase === "show" ? "ok" : "warn");
+    $("segment").textContent = st.segment ? `${st.segment} · ${st.segments_left} left` : ""; $("segment").hidden = !st.segment;
+    const h = $("hold"); h.hidden = !st.hold; h.textContent = "HOLD: " + st.hold; h.className = "pill warn";
+    const app = st.app || {};
+    $("fps").hidden = app.fps === undefined; $("fps").textContent = `${app.fps} FPS`;
+    $("fps").className = "pill " + (app.fps >= 55 ? "ok" : app.fps >= 28 ? "warn" : "bad");
+    $("pausebtn").textContent = st.manual_pause ? "RESUME" : "PAUSE"; $("pausebtn").classList.toggle("on", st.manual_pause);
+    mark($("speeds"), st.time_scale);
+    mark($("variants"), st.force.hole_variant || "");
+    mark($("interf"), st.director.interference);
+    mark($("pages"), app.overlay ? app.overlay_page : -1);
+    $("ovl").classList.toggle("on", !!app.overlay); $("ovl").textContent = app.overlay ? "OVERLAY ON" : "OVERLAY OFF";
+    if (document.activeElement !== $("item")) $("item").value = st.force.hole_item || "";
+    if (document.activeElement !== $("incident")) $("incident").value = st.force.incident || "";
+    const f = Object.entries(st.force); $("forced").textContent = f.length ? "Waiting to use: " + f.map(([k, v]) => `${k}=${v}`).join(", ") : "Nothing forced.";
+
+    const humans = st.players.filter((p) => !p.fake).length;
+    $("pcount").textContent = `${st.players.length}/8 · ${st.bots_online} bot${st.bots_online === 1 ? "" : "s"}${st.bots_offline ? ", " + st.bots_offline + " dropped" : ""} · ${humans} human`;
+    $("players").innerHTML = st.players.sort((a, b) => a.number - b.number).map((p) =>
+      `<tr><td>#${p.number}</td><td>${esc(p.name)}${p.fake ? ' <span class="dim">bot</span>' : ""}</td>` +
+      `<td class="${p.connected ? "" : "dim"}">${p.connected ? p.status.toLowerCase() : "offline"}</td><td class="n">${p.score.toLocaleString("en-GB")}</td></tr>`).join("")
+      || '<tr><td class="dim">Nobody yet.</td></tr>';
+
+    const d = st.director;
+    const kv = [["Graham", d.mood], ["Pressure", d.pressure.toFixed(2)], ["Degradation", d.degradation.toFixed(2)],
+      ["Complicity", d.complicity.toFixed(2)], ["Familiarity", "tier " + d.familiarity], ["Show time", Math.round(d.show_time) + " s"],
+      ["Incidents", d.incidents.map((i) => `${i.id}@${Math.round(i.t)}s`).join(", ") || "none yet"]];
+    $("director").innerHTML = kv.map(([k, v]) => `<span>${k}</span><span>${esc(v)}</span>`).join("");
+    $("decisions").innerHTML = st.decisions.slice().reverse().map((x) => `<div><b>${Math.round(x.t)}s ${esc(x.kind)}</b> ${esc(x.choice)} <span class="dim">${esc((x.reasons || []).join(" · "))}</span></div>`).join("") || '<div class="dim">None yet.</div>';
+    $("events").innerHTML = st.events.slice().reverse().map((x) => `<div><b>${x.t.toFixed(0)}s ${esc(x.e)}</b> ${esc(x.d)}</div>`).join("") || '<div class="dim">Quiet.</div>';
+  }
+})();
+</script>
+</body>
+</html>

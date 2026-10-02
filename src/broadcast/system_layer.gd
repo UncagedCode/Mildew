@@ -18,6 +18,7 @@ var join_target := 0.0
 var qr_tex: Texture2D
 var short_url := ""
 var room_code := ""
+var dev_hint := ""          # debug builds only: phone dev panel address + PIN
 var contestants := 0
 var min_players := 2
 var max_players := 8
@@ -115,11 +116,16 @@ func _draw_join(vis: float) -> void:
 		var hint_col := Color(1, 1, 0, a * blink)
 		draw_string(f_mono, Vector2(panel.position.x + 36, y + 266), "FLOOR CAPTAIN: PRESS BEGIN ON YOUR PHONE", HORIZONTAL_ALIGNMENT_LEFT, panel.size.x - 60, 20, hint_col)
 		draw_string(f_mono, Vector2(panel.position.x + 36, y + 292), "(OR OK ON THE REMOTE)", HORIZONTAL_ALIGNMENT_LEFT, panel.size.x - 60, 20, hint_col)
+	if dev_hint != "":
+		draw_rect(Rect2(panel.position.x, panel.end.y + 12, panel.size.x, 40), Color(0.35, 0.12, 0.0, 0.9 * a))
+		draw_string(f_mono, Vector2(panel.position.x + 16, panel.end.y + 40), dev_hint, HORIZONTAL_ALIGNMENT_LEFT, panel.size.x - 24, 22, Color(1, 0.75, 0.3, a))
 
 
 func _draw_late_hint() -> void:
 	draw_string(f_mono, Vector2(SW - 232, 40), "JOIN: " + room_code, HORIZONTAL_ALIGNMENT_LEFT, 220, 22, Color(1, 1, 1, 0.45))
 	draw_string(f_mono, Vector2(SW - 232, 66), short_url.replace("http://", ""), HORIZONTAL_ALIGNMENT_LEFT, 224, 14, Color(1, 1, 1, 0.35))
+	if dev_hint != "":
+		draw_string(f_mono, Vector2(SW - 232, 88), "DEV PIN " + dev_hint.get_slice("PIN ", 1), HORIZONTAL_ALIGNMENT_LEFT, 224, 14, Color(1, 0.7, 0.3, 0.35))
 
 
 func _draw_hold() -> void:

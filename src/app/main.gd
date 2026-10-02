@@ -44,6 +44,11 @@ func _ready() -> void:
 	host = MildewHost.new()
 	host.name = "MildewHost"
 	host.setup(cfg, store, content)
+	host.dev_enabled = dev_build
+	if _args.has("dev-pin"):
+		host.dev_pin = str(_args["dev-pin"])
+	host.dev_handler = _dev_remote
+	host.dev_extra = _dev_remote_state
 	add_child(host)
 	if _args.has("mildew-host"):
 		_run_headless_host()
@@ -100,7 +105,7 @@ func _run_headless_host() -> void:
 	host.session.time_scale = float(_args.get("timescale", 1.0))
 	host.tv_event.connect(func(e): print("EVT ", JSON.stringify(e)))
 	print("MILDEW_HOST_READY ", JSON.stringify({"http": host.http.port, "ws": host.ws.port, "room": host.session.room_code,
-		"key": host.session.join_key, "join_url": host.join_url, "lan": host.lan_ip}))
+		"key": host.session.join_key, "join_url": host.join_url, "lan": host.lan_ip, "dev_pin": host.dev_pin}))
 
 
 # ===========================================================================
@@ -425,7 +430,7 @@ func _refresh_pause() -> void:
 				{"key": "end", "label": "END TRANSMISSION", "desc": "Stops the broadcast now and returns to the title screen. Scores so far are saved."},
 			]
 			if dev_build:
-				sys.pause_items.append({"key": "dev", "label": "DEVELOPER TOOLS", "desc": "Fake players, disconnect simulation, timescale, diagnostics overlay."})
+				sys.pause_items.append({"key": "dev", "label": "DEVELOPER TOOLS", "desc": "Fake players, disconnect simulation, timescale, diagnostics overlay. Phone panel: %s/dev  PIN %s" % [host.short_url.replace("http://", ""), host.dev_pin]})
 		"settings":
 			_settings_menu(sys)
 			return
@@ -520,6 +525,105 @@ func _dev_action(key: String) -> void:
 			view.graham.speak(3.0)
 		"start":
 			host.session.start_show()
+
+
+## Phone dev panel (debug builds; D023). Every command is also reachable from the remote's
+## DEVELOPER TOOLS menu or the keyboard, so the panel never becomes a required path.
+func _dev_remote(cmd: String, args: Dictionary) -> Dictionary:
+	if not dev_build or host.session == null:
+		return {"ok": false, "msg": "no session"}
+	var s := host.session
+	match cmd:
+		"add_bot":
+			var n := clampi(int(args.get("count", 1)), 1, 8)
+			var added := 0
+			for i in n:
+				if s.players.size() >= cfg.i("product.max_players", 8):
+					break
+				host.add_fake_player(str(args.get("personality", "")))
+				added += 1
+			return {"ok": added > 0, "msg": "added %d bot(s)" % added if added > 0 else "studio is full"}
+		"remove_bot":
+			host.remove_fake_player()
+			return {"ok": true, "msg": "removed a bot"}
+		"drop_bot":
+			var b = host.drop_fake_player()
+			return {"ok": b != null, "msg": ("dropped %s" % b.name) if b != null else "no connected bot"}
+		"reconnect_bot":
+			var b = host.reconnect_fake_player()
+			return {"ok": b != null, "msg": ("reconnected %s" % b.name) if b != null else "no dropped bot"}
+		"start_show":
+			var ok := s.start_show()
+			return {"ok": ok, "msg": "show started" if ok else "needs the lobby and at least 2 connected contestants"}
+		"pause":
+			if s.phase != SessionServer.Phase.SHOW:
+				return {"ok": false, "msg": "only during a show"}
+			var on := bool(args.get("on", not s.manual_pause))
+			if view != null:
+				if on:
+					_open_pause("main")
+				else:
+					_close_pause()
+			else:
+				s.set_manual_pause(on)
+			return {"ok": true, "msg": "paused" if on else "resumed"}
+		"timescale":
+			s.time_scale = clampf(float(args.get("value", 1.0)), 0.25, 16.0)
+			return {"ok": true, "msg": "timescale x%s" % s.time_scale}
+		"force":
+			var key := str(args.get("key", ""))
+			if not key in ["hole_variant", "hole_item", "incident"]:
+				return {"ok": false, "msg": "unknown force key"}
+			var val := str(args.get("value", ""))
+			if val == "":
+				s.director.force.erase(key)
+				return {"ok": true, "msg": "cleared %s" % key}
+			s.director.force[key] = val
+			return {"ok": true, "msg": "next %s: %s" % [key, val]}
+		"interference":
+			var mode := str(args.get("value", ""))
+			if not mode in ["standard_transmission", "supervised_transmission", "clean_transmission"]:
+				return {"ok": false, "msg": "unknown mode"}
+			store.set_setting("interference", mode)
+			s.director.interference_mode = mode
+			return {"ok": true, "msg": mode}
+		"overlay":
+			if dev == null:
+				return {"ok": false, "msg": "no TV display"}
+			if args.has("page"):
+				dev.visible = true
+				dev.page = clampi(int(args.page), 0, DevOverlay.PAGES - 1)
+			else:
+				dev.visible = not dev.visible
+			return {"ok": true, "msg": "overlay %s" % ("on" if dev.visible else "off")}
+		"graham_gallery":
+			if view == null:
+				return {"ok": false, "msg": "no TV display"}
+			_dev_action("gallery")
+			return {"ok": true, "msg": "gallery: next state"}
+		"graham_speak":
+			if view == null:
+				return {"ok": false, "msg": "no TV display"}
+			_dev_action("graham_speak")
+			return {"ok": true, "msg": "speech burst"}
+		"restart":
+			# New broadcast with the same TV: end and immediately begin again (dev sockets reconnect).
+			call_deferred("_dev_restart")
+			return {"ok": true, "msg": "restarting transmission"}
+	return {"ok": false, "msg": "unknown command %s" % cmd}
+
+
+func _dev_restart() -> void:
+	if view == null:
+		host.begin()
+		return
+	_end_transmission()
+	_begin_transmission()
+
+
+func _dev_remote_state() -> Dictionary:
+	return {"screen": state, "fps": Engine.get_frames_per_second(), "overlay": dev.visible if dev != null else false, "overlay_page": dev.page if dev != null else 0,
+		"pause_open": _pause_open}
 
 
 func _dev_key(code: int) -> bool:

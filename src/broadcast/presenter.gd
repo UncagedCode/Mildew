@@ -263,6 +263,7 @@ func _lobby() -> void:
 	sys.join_target = 1.0
 	sys.late_hint = false
 	sys.set_join(host.join_url, host.short_url, host.session.room_code)
+	sys.dev_hint = ("DEV PANEL  %s/dev  PIN %s" % [host.short_url.replace("http://", ""), host.dev_pin]) if host.dev_enabled else ""
 	studio.cut_to("cam2", false)
 	studio.graham.set_activity("waiting")
 	audio.music("lobby_bed", -10.0)
