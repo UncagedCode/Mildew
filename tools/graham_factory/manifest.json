@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "notes": "Proof-of-concept Graham library. Add semantic lines here; never put API keys in this file.",
+  "lines": [
+    {"id": "name_aaron", "mood": "name", "text": "Aaron."},
+    {"id": "name_elijah", "mood": "name", "text": "Elijah."},
+    {"id": "name_grace", "mood": "name", "text": "Grace."},
+    {"id": "name_josh", "mood": "name", "text": "Josh."},
+    {"id": "name_donna", "mood": "name", "text": "Donna."},
+    {"id": "welcome_01", "mood": "presenter", "text": "Good evening, ladies and gentlemen, and welcome once again to Mildew!"},
+    {"id": "question_01", "mood": "presenter_brisk", "text": "Right — question one."},
+    {"id": "correct_01", "mood": "pleased", "text": "That is correct. Well done."},
+    {"id": "wrong_01", "mood": "disappointed", "text": "No. I'm afraid that's completely wrong."},
+    {"id": "insult_pathetic_01", "mood": "teasing", "text": "That was absolutely pathetic."},
+    {"id": "mystified_01", "mood": "teasing", "text": "I don't know how you knew that."},
+    {"id": "reluctant_praise_01", "mood": "teasing", "text": "Well done. Eventually."},
+    {"id": "takes_lead_01", "mood": "excited", "text": "And that puts you into the lead!"},
+    {"id": "oh_dear_01", "mood": "disappointed", "text": "Oh dear."},
+    {"id": "move_on_01", "mood": "irritated", "text": "Right. Let's just move on."},
+    {"id": "incident_stop_01", "mood": "angry", "text": "I said stop."},
+    {"id": "recovery_right_01", "mood": "rattled", "text": "Right..."},
+    {"id": "question_six_01", "mood": "recovered", "text": "Question six."},
+    {"id": "off_air_still_on_01", "mood": "off_air", "text": "Are we still on?"},
+    {"id": "off_air_warning_01", "mood": "off_air", "text": "I told you not to do that."},
+    {"id": "and_were_back_01", "mood": "recovered", "text": "And we're back!"},
+    {"id": "closing_01", "mood": "closing", "text": "Ladies and gentlemen, that is all we have time for tonight."},
+    {"id": "closing_thanks_01", "mood": "closing", "text": "Thank you for joining us..."},
+    {"id": "closing_goodnight_01", "mood": "closing", "text": "and good night."}
+  ]
+}
