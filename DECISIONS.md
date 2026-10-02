@@ -109,3 +109,12 @@ and is **not** implemented until approved.
 - Studio/rooms: move toward realistic PBR materials, photo-sourced textures and lighting.
 - Audio: synthesized crowd/music remain placeholders; real recorded/licensed audio preferred.
 **Approval:** given by user.
+
+### 2026-10-02 — D021 Low-budget production strategy: still-image / broadcast compositing (user direction)
+**Type:** user direction (production/creative). **Supersedes parts of:** D010 (procedural puppet), D020 (Graham target).
+**Direction:** do not assume large amounts of AI-generated FMV. `references/graham/graham_reference_performance_v1.mp4` is the canonical Graham reference. Normal Graham presentation = reusable photoreal **still-image performance states** animated/composited in Godot: breathing, blinks, small eye-direction changes, restrained mouth states, tiny head/body drift, cue-card movement — concealed by authentic TV editing (cuts, reaction cutaways, graphics, scoreboards, analogue effects, audience audio, framing). Graham must never sit static for long. His speech frequently continues over scoreboards, questions, podium shots, avatars, archive footage and game graphics.
+**Reserve real FMV for:** openings/major introductions, important backstage reactions, Graham losing his temper, rare off-air material, major Broadcast Incidents.
+**Adverts:** cheap late-90s motion graphics (stills, typography, jingles, VO, simple animation). **Backstage feeds:** stills + fluorescent flicker, camera noise, subtle zoom/drift, moving shadows, audio, small animated elements.
+**Intent:** a deliberate strange 1990s TV / interactive CD-ROM hybrid — not a downgrade. Priority: PoC looks and feels like Mildew without further paid generation.
+**Pending:** a reference pack (being produced by the user) will supply Graham stills; the GrahamStills renderer is built to consume it. The BBC bug in the reference video must be cropped/removed from anything derived from it.
+**Approval:** given by user.
