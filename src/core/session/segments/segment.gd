@@ -46,7 +46,7 @@ func say_at(t: float, speaker: String, category: String, ctx: Dictionary = {}) -
 
 
 func handle_action(_player: PlayerState, _msg: Dictionary) -> String:
-	return Protocol.E_INVALID_STATE
+	return Protocol.E_STALE   # nothing open to answer (late arrival after the segment moved on)
 
 
 func screen_for(_player: PlayerState) -> Dictionary:

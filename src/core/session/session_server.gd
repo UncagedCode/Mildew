@@ -112,7 +112,10 @@ func receive_text(conn_id: int, text: String) -> void:
 		if c.msg_count == max_rate + 1:
 			_error(conn_id, Protocol.E_RATE_LIMIT)
 		return
-	var parsed := Protocol.parse(text, cfg.i("network.max_message_bytes", 4096))
+	# Drawings (Police Sketch) get a larger, still bounded, frame; everything else stays small.
+	var parsed := Protocol.parse(text, cfg.i("network.max_drawing_bytes", 49152))
+	if parsed.ok and str(parsed.msg.get("t")) != Protocol.C_DRAW and text.to_utf8_buffer().size() > cfg.i("network.max_message_bytes", 4096):
+		parsed = {"ok": false, "code": Protocol.E_TOO_LARGE}
 	if not parsed.ok:
 		_invalid(conn_id, parsed.code)
 		return
@@ -881,7 +884,7 @@ func emit_tv(evt: Dictionary) -> void:
 
 
 ## Phone-facing moments where a private irregularity may (rarely) slip through (docs/03).
-const INTERFERENCE_MOMENTS := {"question_open": "question_open", "wv_write_open": "write_open", "wv_vote_open": "vote_open",
+const INTERFERENCE_MOMENTS := {"question_open": "question_open", "wv_write_open": "write_open", "wv_vote_open": "vote_open", "ps_step": "write_open",
 	"hole_stage": "hole_stage", "segment": "boundary"}
 
 

@@ -31,7 +31,8 @@ const FORMATS := {
 		"tags": ["social", "writing", "discussion", "good-middle", "good-finale", "2-player-safe"]},
 	"mouthfeel": {"title": "MOUTHFEEL", "kind": "game", "implemented": true,
 		"tags": ["writing", "gross", "good-middle", "good-finale", "2-player-safe"]},
-	"police_sketch": {"title": "POLICE SKETCH", "kind": "game", "implemented": false, "tags": ["drawing", "social", "long"]},
+	"police_sketch": {"title": "POLICE SKETCH", "kind": "game", "implemented": true,
+		"tags": ["drawing", "social", "long", "good-middle", "2-player-safe"]},
 	"do_not_press_that": {"title": "DO NOT PRESS THAT", "kind": "game", "implemented": false, "tags": ["cooperation", "chaotic", "tense"]},
 	"basement": {"title": "THE BASEMENT", "kind": "game", "implemented": false, "tags": ["deduction", "discussion", "long", "unsettling-capable"]},
 }
@@ -200,6 +201,13 @@ func plan_episode(player_ids: Array, _legacy_question_count: int = 0) -> Array:
 ## Picks an implemented game for a slot role tag (good-opener / good-middle / good-finale),
 ## avoiding games already used this show. Logged with reasons (docs/03 "Director logging").
 func choose_game(role_tag: String, player_count: int) -> String:
+	var pl: Array = force.get("playlist", [])
+	if games_this_show.size() < pl.size():
+		var g := str(pl[games_this_show.size()])
+		if FORMATS.has(g) and FORMATS[g].implemented and not games_this_show.has(g):
+			games_this_show.append(g)
+			log_decision("SelectGame", g, ["forced playlist (developer/test)"])
+			return g
 	if force.has("game") and FORMATS.has(force.game) and FORMATS[force.game].implemented and not games_this_show.has(force.game):
 		games_this_show.append(str(force.game))
 		log_decision("SelectGame", force.game, ["forced by developer"])
@@ -243,7 +251,7 @@ func choose_game(role_tag: String, player_count: int) -> String:
 
 
 const CONTENT_KIND := {"hole": "hole", "real_or_mildew": "real_or_mildew", "guess_the_genitals": "guess_the_genitals",
-	"mildew_survey": "mildew_survey", "mouthfeel": "mouthfeel"}
+	"mildew_survey": "mildew_survey", "mouthfeel": "mouthfeel", "police_sketch": "police_sketch"}
 
 
 ## A game is only scheduled when it has enough content at this installation's familiarity tier.
@@ -292,6 +300,20 @@ func plan_game(game_id: String, player_count: int, finale: bool = false) -> Arra
 			out.append_array(_plan_survey(player_count, fmult))
 		"mouthfeel":
 			out.append_array(_plan_mouthfeel(player_count, fmult))
+		"police_sketch":
+			# 2–3 players: two short rounds (each draws one, interprets one, then swap with new prompts).
+			var rounds := 2 if player_count <= 3 else 1
+			out.append({"kind": "sting", "game_id": "police_sketch", "title": "POLICE SKETCH", "style": "ps", "seconds": 3.6})
+			out.append({"kind": "link", "lines": [["graham", "ps_intro"], ["graham", "ps_rules_two" if player_count <= 3 else "ps_rules"]], "camera": "cam1"})
+			for r in rounds:
+				var its := pick_items("police_sketch", "police_sketch", player_count, player_count)
+				if force.has("ps_variant"):
+					var bp := (content.query("police_sketch", "police_sketch", 5, 0) if content else []).filter(func(i): return i.get("variant") == str(force.ps_variant))
+					if not bp.is_empty() and not its.is_empty():
+						its[0] = bp[0]
+				out.append({"kind": "sketch", "items": its, "game_id": "police_sketch", "mid_game": r > 0,
+					"multiplier": fmult * (1.5 if fmult > 1.0 and r == rounds - 1 else 1.0)})
+			out.append({"kind": "link", "lines": [["graham", "ps_outro"]], "camera": "cam1", "mid_game": false})
 		"hole":
 			var rounds := _ci("hole.rounds_per_game", 6)
 			var items := pick_hole_items(rounds, player_count)

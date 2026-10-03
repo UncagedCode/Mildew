@@ -79,6 +79,12 @@ func validate(db: ContentDB, release_mode: bool = false) -> bool:
 					_validate_survey(item, where)
 				"interference":
 					_validate_interference(item, where)
+				"police_sketch":
+					_validate_common_game(item, where)
+					if str(item.get("prompt", "")).strip_edges() == "" or str(item.get("prompt", "")).length() > 140:
+						errors.append("%s: sketch prompt missing or too long" % where)
+					if not ["standard", "body_part"].has(str(item.get("variant", "standard"))):
+						errors.append("%s: unknown sketch variant '%s'" % [where, str(item.get("variant"))])
 				"mouthfeel":
 					_validate_mouthfeel(item, where, release_mode)
 				"graham_lines", "announcer_lines":

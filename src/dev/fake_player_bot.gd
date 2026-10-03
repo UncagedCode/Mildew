@@ -113,6 +113,34 @@ func _on_screen(screen: String, data: Dictionary) -> void:
 			var delay := _delay(window)
 			if delay < window:
 				_queue(delay, {"t": Protocol.C_VOTE, "q": data.get("qid", ""), "c": allowed[rng.randi_range(0, allowed.size() - 1)]})
+		"ps_draw":
+			var key := "d:%s" % data.get("qid", "")
+			if answered_qids.has(key) or personality == "afk":
+				return
+			answered_qids[key] = true
+			var window := float(data.get("remaining_ms", 30000)) / 1000.0
+			var delay := _delay(window)
+			if delay < window:
+				_queue(delay, {"t": Protocol.C_DRAW, "q": data.get("qid", ""), "strokes": _bot_strokes()})
+		"ps_describe":
+			var key := "s:%s" % data.get("qid", "")
+			if answered_qids.has(key) or personality == "afk":
+				return
+			answered_qids[key] = true
+			var window := float(data.get("remaining_ms", 20000)) / 1000.0
+			var delay := _delay(window)
+			if delay < window:
+				_queue(delay, {"t": Protocol.C_SUBMIT, "q": data.get("qid", ""), "text": _bot_text(false)})
+		"ps_vote":
+			var key := "pv:%s" % data.get("qid", "")
+			if answered_qids.has(key) or personality == "afk":
+				return
+			answered_qids[key] = true
+			var own: Array = (data.get("own", []) as Array).map(func(x): return int(x))
+			var allowed: Array = range((data.get("options", []) as Array).size()).filter(func(i): return not own.has(i))
+			if allowed.is_empty():
+				return
+			_queue(_delay(float(data.get("remaining_ms", 20000)) / 1000.0), {"t": Protocol.C_VOTE, "q": data.get("qid", ""), "c": allowed[rng.randi_range(0, allowed.size() - 1)]})
 		"wv_rate":
 			var key := "r:%s" % data.get("qid", "")
 			if answered_qids.has(key) or personality == "afk":
@@ -206,6 +234,22 @@ func _choose(qid: String, options: Array) -> int:
 const BOT_TEXT := ["A wet sock", "Grandad's teeth", "Lukewarm regret", "A damp sponge full of soup", "Something from the canteen",
 	"Like chewing a sad flannel", "Hot gravy", "The Green Room sofa", "A pickled egg", "Ham"]
 const BOT_CHAIN := ["but warm", "with hair in it", "served in a shoe", "left out overnight", "with a surprise inside"]
+
+
+## A crude bot "drawing": a few wobbly strokes (exercises the real stroke validation).
+func _bot_strokes() -> Array:
+	var out: Array = []
+	for k in rng.randi_range(2, 6):
+		var p: Array = []
+		var x := rng.randi_range(100, 900)
+		var y := rng.randi_range(100, 900)
+		for i in rng.randi_range(4, 30):
+			x = clampi(x + rng.randi_range(-60, 60), 0, 1000)
+			y = clampi(y + rng.randi_range(-60, 60), 0, 1000)
+			p.append(x)
+			p.append(y)
+		out.append({"w": rng.randi_range(1, 3), "p": p})
+	return out
 
 
 func _bot_text(chain: bool) -> String:

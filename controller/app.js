@@ -33,7 +33,7 @@
     if (text !== undefined && text !== null) e.textContent = text;
     return e;
   }
-  function clear() { lcd.textContent = ""; keys.textContent = ""; cancelAnimationFrame(S.timerRAF); }
+  function clear() { lcd.textContent = ""; keys.textContent = ""; cancelAnimationFrame(S.timerRAF); S.psKey = ""; S.wvKey = ""; }
   function buzz(p) { try { if (navigator.vibrate) navigator.vibrate(p); } catch (e) { /* unsupported */ } }
   function key(label, cls, onTap, cap) {
     const b = el("button", "key " + (cls || ""));
@@ -384,6 +384,9 @@
       case "wv_vote": return scrWVVote(d);
       case "wv_rate": return scrWVRate(d);
       case "wv_result": return scrWVResult(d);
+      case "ps_draw": return scrPSDraw(d);
+      case "ps_describe": return scrPSDescribe(d);
+      case "ps_vote": return scrWVVote(Object.assign({}, d, { own: -1, ownList: d.own || [] }));
       case "locked": return scrLocked(d);
       case "result": return scrResult(d);
       case "scores": return scrScores(d);
@@ -481,13 +484,16 @@
   function scrWVWrite(d) {
     const wkey = "draft.wv." + d.qid + "." + (d.chain ? String(d.prompt || "").length : 0);
     if (S.wvKey === wkey && document.getElementById("wv-text")) return; // same screen re-sent: keep typing
-    clear();
-    S.wvKey = wkey;
+    clear(); S.psKey = "";
     buzz([30, 40, 30]);
     if (d.header) lcd.appendChild(el("div", "sub", d.header));
     if (d.category) lcd.appendChild(el("div", "sub warn", "VOTE CATEGORY: " + d.category));
     lcd.appendChild(el("div", "prompt", d.prompt));
     if (d.hint) lcd.appendChild(el("div", "sub", d.hint));
+    wvWriter(d, wkey, d.chain ? "MAKE IT WORSE" : "SUBMIT");
+  }
+  function wvWriter(d, wkey, label) {
+    S.wvKey = wkey;
     wvTimer(d);
     const ta = el("textarea", "wv-text"); ta.id = "wv-text";
     ta.maxLength = d.max || 80; ta.rows = 3; ta.autocapitalize = "sentences"; ta.spellcheck = false;
@@ -498,7 +504,7 @@
     ta.addEventListener("input", upd);
     upd();
     keys.appendChild(ta); keys.appendChild(count);
-    const b = key(d.chain ? "MAKE IT WORSE" : "SUBMIT", "go plain", (btn) => {
+    const b = key(label, "go plain", (btn) => {
       const v = ta.value.trim();
       if (!v) { toast("WRITE SOMETHING FIRST."); return; }
       if (S.status.paused) { toast("TRANSMISSION IS ON HOLD."); return; }
@@ -522,7 +528,7 @@
     lcd.appendChild(el("div", "title", d.ask || "VOTE"));
     wvTimer(d);
     (d.options || []).forEach((opt, i) => {
-      const mine = i === d.own;
+      const mine = i === d.own || (d.ownList || []).indexOf(i) >= 0;
       const b = key(mine ? opt + "  (YOURS)" : opt, "plain long " + (mine ? "grey" : ["a", "b", "c", "d"][i % 4]), (btn) => {
         if (S.status.paused) { toast("TRANSMISSION IS ON HOLD."); return; }
         for (const k of keys.querySelectorAll(".key")) k.disabled = true;
@@ -560,6 +566,102 @@
     if (d.votes !== undefined && d.mine) lcd.appendChild(el("div", "sub", d.votes + " VOTE" + (d.votes === 1 ? "" : "S")));
     lcd.appendChild(el("div", "spacer"));
     lcd.appendChild(el("div", "sub", "YOUR SCORE: " + fmt(d.score)));
+  }
+
+  // ---------------- POLICE SKETCH ----------------
+  // Strokes are normalised to 0..1000 and thinned (min step) so a drawing stays well under the
+  // host's drawing frame limit. The draft lives in local storage per step, so a reload or
+  // reconnect restores the drawing; the screen is not rebuilt while drawing.
+  const PS_W = [0, 6, 14, 40];
+  const PS_MAX_POINTS = 5500, PS_MAX_STROKES = 280;
+  function psRender(cv, strokes) {
+    const g = cv.getContext("2d");
+    g.fillStyle = "#f3efe4"; g.fillRect(0, 0, cv.width, cv.height);
+    g.lineCap = "round"; g.lineJoin = "round";
+    const sx = cv.width / 1000, sy = cv.height / 1000;
+    for (const st of strokes) {
+      const p = st.p || []; if (p.length < 2) continue;
+      g.strokeStyle = st.e ? "#f3efe4" : "#1b1b1f"; g.fillStyle = g.strokeStyle;
+      g.lineWidth = Math.max(1.5, (st.e ? 40 : PS_W[st.w || 1]) * sx);
+      if (p.length === 2) { g.beginPath(); g.arc(p[0] * sx, p[1] * sy, g.lineWidth / 2, 0, 7); g.fill(); continue; }
+      g.beginPath(); g.moveTo(p[0] * sx, p[1] * sy);
+      for (let i = 2; i < p.length; i += 2) g.lineTo(p[i] * sx, p[i + 1] * sy);
+      g.stroke();
+    }
+  }
+  function psCanvas() {
+    const cv = document.createElement("canvas"); cv.className = "ps-canvas";
+    const side = Math.min(lcd.clientWidth - 8 || 320, 520);
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    cv.width = Math.round(side * dpr); cv.height = Math.round(side * dpr);
+    cv.style.width = side + "px"; cv.style.height = side + "px";
+    return cv;
+  }
+  function scrPSDraw(d) {
+    const dkey = "draft.ps." + d.qid;
+    if (S.psKey === dkey && document.getElementById("ps-draw")) return;
+    clear(); S.wvKey = ""; S.psKey = dkey;
+    buzz([30, 40, 30]);
+    lcd.appendChild(el("div", "sub", d.header || "POLICE SKETCH"));
+    lcd.appendChild(el("div", "sub warn", d.witness || "THE WITNESS SAYS:"));
+    lcd.appendChild(el("div", "title ps-prompt", "\u201c" + (d.prompt || "") + "\u201d"));
+    wvTimer(d);
+    const cv = psCanvas(); cv.id = "ps-draw"; lcd.appendChild(cv);
+    let strokes = [];
+    try { strokes = JSON.parse(store.get(dkey) || "[]"); } catch (e) { strokes = []; }
+    let tool = { w: 1, e: false }, cur = null, points = strokes.reduce((n, s) => n + s.p.length / 2, 0);
+    const save = () => store.set(dkey, JSON.stringify(strokes));
+    const redraw = () => psRender(cv, cur ? strokes.concat([cur]) : strokes);
+    const pos = (ev) => { const r = cv.getBoundingClientRect();
+      return [Math.max(0, Math.min(1000, Math.round((ev.clientX - r.left) / r.width * 1000))), Math.max(0, Math.min(1000, Math.round((ev.clientY - r.top) / r.height * 1000)))]; };
+    cv.addEventListener("pointerdown", (ev) => {
+      ev.preventDefault();
+      if (strokes.length >= PS_MAX_STROKES || points >= PS_MAX_POINTS) { toast("THE EVIDENCE BAG IS FULL. SUBMIT IT."); return; }
+      cv.setPointerCapture(ev.pointerId);
+      const [x, y] = pos(ev); cur = { w: tool.w, e: tool.e, p: [x, y] }; points++; redraw();
+    });
+    cv.addEventListener("pointermove", (ev) => {
+      if (!cur) return; ev.preventDefault();
+      const [x, y] = pos(ev), n = cur.p.length;
+      const dx = x - cur.p[n - 2], dy = y - cur.p[n - 1];
+      if (dx * dx + dy * dy < 64 || points >= PS_MAX_POINTS) return;
+      cur.p.push(x, y); points++; redraw();
+    });
+    const end = () => { if (!cur) return; strokes.push(cur); cur = null; save(); redraw(); };
+    cv.addEventListener("pointerup", end); cv.addEventListener("pointercancel", end); cv.addEventListener("pointerleave", end);
+    cv.style.touchAction = "none";
+    redraw();
+    const tools = el("div", "keyrow ps-tools"); keys.appendChild(tools);
+    const tb = (label, fn) => { const b = el("button", "key plain small grey", label); b.addEventListener("click", (ev) => { ev.preventDefault(); buzz(10); fn(b); }); tools.appendChild(b); return b; };
+    const pick = (b, t) => { tool = t; for (const k of tools.children) k.classList.remove("on"); b.classList.add("on"); };
+    const thin = tb("THIN", (b) => pick(b, { w: 1, e: false }));
+    tb("THICK", (b) => pick(b, { w: 2, e: false }));
+    tb("RUB", (b) => pick(b, { w: 3, e: true }));
+    thin.classList.add("on");
+    const row2 = el("div", "keyrow"); keys.appendChild(row2);
+    const ub = el("button", "key plain small grey", "UNDO"); ub.addEventListener("click", (ev) => { ev.preventDefault(); const s0 = strokes.pop(); if (s0) points -= s0.p.length / 2; save(); redraw(); });
+    const cb = el("button", "key plain small grey", "CLEAR"); cb.addEventListener("click", (ev) => { ev.preventDefault(); if (!strokes.length || confirm("Clear the whole drawing?")) { strokes = []; points = 0; save(); redraw(); } });
+    row2.appendChild(ub); row2.appendChild(cb);
+    const sb = key("SUBMIT EVIDENCE", "go plain", (btn) => {
+      if (!strokes.length) { toast("DRAW SOMETHING FIRST."); return; }
+      if (S.status.paused) { toast("TRANSMISSION IS ON HOLD."); return; }
+      if (send({ t: "draw", q: d.qid, strokes })) { btn.disabled = true; btn.classList.add("pressed"); store.del(dkey); }
+      else toast("NOT CONNECTED. YOUR DRAWING IS SAVED; TRY AGAIN IN A MOMENT.");
+    });
+    sb.id = "ps-submit";
+  }
+  function scrPSDescribe(d) {
+    const wkey = "draft.wv." + d.qid + ".0";
+    if (S.wvKey === wkey && document.getElementById("wv-text")) return;
+    clear(); S.psKey = "";
+    buzz([30, 40, 30]);
+    lcd.appendChild(el("div", "sub", d.header || "POLICE SKETCH"));
+    lcd.appendChild(el("div", "sub warn", "WHAT IS THIS A DRAWING OF?"));
+    if (d.missing) lcd.appendChild(el("div", "title", "NO DRAWING WAS SUBMITTED. MAKE SOMETHING UP."));
+    else { const cv = psCanvas(); cv.id = "ps-view"; lcd.appendChild(cv); psRender(cv, d.strokes || []); }
+    S.wvKey = ""; // let the shared writer build the input below
+    const holder = { qid: d.qid, header: null, prompt: "", hint: "", max: d.max || 70, remaining_ms: d.remaining_ms, total_ms: d.total_ms };
+    wvWriter(holder, wkey, "DESCRIBE IT");
   }
 
   // ---------------- HOLE ----------------

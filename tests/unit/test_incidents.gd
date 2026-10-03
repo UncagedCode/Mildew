@@ -131,6 +131,7 @@ func test_shows_with_incidents_still_complete() -> void:
 		h.add_bot("Claire", "high_accuracy", seed + 2)
 		a.auto_start_at_count = 3
 		h.session.director.force["incident"] = "t0.lower_third_typo"
+		h.session.director.force["game"] = "hole"
 		check(h.run_until(func(): return h.session.phase == SessionServer.Phase.ENDED, 700.0), "busy-incident show completes (seed %d)" % seed)
 		var incs := h.events_of("incident")
 		check(incs.size() >= 1, "incidents happened (seed %d: %d)" % [seed, incs.size()])

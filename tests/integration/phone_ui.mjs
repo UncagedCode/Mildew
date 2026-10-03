@@ -18,7 +18,7 @@ const check = (ok, msg) => { checks.push({ ok: !!ok, msg }); console.log(ok ? " 
 
 const port = 18300, wsPort = 18301;
 const proc = spawn("godot", ["--headless", "--path", ROOT, "--", "--mildew-host", "--port", String(port), "--ws-port", String(wsPort),
-  "--timescale", "6", "--save-dir", `user://phone_${Date.now()}`], { stdio: ["ignore", "pipe", "pipe"] });
+  "--timescale", "6", "--force-games", "hole,mildew_survey,police_sketch", "--save-dir", `user://phone_${Date.now()}`], { stdio: ["ignore", "pipe", "pipe"] });
 let ready = null, buf = "";
 const events = [];
 proc.stdout.on("data", (d) => { buf += d; let i; while ((i = buf.indexOf("\n")) >= 0) { const l = buf.slice(0, i); buf = buf.slice(i + 1);
@@ -129,14 +129,85 @@ try {
   await A.waitForSelector("text=YOUR SCORE", { timeout: 60000 });
   check(await A.locator("text=/CORRECT|WRONG|RIGHT SORT OF THING/").count(), "Hole result screen shown");
   await shot(A, "16_hole_result");
-  // finish
+  // --- Mildew Survey: type an answer, survive a reload mid-typing, vote, no self-vote -------
+  await A.waitForSelector("#wv-text", { timeout: 120000 });
+  await B.waitForSelector("#wv-text", { timeout: 10000 });
+  await A.fill("#wv-text", "A damp sock with ambitions");
+  await shot(A, "17_survey_write");
+  await B.fill("#wv-text", "Grandad's spare teeth");
+  await B.reload();
+  await B.waitForSelector("#wv-text", { timeout: 15000 });
+  check((await B.inputValue("#wv-text")) === "Grandad's spare teeth", "unsent answer survives a page reload (local draft)");
+  await A.click("#wv-submit");
+  await A.waitForSelector("text=SUBMITTED. WAITING FOR THE OTHERS.", { timeout: 5000 });
+  await B.click("#wv-submit");
+  await A.waitForSelector("text=VOTE FOR THE BEST", { timeout: 20000 });
+  await shot(A, "18_survey_vote");
+  const mine = A.locator('.key:has-text("(YOURS)")');
+  check(await mine.count() === 1 && await mine.isDisabled(), "own answer shown and disabled on the vote screen");
+  check(await A.locator(".key.long").count() >= 3, "two players still get 3+ answers to vote on (archive filler)");
+  await A.locator(".key.long:not([disabled])").first().click();
+  await A.waitForSelector("text=VOTE RECEIVED.", { timeout: 5000 });
+  const bv = B.locator(".key.long:not([disabled])");
+  if (await bv.count()) await bv.first().click();
+  await A.waitForSelector("text=YOUR SCORE", { timeout: 30000 });
+  await shot(A, "19_survey_result");
+  check(events.some((e) => e.e === "wv_reveal"), "TV received the survey reveal");
+  // --- Police Sketch: draw with a finger, survive a reload mid-drawing, interpret, vote ---------
+  const scribble = async (p, sel, seed) => {
+    const box = await p.locator(sel).boundingBox();
+    for (let k = 0; k < 3; k++) {
+      await p.mouse.move(box.x + box.width * (0.2 + 0.2 * k), box.y + box.height * 0.3);
+      await p.mouse.down();
+      for (let i = 1; i <= 12; i++) await p.mouse.move(box.x + box.width * (0.2 + 0.2 * k + 0.02 * i), box.y + box.height * (0.3 + 0.04 * i + 0.01 * seed), { steps: 2 });
+      await p.mouse.up();
+    }
+  };
+  // Earlier survey rounds may still be running; answer them until the sketch arrives.
+  for (let i = 0; i < 600 && !(await A.locator("#ps-draw").count()); i++) {
+    for (const p of [A, B]) {
+      if (await p.locator("#wv-text").count() && !(await p.locator("#wv-submit[disabled]").count())) { await p.fill("#wv-text", "Ham").catch(() => {}); await p.click("#wv-submit").catch(() => {}); }
+      const v = p.locator(".key.long:not([disabled])"); if (await v.count()) await v.first().click().catch(() => {});
+    }
+    await sleep(300);
+  }
+  await A.waitForSelector("#ps-draw", { timeout: 60000 });
+  await B.waitForSelector("#ps-draw", { timeout: 10000 });
+  await scribble(A, "#ps-draw", 1);
+  await scribble(B, "#ps-draw", 2);
+  await shot(A, "20_sketch_draw");
+  const draftBefore = await B.evaluate(() => Object.keys(localStorage).filter((k) => k.includes("draft.ps")).map((k) => localStorage.getItem(k).length)[0] || 0);
+  await B.reload();
+  await B.waitForSelector("#ps-draw", { timeout: 15000 });
+  const draftAfter = await B.evaluate(() => Object.keys(localStorage).filter((k) => k.includes("draft.ps")).map((k) => localStorage.getItem(k).length)[0] || 0);
+  check(draftBefore > 20 && draftAfter === draftBefore, `drawing survives a reload (draft ${draftBefore} → ${draftAfter} bytes)`);
+  await A.click("#ps-submit");
+  await B.click("#ps-submit");
+  await A.waitForSelector("#ps-view", { timeout: 20000 });
+  await shot(A, "21_sketch_describe");
+  check(await A.locator("#ps-view").count() === 1, "interpreter sees the other contestant's drawing");
+  await A.fill("#wv-text", "A pigeon in a stolen hat"); await A.click("#wv-submit");
+  await B.waitForSelector("#wv-text", { timeout: 10000 }); await B.fill("#wv-text", "Three worms having a row"); await B.click("#wv-submit");
+  check(true, "both interpretations submitted");
+  await A.waitForSelector("text=FUNNIEST MUTATION", { timeout: 120000 });
+  await shot(A, "22_sketch_vote");
+  check(await A.locator('.key:has-text("(YOURS)")').count() >= 1, "own case disabled when voting");
+  check(events.some((e) => e.e === "ps_reveal_chain" && e.chain.steps[0].strokes.length >= 1), "TV received the drawings over the real socket");
+  // finish (answer anything that appears: multiple choice, writing, votes, ratings)
   for (let i = 0; i < 2000; i++) {
-    for (const p of [A, B]) { const k = p.locator(".key.c"); if (await k.count()) await k.first().click().catch(() => {}); }
+    for (const p of [A, B]) {
+      const k = p.locator(".key.c"); if (await k.count()) await k.first().click().catch(() => {});
+      if (await p.locator("#wv-text").count() && !(await p.locator("#wv-submit[disabled]").count())) {
+        await p.fill("#wv-text", "Warm gravy").catch(() => {}); await p.click("#wv-submit").catch(() => {});
+      }
+      const v = p.locator(".key.long:not([disabled])"); if (await v.count()) await v.first().click().catch(() => {});
+      const r = p.locator('.keyrow .key:has-text("4")'); if (await r.count()) await r.first().click().catch(() => {});
+    }
     if (await A.locator("text=END OF TRANSMISSION").count()) break;
     await sleep(300);
   }
   check(await A.locator("text=END OF TRANSMISSION").count(), "phone reaches END OF TRANSMISSION");
-  await shot(A, "17_ended_captain");
+  await shot(A, "23_ended_captain");
   check(consoleErrors.length === 0, "no page JS errors: " + consoleErrors.join(" | "));
 } catch (e) {
   check(false, "exception: " + e.message);

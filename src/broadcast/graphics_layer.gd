@@ -450,6 +450,10 @@ func _draw_sting() -> void:
 			bg = Color(0.05, 0.08, 0.3)
 			ca = Color("#ff9a1f")
 			cb = Color("#f6efd8")
+		"ps":       # interview-room grey / evidence-tag yellow
+			bg = Color(0.1, 0.11, 0.12)
+			ca = Color("#f2d230")
+			cb = Color("#8fa3b0")
 		"mf":       # bile green / gravy brown
 			bg = Color(0.18, 0.1, 0.03)
 			ca = Color("#a8c43a")

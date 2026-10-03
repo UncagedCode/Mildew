@@ -1,0 +1,574 @@
+{
+ "pack_id": "police_sketch.core_cp5",
+ "content_kind": "police_sketch",
+ "game_id": "police_sketch",
+ "_comment": "Police Sketch prompts (CP5). Original writing. variant body_part: Graham describes unusual (animal) anatomy without showing it.",
+ "items": [
+  {
+   "id": "ps.a_suspicious_looking_pigeon_wearing_something_it",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "drawing",
+    "grossness_1",
+    "animals"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "variant": "standard",
+   "prompt": "A suspicious-looking pigeon wearing something it clearly stole"
+  },
+  {
+   "id": "ps.a_man_who_has_just_found_out_what_was_in_the_pie",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "drawing",
+    "grossness_1",
+    "food"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "variant": "standard",
+   "prompt": "A man who has just found out what was in the pie"
+  },
+  {
+   "id": "ps.your_nan_winning_a_fight_with_a_goose",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "drawing",
+    "grossness_1",
+    "animals"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "variant": "standard",
+   "prompt": "Your nan winning a fight with a goose"
+  },
+  {
+   "id": "ps.a_cat_that_knows_what_you_did",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "drawing",
+    "grossness_1",
+    "animals"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "variant": "standard",
+   "prompt": "A cat that knows what you did"
+  },
+  {
+   "id": "ps.a_haunted_microwave",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "drawing",
+    "grossness_1",
+    "household"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "variant": "standard",
+   "prompt": "A haunted microwave"
+  },
+  {
+   "id": "ps.a_dog_that_has_eaten_the_wedding_cake",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "drawing",
+    "grossness_1",
+    "animals"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "variant": "standard",
+   "prompt": "A dog that has eaten the wedding cake"
+  },
+  {
+   "id": "ps.a_vicar_falling_into_a_trifle",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "drawing",
+    "grossness_1",
+    "food"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "variant": "standard",
+   "prompt": "A vicar falling into a trifle"
+  },
+  {
+   "id": "ps.the_world_s_saddest_sandwich",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "drawing",
+    "grossness_1",
+    "food"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "variant": "standard",
+   "prompt": "The world's saddest sandwich"
+  },
+  {
+   "id": "ps.a_horse_at_a_job_interview",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "drawing",
+    "grossness_1",
+    "animals"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "variant": "standard",
+   "prompt": "A horse at a job interview"
+  },
+  {
+   "id": "ps.a_sausage_that_is_going_places",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "drawing",
+    "grossness_1",
+    "food"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "variant": "standard",
+   "prompt": "A sausage that is going places"
+  },
+  {
+   "id": "ps.a_toddler_operating_a_forklift",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "drawing",
+    "grossness_1",
+    "household"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "variant": "standard",
+   "prompt": "A toddler operating a forklift"
+  },
+  {
+   "id": "ps.a_crab_that_has_lost_its_other_shoe",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "drawing",
+    "grossness_1",
+    "animals"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "variant": "standard",
+   "prompt": "A crab that has lost its other shoe"
+  },
+  {
+   "id": "ps.a_very_angry_bath",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "drawing",
+    "grossness_1",
+    "household"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "variant": "standard",
+   "prompt": "A very angry bath"
+  },
+  {
+   "id": "ps.a_pensioner_on_a_jet_ski",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "drawing",
+    "grossness_1"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "variant": "standard",
+   "prompt": "A pensioner on a jet ski"
+  },
+  {
+   "id": "ps.a_pigeon_eating_chips_off_another_pigeon",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "drawing",
+    "grossness_1",
+    "animals"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "variant": "standard",
+   "prompt": "A pigeon eating chips off another pigeon"
+  },
+  {
+   "id": "ps.graham_on_holiday",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "drawing",
+    "grossness_1",
+    "studio_world"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "variant": "standard",
+   "prompt": "Graham on holiday"
+  },
+  {
+   "id": "ps.a_lighthouse_having_a_panic_attack",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "drawing",
+    "grossness_1"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "variant": "standard",
+   "prompt": "A lighthouse having a panic attack"
+  },
+  {
+   "id": "ps.two_badgers_sharing_a_milkshake",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "drawing",
+    "grossness_1",
+    "animals"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "variant": "standard",
+   "prompt": "Two badgers sharing a milkshake"
+  },
+  {
+   "id": "ps.a_man_trapped_inside_a_giant_jelly",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "drawing",
+    "grossness_1",
+    "food"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "variant": "standard",
+   "prompt": "A man trapped inside a giant jelly"
+  },
+  {
+   "id": "ps.the_ghost_of_a_kebab",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "drawing",
+    "grossness_1",
+    "food"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "variant": "standard",
+   "prompt": "The ghost of a kebab"
+  },
+  {
+   "id": "ps.a_fridge_with_too_many_opinions",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "drawing",
+    "grossness_1",
+    "household"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "variant": "standard",
+   "prompt": "A fridge with too many opinions"
+  },
+  {
+   "id": "ps.a_snail_that_has_made_bad_choices",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "drawing",
+    "grossness_1",
+    "animals"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "variant": "standard",
+   "prompt": "A snail that has made bad choices"
+  },
+  {
+   "id": "ps.a_sheep_pretending_to_be_a_cloud",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "drawing",
+    "grossness_1",
+    "animals"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "variant": "standard",
+   "prompt": "A sheep pretending to be a cloud"
+  },
+  {
+   "id": "ps.a_bin_lorry_in_love",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "drawing",
+    "grossness_1"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "variant": "standard",
+   "prompt": "A bin lorry in love"
+  },
+  {
+   "id": "ps.someone_s_dad_dancing_at_a_funeral",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "drawing",
+    "grossness_1"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "variant": "standard",
+   "prompt": "Someone's dad dancing at a funeral"
+  },
+  {
+   "id": "ps.a_duck_committing_tax_fraud",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "drawing",
+    "grossness_1",
+    "animals"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "variant": "standard",
+   "prompt": "A duck committing tax fraud"
+  },
+  {
+   "id": "ps.a_slug_in_a_wedding_dress",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "drawing",
+    "grossness_1",
+    "animals"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "variant": "standard",
+   "prompt": "A slug in a wedding dress"
+  },
+  {
+   "id": "ps.the_green_room_sofa_after_a_long_night",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "drawing",
+    "grossness_1",
+    "studio_world"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "variant": "standard",
+   "prompt": "The Green Room sofa after a long night"
+  },
+  {
+   "id": "ps.a_ham_on_the_run",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "drawing",
+    "grossness_1",
+    "studio_world"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "variant": "standard",
+   "prompt": "A ham on the run"
+  },
+  {
+   "id": "ps.a_man_who_sneezed_so_hard_he_left_his_body",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "drawing",
+    "grossness_1",
+    "body_fluids"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "variant": "standard",
+   "prompt": "A man who sneezed so hard he left his body"
+  },
+  {
+   "id": "ps.an_octopus_doing_the_washing_up",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "drawing",
+    "grossness_1",
+    "animals"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "variant": "standard",
+   "prompt": "An octopus doing the washing up"
+  },
+  {
+   "id": "ps.a_badger_in_a_hot_tub",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "drawing",
+    "grossness_1",
+    "animals"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "variant": "standard",
+   "prompt": "A badger in a hot tub"
+  },
+  {
+   "id": "ps.neil_from_the_production_team",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 3,
+   "content_tags": [
+    "drawing",
+    "grossness_1",
+    "studio_world"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "variant": "standard",
+   "prompt": "Neil from the production team"
+  },
+  {
+   "id": "ps.the_locked_room_from_memory",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 3,
+   "content_tags": [
+    "drawing",
+    "grossness_1",
+    "studio_world"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "variant": "standard",
+   "prompt": "The locked room, from memory"
+  },
+  {
+   "id": "ps.body.1",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "drawing",
+    "animal_anatomy",
+    "grossness_2"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "variant": "body_part",
+   "prompt": "Graham describes: a long pink flap that folds back on itself like a deckchair, with two little hooks at the end"
+  },
+  {
+   "id": "ps.body.2",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "drawing",
+    "animal_anatomy",
+    "grossness_2"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "variant": "body_part",
+   "prompt": "Graham describes: a soft tube, coiled like a garden hose, with a frilly bit at the business end"
+  },
+  {
+   "id": "ps.body.3",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "drawing",
+    "animal_anatomy",
+    "grossness_2"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "variant": "body_part",
+   "prompt": "Graham describes: a hard, curved bone, about the length of a ruler, slightly bent, rather proud of itself"
+  },
+  {
+   "id": "ps.body.4",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "drawing",
+    "animal_anatomy",
+    "grossness_2"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "variant": "body_part",
+   "prompt": "Graham describes: a spiky little club, like a medieval weapon, but tiny, and on a beetle"
+  }
+ ]
+}

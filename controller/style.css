@@ -178,3 +178,9 @@ body {
 @keyframes intf-in { from { opacity: 0; transform: translateX(-6px); } to { opacity: 1; transform: none; } }
 .intf-unit { color: #ff5a4a !important; }
 .intf-field { color: #ff5a4a !important; letter-spacing: 1px; }
+
+/* Police Sketch (CP5) */
+.ps-canvas { display: block; margin: 8px auto 0; border: 3px solid #1b1b1f; border-radius: 2px; background: #f3efe4; touch-action: none;
+  box-shadow: 0 4px 0 rgba(0,0,0,.35); }
+.ps-prompt { text-transform: none; }
+.ps-tools .key.on { filter: none; outline: 3px solid var(--lcd-fg); }

@@ -103,6 +103,8 @@ func _run_headless_host() -> void:
 		get_tree().quit(2)
 		return
 	host.session.time_scale = float(_args.get("timescale", 1.0))
+	if _args.has("force-games"):
+		host.session.director.force["playlist"] = str(_args["force-games"]).split(",", false)
 	host.tv_event.connect(func(e): print("EVT ", JSON.stringify(e)))
 	print("MILDEW_HOST_READY ", JSON.stringify({"http": host.http.port, "ws": host.ws.port, "room": host.session.room_code,
 		"key": host.session.join_key, "join_url": host.join_url, "lan": host.lan_ip, "dev_pin": host.dev_pin}))
@@ -143,6 +145,7 @@ func _build_presentation() -> void:
 	presenter.hole = view.hole
 	presenter.quiz = view.quiz
 	presenter.wv = view.wv
+	presenter.ps = view.ps
 	add_child(presenter)
 	presenter.attach(host)
 	dev = DevOverlay.new()

@@ -81,7 +81,10 @@ func test_hole_full_game_eight_players() -> void:
 	var protocol_errors := 0
 	for bot in h.bots:
 		protocol_errors += bot.errors_received.filter(func(c): return c != Protocol.E_STALE).size()
-	check_eq(protocol_errors, 0, "no non-stale protocol errors")
+	var errs: Array = []
+	for bot in h.bots:
+		errs.append_array(bot.errors_received.filter(func(c): return c != Protocol.E_STALE))
+	check_eq(protocol_errors, 0, "no non-stale protocol errors: %s" % [errs])
 
 
 func test_hole_stage_scoring_and_partial_credit() -> void:

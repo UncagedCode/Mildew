@@ -18,7 +18,7 @@ async function startHost(tag) {
   const port = basePort, wsPort = basePort + 1;
   basePort += 10;
   const args = ["--headless", "--path", ROOT, "--", "--mildew-host", "--port", String(port), "--ws-port", String(wsPort),
-    "--timescale", String(SCALE), "--save-dir", `user://it_${tag}_${Date.now()}`, "--seed", "4242"];
+    "--timescale", String(SCALE), "--save-dir", `user://it_${tag}_${Date.now()}`, "--seed", "4242", "--force-games", "hole"];
   const proc = spawn("godot", args, { stdio: ["ignore", "pipe", "pipe"] });
   const events = [];
   let ready = null, buf = "";

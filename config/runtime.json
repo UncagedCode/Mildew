@@ -6,6 +6,7 @@
   "ws_port": 8081,
   "port_search_span": 10,
   "max_message_bytes": 4096,
+  "max_drawing_bytes": 49152,
   "max_messages_per_second": 30,
   "client_ping_interval_ms": 2000,
   "client_silence_timeout_ms": 9000,
@@ -33,7 +34,7 @@
   "speech_padding_seconds": 0.7,
   "warmup_questions": 2,
   "warmup_max_broadcasts": 2,
-  "games_per_episode": 3,
+  "games_per_episode": 5,
   "finale_multiplier": 1.5
  },
  "dev": {
@@ -67,6 +68,20 @@
   "open_round_min_familiarity": 4,
   "open_round_chance": 0.5,
   "max_studio_holes_per_game": 1
+ },
+ "police_sketch": {
+  "draw_seconds": 50,
+  "describe_seconds": 30,
+  "vote_seconds": 20,
+  "max_chain_steps": 4,
+  "describe_points": 400,
+  "reconstructed_threshold": 0.5,
+  "reconstructed_bonus": 500,
+  "funny_vote_points": 200,
+  "drawing_vote_points": 400,
+  "graham_choice_bonus": 250,
+  "reveal_seconds_per_step": 2.4,
+  "exhibit_chance": 0.25
  },
  "mildew_survey": {
   "rounds_per_game": 4

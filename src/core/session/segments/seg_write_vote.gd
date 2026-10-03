@@ -290,13 +290,13 @@ func handle_action(player: PlayerState, msg: Dictionary) -> String:
 				return ""
 			if sub == "chain":
 				if _chain_pid() != player.player_id:
-					return Protocol.E_INVALID_STATE
+					return Protocol.E_STALE
 				written[player.player_id] = text
 				return ""
-			return Protocol.E_INVALID_STATE
+			return Protocol.E_STALE
 		Protocol.C_VOTE:
 			if sub != "vote":
-				return Protocol.E_INVALID_STATE
+				return Protocol.E_STALE
 			var c = Protocol.get_int(msg, "c")
 			if c == null:
 				return Protocol.E_BAD_PAYLOAD
