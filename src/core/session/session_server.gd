@@ -206,7 +206,7 @@ func _handle(conn_id: int, msg: Dictionary) -> void:
 		Protocol.C_LEAVE:
 			_on_leave(conn_id)
 		Protocol.C_READY:
-			pass  # used by later checkpoints (commercial break early resume)
+			_on_game_action(conn_id, msg)   # routed to the current segment (Basement READY, break early resume)
 		_:
 			if Protocol.GAME_ACTIONS.has(t):
 				_on_game_action(conn_id, msg)

@@ -20,7 +20,9 @@ const C_SUBMIT := "submit"                  # {q, text}  Survey/Mouthfeel: writt
 const C_DRAW := "draw"                      # {q, strokes:[{w,e,p:[x,y,...]}]}  Police Sketch drawing (bounded)
 const C_CTL := "ctl"                        # {q, c (control id), v? (absolute value), n? (button press count)}  Do Not Press That
 const C_VOTE := "vote"                      # {q, c}     Survey/Mouthfeel: vote for answer c (chain: rating 1-5)
-const C_READY := "ready"                    # {}
+const C_INVESTIGATE := "investigate"        # {q, i}     The Basement: use optional investigation i
+const C_THEORY := "theory"                  # {q, a:{question_id: option}}  The Basement: individual final theory
+const C_READY := "ready"                    # {q?}       Basement "ready to submit"; break early resume
 const C_PLAY_AGAIN := "play_again"          # {} (floor captain only)
 const C_LEAVE := "leave"                    # {}
 const C_PING := "ping"                      # {id, rtt?}
@@ -37,10 +39,10 @@ const S_KICKED := "kicked"          # {reason}
 const S_INTERFERE := "interfere"    # {style, text, ms, buzz?, after?}  private, ephemeral, never resent
 
 ## Game actions are routed to the current segment, which validates them against its own state.
-const GAME_ACTIONS := [C_ANSWER, C_LOCK, C_PASS, C_SUBMIT, C_VOTE, C_DRAW, C_CTL]
+const GAME_ACTIONS := [C_ANSWER, C_LOCK, C_PASS, C_SUBMIT, C_VOTE, C_DRAW, C_CTL, C_INVESTIGATE, C_THEORY]
 
 const CLIENT_TYPES := [C_HELLO, C_CHECK_NAME, C_SAY_NAME, C_CREATE_PROFILE, C_SELECT_PROFILE,
-	C_START_SHOW, C_ANSWER, C_LOCK, C_PASS, C_SUBMIT, C_VOTE, C_DRAW, C_CTL, C_READY, C_PLAY_AGAIN, C_LEAVE, C_PING]
+	C_START_SHOW, C_ANSWER, C_LOCK, C_PASS, C_SUBMIT, C_VOTE, C_DRAW, C_CTL, C_INVESTIGATE, C_THEORY, C_READY, C_PLAY_AGAIN, C_LEAVE, C_PING]
 
 # Error codes (stable strings; the controller maps them to on-brand copy).
 const E_BAD_JSON := "bad_json"

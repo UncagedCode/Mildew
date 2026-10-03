@@ -1,0 +1,25 @@
+{
+ "pack_id": "graham.cp7_basement",
+ "content_kind": "graham_lines",
+ "speaker": "graham",
+ "_comment": "Graham lines for The Basement (CP7). Per-case reveal lines live in the case data (graham_reveal).",
+ "items": [
+  {"id": "g.bas_intro.1", "category": "bas_intro", "text": "The Basement. Something has happened. You weren't there. Neither was I. Officially.", "enabled": true, "quality_status": "draft"},
+  {"id": "g.bas_intro.2", "category": "bas_intro", "text": "Time for The Basement. Our investigative strand. We've never solved anything, but we keep trying.", "enabled": true, "quality_status": "draft"},
+  {"id": "g.bas_rules.1", "category": "bas_rules", "text": "Each of you has evidence on your device. Some of it matters. Some of it doesn't. Talk it through, then each of you files your own theory.", "enabled": true, "quality_status": "draft"},
+  {"id": "g.bas_rules.2", "category": "bas_rules", "text": "You may investigate. Not much. We have a budget. Share what you like. Or don't. I'll be watching your faces.", "enabled": true, "quality_status": "draft"},
+  {"id": "g.bas_setup.1", "category": "bas_setup", "text": "Here's what we know.", "enabled": true, "quality_status": "draft"},
+  {"id": "g.bas_setup.2", "category": "bas_setup", "text": "This was reported to us this week.", "enabled": true, "quality_status": "draft"},
+  {"id": "g.bas_setup.3", "category": "bas_setup", "text": "Read it. Then look at your evidence. Then talk.", "enabled": true, "quality_status": "draft"},
+  {"id": "g.bas_theory.1", "category": "bas_theory", "text": "Time's up. File your theories. On your own. No conferring now.", "enabled": true, "quality_status": "draft"},
+  {"id": "g.bas_theory.2", "category": "bas_theory", "text": "Enough talk. What do you each think happened?", "enabled": true, "quality_status": "draft"},
+  {"id": "g.bas_group_agreed.1", "category": "bas_group_agreed", "text": "You all agree. That's either very good police work or a very loud person.", "enabled": true, "quality_status": "draft"},
+  {"id": "g.bas_group_agreed.2", "category": "bas_group_agreed", "text": "Unanimous. Let's see if you're unanimously wrong.", "enabled": true, "quality_status": "draft"},
+  {"id": "g.bas_group_split.1", "category": "bas_group_split", "text": "You don't agree. Interesting. Somebody's been quiet.", "enabled": true, "quality_status": "draft"},
+  {"id": "g.bas_group_split.2", "category": "bas_group_split", "text": "A split jury. Let's find out who was listening.", "enabled": true, "quality_status": "draft"},
+  {"id": "g.bas_unresolved.1", "category": "bas_unresolved", "text": "We never found out. We stopped asking.", "enabled": true, "quality_status": "draft"},
+  {"id": "g.bas_unresolved.2", "category": "bas_unresolved", "text": "And that's as far as anyone got.", "enabled": true, "quality_status": "draft"},
+  {"id": "g.bas_outro.1", "category": "bas_outro", "text": "That's The Basement. Please don't go down there.", "enabled": true, "quality_status": "draft"},
+  {"id": "g.bas_outro.2", "category": "bas_outro", "text": "Case closed. Mostly.", "enabled": true, "quality_status": "draft"}
+ ]
+}

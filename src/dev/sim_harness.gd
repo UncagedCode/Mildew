@@ -54,12 +54,27 @@ func dnp_oracle(control_id: String) -> int:
 	return 0
 
 
+## Dev-only: The Basement's best-supported option for a question.
+func bas_oracle(case_id: String, question_id: String) -> int:
+	var c: Dictionary = session.content.get_item(case_id)
+	for q in c.get("questions", []):
+		if str(q.id) == question_id:
+			var cr: Array = q.get("credit", [])
+			var best := 0
+			for k in cr.size():
+				if float(cr[k]) > float(cr[best]):
+					best = k
+			return best
+	return -1
+
+
 func add_bot(name: String, personality: String, seed: int = 0) -> FakePlayerBot:
 	var bot := FakePlayerBot.new(name, personality, seed)
 	bot.room_key = session.join_key
 	bot.oracle = oracle
 	bot.hole_oracle = hole_oracle
 	bot.dnp_oracle = dnp_oracle
+	bot.bas_oracle = bas_oracle
 	connect_bot(bot)
 	bots.append(bot)
 	return bot

@@ -79,6 +79,8 @@ func validate(db: ContentDB, release_mode: bool = false) -> bool:
 					_validate_survey(item, where)
 				"interference":
 					_validate_interference(item, where)
+				"basement":
+					_validate_basement(item, where)
 				"do_not_press_that":
 					_validate_common_game(item, where)
 					if str(item.get("title", "")) == "" or (item.get("labels", []) as Array).size() < 6:
@@ -199,6 +201,44 @@ func _validate_interference(item: Dictionary, where: String) -> void:
 		for bad in ["incoming call", "accept", "decline", "slide to answer"]:
 			if low.contains(bad):
 				errors.append("%s: must not imitate the phone's own call UI ('%s')" % [where, bad])
+
+
+## The Basement (docs/04 §7): structure + every player count 2–8 deals a valid hand.
+const BASEMENT_KINDS := ["key", "support", "red_herring", "unreliable"]
+
+
+func _validate_basement(item: Dictionary, where: String) -> void:
+	_validate_common_game(item, where)
+	for f in ["title", "setup", "reveal"]:
+		if str(item.get(f, "")).strip_edges() == "":
+			errors.append("%s: case missing %s" % [where, f])
+	var ev: Array = item.get("evidence", [])
+	if ev.size() < 8:
+		errors.append("%s: needs 8+ evidence cards for 8 players" % where)
+	var qids: Array = (item.get("questions", []) as Array).map(func(q): return str(q.get("id", "")))
+	for e in ev:
+		if not BASEMENT_KINDS.has(str(e.get("kind", ""))):
+			errors.append("%s: evidence %s has unknown kind" % [where, e.get("id")])
+		for s in e.get("supports", []):
+			if not qids.has(s):
+				errors.append("%s: evidence %s supports unknown question %s" % [where, e.get("id"), s])
+	for q in item.get("questions", []):
+		var opts: Array = q.get("options", [])
+		var cr: Array = q.get("credit", [])
+		if opts.size() < 2 or opts.size() != cr.size():
+			errors.append("%s: question %s options/credit mismatch" % [where, q.get("id")])
+		elif cr.max() <= 0.0:
+			errors.append("%s: question %s has no creditable answer" % [where, q.get("id")])
+	if (item.get("investigations", []) as Array).is_empty():
+		errors.append("%s: no optional investigations" % where)
+	var rng := RandomNumberGenerator.new()
+	for n in range(2, 9):
+		for s in 5:
+			rng.seed = hash("%s/%d/%d" % [item.get("id"), n, s])
+			var errs := BasementCase.deal(item, n, rng).validate()
+			if not errs.is_empty():
+				errors.append("%s: invalid deal for %d players: %s" % [where, n, errs[0]])
+				return
 
 
 ## Mildew Survey (docs/04 §3): a prompt, enough archive filler for a 2-player vote, known round formats.

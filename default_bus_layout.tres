@@ -1,13 +1,8 @@
-[gd_resource type="AudioBusLayout" load_steps=5 format=3]
+[gd_resource type="AudioBusLayout" format=3 uid="uid://b8mp1eq11cuci"]
 
 [sub_resource type="AudioEffectHighPassFilter" id="AudioEffectHighPassFilter_graham"]
 resource_name = "HighPass"
 cutoff_hz = 130.0
-
-[sub_resource type="AudioEffectLowPassFilter" id="AudioEffectLowPassFilter_graham"]
-resource_name = "LowPass"
-cutoff_hz = 7200.0
-resonance = 0.6
 
 [sub_resource type="AudioEffectEQ6" id="AudioEffectEQ6_graham"]
 resource_name = "EQ6"
@@ -18,10 +13,14 @@ band_db/1000_hz = 2.0
 band_db/3200_hz = 2.5
 band_db/10000_hz = -6.0
 
+[sub_resource type="AudioEffectLowPassFilter" id="AudioEffectLowPassFilter_graham"]
+resource_name = "LowPass"
+cutoff_hz = 7200.0
+resonance = 0.6
+
 [sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_graham"]
 resource_name = "Compressor"
 threshold = -18.0
-ratio = 4.0
 gain = 3.0
 attack_us = 2000.0
 release_ms = 120.0

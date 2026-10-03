@@ -16,6 +16,7 @@ var player_id := ""
 var resume_token := ""
 var room_key := ""
 var oracle: Callable              # func(content_id: String) -> String (correct option TEXT; options are shuffled per asking)
+var bas_oracle: Callable          # func(case_id, question_id) -> best option index (dev only)
 var dnp_oracle: Callable          # func(control_id: String) -> int target (dev only; real players talk to each other)
 var hole_oracle: Callable         # func(content_id: String, variant: String) -> String (answer label)
 var hole_handled := {}            # "qid:stage" -> true
@@ -142,6 +143,30 @@ func _on_screen(screen: String, data: Dictionary) -> void:
 			if allowed.is_empty():
 				return
 			_queue(_delay(float(data.get("remaining_ms", 20000)) / 1000.0), {"t": Protocol.C_VOTE, "q": data.get("qid", ""), "c": allowed[rng.randi_range(0, allowed.size() - 1)]})
+		"bas_evidence":
+			if personality == "afk" or not bool(data.get("live", false)):
+				return
+			var q := str(data.get("qid", ""))
+			var window := float(data.get("remaining_ms", 60000)) / 1000.0
+			if bool(data.get("can_investigate", false)) and not answered_qids.has("i:" + q) and rng.randf() < 0.5:
+				answered_qids["i:" + q] = true
+				var free: Array = (data.get("investigations", []) as Array).filter(func(x): return not bool(x.taken))
+				if not free.is_empty():
+					_queue(_delay(window * 0.3), {"t": Protocol.C_INVESTIGATE, "q": q, "i": int(free[rng.randi_range(0, free.size() - 1)].i)})
+			if not answered_qids.has("r:" + q):
+				answered_qids["r:" + q] = true
+				_queue(_delay(window * 0.5) + 0.5, {"t": Protocol.C_READY, "q": q})
+		"bas_theory":
+			var q2 := str(data.get("qid", ""))
+			if personality == "afk" or answered_qids.has("t:" + q2):
+				return
+			answered_qids["t:" + q2] = true
+			var a := {}
+			for qd in data.get("questions", []):
+				var best := int(bas_oracle.call(q2.split("#")[0], str(qd.id))) if bas_oracle.is_valid() else -1
+				var good := personality in ["high_accuracy", "cautious"] and best >= 0 and rng.randf() < 0.85
+				a[str(qd.id)] = best if good else rng.randi_range(0, (qd.options as Array).size() - 1)
+			_queue(_delay(float(data.get("remaining_ms", 30000)) / 1000.0), {"t": Protocol.C_THEORY, "q": q2, "a": a})
 		"dnp_panel":
 			if personality == "afk" or not bool(data.get("live", false)):
 				return

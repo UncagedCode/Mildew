@@ -69,6 +69,15 @@
   "open_round_chance": 0.5,
   "max_studio_holes_per_game": 1
  },
+ "basement": {
+  "cases_per_game": 1,
+  "discuss_seconds": 120,
+  "discuss_seconds_per_player": 10,
+  "theory_seconds": 45,
+  "points_per_question": 600,
+  "efficiency_bonus": 100,
+  "reveal_read_seconds": 7
+ },
  "dnp": {
   "puzzles_per_game": 4,
   "seconds": 75,

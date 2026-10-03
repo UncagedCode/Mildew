@@ -33,7 +33,7 @@
     if (text !== undefined && text !== null) e.textContent = text;
     return e;
   }
-  function clear() { lcd.textContent = ""; keys.textContent = ""; cancelAnimationFrame(S.timerRAF); S.psKey = ""; S.wvKey = ""; S.dnpKey = ""; }
+  function clear() { lcd.textContent = ""; keys.textContent = ""; cancelAnimationFrame(S.timerRAF); S.psKey = ""; S.wvKey = ""; S.dnpKey = ""; S.basSig = ""; }
   function buzz(p) { try { if (navigator.vibrate) navigator.vibrate(p); } catch (e) { /* unsupported */ } }
   function key(label, cls, onTap, cap) {
     const b = el("button", "key " + (cls || ""));
@@ -387,6 +387,8 @@
       case "wv_result": return scrWVResult(d);
       case "ps_draw": return scrPSDraw(d);
       case "dnp_panel": return scrDnpPanel(d);
+      case "bas_evidence": return scrBasEvidence(d);
+      case "bas_theory": return scrBasTheory(d);
       case "dnp_result": return scrDnpResult(d);
       case "ps_describe": return scrPSDescribe(d);
       case "ps_vote": return scrWVVote(Object.assign({}, d, { own: -1, ownList: d.own || [] }));
@@ -740,6 +742,79 @@
     lcd.appendChild(el("div", "sub", d.mistakes ? "YOUR MISTAKES: " + d.mistakes : "YOU DIDN'T BREAK ANYTHING. BONUS."));
     lcd.appendChild(el("div", "spacer"));
     lcd.appendChild(el("div", "sub", "YOUR SCORE: " + fmt(d.score)));
+  }
+
+  // ---------------- THE BASEMENT ----------------
+  // Private evidence cards. Unreliable clues are not marked (the holder isn't told); sensitive ones
+  // are marked privately — sharing them is the player's choice.
+  function basCards(d) {
+    const box = el("div", "bas-cards");
+    for (const c of d.cards || []) {
+      const card = el("div", "bas-card" + (c.sensitive ? " sensitive" : ""));
+      if (c.sensitive) card.appendChild(el("div", "bas-tag", "ONLY YOU KNOW THIS"));
+      card.appendChild(el("div", "", c.text));
+      box.appendChild(card);
+    }
+    if (d.finding && d.finding.text) {
+      const f = el("div", "bas-card finding");
+      f.appendChild(el("div", "bas-tag", "YOUR INVESTIGATION: " + d.finding.label));
+      f.appendChild(el("div", "", d.finding.text));
+      box.appendChild(f);
+    }
+    return box;
+  }
+  function scrBasEvidence(d) {
+    const sig = JSON.stringify([d.qid, d.live, d.ready, d.can_investigate, d.inv_left, d.finding, (d.investigations || []).map((i) => i.taken)]);
+    if (S.basSig === sig && document.querySelector(".bas-cards")) return;
+    const scrollY = lcd.scrollTop;
+    clear(); S.basSig = sig;
+    lcd.appendChild(el("div", "sub", d.header || "THE BASEMENT"));
+    lcd.appendChild(el("div", "title", d.title || ""));
+    if (d.live) wvTimer(d); else lcd.appendChild(el("div", "sub blinker", "LISTEN TO THE TELEVISION"));
+    lcd.appendChild(el("div", "sub warn", "YOUR EVIDENCE (SHARE IT OR DON'T):"));
+    lcd.appendChild(basCards(d));
+    lcd.scrollTop = scrollY;
+    if (!d.live) return;
+    if (d.can_investigate) {
+      keys.appendChild(el("div", "sub", "INVESTIGATE (" + d.inv_left + " LEFT FOR THE WHOLE TEAM, ONE EACH):"));
+      const grid = el("div", "keygrid"); keys.appendChild(grid);
+      for (const inv of d.investigations || []) {
+        const b = el("button", "key small plain grey", inv.label);
+        b.disabled = inv.taken;
+        b.addEventListener("click", (ev) => { ev.preventDefault(); if (b.disabled) return;
+          if (!confirm("Use one of the team's investigations on: " + inv.label + "?")) return;
+          buzz(20); b.disabled = true; send({ t: "investigate", q: d.qid, i: inv.i }); });
+        grid.appendChild(b);
+      }
+    }
+    if (d.ready) keys.appendChild(el("div", "sub blinker", "YOU'RE READY. WAITING FOR THE OTHERS."));
+    else key("READY TO FILE MY THEORY", "go plain", (b) => { b.disabled = true; send({ t: "ready", q: d.qid }); });
+  }
+  function scrBasTheory(d) {
+    if (S.basSig === "theory" + d.qid && document.querySelector(".bas-q")) return;
+    clear(); S.basSig = "theory" + d.qid;
+    buzz([30, 40, 30]);
+    lcd.appendChild(el("div", "sub", d.header || "THE BASEMENT"));
+    lcd.appendChild(el("div", "title", "YOUR THEORY"));
+    wvTimer(d);
+    const det = el("details", "bas-recall"); det.appendChild(el("summary", "", "YOUR EVIDENCE")); det.appendChild(basCards(d)); lcd.appendChild(det);
+    const picks = {};
+    const submit = key("FILE THEORY", "go plain", (b) => {
+      const missing = (d.questions || []).filter((q) => picks[q.id] === undefined);
+      if (missing.length) { toast("ANSWER EVERY QUESTION FIRST."); return; }
+      b.disabled = true; send({ t: "theory", q: d.qid, a: picks });
+    });
+    for (const q of d.questions || []) {
+      const box = el("div", "bas-q"); box.appendChild(el("div", "sub warn", q.ask));
+      const grid = el("div", "keygrid");
+      q.options.forEach((o, i) => {
+        const b = el("button", "key small plain grey", o);
+        b.addEventListener("click", (ev) => { ev.preventDefault(); buzz(10); picks[q.id] = i;
+          for (const x of grid.children) x.classList.remove("on"); b.classList.add("on"); });
+        grid.appendChild(b);
+      });
+      box.appendChild(grid); keys.insertBefore(box, submit);
+    }
   }
 
   // ---------------- HOLE ----------------

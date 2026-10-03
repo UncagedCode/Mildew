@@ -210,6 +210,12 @@ func add_fake_player(personality: String = "") -> FakePlayerBot:
 			var k := SegHole.SCALE_KEYS.find(str(it.get("scale", "")))
 			return SegHole.SCALE_LABELS[k] if k >= 0 else ""
 		return str(it.get("answer", ""))
+	bot.bas_oracle = func(case_id: String, question_id: String) -> int:
+		for q in content.get_item(case_id).get("questions", []):
+			if str(q.id) == question_id:
+				var cr: Array = q.get("credit", [])
+				return cr.find(cr.max())
+		return -1
 	bot.dnp_oracle = func(control_id: String) -> int:
 		var seg = session._current
 		if seg is SegDnp and seg.puzzle != null:

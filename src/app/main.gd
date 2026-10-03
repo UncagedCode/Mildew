@@ -147,6 +147,7 @@ func _build_presentation() -> void:
 	presenter.wv = view.wv
 	presenter.ps = view.ps
 	presenter.dnp = view.dnp
+	presenter.bas = view.bas
 	add_child(presenter)
 	presenter.attach(host)
 	dev = DevOverlay.new()

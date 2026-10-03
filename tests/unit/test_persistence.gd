@@ -71,6 +71,7 @@ func test_show_updates_profiles_and_installation() -> void:
 	var s := SessionServer.new(c, store, content(), 77)
 	s.time_scale = 12.0
 	s.open()
+	s.director.force["playlist"] = ["real_or_mildew"]
 	var conns: Array = []
 	for n in ["Aaron", "Sarah"]:
 		var cid := s.connect_client({"transport": "ws"})

@@ -450,6 +450,10 @@ func _draw_sting() -> void:
 			bg = Color(0.05, 0.08, 0.3)
 			ca = Color("#ff9a1f")
 			cb = Color("#f6efd8")
+		"bas":      # bare-bulb sodium / damp concrete
+			bg = Color(0.05, 0.04, 0.03)
+			ca = Color("#e0a040")
+			cb = Color("#5a5a52")
 		"dnp":      # control-room green / warning red
 			bg = Color(0.06, 0.09, 0.06)
 			ca = Color("#ff3b30")

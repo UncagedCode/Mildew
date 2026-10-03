@@ -198,3 +198,14 @@ body {
 .dnp-switch.on { --kc: #3e8f3a; }
 .dnp-val { flex: 1; text-align: center; font: 700 30px/44px "DejaVu Sans Mono", monospace; color: #ffd23f; background: #111; border-radius: 4px; }
 .dnp-count { color: #f0e6c8 !important; min-height: 16px; }
+
+/* The Basement (CP7) */
+.bas-cards { display: flex; flex-direction: column; gap: 8px; margin-top: 6px; }
+.bas-card { background: #ece4cf; color: #26221c; padding: 10px 12px; border-radius: 2px; font: 15px/1.35 "Liberation Serif", Georgia, serif;
+  text-transform: none; box-shadow: 0 2px 0 rgba(0,0,0,.4); }
+.bas-card.sensitive { border-left: 6px solid #a32020; }
+.bas-card.finding { background: #f6e3a8; }
+.bas-tag { font: 700 11px/1.2 "DejaVu Sans Mono", monospace; color: #a32020; letter-spacing: 1px; margin-bottom: 4px; }
+.bas-q { margin-bottom: 6px; }
+.keygrid .key.on, .bas-q .key.on { outline: 3px solid var(--lcd-fg); filter: none; --kc: #3e6b2f; }
+.bas-recall summary { color: var(--lcd-fg); font: 700 13px "DejaVu Sans Mono", monospace; margin: 6px 0; }

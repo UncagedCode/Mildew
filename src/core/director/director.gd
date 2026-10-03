@@ -35,7 +35,8 @@ const FORMATS := {
 		"tags": ["drawing", "social", "long", "good-middle", "2-player-safe"]},
 	"do_not_press_that": {"title": "DO NOT PRESS THAT", "kind": "game", "implemented": true,
 		"tags": ["cooperation", "chaotic", "tense", "high-energy", "good-middle", "good-finale", "2-player-safe"]},
-	"basement": {"title": "THE BASEMENT", "kind": "game", "implemented": false, "tags": ["deduction", "discussion", "long", "unsettling-capable"]},
+	"basement": {"title": "THE BASEMENT", "kind": "game", "implemented": true,
+		"tags": ["deduction", "discussion", "long", "low-energy", "unsettling-capable", "good-middle", "2-player-safe"]},
 }
 
 var rng := RandomNumberGenerator.new()
@@ -254,7 +255,7 @@ func choose_game(role_tag: String, player_count: int) -> String:
 
 
 const CONTENT_KIND := {"hole": "hole", "real_or_mildew": "real_or_mildew", "guess_the_genitals": "guess_the_genitals",
-	"mildew_survey": "mildew_survey", "mouthfeel": "mouthfeel", "police_sketch": "police_sketch", "do_not_press_that": "do_not_press_that"}
+	"mildew_survey": "mildew_survey", "mouthfeel": "mouthfeel", "police_sketch": "police_sketch", "do_not_press_that": "do_not_press_that", "basement": "basement"}
 
 
 ## A game is only scheduled when it has enough content at this installation's familiarity tier.
@@ -303,6 +304,18 @@ func plan_game(game_id: String, player_count: int, finale: bool = false) -> Arra
 			out.append_array(_plan_survey(player_count, fmult))
 		"mouthfeel":
 			out.append_array(_plan_mouthfeel(player_count, fmult))
+		"basement":
+			# One long case per programme slot (8–12 min); seasoned installations may get a second.
+			var cases := pick_items("basement", "basement", _ci("basement.cases_per_game", 1), player_count)
+			if force.has("basement_item"):
+				var fc: Dictionary = content.get_item(str(force.basement_item)) if content else {}
+				if not fc.is_empty() and not cases.is_empty():
+					cases[0] = fc
+			out.append({"kind": "sting", "game_id": "basement", "title": "THE BASEMENT", "style": "bas", "seconds": 4.0})
+			out.append({"kind": "link", "lines": [["graham", "bas_intro"], ["graham", "bas_rules"]], "camera": "cam1"})
+			for i in cases.size():
+				out.append({"kind": "basement", "item": cases[i], "game_id": "basement", "mid_game": i > 0, "multiplier": fmult})
+			out.append({"kind": "link", "lines": [["graham", "bas_outro"]], "camera": "cam1", "mid_game": false})
 		"do_not_press_that":
 			var puzzles := pick_items("do_not_press_that", "do_not_press_that", _ci("dnp.puzzles_per_game", 4), player_count)
 			if force.has("dnp_item"):

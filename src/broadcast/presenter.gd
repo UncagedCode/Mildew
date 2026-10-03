@@ -16,6 +16,7 @@ var quiz: QuizBoard
 var wv: WriteVoteBoard
 var ps: SketchBoard
 var dnp: DnpBoard
+var bas: BasementBoard
 var _quiz_q := false                 # current question is on the quiz board (CP3 layouts)
 
 var _sync_timer := 0.0
@@ -55,6 +56,8 @@ func _process(delta: float) -> void:
 			ps.players = pmap
 		if dnp:
 			dnp.players = pmap
+		if bas:
+			bas.players = pmap
 		sys.contestants = plist.filter(func(p): return p.status == "active" and p.connected).size()
 		studio.graham.set_pressure(host.session.director.pressure)
 		if not studio.graham.is_speaking():
@@ -96,6 +99,9 @@ func _on_event(evt: Dictionary) -> void:
 			if str(evt.kind) != "question" and quiz and quiz.is_showing():
 				quiz.hide_board()
 				_quiz_q = false
+				_in_question = false
+			if str(evt.kind) != "basement" and bas and bas.is_showing():
+				bas.hide_board()
 				_in_question = false
 			if str(evt.kind) != "dnp" and dnp and dnp.is_showing():
 				dnp.hide_board()
@@ -162,6 +168,8 @@ func _on_event(evt: Dictionary) -> void:
 			_ps_event(evt)
 		"dnp_puzzle", "dnp_open", "dnp_state", "dnp_mistake", "dnp_result":
 			_dnp_event(evt)
+		"bas_case", "bas_discuss", "bas_investigated", "bas_ready", "bas_theory", "bas_theory_in", "bas_reveal":
+			_bas_event(evt)
 		"question_show" when str(evt.get("layout", "panel")) != "panel":
 			_in_question = true
 			_quiz_q = true
@@ -526,7 +534,7 @@ func _audience_cutaway(cam: String, seconds: float) -> bool:
 
 
 func _graphic_owns_frame() -> bool:
-	return _in_question or (hole != null and hole.is_showing()) or (quiz != null and quiz.is_showing()) or (wv != null and wv.is_showing()) or (ps != null and ps.is_showing()) or (dnp != null and dnp.is_showing()) or gfx.is_question_visible()
+	return _in_question or (hole != null and hole.is_showing()) or (quiz != null and quiz.is_showing()) or (wv != null and wv.is_showing()) or (ps != null and ps.is_showing()) or (dnp != null and dnp.is_showing()) or (bas != null and bas.is_showing()) or gfx.is_question_visible()
 
 
 ## Survey / Mouthfeel presentation (CP4): the board draws; this adds studio grammar and sound.
@@ -640,3 +648,30 @@ func _dnp_event(evt: Dictionary) -> void:
 			for pid in d.keys():
 				if int(d[pid]) > 0:
 					studio.flash_podium(pid, "+%s" % PodiumScreen._fmt(int(d[pid])))
+
+
+## The Basement presentation (CP7): quiet, low drone; no applause until the reveal.
+func _bas_event(evt: Dictionary) -> void:
+	if bas == null:
+		return
+	bas.on_event(evt, host.session.time_scale)
+	match str(evt.e):
+		"bas_case":
+			_in_question = true
+			gfx.hide_question()
+			for pid in studio.podiums.keys():
+				studio.light_podium(pid, false)
+			audio.play("whoosh", -8.0)
+			studio.graham.set_activity("reading")
+		"bas_discuss", "bas_theory":
+			studio.graham.set_activity("idle")
+		"bas_investigated":
+			audio.play("lock", -10.0)
+		"bas_ready", "bas_theory_in":
+			studio.light_podium(str(evt.pid), true)
+		"bas_reveal":
+			var d: Dictionary = evt.get("deltas", {})
+			for pid in d.keys():
+				if int(d[pid]) > 0:
+					studio.flash_podium(pid, "+%s" % PodiumScreen._fmt(int(d[pid])))
+			audio.crowd("ooh", -8.0)
