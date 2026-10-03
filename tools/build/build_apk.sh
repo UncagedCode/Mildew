@@ -31,6 +31,7 @@ need "pack: do not press that" "assets/content/games/do_not_press_that/core_cp6.
 need "pack: basement" "assets/content/games/basement/core_cp7.json" "$LISTING"
 need "pack: adverts" "assets/content/adverts/core_cp8.json" "$LISTING"
 need "pack: rooms" "assets/content/world/rooms.json" "$LISTING"
+need "pack: room plates" "green_room__base.jpg-" "$LISTING"
 need "pack: cp8 audio" "bang_distant.wav-" "$LISTING"
 need "pack: graham map" "assets/config/graham_cutouts.json" "$LISTING"
 need "pack: graham cut-outs" "talk_closed.png-" "$LISTING"
