@@ -360,8 +360,49 @@ def gen_production():
     write("feedback.wav", master(squeal, 0.45, tape=False))
 
 
+def gen_cp8():
+    """Adverts jingle, break bumper, and the sinister kit: distant banging, room tone, door, drone."""
+    # Advert jingle: 2.2 s bright cheap synth hook
+    buf = np.zeros(int(SR * 2.4))
+    notes = [72, 76, 79, 84, 79, 84]
+    for i, n in enumerate(notes):
+        mix_into(buf, epiano(midi(n), 0.3, 0.9), i * 0.18)
+    mix_into(buf, chord([60, 64, 67, 72], 1.2, brass, 0.6), 1.1)
+    write("jingle_advert.wav", master(buf, 0.6))
+    # Break bumper: ident-like rising chord
+    buf = np.zeros(int(SR * 3.0))
+    mix_into(buf, chord([55, 62, 67, 71], 2.4, brass, 0.7), 0.0)
+    mix_into(buf, cymbal(2.0, 0.4), 0.0)
+    write("break_bumper.wav", master(buf, 0.6))
+    # Distant banging: three heavy, muffled thuds somewhere in the building, with a tail
+    t = t_axis(3.2)
+    x = np.zeros(len(t))
+    for at, v in [(0.0, 1.0), (0.55, 0.85), (1.6, 1.0)]:
+        i0 = int(at * SR)
+        tt = t[: len(t) - i0]
+        thud = (np.sin(2 * np.pi * 52 * tt) * np.exp(-tt * 9) + rng.standard_normal(len(tt)) * np.exp(-tt * 30) * 0.3) * v
+        x[i0:] += thud
+    x = lfilter(*butter(2, 420 / (SR / 2)), x)
+    tail = np.convolve(x, np.exp(-np.linspace(0, 6, int(SR * 0.6))) * rng.standard_normal(int(SR * 0.6)) * 0.02, mode="full")[: len(x)]
+    write("bang_distant.wav", master(x * 0.8 + tail, 0.55, tape=True))
+    # Room tone / hum drone: 6 s, 50 Hz mains + air
+    t = t_axis(6.0)
+    hum = np.sin(2 * np.pi * 50 * t) * 0.12 + np.sin(2 * np.pi * 100 * t) * 0.06 + np.sin(2 * np.pi * 150 * t) * 0.02
+    air = lfilter(*butter(2, 700 / (SR / 2)), rng.standard_normal(len(t))) * 0.05
+    fade = np.minimum(1, np.minimum(t / 0.8, (t[-1] - t) / 0.8))
+    write("room_tone.wav", master((hum + air) * fade, 0.5, tape=True))
+    # Heavy door closing somewhere off-set
+    t = t_axis(1.6)
+    door = np.sin(2 * np.pi * 70 * t) * np.exp(-t * 6) + lfilter(*butter(2, 1200 / (SR / 2)), rng.standard_normal(len(t))) * np.exp(-t * 14) * 0.5
+    creak = np.sin(2 * np.pi * (300 + 60 * np.sin(2 * np.pi * 3 * t)) * t) * np.exp(-((t - 0.0) * 4)) * 0.0
+    write("door_distant.wav", master(lfilter(*butter(2, 900 / (SR / 2)), door + creak) * 0.9, 0.5, tape=True))
+
+
 if __name__ == "__main__":
     import sys
+    if len(sys.argv) > 1 and sys.argv[1] == "cp8":
+        gen_cp8()
+        raise SystemExit
     if len(sys.argv) > 1 and sys.argv[1] == "cp2":
         gen_hole_sting()
         gen_crowd()

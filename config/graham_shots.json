@@ -249,5 +249,72 @@
   "lead": "reading_cards",
   "settle": "reading_cards",
   "cutaway": []
+ },
+ "incident_snap": {
+  "lead": "angry",
+  "settle": "look_off",
+  "talk": true,
+  "cutaway": [],
+  "return": 0.0
+ },
+ "incident_snap_recover": {
+  "lead": "return_tense",
+  "settle": "recovered_presenter",
+  "talk": true,
+  "cutaway": [],
+  "return": 0.0
+ },
+ "incident_stare_recover": {
+  "lead": "stare",
+  "settle": "recovered_presenter",
+  "talk": true,
+  "cutaway": [],
+  "return": 0.0
+ },
+ "incident_bang_ignore": {
+  "lead": "look_off",
+  "settle": "neutral",
+  "talk": true,
+  "cutaway": [],
+  "return": 0.0
+ },
+ "announcer_reply": {
+  "lead": "irritated_front",
+  "settle": "restrained_smile",
+  "talk": true,
+  "cutaway": [],
+  "return": 0.0
+ },
+ "incident_reset": {
+  "lead": "presenter_smile",
+  "settle": "presenter_smile",
+  "talk": true,
+  "cutaway": [
+   "cam2"
+  ],
+  "return": 0.3
+ },
+ "punish_fail": {
+  "lead": "disappointed",
+  "settle": "disappointed",
+  "talk": true,
+  "cutaway": [],
+  "return": 0.0
+ },
+ "punish_success": {
+  "lead": "laughing",
+  "settle": "presenter_smile",
+  "talk": true,
+  "cutaway": [
+   "subject"
+  ],
+  "return": 0.3
+ },
+ "test_after": {
+  "lead": "rattled",
+  "settle": "recovered_presenter",
+  "talk": true,
+  "cutaway": [],
+  "return": 0.0
  }
 }

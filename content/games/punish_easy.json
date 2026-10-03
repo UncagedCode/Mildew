@@ -1,0 +1,167 @@
+{
+ "pack_id": "punish.easy_cp8",
+ "content_kind": "easy_question",
+ "_comment": "Punishment segment: {NAME}'S EASY QUESTION. Theatrical humiliation about in-game behaviour only. correct is index 0 (shuffled on air).",
+ "items": [
+  {
+   "id": "easy.1",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "fictional",
+    "short"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "Which of these is a cow?",
+   "options": [
+    "A COW",
+    "A KETTLE",
+    "A VICAR",
+    "THE MOON"
+   ],
+   "correct": 0
+  },
+  {
+   "id": "easy.2",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "fictional",
+    "short"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "Which of these is wet?",
+   "options": [
+    "WATER",
+    "A BRICK",
+    "DUST",
+    "SAND"
+   ],
+   "correct": 0
+  },
+  {
+   "id": "easy.3",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "fictional",
+    "short"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "Which of these is Graham?",
+   "options": [
+    "GRAHAM",
+    "A LAMP",
+    "A CAT",
+    "NEIL"
+   ],
+   "correct": 0
+  },
+  {
+   "id": "easy.4",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "fictional",
+    "short"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "How many legs does a dog have?",
+   "options": [
+    "FOUR",
+    "NINE",
+    "NONE",
+    "LOTS"
+   ],
+   "correct": 0
+  },
+  {
+   "id": "easy.5",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "fictional",
+    "short"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "Which of these is a colour?",
+   "options": [
+    "RED",
+    "TUESDAY",
+    "SOUP",
+    "LOUD"
+   ],
+   "correct": 0
+  },
+  {
+   "id": "easy.6",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "fictional",
+    "short"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "Which of these is food?",
+   "options": [
+    "A SANDWICH",
+    "A SHOE",
+    "A CHAIR",
+    "A TAX RETURN"
+   ],
+   "correct": 0
+  },
+  {
+   "id": "easy.7",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "fictional",
+    "short"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What comes after one?",
+   "options": [
+    "TWO",
+    "GREEN",
+    "HAM",
+    "NEVER"
+   ],
+   "correct": 0
+  },
+  {
+   "id": "easy.8",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "fictional",
+    "short"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "Which of these says moo?",
+   "options": [
+    "A COW",
+    "A CRAB",
+    "A CAR",
+    "A PEN"
+   ],
+   "correct": 0
+  }
+ ]
+}

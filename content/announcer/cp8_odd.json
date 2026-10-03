@@ -1,0 +1,56 @@
+{
+ "pack_id": "announcer.cp8_odd",
+ "content_kind": "announcer_lines",
+ "speaker": "announcer",
+ "_comment": "Announcer behaving oddly (Tier 2), stage-gated.",
+ "items": [
+  {
+   "id": "a.odd.1",
+   "category": "odd",
+   "text": "We'll be right back.",
+   "enabled": true,
+   "quality_status": "draft",
+   "stage": 0
+  },
+  {
+   "id": "a.odd.2",
+   "category": "odd",
+   "text": "Mildew is recorded before a live studio audience. Some of them are still here.",
+   "enabled": true,
+   "quality_status": "draft",
+   "stage": 1
+  },
+  {
+   "id": "a.odd.3",
+   "category": "odd",
+   "text": "Please do not go into the corridor during the next part.",
+   "enabled": true,
+   "quality_status": "draft",
+   "stage": 1
+  },
+  {
+   "id": "a.odd.4",
+   "category": "odd",
+   "text": "Graham, that's enough.",
+   "enabled": true,
+   "quality_status": "draft",
+   "stage": 2
+  },
+  {
+   "id": "a.odd.5",
+   "category": "odd",
+   "text": "Please end the transmission.",
+   "enabled": true,
+   "quality_status": "draft",
+   "stage": 3
+  },
+  {
+   "id": "a.odd.6",
+   "category": "odd",
+   "text": "Viewers at home are reminded to lock their doors. Thank you.",
+   "enabled": true,
+   "quality_status": "draft",
+   "stage": 2
+  }
+ ]
+}

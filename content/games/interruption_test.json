@@ -1,0 +1,72 @@
+{
+ "pack_id": "interruption.the_test_cp8",
+ "content_kind": "interruption",
+ "_comment": "THE TEST: a rare hidden Interruption Game. Unscored, unexplained; answers are kept locally and never shown back.",
+ "items": [
+  {
+   "id": "test.questions",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 3,
+   "content_tags": [
+    "unsettling_capable"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "questions": [
+    [
+     "ARE YOU ALONE IN THE ROOM?",
+     [
+      "YES",
+      "NO"
+     ]
+    ],
+    [
+     "HAVE YOU BEEN HERE BEFORE?",
+     [
+      "YES",
+      "NO",
+      "I DON'T KNOW"
+     ]
+    ],
+    [
+     "WHICH DOOR?",
+     [
+      "1",
+      "2",
+      "3"
+     ]
+    ],
+    [
+     "CAN YOU SEE THE CORRIDOR?",
+     [
+      "YES",
+      "NO"
+     ]
+    ],
+    [
+     "IS THE LIGHT ON?",
+     [
+      "YES",
+      "NO"
+     ]
+    ],
+    [
+     "DID YOU HEAR THAT?",
+     [
+      "YES",
+      "NO"
+     ]
+    ],
+    [
+     "WHO IS STANDING NEXT TO YOU?",
+     [
+      "NOBODY",
+      "SOMEONE",
+      "I'D RATHER NOT SAY"
+     ]
+    ]
+   ]
+  }
+ ]
+}

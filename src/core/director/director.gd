@@ -47,6 +47,9 @@ var force := {}                    # dev overrides: hole_variant, hole_item, gam
 var games_this_show: Array = []
 var incidents: IncidentEngine
 var interference: PrivateInterference
+var world: WorldState
+var installation_seed := 0
+var chain_boundary := 12          # the segment boundary (count) at which a chain step may happen this show
 var voice: GrahamVoiceIndex = null   # authored Graham clips (D024); voiced lines are preferred when present
 
 # --- Hidden axes (0..1). Never shown to players. ---
@@ -66,7 +69,9 @@ var _mood_hold := 0.0               # seconds of show time before drifting back 
 
 # --- Relationships: player_id -> {trait: weight 0..1} ---
 var relationships := {}
-var dnp_culprit := ""              # Do Not Press That: who broke the last puzzle (punishment hook)
+var dnp_culprit := ""
+var punished_this_show := false
+var last_test_broadcast := -100              # Do Not Press That: who broke the last puzzle (punishment hook)
 var player_stats := {}             # player_id -> {answered, correct, wrong_streak, correct_streak, missed_streak, fastest}
 
 var skeleton: Array = []          # planned slots (resolved / unresolved), for debug overlay
@@ -90,6 +95,7 @@ func _init(p_content: ContentDB = null, seed: int = 0) -> void:
 	_index_lines()
 	incidents = IncidentEngine.new(self)
 	interference = PrivateInterference.new(self)
+	world = WorldState.new(self)
 
 
 func _index_lines() -> void:
@@ -114,6 +120,9 @@ func begin_session(installation: Dictionary, settings_interference: String) -> v
 	familiarity_tier = clampi(1 + played / 3, 1, 5)
 	recent_installation_content = installation.get("recent_content_history", []).duplicate()
 	recent_games = installation.get("recent_games", []).duplicate()
+	installation_seed = int(installation.get("seed", 0))
+	last_test_broadcast = int(installation.get("last_test_broadcast", -100))
+	world.load_from(installation)
 	log_decision("BeginSession", "familiarity_tier=%d" % familiarity_tier, [
 		"broadcasts_played=%d" % played,
 		"interference=%s (eligible repertoire, not frequency)" % interference_mode,
@@ -131,6 +140,7 @@ func reset_for_new_show() -> void:
 	relationships.clear()
 	player_stats.clear()
 	dnp_culprit = ""
+	punished_this_show = false
 	used_content.clear()
 	games_this_show.clear()
 	show_time = 0.0
@@ -138,6 +148,8 @@ func reset_for_new_show() -> void:
 		tone[t] = 0.0
 	incidents.reset_for_new_show()
 	interference.reset_for_new_show()
+	world.advanced_this_show = false
+	chain_boundary = rng.randi_range(8, 22)
 
 
 # ---------------------------------------------------------------------------
@@ -228,7 +240,18 @@ func _furniture(after_game: int, mid: int, n: int) -> Array:
 		"break":
 			var ads := pick_items("advert", "", _ci("break.adverts", 2), n)
 			log_decision("Furniture", "commercial_break", ["after game %d (midpoint)" % after_game, "ads=%s" % str(ads.map(func(a): return a.id))])
-			return [{"kind": "advert", "mode": "break", "ads": ads}, {"kind": "link", "lines": [["graham", "part_two"]], "camera": "cam1"}]
+			var segs: Array = [{"kind": "advert", "mode": "break", "ads": ads}]
+			# THE TEST (hidden Interruption Game): rare, seasoned installations only, never in CLEAN/SUPERVISED.
+			var test_ok := familiarity_tier >= 3 and interference_mode == "standard_transmission" and broadcasts_played - last_test_broadcast >= 5
+			if force.has("the_test") or (test_ok and rng.randf() < _cf("special.test_chance", 0.12)):
+				force.erase("the_test")
+				var t := pick_items("interruption", "", 1, n) if content else []
+				if not t.is_empty():
+					segs.append({"kind": "special", "mode": "the_test", "item": t[0]})
+					last_test_broadcast = broadcasts_played
+					log_decision("Furniture", "THE TEST", ["familiarity=%d" % familiarity_tier])
+			segs.append({"kind": "link", "lines": [["graham", "part_two"]], "camera": "cam1"})
+			return segs
 		"poll":
 			var polls := pick_items("poll", "", 1, n)
 			if not polls.is_empty():
@@ -239,6 +262,32 @@ func _furniture(after_game: int, mid: int, n: int) -> Array:
 		return []
 	log_decision("Furniture", "advert", [str(ad[0].id)])
 	return [{"kind": "link", "lines": [["announcer", "advert_link"]], "camera": "cam1"}, {"kind": "advert", "mode": "single", "ads": ad}]
+
+
+## Punishment eligibility (docs/03): one contestant Graham is fed up with, at most once a show,
+## never in CLEAN TRANSMISSION. Returns a pid or "".
+func punishment_candidate(active: Array) -> String:
+	if punished_this_show or interference_mode == "clean_transmission" or active.size() < 2:
+		return ""
+	var best := ""
+	var bv := 0.0
+	for pid in active:
+		var r := rel(pid)
+		var s := stats(pid)
+		var v := float(r.get("irritant", 0.0)) + float(r.get("disappointment", 0.0)) + float(r.get("target", 0.0)) + 0.08 * int(s.get("wrong_streak", 0))
+		if v > bv:
+			bv = v
+			best = pid
+	var forced: bool = force.has("punish")
+	if forced:
+		force.erase("punish")
+		if best == "":
+			best = str(active[rng.randi_range(0, active.size() - 1)])
+	elif bv < _cf("special.punish_threshold", 0.35) or rng.randf() > _cf("special.punish_chance", 0.5):
+		return ""
+	punished_this_show = true
+	log_decision("PunishEligible", best, ["score=%.2f" % bv, "forced" if forced else "earned"])
+	return best
 
 
 ## Run-over support (docs/01 §7): when the programme is running long, future games lose rounds

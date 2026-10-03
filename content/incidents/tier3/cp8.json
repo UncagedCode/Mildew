@@ -1,0 +1,63 @@
+{
+ "pack_id": "incidents.tier3.cp8",
+ "content_kind": "incident",
+ "_comment": "Tier 3 incidents (CP8). Never explained. A comedic/normal reset follows (SegIncident).",
+ "items": [
+  {
+   "id": "t3.graham_snap",
+   "tier": 3,
+   "target": "graham",
+   "rarity_weight": 1.0,
+   "cooldown_seconds": 5400,
+   "moments": [
+    "boundary"
+   ],
+   "payload": {
+    "effect": "graham_snap",
+    "duration": 5.5,
+    "lines": [
+     [
+      "graham",
+      "incident_snap"
+     ],
+     [
+      "graham",
+      "incident_snap_recover"
+     ]
+    ]
+   },
+   "minimum_familiarity": 2,
+   "enabled": true,
+   "quality_status": "draft",
+   "min_players": 2,
+   "max_players": 8,
+   "persistence": "none"
+  },
+  {
+   "id": "t3.silent_stare",
+   "tier": 3,
+   "target": "graham",
+   "rarity_weight": 0.6,
+   "cooldown_seconds": 7200,
+   "moments": [
+    "boundary"
+   ],
+   "payload": {
+    "effect": "silent_stare",
+    "duration": 8.0,
+    "lines": [
+     [
+      "graham",
+      "incident_stare_recover"
+     ]
+    ]
+   },
+   "minimum_familiarity": 3,
+   "enabled": true,
+   "quality_status": "draft",
+   "min_players": 2,
+   "max_players": 8,
+   "persistence": "none"
+  }
+ ]
+}

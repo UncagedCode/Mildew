@@ -1,0 +1,101 @@
+{
+ "pack_id": "incidents.tier2.cp8",
+ "content_kind": "incident",
+ "_comment": "Tier 2 incidents (CP8). Never explained. A comedic/normal reset follows (SegIncident).",
+ "items": [
+  {
+   "id": "t2.cctv_room",
+   "tier": 2,
+   "target": "tv_video",
+   "rarity_weight": 1.0,
+   "cooldown_seconds": 900,
+   "moments": [
+    "boundary"
+   ],
+   "payload": {
+    "effect": "cctv_cutaway",
+    "duration": 2.6
+   },
+   "enabled": true,
+   "quality_status": "draft",
+   "min_players": 2,
+   "max_players": 8,
+   "persistence": "none"
+  },
+  {
+   "id": "t2.room_callback",
+   "tier": 2,
+   "target": "room",
+   "rarity_weight": 0.8,
+   "cooldown_seconds": 1200,
+   "moments": [
+    "boundary"
+   ],
+   "payload": {
+    "effect": "room_callback",
+    "duration": 3.0
+   },
+   "minimum_familiarity": 2,
+   "enabled": true,
+   "quality_status": "draft",
+   "min_players": 2,
+   "max_players": 8,
+   "persistence": "none"
+  },
+  {
+   "id": "t2.banging",
+   "tier": 2,
+   "target": "tv_audio",
+   "rarity_weight": 0.9,
+   "cooldown_seconds": 1200,
+   "moments": [
+    "boundary"
+   ],
+   "payload": {
+    "effect": "banging",
+    "duration": 4.0,
+    "lines": [
+     [
+      "graham",
+      "incident_bang_ignore"
+     ]
+    ]
+   },
+   "enabled": true,
+   "quality_status": "draft",
+   "min_players": 2,
+   "max_players": 8,
+   "persistence": "none"
+  },
+  {
+   "id": "t2.announcer_odd",
+   "tier": 2,
+   "target": "announcer",
+   "rarity_weight": 0.7,
+   "cooldown_seconds": 1500,
+   "moments": [
+    "boundary"
+   ],
+   "payload": {
+    "effect": "announcer_odd",
+    "duration": 2.0,
+    "lines": [
+     [
+      "announcer",
+      "odd"
+     ],
+     [
+      "graham",
+      "announcer_reply"
+     ]
+    ]
+   },
+   "minimum_familiarity": 2,
+   "enabled": true,
+   "quality_status": "draft",
+   "min_players": 2,
+   "max_players": 8,
+   "persistence": "none"
+  }
+ ]
+}

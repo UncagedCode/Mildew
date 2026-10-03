@@ -1,0 +1,122 @@
+{
+ "pack_id": "world.rooms_cp8",
+ "content_kind": "room",
+ "_comment": "Recurring backstage rooms (CP8 PoC: 5 of the 8-10). Shown as CCTV cutaways drawn by CctvView; states persist per installation and change non-linearly. Geometry (adjacent) keeps the studio complex consistent. A photographic plate can replace the CCTV look per room later.",
+ "items": [
+  {
+   "id": "room.green_room",
+   "name": "GREEN ROOM",
+   "cam": "CAM 6",
+   "props": [
+    "sofa",
+    "fridge",
+    "plant"
+   ],
+   "door": "left",
+   "adjacent": [
+    "room.corridor",
+    "room.kitchenette"
+   ],
+   "enabled": true,
+   "quality_status": "draft",
+   "default": {
+    "door": "closed",
+    "chair": "centre",
+    "light": "on",
+    "figure": "none"
+   }
+  },
+  {
+   "id": "room.studio_c",
+   "name": "STUDIO C",
+   "cam": "CAM 4",
+   "props": [
+    "podiums",
+    "lamp_stand"
+   ],
+   "door": "right",
+   "adjacent": [
+    "room.corridor",
+    "room.control_room"
+   ],
+   "enabled": true,
+   "quality_status": "draft",
+   "default": {
+    "door": "closed",
+    "chair": "centre",
+    "light": "on",
+    "figure": "none"
+   }
+  },
+  {
+   "id": "room.corridor",
+   "name": "SERVICE CORRIDOR",
+   "cam": "CAM 2",
+   "props": [
+    "fire_extinguisher",
+    "doors"
+   ],
+   "door": "back",
+   "adjacent": [
+    "room.green_room",
+    "room.studio_c",
+    "room.prop_store",
+    "room.tape_room"
+   ],
+   "plate": "corridor",
+   "enabled": true,
+   "quality_status": "draft",
+   "default": {
+    "door": "closed",
+    "chair": "centre",
+    "light": "on",
+    "figure": "none"
+   }
+  },
+  {
+   "id": "room.prop_store",
+   "name": "PROP STORE",
+   "cam": "CAM 9",
+   "props": [
+    "shelves",
+    "boxes",
+    "mannequin"
+   ],
+   "door": "left",
+   "adjacent": [
+    "room.corridor",
+    "room.loading"
+   ],
+   "enabled": true,
+   "quality_status": "draft",
+   "default": {
+    "door": "closed",
+    "chair": "centre",
+    "light": "on",
+    "figure": "none"
+   }
+  },
+  {
+   "id": "room.tape_room",
+   "name": "ARCHIVE / TAPE ROOM",
+   "cam": "CAM 11",
+   "props": [
+    "shelves",
+    "tv_trolley"
+   ],
+   "door": "back",
+   "adjacent": [
+    "room.corridor",
+    "room.locked"
+   ],
+   "enabled": true,
+   "quality_status": "draft",
+   "default": {
+    "door": "closed",
+    "chair": "centre",
+    "light": "on",
+    "figure": "none"
+   }
+  }
+ ]
+}

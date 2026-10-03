@@ -389,6 +389,8 @@
       case "dnp_panel": return scrDnpPanel(d);
       case "bas_evidence": return scrBasEvidence(d);
       case "break": return scrBreak(d);
+      case "test_q": return scrTestQ(d);
+      case "test_wait": return scrTestWait();
       case "bas_theory": return scrBasTheory(d);
       case "dnp_result": return scrDnpResult(d);
       case "ps_describe": return scrPSDescribe(d);
@@ -743,6 +745,20 @@
     lcd.appendChild(el("div", "sub", d.mistakes ? "YOUR MISTAKES: " + d.mistakes : "YOU DIDN'T BREAK ANYTHING. BONUS."));
     lcd.appendChild(el("div", "spacer"));
     lcd.appendChild(el("div", "sub", "YOUR SCORE: " + fmt(d.score)));
+  }
+
+  // ---------------- THE TEST ----------------
+  // No header, no unit number styling, no explanation.
+  function scrTestQ(d) {
+    clear();
+    lcd.appendChild(el("div", "spacer"));
+    lcd.appendChild(el("div", "big", d.ask));
+    (d.options || []).forEach((o, i) => key(o, "plain grey", (b) => { for (const k of keys.querySelectorAll(".key")) k.disabled = true; send({ t: "answer", q: d.qid, c: i }); }));
+  }
+  function scrTestWait() {
+    clear();
+    lcd.appendChild(el("div", "spacer"));
+    lcd.appendChild(el("div", "title blinker", "THANK YOU."));
   }
 
   // ---------------- COMMERCIAL BREAK ----------------

@@ -1,0 +1,113 @@
+{
+ "pack_id": "graham.cp8_incidents",
+ "content_kind": "graham_lines",
+ "speaker": "graham",
+ "_comment": "Graham lines for Tier 2/3 incidents (CP8). Anger is rare by design.",
+ "items": [
+  {
+   "id": "g.incident_bang_ignore.1",
+   "category": "incident_bang_ignore",
+   "text": "Somebody's moving scenery.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.incident_bang_ignore.2",
+   "category": "incident_bang_ignore",
+   "text": "...That'll be the pipes.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.incident_bang_ignore.3",
+   "category": "incident_bang_ignore",
+   "text": "Ignore that.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.incident_snap.1",
+   "category": "incident_snap",
+   "text": "I said stop.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.incident_snap.2",
+   "category": "incident_snap",
+   "text": "Not now.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.incident_snap_recover.1",
+   "category": "incident_snap_recover",
+   "text": "Anyway!",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.incident_snap_recover.2",
+   "category": "incident_snap_recover",
+   "text": "Where were we. Yes.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.incident_stare_recover.1",
+   "category": "incident_stare_recover",
+   "text": "...Sorry. Where were we.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.incident_stare_recover.2",
+   "category": "incident_stare_recover",
+   "text": "Right. Yes. Lovely.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.announcer_reply.1",
+   "category": "announcer_reply",
+   "text": "Will we?",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.announcer_reply.2",
+   "category": "announcer_reply",
+   "text": "Thank you. That'll do.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.announcer_reply.3",
+   "category": "announcer_reply",
+   "text": "Nobody asked you.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.incident_reset.1",
+   "category": "incident_reset",
+   "text": "Let's have a lovely, normal bit of telly.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.incident_reset.2",
+   "category": "incident_reset",
+   "text": "Right! Something nice.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.incident_reset.3",
+   "category": "incident_reset",
+   "text": "Moving on. Briskly.",
+   "enabled": true,
+   "quality_status": "draft"
+  }
+ ]
+}

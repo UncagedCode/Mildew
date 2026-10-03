@@ -17,6 +17,7 @@ var ps: SketchBoard
 var dnp: DnpBoard
 var bas: BasementBoard
 var ads: AdvertPlayer
+var cctv: CctvView
 var graham: GrahamPresenter
 var plates: PlateStage
 var screen: TextureRect
@@ -60,6 +61,8 @@ func build() -> void:
 	viewport.add_child(bas)
 	ads = AdvertPlayer.new()       # adverts, commercial break, viewer polls, awards (CP8)
 	viewport.add_child(ads)
+	cctv = CctvView.new()          # backstage CCTV cutaways (CP8)
+	viewport.add_child(cctv)
 	gfx = GraphicsLayer.new()
 	viewport.add_child(gfx)
 	gfx.bottom_busy = func(): return hole.is_showing() or quiz.is_showing() or wv.is_showing() or ps.is_showing() or dnp.is_showing() or bas.is_showing() or ads.is_showing()

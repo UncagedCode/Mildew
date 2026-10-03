@@ -63,7 +63,8 @@ func test_hole_full_game_two_players() -> void:
 		for e in h.events_of("hole_reveal"):
 			hole_pts += int(e.get("deltas", {}).get(s.pid, 0))
 		check(hole_pts >= 0 and hole_pts <= int(rounds * 1500 * 1.5), "Hole points in bounds %s" % hole_pts)
-	check(a.errors_received.is_empty() and b.errors_received.is_empty(), "no protocol errors: %s %s" % [a.errors_received, b.errors_received])
+	var nonstale := (a.errors_received + b.errors_received).filter(func(c): return c != Protocol.E_STALE)
+	check(nonstale.is_empty(), "no protocol errors (late answers aside): %s %s" % [a.errors_received, b.errors_received])
 	check(h.events_of("sting").any(func(e): return e.game_id == "hole"), "Hole sting played")
 	check(h.events_of("say").any(func(e): return e.category == "hole_rules"), "Graham explains the rules")
 

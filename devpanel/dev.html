@@ -105,6 +105,8 @@
       <div class="row"><select id="incident"><option value="">Incident: Director's choice</option></select></div>
       <div class="row"><select id="privmsg"><option value="">Private phone message: Director's choice</option></select></div>
       <div class="row"><select id="nextgame"><option value="">First game: Director's choice</option></select></div>
+      <div class="row"><select id="chainstep"><option value="">Room/event chain step: Director's choice</option></select></div>
+      <div class="row"><button id="fpunish">FORCE EASY QUESTION</button><button id="ftest">FORCE THE TEST (AT BREAK)</button><button id="fbreak">NEXT FURNITURE = BREAK</button></div>
       <p class="hint" id="forced">Nothing forced.</p>
     </div>
   </section>
@@ -214,6 +216,10 @@
   $("incident").onchange = (e) => send("force", { key: "incident", value: e.target.value });
   $("privmsg").onchange = (e) => send("force", { key: "interfere", value: e.target.value });
   $("nextgame").onchange = (e) => send("force", { key: "game", value: e.target.value });
+  $("chainstep").onchange = (e) => send("force", { key: "chain_step", value: e.target.value });
+  $("fpunish").onclick = () => send("force", { key: "punish", value: "1" });
+  $("ftest").onclick = () => send("force", { key: "the_test", value: "1" });
+  $("fbreak").onclick = () => send("force", { key: "furniture", value: "break" });
 
   function chipRow(el, values, labelFn, onTap) {
     el.innerHTML = "";
@@ -236,6 +242,8 @@
     for (const i of cat.incidents) inc.add(new Option(`T${i.tier} · ${i.id.replace(/^t\d\./, "")}`, i.id));
     const pm = $("privmsg"); pm.length = 1;
     for (const i of (cat.private || [])) pm.add(new Option(`T${i.tier} · ${i.id.replace(/^p\./, "")} (${i.source})`, i.id));
+    const cs = $("chainstep"); cs.length = 1;
+    for (const c of (cat.chains || [])) cs.add(new Option(c.replace(/^chain\./, ""), c));
     const ng = $("nextgame"); ng.length = 1;
     for (const g of (cat.games || [])) ng.add(new Option(g.replace(/_/g, " "), g));
   }

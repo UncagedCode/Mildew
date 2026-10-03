@@ -33,6 +33,7 @@ var session_time := 0.0           # scaled time since session open (never freeze
 var manual_pause := false
 var hold_reason := ""             # "", "manual", "reconnect", "players"
 var question_counter := 0
+var _boundaries := 0
 var invalid_message_count := 0
 var rate_limited_count := 0
 var show_count := 0
@@ -537,6 +538,7 @@ func start_show() -> bool:
 	director.reset_for_new_show()
 	facts_shown.clear()
 	question_counter = 0
+	_boundaries = 0
 	for p in players.values():
 		p.score = 0
 		p.rot = 0
@@ -570,8 +572,23 @@ func _advance() -> void:
 		if phase == Phase.SHOW and not _segments.is_empty() and prev.kind != "incident":
 			var nxt: Dictionary = _segments[0]
 			if str(nxt.get("kind")) not in ["sign_off"]:
+				_boundaries += 1
+				var mid := bool(nxt.get("mid_game", false))
 				var inc: Dictionary = director.incidents.opportunity("boundary", {"game": str(nxt.get("game_id", "")),
-					"players": _connected_active_count(), "next": str(nxt.get("kind"))})
+					"players": _connected_active_count(), "next": str(nxt.get("kind")), "mid_game": mid})
+				# Punishment between games: "{NAME}'S EASY QUESTION" (rare, earned).
+				if inc.is_empty() and str(nxt.get("kind")) == "scores" and not bool(nxt.get("final", false)) and prev.kind != "special":
+					var victim := director.punishment_candidate(active_player_ids().filter(func(x): return players[x].connected))
+					if victim != "":
+						var easy := director.pick_items("easy_question", "", 1, 2)
+						if not easy.is_empty():
+							_segments.push_front({"kind": "special", "mode": "punish", "pid": victim, "item": easy[0]})
+				# Persistent room/event chains (Tier 2-4): at most one step per broadcast, between games.
+				if inc.is_empty() and not mid and (_boundaries >= director.chain_boundary or director.force.has("chain_step")):
+					var step: Dictionary = director.world.maybe_advance({"returning_players": _has_returning_players(), "installation_seed": director.installation_seed})
+					if not step.is_empty():
+						inc = {"id": "chain:" + str(step.chain), "tier": int(step.tier), "effect": "chain_step", "params": step,
+							"lines": [step.line] if step.has("line") else [], "duration": 3.2, "moment": "boundary"}
 				if not inc.is_empty():
 					_segments.push_front({"kind": "incident", "incident": inc})
 	if phase != Phase.SHOW:
@@ -651,6 +668,13 @@ func close_session(reason: String) -> void:
 	_log("session closed: %s" % reason)
 
 
+func _has_returning_players() -> bool:
+	for p in players.values():
+		if p.is_active() and store.profiles.has(p.profile_id) and int(store.profiles[p.profile_id].get("games_played", 0)) > 0:
+			return true
+	return false
+
+
 func _persist_results() -> void:
 	var st := standings()
 	var top_score := int(st[0].score) if not st.is_empty() else 0
@@ -683,6 +707,15 @@ func _persist_results() -> void:
 		if not seen.has(id):
 			seen.append(id)
 	store.installation.facts_seen = seen
+	# The world behind the programme persists (rooms, chains). The Announcer drifts, slowly.
+	if not store.installation.has("seed"):
+		store.installation.seed = director.rng.randi()
+	director.world.save_into(store.installation)
+	store.installation.last_test_broadcast = director.last_test_broadcast
+	var played := int(store.installation.get("broadcasts_played", 0))
+	if played >= 3 and played % 3 == 0 and director.interference_mode != "clean_transmission" and director.rng.randf() < 0.6:
+		store.installation.announcer_stage = mini(3, int(store.installation.get("announcer_stage", 0)) + 1)
+		director.log_decision("AnnouncerStage", str(store.installation.announcer_stage), ["broadcasts_played=%d" % played])
 	store.save_installation()
 
 

@@ -1,6 +1,6 @@
 class_name SegIncident
 extends Segment
-## A short broadcast irregularity at a segment boundary (Tier 0/1). Presentation only.
+## A short broadcast irregularity at a segment boundary (Tier 0-3, and chain steps). Presentation only.
 var inc: Dictionary
 
 func _init(desc: Dictionary) -> void:
@@ -19,10 +19,34 @@ func start() -> void:
 		params["name"] = p.display_name
 		params["typo"] = SegIncident.typo(p.display_name, session.director.rng)
 		params["number"] = p.number
+	var world = session.director.world
+	var tier := int(inc.get("tier", 0))
+	match str(inc.get("effect")):
+		"cctv_cutaway":
+			params.merge(world.cctv(tier), true)
+		"room_callback":
+			var seen: Array = world.rooms_seen
+			params.merge(world.cctv(2, str(seen[session.director.rng.randi_range(0, seen.size() - 1)]) if not seen.is_empty() else ""), true)
+		"chain_step":
+			if params.has("interfere"):
+				session.director.force["interfere"] = str(params.interfere)
+				session._interference_opportunity("boundary", "")
 	emit_incident(session, inc, params)
 	var t := 0.35
+	var lead := 0.35
+	match str(inc.get("effect")):
+		"graham_snap":
+			lead = 1.6          # the noise, then he stops smiling
+		"silent_stare":
+			lead = float(inc.get("duration", 8.0)) - 1.5   # nothing happens for a while. Nothing at all.
+		"cctv_cutaway", "room_callback", "chain_step":
+			lead = float(inc.get("duration", 2.6)) + 0.3   # back in the studio before anybody speaks
+	t = lead
 	for l in inc.get("lines", []):
 		t = say_at(t, str(l[0]), str(l[1])) + 0.2
+	# Tonal whiplash: after a sinister beat, straight back to something stupid (docs/03).
+	if tier >= 2 and session.director.rng.randf() < 0.6:
+		t = say_at(t + 0.4, "graham", "incident_reset") + 0.2
 	duration = maxf(float(inc.get("duration", 1.5)), t) + 0.3
 
 static func emit_incident(s, i: Dictionary, params: Dictionary) -> void:

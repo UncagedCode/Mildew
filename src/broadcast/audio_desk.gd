@@ -5,7 +5,7 @@ extends Node
 
 const SFX := ["correct", "wrong", "lock", "tick", "static_burst", "whoosh", "sting_game", "ident_sallow",
 	"applause_small", "applause_medium", "applause_big", "sting_hole", "zoom_servo", "mic_pop", "feedback",
-	"crowd_ooh", "crowd_aww", "crowd_laugh", "crowd_gasp"]
+	"crowd_ooh", "crowd_aww", "crowd_laugh", "crowd_gasp", "jingle_advert", "break_bumper", "bang_distant", "room_tone", "door_distant"]
 
 var _streams := {}
 var _music: AudioStreamPlayer

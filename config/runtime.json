@@ -77,6 +77,13 @@
   "bumper_seconds": 4,
   "return_seconds": 3
  },
+ "special": {
+  "punish_seconds": 12,
+  "punish_threshold": 0.5,
+  "punish_chance": 0.25,
+  "test_seconds": 18,
+  "test_chance": 0.12
+ },
  "poll": {
   "seconds": 15
  },

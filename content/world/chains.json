@@ -1,0 +1,150 @@
+{
+ "pack_id": "world.chains_cp8",
+ "content_kind": "event_chain",
+ "_comment": "Persistent room/event chains. One step advances per eligible broadcast (rarely); steps can revert rooms. Tier 4 chains need prerequisites beyond chance (rooms seen, familiarity, announcer stage, returning players, installation seed) and are dev-testable via force.chain_step. No catalogue, no achievements.",
+ "items": [
+  {
+   "id": "chain.chair",
+   "name": "The chair",
+   "min_familiarity": 1,
+   "steps": [
+    {
+     "room": "room.green_room",
+     "set": {
+      "chair": "left"
+     }
+    },
+    {
+     "room": "room.green_room",
+     "set": {
+      "chair": "door"
+     }
+    },
+    {
+     "room": "room.green_room",
+     "set": {
+      "chair": "centre"
+     },
+     "note": "back to normal"
+    }
+   ],
+   "tier": 2,
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "chain.tape_room_door",
+   "name": "The tape room door",
+   "min_familiarity": 2,
+   "steps": [
+    {
+     "room": "room.tape_room",
+     "set": {
+      "door": "open"
+     }
+    },
+    {
+     "room": "room.tape_room",
+     "set": {
+      "light": "off"
+     }
+    },
+    {
+     "room": "room.tape_room",
+     "set": {
+      "door": "closed",
+      "light": "on"
+     }
+    }
+   ],
+   "tier": 2,
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "chain.studio_c_figure",
+   "name": "Podium 4",
+   "min_familiarity": 3,
+   "requires": {
+    "rooms_seen": [
+     "room.studio_c"
+    ],
+    "announcer_stage": 1
+   },
+   "steps": [
+    {
+     "room": "room.studio_c",
+     "set": {
+      "light": "off"
+     }
+    },
+    {
+     "room": "room.studio_c",
+     "set": {
+      "figure": "podium"
+     }
+    },
+    {
+     "room": "room.studio_c",
+     "set": {
+      "figure": "none",
+      "light": "on"
+     }
+    }
+   ],
+   "tier": 3,
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "chain.legend_locked_room",
+   "name": "Locked room (Tier 4 machinery)",
+   "min_familiarity": 4,
+   "tier": 4,
+   "requires": {
+    "rooms_seen": [
+     "room.tape_room",
+     "room.corridor"
+    ],
+    "announcer_stage": 2,
+    "returning_players": true,
+    "seed_mod": [
+     3,
+     0
+    ]
+   },
+   "steps": [
+    {
+     "room": "room.corridor",
+     "set": {
+      "door": "open"
+     },
+     "interfere": "p.why_watching"
+    },
+    {
+     "room": "room.corridor",
+     "set": {
+      "figure": "far"
+     },
+     "line": [
+      "announcer",
+      "advert_link"
+     ]
+    },
+    {
+     "room": "room.corridor",
+     "set": {
+      "figure": "none",
+      "door": "closed"
+     },
+     "line": [
+      "graham",
+      "incident_stare_recover"
+     ]
+    }
+   ],
+   "enabled": true,
+   "quality_status": "draft"
+  }
+ ]
+}

@@ -25,6 +25,9 @@ var _showing := false
 var _poll := {}               # {prompt, options, tally}
 var _awards: Array = []       # [{title, name, avatar, prize, t}]
 var players := {}
+var _punish := {}             # {title, prompt, options, pid, result}
+var _test := false
+var _test_t := 0.0
 
 
 func _ready() -> void:
@@ -69,6 +72,36 @@ func poll_result(evt: Dictionary) -> void:
 	_poll["rt"] = _t
 
 
+func show_punish(evt: Dictionary) -> void:
+	_clear_all()
+	_punish = evt.duplicate()
+	_punish["t"] = _t
+	_showing = true
+
+
+func punish_result(evt: Dictionary) -> void:
+	_punish["result"] = evt
+	_punish["rt"] = _t
+
+
+func show_test() -> void:
+	_clear_all()
+	_test = true
+	_test_t = _t
+	_showing = true
+
+
+func _clear_all() -> void:
+	_ad = {}
+	_card = {}
+	_poll = {}
+	_awards = []
+	_punish = {}
+	_test = false
+	_punish = {}
+	_test = false
+
+
 func show_award(evt: Dictionary) -> void:
 	if _awards.is_empty():
 		_ad = {}
@@ -107,6 +140,12 @@ func _process(delta: float) -> void:
 
 func _draw() -> void:
 	if not _showing:
+		return
+	if _test:
+		_draw_test()
+		return
+	if not _punish.is_empty():
+		_draw_punish()
 		return
 	if not _card.is_empty():
 		_draw_card()
@@ -359,3 +398,52 @@ func _draw_awards() -> void:
 		draw_string(f_display, Vector2(tx, r.position.y + 44 + minf(70.0, r.size.y * 0.45)), str(aw.name), HORIZONTAL_ALIGNMENT_LEFT, r.size.x - r.size.y - 30, 52, Color(1, 1, 1, a))
 		if str(aw.prize) != "":
 			draw_string(f_sans, Vector2(tx, r.end.y - 14), "WINS: " + str(aw.prize), HORIZONTAL_ALIGNMENT_LEFT, r.size.x - r.size.y - 30, 26, Color(1, 0.9, 0.5, a))
+
+
+## {NAME}'S EASY QUESTION: a children's-TV quiz card, confetti if they manage it.
+func _draw_punish() -> void:
+	draw_rect(Rect2(0, 0, W, H), Color(0.98, 0.85, 0.2))
+	for i in 16:
+		draw_circle(Vector2(fmod(i * 211.0, W), fmod(i * 337.0, H)), 50 + (i % 4) * 20, Color(1, 1, 1, 0.12))
+	draw_rect(Rect2(60, 60, W - 120, 120), Color(0.85, 0.15, 0.4))
+	draw_string(f_display, Vector2(0, 150), str(_punish.get("title", "")), HORIZONTAL_ALIGNMENT_CENTER, W, 70 if str(_punish.title).length() < 22 else 54, Color(1, 1, 1))
+	draw_string(f_sans, Vector2(0, 300), str(_punish.get("prompt", "")), HORIZONTAL_ALIGNMENT_CENTER, W, 64, Color(0.15, 0.1, 0.3))
+	var opts: Array = _punish.get("options", [])
+	var res: Dictionary = _punish.get("result", {})
+	var cols := [Color("#c7362b"), Color("#2e5fae"), Color("#3f9a45"), Color("#9a5cff")]
+	for i in opts.size():
+		var r := Rect2(160 + (i % 2) * 580, 400 + (i / 2) * 200, 540, 160)
+		var c: Color = cols[i % 4]
+		if not res.is_empty():
+			if i == int(res.correct):
+				c = Color("#3f9a45")
+			elif i == int(res.answer):
+				c = Color("#5a5a5a")
+			else:
+				c = c.darkened(0.5)
+		draw_rect(r, c)
+		draw_string(f_display, r.position + Vector2(0, r.size.y * 0.5 + 22), str(opts[i]), HORIZONTAL_ALIGNMENT_CENTER, r.size.x, 56, Color(1, 1, 1))
+	if not res.is_empty():
+		var rt := _t - float(_punish.get("rt", _t))
+		if bool(res.ok):
+			for k in 120:
+				var x := fmod(k * 97.0 + rt * (40 + k % 7 * 20), W)
+				var y := fmod(k * 53.0 + rt * (300 + (k % 5) * 80), H)
+				draw_rect(Rect2(x, y, 14, 22), [Color.RED, Color.YELLOW, Color.CYAN, Color.MAGENTA, Color.GREEN][k % 5])
+			draw_string(f_display, Vector2(0, 980), "HE'S DONE IT!" if rt > 0.3 else "", HORIZONTAL_ALIGNMENT_CENTER, W, 90, Color(0.85, 0.15, 0.4))
+		else:
+			draw_string(f_display, Vector2(0, 980), "OH DEAR", HORIZONTAL_ALIGNMENT_CENTER, W, 80, Color(0.3, 0.2, 0.4))
+
+
+## THE TEST: generic colour bars, a tone, and one word. (No real broadcaster's test card.)
+func _draw_test() -> void:
+	var bars := [Color(0.75, 0.75, 0.75), Color(0.75, 0.75, 0), Color(0, 0.75, 0.75), Color(0, 0.75, 0), Color(0.75, 0, 0.75), Color(0.75, 0, 0), Color(0, 0, 0.75)]
+	var bw := W / bars.size()
+	for i in bars.size():
+		draw_rect(Rect2(i * bw, 0, bw + 1, H * 0.67), bars[i])
+	draw_rect(Rect2(0, H * 0.67, W, H * 0.33), Color(0.06, 0.06, 0.06))
+	var el := _t - _test_t
+	draw_rect(Rect2(W * 0.5 - 260, H * 0.30, 520, 150), Color(0, 0, 0))
+	draw_string(f_mono, Vector2(0, H * 0.30 + 105), "THE TEST", HORIZONTAL_ALIGNMENT_CENTER, W, 80, Color(0.95, 0.95, 0.95))
+	if int(el * 1.5) % 2 == 0:
+		draw_string(f_mono, Vector2(0, H * 0.84), "ANSWER ON YOUR UNIT", HORIZONTAL_ALIGNMENT_CENTER, W, 34, Color(0.8, 0.8, 0.8))

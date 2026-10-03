@@ -92,6 +92,18 @@ func validate(db: ContentDB, release_mode: bool = false) -> bool:
 							errors.append("%s: scene without bg colours" % where)
 					if secs < 6.0 or secs > 30.0:
 						errors.append("%s: advert length %.1fs outside 6..30" % [where, secs])
+				"room":
+					if str(item.get("name", "")) == "" or str(item.get("cam", "")) == "":
+						errors.append("%s: room needs a name and a camera" % where)
+				"event_chain":
+					var tier := int(item.get("tier", 0))
+					if tier < 2 or tier > 4:
+						errors.append("%s: chain tier must be 2-4" % where)
+					if tier == 4 and (item.get("requires", {}) as Dictionary).is_empty():
+						errors.append("%s: Tier 4 needs prerequisites beyond chance" % where)
+					for st in item.get("steps", []):
+						if not str(st.get("room", "")).begins_with("room."):
+							errors.append("%s: chain step without a room" % where)
 				"poll":
 					if str(item.get("prompt", "")) == "" or not ((item.get("options", []) as Array).size() in [2, 3, 4]):
 						errors.append("%s: poll needs a prompt and 2-4 options" % where)

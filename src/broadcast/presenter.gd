@@ -18,6 +18,7 @@ var ps: SketchBoard
 var dnp: DnpBoard
 var bas: BasementBoard
 var ads: AdvertPlayer
+var cctv: CctvView
 var _quiz_q := false                 # current question is on the quiz board (CP3 layouts)
 
 var _sync_timer := 0.0
@@ -103,7 +104,7 @@ func _on_event(evt: Dictionary) -> void:
 				quiz.hide_board()
 				_quiz_q = false
 				_in_question = false
-			if not (str(evt.kind) in ["advert", "poll", "awards"]) and ads and ads.is_showing():
+			if not (str(evt.kind) in ["advert", "poll", "awards", "special"]) and ads and ads.is_showing():
 				ads.stop()
 				_in_question = false
 			if str(evt.kind) != "basement" and bas and bas.is_showing():
@@ -176,7 +177,7 @@ func _on_event(evt: Dictionary) -> void:
 			_dnp_event(evt)
 		"bas_case", "bas_discuss", "bas_investigated", "bas_ready", "bas_theory", "bas_theory_in", "bas_reveal":
 			_bas_event(evt)
-		"advert_show", "advert_end", "break_card", "break_ready", "poll_show", "poll_progress", "poll_result", "award":
+		"advert_show", "advert_end", "break_card", "break_ready", "poll_show", "poll_progress", "poll_result", "award", "special_punish", "special_punish_result", "special_test", "special_test_end":
 			_furniture_event(evt)
 		"question_show" when str(evt.get("layout", "panel")) != "panel":
 			_in_question = true
@@ -528,6 +529,40 @@ func _incident(evt: Dictionary) -> void:
 				later.call(dur, func(): studio._do_cut(back))
 		"off_mic_cue", "wrong_name":
 			pass  # carried by the line itself
+		# ---- Tier 2/3 + chain steps (CP8): never over an active game graphic ----
+		"cctv_cutaway", "room_callback", "chain_step":
+			if cctv and not _graphic_owns_frame():
+				audio.duck(true)
+				audio.play("room_tone", -10.0)
+				cctv.show_room(p, dur)
+				gfx.dog_visible = false
+				later.call(dur, func():
+					gfx.dog_visible = true
+					audio.duck(false)
+					cctv.stop()
+					studio._do_cut("cam1"))
+		"banging":
+			audio.play("bang_distant", -3.0)
+			later.call(0.4, func(): g.set_state("look_off", "cut"))
+			if not _graphic_owns_frame():
+				studio._do_cut("cam1")
+		"announcer_odd":
+			audio.duck(true)
+			later.call(dur, func(): audio.duck(false))
+		"graham_snap":
+			audio.play("bang_distant", -1.0)
+			audio.silence_audience()
+			if not _graphic_owns_frame():
+				studio._do_cut("cam1")
+				later.call(0.6, func(): g.set_state("look_off", "cut"))
+		"silent_stare":
+			audio.silence_audience()
+			audio.duck(true)
+			if not _graphic_owns_frame():
+				studio._do_cut("cam1")
+				g.set_state("stare", "cut")
+				_stare_until = Time.get_ticks_msec() + int(dur * 1000.0)
+			later.call(dur, func(): audio.duck(false))
 
 
 ## Audience reaction cutaway (photographic plate only), then back to Graham. False if unavailable.
@@ -539,6 +574,9 @@ func _audience_cutaway(cam: String, seconds: float) -> bool:
 		if studio.current_cam == cam:
 			studio.cut_to("cam1", false))
 	return true
+
+
+var _stare_until := 0
 
 
 func _graphic_owns_frame() -> bool:
@@ -696,7 +734,7 @@ func _furniture_event(evt: Dictionary) -> void:
 			gfx.hide_question()
 			gfx.dog_visible = false            # adverts carry no channel bug
 			ads.play(evt.advert, ts)
-			audio.play("sting_game", -6.0)
+			audio.play("jingle_advert", -6.0)
 		"advert_end":
 			ads.stop()
 			gfx.dog_visible = true
@@ -709,7 +747,7 @@ func _furniture_event(evt: Dictionary) -> void:
 				ads.set_ready(int(evt.get("ready", 0)), int(evt.get("of", 0)))
 				audio.play("theme_opening", -14.0)
 			else:
-				audio.play("whoosh", -4.0)
+				audio.play("break_bumper", -4.0)
 		"break_ready":
 			ads.set_ready(int(evt.count), int(evt.of))
 		"poll_show":
@@ -723,6 +761,31 @@ func _furniture_event(evt: Dictionary) -> void:
 		"poll_result":
 			ads.poll_result(evt)
 			audio.crowd("ooh", -10.0)
+		"special_punish":
+			_in_question = true
+			gfx.hide_question()
+			ads.show_punish(evt)
+			audio.play("sting_game", -4.0)
+		"special_punish_result":
+			ads.punish_result(evt)
+			if bool(evt.ok):
+				audio.applause("big")
+			else:
+				audio.silence_audience()
+				audio.play("wrong", -4.0)
+		"special_test":
+			_in_question = true
+			gfx.hide_question()
+			gfx.dog_visible = false
+			audio.stop_music()
+			audio.silence_audience()
+			audio.play("feedback", -18.0)
+			ads.show_test()
+		"special_test_end":
+			ads.stop()
+			gfx.dog_visible = true
+			_in_question = false
+			studio._do_cut("cam1")
 		"award":
 			_in_question = true
 			ads.show_award(evt)

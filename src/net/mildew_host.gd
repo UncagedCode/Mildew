@@ -388,6 +388,7 @@ func _dev_catalogue() -> Dictionary:
 	var games: Array = Director.FORMATS.keys().filter(func(k): return Director.FORMATS[k].kind == "game" and Director.FORMATS[k].implemented)
 	return {"personalities": FakePlayerBot.PERSONALITIES, "hole_items": items, "hole_variants": ["standard", "scale", "open"],
 		"private": privs, "games": games, "dnp_items": content.query("do_not_press_that", "", 5, 0).map(func(i): return i.id),
+		"chains": content.query("event_chain", "", 5, 0).map(func(i): return i.id),
 		"incidents": incs, "interference": ["standard_transmission", "supervised_transmission", "clean_transmission"],
 		"timescales": [1, 2, 4, 8]}
 

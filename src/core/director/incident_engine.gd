@@ -16,7 +16,9 @@ extends RefCounted
 const MOMENTS := ["boundary", "hole_round_start", "hole_stage", "hole_reveal"]
 const EFFECTS := ["mic_pop", "feedback", "lower_third_typo", "early_applause", "late_cut", "wrong_camera",
 	"off_mic_cue", "signal_tear", "empty_corridor", "hole_doorway", "wrong_name", "production_caption",
-	"wrong_audience_reaction", "floor_shot"]
+	"wrong_audience_reaction", "floor_shot",
+	# CP8 Tier 2/3 (docs/03): rooms, banging, the Announcer, Graham losing it, the stare
+	"cctv_cutaway", "room_callback", "banging", "announcer_odd", "graham_snap", "silent_stare"]
 
 var director  # Director (untyped: avoids a cyclic class reference)
 var items: Array = []
@@ -25,7 +27,7 @@ var last_fired := {}              # id -> show_time
 var last_tier := {}               # tier -> show_time
 var last_any := -1.0e9
 var fired_log: Array = []         # [{t, id, tier, moment}] (dev only; never shown to players)
-var count_by_tier := {0: 0, 1: 0}
+var count_by_tier := {0: 0, 1: 0, 2: 0, 3: 0}
 
 
 func _init(p_director) -> void:
@@ -39,7 +41,7 @@ func reset_for_new_show() -> void:
 	last_tier.clear()
 	last_any = -1.0e9
 	fired_log.clear()
-	count_by_tier = {0: 0, 1: 0}
+	count_by_tier = {0: 0, 1: 0, 2: 0, 3: 0}
 	# Temperament: most sessions normal, a few unusually clean, a few a bit busier.
 	var r: float = director.rng.randf()
 	temperament = 0.25 if r < 0.15 else (1.35 if r > 0.85 else 1.0)
@@ -53,7 +55,7 @@ func _mode_multiplier(tier: int, item: Dictionary) -> float:
 				return 0.0
 			return 0.5 if item.get("clean_safe", false) else 0.0
 		"supervised_transmission":
-			return 1.0 if tier == 0 else 0.35
+			return 1.0 if tier == 0 else (0.35 if tier == 1 else (0.2 if tier == 2 else 0.0))
 	return 1.0
 
 
@@ -67,8 +69,8 @@ func opportunity(moment: String, ctx: Dictionary = {}) -> Dictionary:
 				director.force.erase("incident")
 				director.log_decision("Incident", forced, ["forced by developer", "moment=%s" % moment])
 				return _fire(it, moment, ctx, now)
-	var base := {0: 0.05, 1: 0.008}
-	var tier_cd := {0: 40.0, 1: 240.0}
+	var base := {0: 0.05, 1: 0.008, 2: 0.007, 3: 0.0016}
+	var tier_cd := {0: 40.0, 1: 240.0, 2: 600.0, 3: 1800.0}
 	var quiet_for := now - last_any
 	# Comedy-saturation safeguard: a long completely normal stretch invites a cheap reminder.
 	var reminder := clampf((quiet_for - 200.0) / 200.0, 0.0, 1.0)
@@ -77,8 +79,12 @@ func opportunity(moment: String, ctx: Dictionary = {}) -> Dictionary:
 	var weights: Array = []
 	for it in items:
 		var tier := int(it.get("tier", 0))
-		if tier > 1:
-			continue  # CP2: Tier 2+ machinery not yet enabled
+		if tier > 3:
+			continue  # Tier 4 lives in WorldState chains (prerequisites, not chance alone)
+		if tier >= 2 and bool(ctx.get("mid_game", false)):
+			continue  # never interrupt a game between its rounds with something major
+		if tier >= 2 and int(count_by_tier.get(tier, 0)) >= (2 if tier == 2 else 1):
+			continue  # major incidents stay rare within a show
 		if not (it.get("moments", []) as Array).has(moment) or not _game_ok(it, ctx):
 			continue
 		var pc := int(ctx.get("players", 2))
@@ -90,7 +96,7 @@ func opportunity(moment: String, ctx: Dictionary = {}) -> Dictionary:
 			continue
 		if now - float(last_tier.get(tier, -1.0e9)) < float(tier_cd.get(tier, 120.0)):
 			continue
-		if tier >= 1 and unsettling > 0.5:
+		if tier >= 1 and unsettling > (0.5 if tier == 1 else 0.3):
 			continue  # horror-saturation safeguard
 		if it.has("needs") and not _needs_ok(it.needs, ctx):
 			continue
@@ -102,7 +108,7 @@ func opportunity(moment: String, ctx: Dictionary = {}) -> Dictionary:
 	if candidates.is_empty():
 		return {}
 	# Roll once per tier present, Tier 1 first (rarer), then Tier 0.
-	for tier in [1, 0]:
+	for tier in [3, 2, 1, 0]:
 		var idx: Array = []
 		for i in candidates.size():
 			if int(candidates[i].get("tier", 0)) == tier:
@@ -156,7 +162,7 @@ func _fire(it: Dictionary, moment: String, ctx: Dictionary, now: float) -> Dicti
 	count_by_tier[tier] = int(count_by_tier.get(tier, 0)) + 1
 	fired_log.append({"t": snappedf(now, 0.1), "id": it.id, "tier": tier, "moment": moment})
 	if tier >= 1:
-		director._tone("unsettling", 0.08)
+		director._tone("unsettling", 0.08 * tier)
 		director.degradation = clampf(director.degradation + 0.02, 0, 1)
 	else:
 		director._tone("comedy", 0.05)
