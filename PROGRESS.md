@@ -6,7 +6,7 @@ Current build/version: `0.1.0-cp8` (versionCode 8), debug APK
 Current branch: `claude/cp3-factual` (contains CP3 → CP8; see git log). APKs: branch `claude/apk-builds`.
 Godot version: **4.7.2-stable** (GL Compatibility) — pinned (D001)
 Android toolchain: headless non-Gradle export + container v2 signer + TV-launcher patch (D007, D008). Build: `tools/build/build_apk.sh`.
-Latest APK: `mildew-0.1.0-cp8-debug.apk` on branch `claude/apk-builds` (SHA-256 `00e612b6…24c5`, see `docs/testing/TEST_REPORT_CP8.md`).
+Latest APK: `mildew-0.1.0-cp8-debug.apk` on branch `claude/apk-builds` (SHA-256 `66011136…f424`, see `docs/testing/TEST_REPORT_CP8.md`).
 
 ## Executive status
 
@@ -108,7 +108,7 @@ environment): every checkpoint's "runs on target hardware" item is **PENDING USE
 | Viewer polls / easy questions / THE TEST | 15 / 8 / 1 | draft | |
 | Incidents | T0 8, T1 6, T2 4, T3 2, chains 4 (one Tier 4) | draft | |
 | Private interference | 22 | draft | |
-| Rooms | 5 (CCTV procedural) | draft | 4–5 ✅ (photographic plates wanted) |
+| Rooms | 10 (photographic CCTV plates, D037) | draft | 4–5 ✅ |
 | Graham lines | CP1–CP8 packs, ~400 lines | draft, **unvoiced** except the 19-line dev library | voice production pending |
 
 ## Art/audio status

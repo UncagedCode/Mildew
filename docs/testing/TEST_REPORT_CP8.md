@@ -17,7 +17,7 @@ Chromium (Playwright) in portrait phone emulation with touch.
 | APK for each checkpoint | PASS (container) | `build/mildew-0.1.0-cp8-debug.apk` (CP4 interim build also produced) |
 | Physical Android TV / phone smoke test | **PENDING USER DEVICE TEST** | checklist in NEXT_BUILD.md |
 
-APK SHA-256: `00e612b6f3af52a233e6c19678ccabe20ef240936b8c645248102d69b1b624c5` (98.2 MB; v2 signature verified;
+APK SHA-256: `6601113685c16439423640b89a3d3e9fc813b6fb4e8bf61ac83908cf32b0f424` (90.9 MB incl. room plates; v2 signature verified;
 manifest LEANBACK + INTERNET; pack checks for every game's content, adverts, rooms, new audio). Published on branch `claude/apk-builds`.
 
 ## Unit / state tests — `tools/run_tests.sh`
