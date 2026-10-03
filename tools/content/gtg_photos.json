@@ -1,0 +1,65 @@
+{
+ "game": "gtg",
+ "items": {
+  "walrus": {
+   "file": "File:Baculum Walrus.jpg",
+   "fx": 0.5,
+   "fy": 0.5,
+   "zoom": 1.0
+  },
+  "snake": {
+   "file": "File:Bothops alcatraz hemipenis OAVM.jpg",
+   "fx": 0.5,
+   "fy": 0.5,
+   "zoom": 1.0
+  },
+  "spider": {
+   "file": "File:Badumna longinqua bulb.jpg",
+   "fx": 0.5,
+   "fy": 0.5,
+   "zoom": 1.0
+  },
+  "octopus": {
+   "file": "File:Hectocotyle1-2.jpg",
+   "fx": 0.5,
+   "fy": 0.5,
+   "zoom": 1.0
+  },
+  "snail": {
+   "file": "File:Bradybaena similaris SEM dart.jpg",
+   "fx": 0.5,
+   "fy": 0.27,
+   "zoom": 1.0
+  },
+  "beetle": {
+   "file": "File:Cyphon poecilopterus aedeagus.jpg",
+   "fx": 0.5,
+   "fy": 0.5,
+   "zoom": 1.0
+  },
+  "shark": {
+   "file": "File:Male pelvic fins and claspers of velvet belly lanternshark Etmopterus spinax.jpg",
+   "fx": 0.5,
+   "fy": 0.5,
+   "zoom": 1.0
+  },
+  "guppy": {
+   "file": "File:Poecilia wingei Gonopodium.JPG",
+   "fx": 0.5,
+   "fy": 0.5,
+   "zoom": 1.0
+  },
+  "stinkhorn": {
+   "file": "File:Phallus-impudicus-stinkmorchel-b.jpg",
+   "fx": 0.5,
+   "fy": 0.5,
+   "zoom": 1.0
+  },
+  "geoduck": {
+   "file": "File:Geoduck 1.jpg",
+   "fx": 0.5,
+   "fy": 0.5,
+   "zoom": 1.0
+  }
+ }
+}

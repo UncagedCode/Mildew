@@ -1,0 +1,691 @@
+{
+ "pack_id": "gtg.core_cp3",
+ "content_kind": "guess_the_genitals",
+ "game_id": "guess_the_genitals",
+ "_comment": "Guess the Genitals CP3 set (docs/04 §1). ANIMAL ONLY, clinical. Real licensed photographs/plates via Wikimedia Commons (tools/content/gtg_photos.json). 'decoy' items are the 'Genital or Something Else?' variant. weirdness orders the game (accessible first). All DRAFT until a human checks the facts. Below the 15-20 PoC target: needs more licensed images.",
+ "items": [
+  {
+   "id": "gtg.walrus",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "weirdness": 1,
+   "content_tags": [
+    "factual",
+    "animals",
+    "sexual_anatomy_animal",
+    "grossness_3"
+   ],
+   "director_tags": [
+    "visual",
+    "gross"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "taxon": "Odobenus rosmarus",
+   "kingdom_class": "animal",
+   "decoy": false,
+   "prompt": "WHOSE IS IT?",
+   "options": [
+    "A walrus",
+    "An elephant",
+    "A giraffe",
+    "A polar bear"
+   ],
+   "correct": 0,
+   "points": 1000,
+   "answer_label": "Walrus (penis bone)",
+   "fact": "That's a walrus baculum — a penis bone. Walruses have one of the largest of any living mammal, up to around 60 cm. Polished ones are sold in Alaska as 'oosiks'.",
+   "sources": [
+    {
+     "title": "Baculum",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Baculum",
+     "supported_claim": "Walrus baculum is among the largest of living mammals; called oosik in Alaska.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check before approval."
+    },
+    {
+     "title": "Oosik",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Oosik",
+     "supported_claim": "Walrus baculum, up to about 60 cm, sold as a souvenir.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check before approval."
+    }
+   ],
+   "image": "res://assets/content/gtg/walrus.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/gtg/walrus.jpg",
+     "source": "Wikimedia Commons",
+     "source_page": "https://commons.wikimedia.org/wiki/File%3ABaculum_Walrus.jpg",
+     "original_url": "https://upload.wikimedia.org/wikipedia/commons/6/6c/Baculum_Walrus.jpg",
+     "creator": "ivanitskiy",
+     "licence": "Public domain",
+     "licence_url": "",
+     "attribution_required": false,
+     "attribution": "ivanitskiy, Public domain, via Wikimedia Commons",
+     "derivative_notes": "cropped to 4:3 and resized to 1600x1200 (tools/content/commons_media.py)",
+     "approval_status": "approved",
+     "art_status": "real_photo",
+     "retrieved": "2026-10-03"
+    }
+   ],
+   "reveal_line": "A walrus. That's a bone. Inside it. Permanently. And people buy them as souvenirs."
+  },
+  {
+   "id": "gtg.snake",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "weirdness": 2,
+   "content_tags": [
+    "factual",
+    "animals",
+    "sexual_anatomy_animal",
+    "grossness_3"
+   ],
+   "director_tags": [
+    "visual",
+    "gross"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "taxon": "Bothrops alcatraz",
+   "kingdom_class": "animal",
+   "decoy": false,
+   "prompt": "WHOSE IS IT?",
+   "options": [
+    "A snake",
+    "A lizard",
+    "A squid",
+    "A frog"
+   ],
+   "correct": 0,
+   "points": 1000,
+   "answer_label": "Alcatrazes lancehead (snake)",
+   "fact": "Snakes have two penises, called hemipenes, tucked into the base of the tail. They use one at a time, and many species' are covered in spines and hooks. This one belongs to the Alcatrazes lancehead, a pit viper found on a single Brazilian island.",
+   "sources": [
+    {
+     "title": "Hemipenis",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Hemipenis",
+     "supported_claim": "Snakes and lizards have paired hemipenes, used one at a time, often spiny.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check before approval."
+    },
+    {
+     "title": "Bothrops alcatraz",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Bothrops_alcatraz",
+     "supported_claim": "Pit viper endemic to Alcatrazes Island, Brazil.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check before approval."
+    }
+   ],
+   "image": "res://assets/content/gtg/snake.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/gtg/snake.jpg",
+     "source": "Wikimedia Commons",
+     "source_page": "https://commons.wikimedia.org/wiki/File%3ABothops_alcatraz_hemipenis_OAVM.jpg",
+     "original_url": "https://upload.wikimedia.org/wikipedia/commons/8/8b/Bothops_alcatraz_hemipenis_OAVM.jpg",
+     "creator": "Otavio A Marques",
+     "licence": "CC BY 4.0",
+     "licence_url": "https://creativecommons.org/licenses/by/4.0",
+     "attribution_required": true,
+     "attribution": "Otavio A Marques, CC BY 4.0, via Wikimedia Commons",
+     "derivative_notes": "cropped to 4:3 and resized to 1600x1200 (tools/content/commons_media.py)",
+     "approval_status": "approved",
+     "art_status": "real_photo",
+     "retrieved": "2026-10-03"
+    }
+   ],
+   "reveal_line": "A snake. Two of them, as you can see. One for weekdays.",
+   "crop": {
+    "x": 0.6,
+    "y": 0.5,
+    "zoom": 1.6
+   }
+  },
+  {
+   "id": "gtg.spider",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "weirdness": 3,
+   "content_tags": [
+    "factual",
+    "animals",
+    "sexual_anatomy_animal",
+    "insects",
+    "grossness_2"
+   ],
+   "director_tags": [
+    "visual",
+    "gross"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "taxon": "Badumna longinqua",
+   "kingdom_class": "animal",
+   "decoy": false,
+   "prompt": "WHOSE IS IT?",
+   "options": [
+    "A spider",
+    "A wasp",
+    "A scorpion",
+    "A crab"
+   ],
+   "correct": 0,
+   "points": 1000,
+   "answer_label": "Grey house spider (palp)",
+   "fact": "Male spiders have no penis at all. They spin a tiny web, deposit sperm on it, soak it up into bulbs on their pedipalps — the little arms by the mouth — and deliver it with those. This is the palp of a grey house spider.",
+   "sources": [
+    {
+     "title": "Spider — reproduction",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Spider#Reproduction_and_life_cycle",
+     "supported_claim": "Males transfer sperm with their pedipalps after charging them from a sperm web.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check before approval."
+    },
+    {
+     "title": "Badumna longinqua",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Badumna_longinqua",
+     "supported_claim": "Grey house spider.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check before approval."
+    }
+   ],
+   "image": "res://assets/content/gtg/spider.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/gtg/spider.jpg",
+     "source": "Wikimedia Commons",
+     "source_page": "https://commons.wikimedia.org/wiki/File%3ABadumna_longinqua_bulb.jpg",
+     "original_url": "https://upload.wikimedia.org/wikipedia/commons/9/91/Badumna_longinqua_bulb.jpg",
+     "creator": "dhobern",
+     "licence": "CC BY 4.0",
+     "licence_url": "https://creativecommons.org/licenses/by/4.0",
+     "attribution_required": true,
+     "attribution": "dhobern, CC BY 4.0, via Wikimedia Commons",
+     "derivative_notes": "cropped to 4:3 and resized to 1600x1200 (tools/content/commons_media.py)",
+     "approval_status": "approved",
+     "art_status": "real_photo",
+     "retrieved": "2026-10-03"
+    }
+   ],
+   "reveal_line": "A spider. It's on his face. That's where he keeps it. Think about that next time one runs across the bath."
+  },
+  {
+   "id": "gtg.octopus",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "weirdness": 3,
+   "content_tags": [
+    "factual",
+    "animals",
+    "sexual_anatomy_animal",
+    "grossness_2"
+   ],
+   "director_tags": [
+    "visual",
+    "gross"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "taxon": "Octopoda (hectocotylus)",
+   "kingdom_class": "animal",
+   "decoy": false,
+   "prompt": "WHOSE IS IT?",
+   "options": [
+    "An octopus",
+    "A starfish",
+    "A centipede",
+    "An eel"
+   ],
+   "correct": 0,
+   "points": 1000,
+   "answer_label": "Octopus (mating arm)",
+   "fact": "Male octopuses mate with a specially modified arm called the hectocotylus. In some relatives the arm breaks off inside the female. When Georges Cuvier first found one, he thought it was a parasitic worm and gave it its name.",
+   "sources": [
+    {
+     "title": "Hectocotylus",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Hectocotylus",
+     "supported_claim": "Modified arm used to transfer sperm; may detach in argonauts; Cuvier first described it as a parasite.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check before approval."
+    }
+   ],
+   "image": "res://assets/content/gtg/octopus.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/gtg/octopus.jpg",
+     "source": "Wikimedia Commons",
+     "source_page": "https://commons.wikimedia.org/wiki/File%3AHectocotyle1-2.jpg",
+     "original_url": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Hectocotyle1-2.jpg",
+     "creator": "Hectocotyle1.jpg: Georges Cuvier derivative work: Mgiganteus (talk)",
+     "licence": "Public domain",
+     "licence_url": "",
+     "attribution_required": false,
+     "attribution": "Hectocotyle1.jpg: Georges Cuvier derivative work: Mgiganteus (talk), Public domain, via Wikimedia Commons",
+     "derivative_notes": "cropped to 4:3 and resized to 1600x1200 (tools/content/commons_media.py)",
+     "approval_status": "approved",
+     "art_status": "real_photo",
+     "retrieved": "2026-10-03"
+    }
+   ],
+   "reveal_line": "An octopus arm. One of the eight. And it's not for waving."
+  },
+  {
+   "id": "gtg.snail",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 3,
+   "weirdness": 4,
+   "content_tags": [
+    "factual",
+    "animals",
+    "sexual_anatomy_animal",
+    "grossness_2"
+   ],
+   "director_tags": [
+    "visual",
+    "gross"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "taxon": "Bradybaena similaris",
+   "kingdom_class": "animal",
+   "decoy": false,
+   "prompt": "WHOSE IS IT?",
+   "options": [
+    "A snail",
+    "A sea urchin",
+    "A hedgehog",
+    "A wasp"
+   ],
+   "correct": 0,
+   "points": 1250,
+   "answer_label": "Asian tramp snail (love dart)",
+   "fact": "Many land snails stab their partner with a 'love dart' made of calcium before mating. The mucus on the dart improves the chances the stabber's sperm is used. This is the dart of the Asian tramp snail, under an electron microscope.",
+   "sources": [
+    {
+     "title": "Love dart",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Love_dart",
+     "supported_claim": "Calcareous dart used in snail courtship; mucus improves sperm survival.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check before approval."
+    },
+    {
+     "title": "Bradybaena similaris",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Bradybaena_similaris",
+     "supported_claim": "Asian tramp snail.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check before approval."
+    }
+   ],
+   "image": "res://assets/content/gtg/snail.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/gtg/snail.jpg",
+     "source": "Wikimedia Commons",
+     "source_page": "https://commons.wikimedia.org/wiki/File%3ABradybaena_similaris_SEM_dart.jpg",
+     "original_url": "https://upload.wikimedia.org/wikipedia/commons/a/af/Bradybaena_similaris_SEM_dart.jpg",
+     "creator": "Joris M. Koene and Hinrich Schulenburg",
+     "licence": "CC BY 2.0",
+     "licence_url": "https://creativecommons.org/licenses/by/2.0",
+     "attribution_required": true,
+     "attribution": "Joris M. Koene and Hinrich Schulenburg, CC BY 2.0, via Wikimedia Commons",
+     "derivative_notes": "cropped to 4:3 and resized to 1600x1200 (tools/content/commons_media.py)",
+     "approval_status": "approved",
+     "art_status": "real_photo",
+     "retrieved": "2026-10-03"
+    }
+   ],
+   "reveal_line": "A snail. It stabs its partner first. With a dart. Then the romance starts."
+  },
+  {
+   "id": "gtg.beetle",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 3,
+   "weirdness": 4,
+   "content_tags": [
+    "factual",
+    "animals",
+    "sexual_anatomy_animal",
+    "insects",
+    "grossness_2"
+   ],
+   "director_tags": [
+    "visual",
+    "gross"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "taxon": "Cyphon poecilopterus",
+   "kingdom_class": "animal",
+   "decoy": false,
+   "prompt": "WHOSE IS IT?",
+   "options": [
+    "A beetle",
+    "A bee",
+    "A moth",
+    "A flea"
+   ],
+   "correct": 0,
+   "points": 1250,
+   "answer_label": "Marsh beetle (aedeagus)",
+   "fact": "Beetle penises, called aedeagi, differ so much between species that entomologists often use them to tell species apart. This one belongs to a marsh beetle, Cyphon poecilopterus.",
+   "sources": [
+    {
+     "title": "Aedeagus",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Aedeagus",
+     "supported_claim": "Insect penis; shape is used to distinguish species.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check before approval."
+    },
+    {
+     "title": "Scirtidae (marsh beetles)",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Scirtidae",
+     "supported_claim": "Cyphon is a genus of marsh beetle.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check before approval."
+    }
+   ],
+   "image": "res://assets/content/gtg/beetle.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/gtg/beetle.jpg",
+     "source": "Wikimedia Commons",
+     "source_page": "https://commons.wikimedia.org/wiki/File%3ACyphon_poecilopterus_aedeagus.jpg",
+     "original_url": "https://upload.wikimedia.org/wikipedia/commons/9/9e/Cyphon_poecilopterus_aedeagus.jpg",
+     "creator": "S.E. Thorpe",
+     "licence": "Public domain",
+     "licence_url": "",
+     "attribution_required": false,
+     "attribution": "S.E. Thorpe, Public domain, via Wikimedia Commons",
+     "derivative_notes": "cropped to 4:3 and resized to 1600x1200 (tools/content/commons_media.py)",
+     "approval_status": "approved",
+     "art_status": "real_photo",
+     "retrieved": "2026-10-03"
+    }
+   ],
+   "reveal_line": "A beetle. Somebody's job is to look at these all day. They have a pension."
+  },
+  {
+   "id": "gtg.shark",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "weirdness": 2,
+   "content_tags": [
+    "factual",
+    "animals",
+    "sexual_anatomy_animal",
+    "grossness_2"
+   ],
+   "director_tags": [
+    "visual",
+    "gross"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "taxon": "Etmopterus spinax",
+   "kingdom_class": "animal",
+   "decoy": false,
+   "prompt": "WHOSE IS IT?",
+   "options": [
+    "A shark",
+    "A dolphin",
+    "A seal",
+    "A penguin"
+   ],
+   "correct": 0,
+   "points": 1000,
+   "answer_label": "Velvet belly lanternshark (claspers)",
+   "fact": "Male sharks have two claspers — extensions of the pelvic fins — and insert one during mating. These belong to a velvet belly lanternshark, a small deep-sea shark that glows.",
+   "sources": [
+    {
+     "title": "Clasper",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Clasper",
+     "supported_claim": "Male cartilaginous fish have paired claspers formed from the pelvic fins.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check before approval."
+    },
+    {
+     "title": "Velvet belly lanternshark",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Velvet_belly_lanternshark",
+     "supported_claim": "Small bioluminescent deep-sea shark.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check before approval."
+    }
+   ],
+   "image": "res://assets/content/gtg/shark.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/gtg/shark.jpg",
+     "source": "Wikimedia Commons",
+     "source_page": "https://commons.wikimedia.org/wiki/File%3AMale_pelvic_fins_and_claspers_of_velvet_belly_lanternshark_Etmopterus_spinax.jpg",
+     "original_url": "https://upload.wikimedia.org/wikipedia/commons/d/da/Male_pelvic_fins_and_claspers_of_velvet_belly_lanternshark_Etmopterus_spinax.jpg",
+     "creator": "Joacim Näslund",
+     "licence": "CC BY 4.0",
+     "licence_url": "https://creativecommons.org/licenses/by/4.0",
+     "attribution_required": true,
+     "attribution": "Joacim Näslund, CC BY 4.0, via Wikimedia Commons",
+     "derivative_notes": "cropped to 4:3 and resized to 1600x1200 (tools/content/commons_media.py)",
+     "approval_status": "approved",
+     "art_status": "real_photo",
+     "retrieved": "2026-10-03"
+    }
+   ],
+   "reveal_line": "A shark. Two of them. Sharks don't do anything by halves."
+  },
+  {
+   "id": "gtg.guppy",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 3,
+   "weirdness": 3,
+   "content_tags": [
+    "factual",
+    "animals",
+    "sexual_anatomy_animal",
+    "grossness_2"
+   ],
+   "director_tags": [
+    "visual",
+    "gross"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "taxon": "Poecilia wingei",
+   "kingdom_class": "animal",
+   "decoy": false,
+   "prompt": "WHOSE IS IT?",
+   "options": [
+    "A fish",
+    "A shrimp",
+    "A newt",
+    "A seahorse"
+   ],
+   "correct": 0,
+   "points": 1250,
+   "answer_label": "Endler's livebearer (gonopodium)",
+   "fact": "Male guppies and their relatives have a gonopodium: a fin that has evolved into a mating organ and swings forward to deliver sperm. This is from Endler's livebearer, a close cousin of the guppy.",
+   "sources": [
+    {
+     "title": "Gonopodium",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Gonopodium",
+     "supported_claim": "Modified anal fin used as an intromittent organ in livebearing fish.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check before approval."
+    },
+    {
+     "title": "Poecilia wingei",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Poecilia_wingei",
+     "supported_claim": "Endler's livebearer.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check before approval."
+    }
+   ],
+   "image": "res://assets/content/gtg/guppy.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/gtg/guppy.jpg",
+     "source": "Wikimedia Commons",
+     "source_page": "https://commons.wikimedia.org/wiki/File%3APoecilia_wingei_Gonopodium.JPG",
+     "original_url": "https://upload.wikimedia.org/wikipedia/commons/1/18/Poecilia_wingei_Gonopodium.JPG",
+     "creator": "J C D",
+     "licence": "CC BY 3.0",
+     "licence_url": "https://creativecommons.org/licenses/by/3.0",
+     "attribution_required": true,
+     "attribution": "J C D, CC BY 3.0, via Wikimedia Commons",
+     "derivative_notes": "cropped to 4:3 and resized to 1600x1200 (tools/content/commons_media.py)",
+     "approval_status": "approved",
+     "art_status": "real_photo",
+     "retrieved": "2026-10-03"
+    }
+   ],
+   "reveal_line": "A fish. It used to be a fin. It isn't any more. That's evolution."
+  },
+  {
+   "id": "gtg.stinkhorn",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "weirdness": 2,
+   "content_tags": [
+    "factual",
+    "animals",
+    "mould_fungi",
+    "grossness_2"
+   ],
+   "director_tags": [
+    "visual",
+    "gross"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "taxon": "Phallus impudicus",
+   "kingdom_class": "decoy",
+   "decoy": true,
+   "prompt": "WHOSE IS IT? (IF ANYONE'S)",
+   "options": [
+    "A mushroom",
+    "A horse",
+    "A duck",
+    "A goat"
+   ],
+   "correct": 0,
+   "points": 1000,
+   "answer_label": "Common stinkhorn (a fungus)",
+   "fact": "It isn't a genital at all. It's a fungus: the common stinkhorn. Its scientific name, Phallus impudicus, means 'shameless penis', and its slimy tip smells of rotting meat to attract flies.",
+   "sources": [
+    {
+     "title": "Phallus impudicus",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Phallus_impudicus",
+     "supported_claim": "Common stinkhorn; name means shameless penis; foul smell attracts flies.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check before approval."
+    }
+   ],
+   "image": "res://assets/content/gtg/stinkhorn.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/gtg/stinkhorn.jpg",
+     "source": "Wikimedia Commons",
+     "source_page": "https://commons.wikimedia.org/wiki/File%3APhallus-impudicus-stinkmorchel-b.jpg",
+     "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/fe/Phallus-impudicus-stinkmorchel-b.jpg",
+     "creator": "Holger Krisp",
+     "licence": "CC BY 3.0",
+     "licence_url": "https://creativecommons.org/licenses/by/3.0",
+     "attribution_required": true,
+     "attribution": "Holger Krisp, CC BY 3.0, via Wikimedia Commons",
+     "derivative_notes": "cropped to 4:3 and resized to 1600x1200 (tools/content/commons_media.py)",
+     "approval_status": "approved",
+     "art_status": "real_photo",
+     "retrieved": "2026-10-03"
+    }
+   ],
+   "reveal_line": "It's a mushroom. A mushroom. The scientists who named it were no better than you."
+  },
+  {
+   "id": "gtg.geoduck",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "weirdness": 2,
+   "content_tags": [
+    "factual",
+    "animals",
+    "food",
+    "grossness_2"
+   ],
+   "director_tags": [
+    "visual",
+    "gross"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "taxon": "Panopea generosa",
+   "kingdom_class": "decoy",
+   "decoy": true,
+   "prompt": "WHOSE IS IT? (IF ANYONE'S)",
+   "options": [
+    "A clam",
+    "A horse",
+    "An elephant",
+    "A tortoise"
+   ],
+   "correct": 0,
+   "points": 1000,
+   "answer_label": "Geoduck (a clam's neck)",
+   "fact": "It isn't a genital either. It's the neck — properly, the siphon — of a geoduck, a giant clam from the Pacific Northwest. Geoducks can live for well over a century.",
+   "sources": [
+    {
+     "title": "Pacific geoduck",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Pacific_geoduck",
+     "supported_claim": "Large burrowing clam with a long siphon; can live over 150 years.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check before approval."
+    }
+   ],
+   "image": "res://assets/content/gtg/geoduck.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/gtg/geoduck.jpg",
+     "source": "Wikimedia Commons",
+     "source_page": "https://commons.wikimedia.org/wiki/File%3AGeoduck_1.jpg",
+     "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/20/Geoduck_1.jpg",
+     "creator": "Jeff",
+     "licence": "CC BY 2.0",
+     "licence_url": "https://creativecommons.org/licenses/by/2.0",
+     "attribution_required": true,
+     "attribution": "Jeff, CC BY 2.0, via Wikimedia Commons",
+     "derivative_notes": "cropped to 4:3 and resized to 1600x1200 (tools/content/commons_media.py)",
+     "approval_status": "approved",
+     "art_status": "real_photo",
+     "retrieved": "2026-10-03"
+    }
+   ],
+   "reveal_line": "A clam. That's its neck. It's been like that for a hundred years and it isn't embarrassed."
+  }
+ ]
+}

@@ -433,12 +433,29 @@ func _draw_sting() -> void:
 	var p := _st_t / _st_dur
 	var fade := smoothstep(0.0, 0.08, p) * (1.0 - smoothstep(0.85, 1.0, p))
 	var c := Vector2(W * 0.5, H * 0.5)
-	draw_rect(Rect2(0, 0, W, H), Color(0.12, 0.02, 0.22, fade))
+	# Per-game palette: REAL OR MILDEW? = teletext green/blue, GUESS THE GENITALS = surgical pink/cream.
+	var bg := Color(0.12, 0.02, 0.22)
+	var ca := Color("#ff4fa3")
+	var cb := Color("#3ec9c1")
+	match _st_style:
+		"rom":
+			bg = Color(0.0, 0.02, 0.35)
+			ca = Color("#3cff6a")
+			cb = Color("#2040ff")
+		"gtg":
+			bg = Color(0.32, 0.05, 0.12)
+			ca = Color("#ff8fa8")
+			cb = Color("#f4e9c8")
+	draw_rect(Rect2(0, 0, W, H), Color(bg, fade))
+	if _st_style == "rom":
+		for i in 40:   # teletext page flicker
+			if (int(_st_t * 12.0) + i) % 5 == 0:
+				draw_rect(Rect2(0, i * 27, W, 14), Color(cb, 0.25 * fade))
 	var rays := 24
 	for i in rays:
 		var a0 := _st_t * 0.6 + TAU * i / rays
 		var a1 := a0 + TAU / rays * 0.5
-		var col := Color("#ff4fa3") if i % 2 == 0 else Color("#3ec9c1")
+		var col := ca if i % 2 == 0 else cb
 		draw_colored_polygon(PackedVector2Array([c, c + Vector2(cos(a0), sin(a0)) * 1400, c + Vector2(cos(a1), sin(a1)) * 1400]), Color(col, 0.55 * fade))
 	draw_circle(c, 300, Color(0.98, 0.85, 0.2, fade))
 	draw_circle(c, 284, Color(0.2, 0.04, 0.32, fade))
@@ -500,7 +517,8 @@ func _draw_menu() -> void:
 	var n := menu_items.size()
 	var top := 560.0 if n <= 4 else 330.0
 	# Long menus scroll: a window of rows around the selection (settings, picture credits).
-	var rows := mini(n, 6)
+	var long_desc := menu_selected < n and str(menu_items[menu_selected].get("desc", "")).length() > 220
+	var rows := mini(n, 4 if long_desc else 6)
 	var first := clampi(menu_selected - 2, 0, maxi(0, n - rows))
 	if menu_title != "":
 		_shadow_text(f_display, Vector2(0, top - 40), menu_title, HORIZONTAL_ALIGNMENT_CENTER, W, 58, Color(1, 0.95, 0.8), 5)
@@ -523,9 +541,16 @@ func _draw_menu() -> void:
 	if menu_selected < menu_items.size():
 		desc = str(menu_items[menu_selected].get("desc", ""))
 	var y := top + rows * 74 + 34
-	for line in _wrap(desc, 56):
-		draw_string(f_mono, Vector2(0, y), line, HORIZONTAL_ALIGNMENT_CENTER, W, 26, Color(0.85, 1, 0.75))
-		y += 34
+	var dfs := 20 if long_desc else 26
+	var dlh := 26.0 if long_desc else 34.0
+	var dlines := _wrap(desc, 100 if long_desc else 56)
+	var max_lines := int((H - 170 - y) / dlh)
+	if dlines.size() > max_lines:
+		dlines = dlines.slice(0, max_lines)
+		dlines[-1] = str(dlines[-1]) + " …"
+	for line in dlines:
+		draw_string(f_mono, Vector2(0, y), line, HORIZONTAL_ALIGNMENT_CENTER, W, dfs, Color(0.85, 1, 0.75))
+		y += dlh
 	if menu_footer != "":
 		draw_rect(Rect2(0, H - 160, W, 50), Color(0, 0, 0, 0.75))
 		draw_string(f_mono, Vector2(0, H - 125), menu_footer, HORIZONTAL_ALIGNMENT_CENTER, W, 26, Color(1, 1, 0.4))

@@ -213,13 +213,26 @@ func _viewer_menu() -> void:
 ## Viewer Information Service: legitimate sources only (never incidents). CP2: picture credits for
 ## the real photographs used in HOLE, straight from each item's media metadata.
 func _viewer_items() -> Array:
-	var items: Array = [{"label": "BACK", "desc": "Facts and pictures used on the programme, with their sources. Scroll for picture credits."}]
-	for it in content.query("hole", "", 5, 0):
+	var items: Array = [{"label": "BACK", "desc": "Facts and pictures used on the programme, with their sources. Facts appear here once they have been broadcast on this television."}]
+	# Facts broadcast on this installation (never incidents — docs/07), newest first.
+	var seen: Array = store.installation.get("facts_seen", [])
+	for i in range(seen.size() - 1, -1, -1):
+		var f: Dictionary = content.get_item(str(seen[i]))
+		if f.is_empty() or str(f.get("fact", "")) == "":
+			continue
+		var srcs: Array = f.get("sources", [])
+		var cite := "; ".join(srcs.map(func(s): return "%s (%s) %s" % [s.get("title", ""), s.get("publisher_or_organisation", ""), str(s.get("reference", "")).uri_decode()]))
+		var label := str(f.get("answer_label", ""))
+		if label == "":
+			label = str(f.get("category", "fact")).replace("_", " ")
+		items.append({"label": "FACT: " + label.to_upper(),
+			"desc": "%s  SOURCES: %s%s" % [f.fact, cite, "  (Draft: not yet independently checked.)" if str(f.get("quality_status", "")) != "approved" else ""]})
+	for it in content.query("hole", "", 5, 0) + content.query("guess_the_genitals", "", 5, 0):
 		var media: Array = it.get("media", [])
 		if media.is_empty() or str(media[0].get("source", "")) != "Wikimedia Commons":
 			continue
 		var m: Dictionary = media[0]
-		items.append({"label": "PICTURE: " + str(it.get("answer", "")).to_upper(),
+		items.append({"label": "PICTURE: " + str(it.get("answer", it.get("answer_label", ""))).to_upper(),
 			"desc": "Photograph: %s. Licence: %s. Via Wikimedia Commons. Cropped and resized. %s" % [m.get("creator", "Unknown"), m.get("licence", ""), str(m.get("source_page", "")).uri_decode()]})
 	return items
 

@@ -196,10 +196,10 @@ func _header(a: float, accent: Color) -> void:
 	draw_colored_polygon(tab, Color(accent, a))
 	draw_string(f_sans, Vector2(76, 86), _title, HORIZONTAL_ALIGNMENT_LEFT, 560, 38, Color(0.1, 0.02, 0.14, a))
 	var rc := "FINAL QUESTION" if _final else ("%d / %d" % [_round, _of] if _of > 0 else "")
-	draw_string(f_mono, Vector2(W - 560, 86), rc, HORIZONTAL_ALIGNMENT_RIGHT, 480, 32, Color(1, 1, 1, a))
+	draw_string(f_mono, Vector2(680, 86), rc, HORIZONTAL_ALIGNMENT_LEFT, 360, 32, Color(1, 1, 1, a))
 	if _confidence and _reveal_t < 0.0:
 		var pulse := 0.6 + 0.4 * sin(_t * 5.0)
-		draw_string(f_mono, Vector2(W - 560, 126), "CONFIDENCE ROUND", HORIZONTAL_ALIGNMENT_RIGHT, 480, 26, Color(1, 0.85, 0.2, a * pulse))
+		draw_string(f_mono, Vector2(900, 86), "CONFIDENCE ROUND", HORIZONTAL_ALIGNMENT_LEFT, 360, 26, Color(1, 0.85, 0.2, a * pulse))
 
 
 func _timer_bar(rect: Rect2, a: float) -> void:
@@ -242,9 +242,11 @@ func _draw_claims_layout(a: float) -> void:
 		draw_string(f_sans, Vector2(pr.position.x, py), l, HORIZONTAL_ALIGNMENT_CENTER, pr.size.x, 38, Color(1, 1, 0.35, a))
 		py += 44
 	var top := 236.0
-	var rh := 166.0
+	var squeeze := clampf((_t - _reveal_t - 2.0) * 2.5, 0.0, 1.0) if (_reveal_t >= 0.0 and _fact != "") else 0.0
+	var rh := lerpf(166.0, 118.0, squeeze)
+	var gap := lerpf(14.0, 8.0, squeeze)
 	for i in _options.size():
-		var r := Rect2(50, top + i * (rh + 14), W - 100, rh)
+		var r := Rect2(50, top + i * (rh + gap), W - 100, rh)
 		var dim := 1.0
 		var good := false
 		if _correct >= 0:
@@ -258,26 +260,28 @@ func _draw_claims_layout(a: float) -> void:
 		draw_string(f_sans, dc + Vector2(-36, 16), LETTERS[i], HORIZONTAL_ALIGNMENT_CENTER, 72, 44, Color(1, 1, 1, a * dim))
 		var text := str(_options[i])
 		var fs := 34
-		var lines := _wrap(f_sans_reg, text, r.size.x - 360, fs)
-		while lines.size() > 3 and fs > 24:
+		var tw := r.size.x - 420
+		var lines := _wrap(f_sans_reg, text, tw, fs)
+		var max_l := 3 if rh > 140.0 else 2
+		while lines.size() > max_l and fs > 22:
 			fs -= 2
-			lines = _wrap(f_sans_reg, text, r.size.x - 360, fs)
+			lines = _wrap(f_sans_reg, text, tw, fs)
 		var ly := r.position.y + r.size.y * 0.5 - (lines.size() - 1) * (fs + 8) * 0.5 + fs * 0.35
 		for l in lines:
-			draw_string(f_sans_reg, Vector2(r.position.x + 112, ly), l, HORIZONTAL_ALIGNMENT_LEFT, r.size.x - 360, fs, Color(1, 1, 1, a * dim))
+			draw_string(f_sans_reg, Vector2(r.position.x + 112, ly), l, HORIZONTAL_ALIGNMENT_LEFT, tw, fs, Color(1, 1, 1, a * dim))
 			ly += fs + 8
-		_chips(i, r.end.x - 14, r.end.y - 56, a)
+		_chips(i, r.end.x - (280.0 if _reveal_t >= 0.0 else 14.0), r.end.y - 52, a)
 		# reveal stamps
 		if _reveal_t >= 0.0 and i < _stamps.size() and str(_stamps[i]) != "":
 			var k := clampf((_t - _reveal_t - 0.25 - i * 0.18) * 5.0, 0.0, 1.0)
 			if k > 0.0:
 				var real: bool = _stamps[i] == "REAL"
 				var sc := 1.0 + (1.0 - k) * 1.6
-				var c := r.position + Vector2(r.size.x - 180, 56)
+				var c := r.position + Vector2(r.size.x - 150, r.size.y * 0.5 - 8)
 				draw_set_transform(c, -0.12, Vector2(sc, sc))
 				var col := Color(0.25, 0.9, 0.35, a * k) if real else Color(1.0, 0.25, 0.3, a * k)
-				draw_rect(Rect2(-110, -34, 220, 68), col, false, 6.0)
-				draw_string(f_display, Vector2(-110, 18), str(_stamps[i]), HORIZONTAL_ALIGNMENT_CENTER, 220, 46, col)
+				draw_rect(Rect2(-100, -30, 200, 60), col, false, 6.0)
+				draw_string(f_display, Vector2(-100, 16), str(_stamps[i]), HORIZONTAL_ALIGNMENT_CENTER, 200, 42, col)
 				draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
 	if _reveal_t < 0.0:
 		_timer_bar(Rect2(50, H - 92, W - 100, 18), a)

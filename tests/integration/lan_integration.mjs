@@ -152,11 +152,14 @@ await scenario("two_players_full_show", async (h, sc) => {
   const b = new Phone(h, "Sarah", { useRoomCode: true });
   await a.connect(); await b.connect();
   check(sc, await a.waitFor((p) => p.player) && await b.waitFor((p) => p.player), "both phones joined (QR key + room code)");
-  check(sc, await a.waitFor((p) => p.last && p.last.screen === "ended", 90000), "show reached END OF TRANSMISSION");
+  check(sc, await a.waitFor((p) => p.last && p.last.screen === "ended", 300000), "show reached END OF TRANSMISSION");
   const ended = h.events.find((e) => e.e === "show_ended");
   check(sc, !!ended, "host emitted show_ended");
-  const qs = h.events.filter((e) => e.e === "question_show").length;
+  const qs = h.events.filter((e) => e.e === "question_show" && e.game_id === "studio_rehearsal").length;
   check(sc, qs === 2, `two studio-rehearsal questions on a new installation (got ${qs})`);
+  const games = new Set(h.events.filter((e) => e.e === "sting").map((e) => e.game_id || e.title));
+  check(sc, games.size >= 3, `rehearsal + at least two games in the programme (${[...games]})`);
+  const reveals = h.events.filter((e) => e.e === "reveal").length;
   const rounds = h.events.filter((e) => e.e === "hole_reveal").length;
   check(sc, rounds === 6, `six Hole rounds (got ${rounds})`);
   check(sc, h.events.some((e) => e.e === "hole_lock"), "phones locked Hole answers over the network");
@@ -164,7 +167,7 @@ await scenario("two_players_full_show", async (h, sc) => {
     const sum = ph.results.reduce((s, r) => s + r.points, 0) + ph.holeResults.reduce((s, r) => s + r.points, 0);
     const st = ended.standings.find((s) => s.pid === ph.player);
     check(sc, st && st.score === sum, `${ph.name}: server score ${st && st.score} equals sum of result screens ${sum}`);
-    check(sc, ph.results.length === 2, `${ph.name} saw 2 rehearsal results`);
+    check(sc, ph.results.length === reveals, `${ph.name} saw a result for every question (${ph.results.length}/${reveals})`);
     check(sc, ph.holeResults.length === 6, `${ph.name} saw 6 Hole results (got ${ph.holeResults.length})`);
   }
   check(sc, a.errors.length === 0 && b.errors.length === 0, `no protocol errors (${a.errors} / ${b.errors})`);
@@ -179,7 +182,7 @@ await scenario("eight_players_and_ninth_rejected", async (h, sc) => {
   const ninth = new Phone(h, "Carol");
   await ninth.connect();
   check(sc, await ninth.waitFor((p) => p.errors.includes("room_full"), 5000), "ninth phone told room_full");
-  check(sc, await phones[0].waitFor((p) => p.last && p.last.screen === "ended", 120000), "8-player show completed");
+  check(sc, await phones[0].waitFor((p) => p.last && p.last.screen === "ended", 360000), "8-player show completed");
   const ended = h.events.find((e) => e.e === "show_ended");
   check(sc, ended && ended.standings.length === 8, "eight in final standings");
   phones.forEach((p) => p.close()); ninth.close();
@@ -200,7 +203,7 @@ await scenario("reconnect_within_window", async (h, sc) => {
   check(sc, await b.waitFor((p) => p.msgs.some((m) => m.t === "joined" && m.resumed), 5000), "resume token restores the player");
   check(sc, b.player === pid, "same player id after reconnect");
   check(sc, await a.waitFor((p) => !p.status.paused, 5000), "hold released immediately on return");
-  check(sc, await a.waitFor((p) => p.last && p.last.screen === "ended", 90000), "show completed after reconnect");
+  check(sc, await a.waitFor((p) => p.last && p.last.screen === "ended", 300000), "show completed after reconnect");
   check(sc, h.events.some((e) => e.e === "player_back"), "host emitted player_back");
   a.close(); b.close();
 });
@@ -216,7 +219,7 @@ await scenario("drop_after_timeout_and_continue", async (h, sc) => {
   check(sc, await a.waitFor((p) => !p.status.paused, 30000 / SCALE + 8000), "hold released after the 30 s window");
   check(sc, h.events.some((e) => e.e === "player_dropped"), "player dropped");
   check(sc, h.events.some((e) => e.e === "say" && e.category === "reconnect_failed"), "Graham comments on the failure to return");
-  check(sc, await a.waitFor((p) => p.last && p.last.screen === "ended", 90000), "show continues to the end with two");
+  check(sc, await a.waitFor((p) => p.last && p.last.screen === "ended", 300000), "show continues to the end with two");
   a.close(); b.close();
 });
 
@@ -278,7 +281,7 @@ await scenario("dev_panel_drives_bots_only_show", async (h, sc) => {
   check(sc, await until(() => h.events.some((e) => e.e === "hole_round" && e.variant === "scale"), 60000), "forced SCALE variant used");
   check(sc, (await result("pause", { on: true })).ok && await until(() => last().manual_pause), "pause from the panel");
   check(sc, (await result("pause", { on: false })).ok && await until(() => !last().manual_pause), "resume from the panel");
-  check(sc, await until(() => h.events.some((e) => e.e === "show_ended"), 120000), "bots-only show completes");
+  check(sc, await until(() => h.events.some((e) => e.e === "show_ended"), 360000), "bots-only show completes");
   check(sc, await until(() => last().events.length > 5 && last().decisions.length > 0), "live feed and Director decisions streamed");
   dev.close();
 });

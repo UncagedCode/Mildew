@@ -18,7 +18,7 @@ const check = (ok, msg) => { checks.push({ ok: !!ok, msg }); console.log(ok ? " 
 
 const port = 18300, wsPort = 18301;
 const proc = spawn("godot", ["--headless", "--path", ROOT, "--", "--mildew-host", "--port", String(port), "--ws-port", String(wsPort),
-  "--timescale", "3", "--save-dir", `user://phone_${Date.now()}`], { stdio: ["ignore", "pipe", "pipe"] });
+  "--timescale", "6", "--save-dir", `user://phone_${Date.now()}`], { stdio: ["ignore", "pipe", "pipe"] });
 let ready = null, buf = "";
 const events = [];
 proc.stdout.on("data", (d) => { buf += d; let i; while ((i = buf.indexOf("\n")) >= 0) { const l = buf.slice(0, i); buf = buf.slice(i + 1);
@@ -130,7 +130,7 @@ try {
   check(await A.locator("text=/CORRECT|WRONG|RIGHT SORT OF THING/").count(), "Hole result screen shown");
   await shot(A, "16_hole_result");
   // finish
-  for (let i = 0; i < 900; i++) {
+  for (let i = 0; i < 2000; i++) {
     for (const p of [A, B]) { const k = p.locator(".key.c"); if (await k.count()) await k.first().click().catch(() => {}); }
     if (await A.locator("text=END OF TRANSMISSION").count()) break;
     await sleep(300);

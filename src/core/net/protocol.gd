@@ -16,6 +16,8 @@ const C_START_SHOW := "start_show"          # {} (floor captain only)
 const C_ANSWER := "answer"                  # {q, c}
 const C_LOCK := "lock"                      # {q, s, c}  Hole: lock candidate c at reveal stage s (irreversible)
 const C_PASS := "pass"                      # {q, s}     Hole: "show me more" for stage s
+const C_SUBMIT := "submit"                  # {q, text}  Survey/Mouthfeel: written answer (or Make It Worse step)
+const C_VOTE := "vote"                      # {q, c}     Survey/Mouthfeel: vote for answer c (chain: rating 1-5)
 const C_READY := "ready"                    # {}
 const C_PLAY_AGAIN := "play_again"          # {} (floor captain only)
 const C_LEAVE := "leave"                    # {}
@@ -32,7 +34,7 @@ const S_PONG := "pong"              # {id, st}
 const S_KICKED := "kicked"          # {reason}
 
 ## Game actions are routed to the current segment, which validates them against its own state.
-const GAME_ACTIONS := [C_ANSWER, C_LOCK, C_PASS]
+const GAME_ACTIONS := [C_ANSWER, C_LOCK, C_PASS, C_SUBMIT, C_VOTE]
 
 const CLIENT_TYPES := [C_HELLO, C_CHECK_NAME, C_SAY_NAME, C_CREATE_PROFILE, C_SELECT_PROFILE,
 	C_START_SHOW, C_ANSWER, C_LOCK, C_PASS, C_READY, C_PLAY_AGAIN, C_LEAVE, C_PING]
@@ -55,6 +57,7 @@ const E_NOT_ENOUGH_PLAYERS := "not_enough_players"
 const E_ALREADY_ANSWERED := "already_answered"
 const E_NOT_PARTICIPANT := "not_participant"
 const E_STALE := "stale_question"
+const E_SELF_VOTE := "self_vote"
 const E_RATE_LIMIT := "rate_limited"
 
 
