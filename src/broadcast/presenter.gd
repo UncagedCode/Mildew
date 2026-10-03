@@ -15,6 +15,7 @@ var hole: HoleBoard
 var quiz: QuizBoard
 var wv: WriteVoteBoard
 var ps: SketchBoard
+var dnp: DnpBoard
 var _quiz_q := false                 # current question is on the quiz board (CP3 layouts)
 
 var _sync_timer := 0.0
@@ -52,6 +53,8 @@ func _process(delta: float) -> void:
 			wv.players = pmap
 		if ps:
 			ps.players = pmap
+		if dnp:
+			dnp.players = pmap
 		sys.contestants = plist.filter(func(p): return p.status == "active" and p.connected).size()
 		studio.graham.set_pressure(host.session.director.pressure)
 		if not studio.graham.is_speaking():
@@ -93,6 +96,9 @@ func _on_event(evt: Dictionary) -> void:
 			if str(evt.kind) != "question" and quiz and quiz.is_showing():
 				quiz.hide_board()
 				_quiz_q = false
+				_in_question = false
+			if str(evt.kind) != "dnp" and dnp and dnp.is_showing():
+				dnp.hide_board()
 				_in_question = false
 			if str(evt.kind) != "sketch" and ps and ps.is_showing():
 				ps.hide_board()
@@ -154,6 +160,8 @@ func _on_event(evt: Dictionary) -> void:
 			_wv_event(evt)
 		"ps_show", "ps_step", "ps_progress", "ps_reveal_chain", "ps_vote_open", "ps_vote_progress", "ps_results":
 			_ps_event(evt)
+		"dnp_puzzle", "dnp_open", "dnp_state", "dnp_mistake", "dnp_result":
+			_dnp_event(evt)
 		"question_show" when str(evt.get("layout", "panel")) != "panel":
 			_in_question = true
 			_quiz_q = true
@@ -518,7 +526,7 @@ func _audience_cutaway(cam: String, seconds: float) -> bool:
 
 
 func _graphic_owns_frame() -> bool:
-	return _in_question or (hole != null and hole.is_showing()) or (quiz != null and quiz.is_showing()) or (wv != null and wv.is_showing()) or (ps != null and ps.is_showing()) or gfx.is_question_visible()
+	return _in_question or (hole != null and hole.is_showing()) or (quiz != null and quiz.is_showing()) or (wv != null and wv.is_showing()) or (ps != null and ps.is_showing()) or (dnp != null and dnp.is_showing()) or gfx.is_question_visible()
 
 
 ## Survey / Mouthfeel presentation (CP4): the board draws; this adds studio grammar and sound.
@@ -592,3 +600,43 @@ func _ps_event(evt: Dictionary) -> void:
 				if int(d[pid]) > 0:
 					studio.flash_podium(pid, "+%s" % PodiumScreen._fmt(int(d[pid])))
 			audio.applause("medium")
+
+
+## Do Not Press That presentation (CP6).
+func _dnp_event(evt: Dictionary) -> void:
+	if dnp == null:
+		return
+	dnp.on_event(evt, host.session.time_scale)
+	match str(evt.e):
+		"dnp_puzzle":
+			_in_question = true
+			gfx.hide_question()
+			for pid in studio.podiums.keys():
+				studio.light_podium(pid, false)
+			audio.play("whoosh", -4.0)
+		"dnp_open":
+			audio.play("zoom_servo", -6.0)
+			studio.graham.set_activity("idle")
+		"dnp_state":
+			audio.play("lock", -12.0)
+		"dnp_mistake":
+			audio.play("wrong", -4.0)
+			audio.crowd("ooh", -8.0)
+			studio.flash_podium(str(evt.pid), "JAMMED")
+		"dnp_result":
+			match str(evt.tier):
+				"perfect":
+					audio.play("correct")
+					audio.applause("big")
+				"completed":
+					audio.play("correct")
+					audio.applause("medium")
+				"barely":
+					audio.applause("small")
+				_:
+					audio.play("wrong")
+					audio.crowd("laugh", -4.0)
+			var d: Dictionary = evt.get("deltas", {})
+			for pid in d.keys():
+				if int(d[pid]) > 0:
+					studio.flash_podium(pid, "+%s" % PodiumScreen._fmt(int(d[pid])))

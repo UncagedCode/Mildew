@@ -14,6 +14,7 @@ var hole: HoleBoard
 var quiz: QuizBoard
 var wv: WriteVoteBoard
 var ps: SketchBoard
+var dnp: DnpBoard
 var graham: GrahamPresenter
 var plates: PlateStage
 var screen: TextureRect
@@ -51,9 +52,11 @@ func build() -> void:
 	viewport.add_child(wv)
 	ps = SketchBoard.new()         # Police Sketch evidence board (CP5)
 	viewport.add_child(ps)
+	dnp = DnpBoard.new()           # Do Not Press That control panel (CP6)
+	viewport.add_child(dnp)
 	gfx = GraphicsLayer.new()
 	viewport.add_child(gfx)
-	gfx.bottom_busy = func(): return hole.is_showing() or quiz.is_showing() or wv.is_showing() or ps.is_showing()
+	gfx.bottom_busy = func(): return hole.is_showing() or quiz.is_showing() or wv.is_showing() or ps.is_showing() or dnp.is_showing()
 	screen = TextureRect.new()
 	screen.texture = viewport.get_texture()
 	screen.expand_mode = TextureRect.EXPAND_IGNORE_SIZE

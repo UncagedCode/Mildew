@@ -884,7 +884,7 @@ func emit_tv(evt: Dictionary) -> void:
 
 
 ## Phone-facing moments where a private irregularity may (rarely) slip through (docs/03).
-const INTERFERENCE_MOMENTS := {"question_open": "question_open", "wv_write_open": "write_open", "wv_vote_open": "vote_open", "ps_step": "write_open",
+const INTERFERENCE_MOMENTS := {"question_open": "question_open", "wv_write_open": "write_open", "wv_vote_open": "vote_open", "ps_step": "write_open", "dnp_open": "question_open",
 	"hole_stage": "hole_stage", "segment": "boundary"}
 
 

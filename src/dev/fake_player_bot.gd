@@ -16,6 +16,7 @@ var player_id := ""
 var resume_token := ""
 var room_key := ""
 var oracle: Callable              # func(content_id: String) -> String (correct option TEXT; options are shuffled per asking)
+var dnp_oracle: Callable          # func(control_id: String) -> int target (dev only; real players talk to each other)
 var hole_oracle: Callable         # func(content_id: String, variant: String) -> String (answer label)
 var hole_handled := {}            # "qid:stage" -> true
 var rng := RandomNumberGenerator.new()
@@ -141,6 +142,29 @@ func _on_screen(screen: String, data: Dictionary) -> void:
 			if allowed.is_empty():
 				return
 			_queue(_delay(float(data.get("remaining_ms", 20000)) / 1000.0), {"t": Protocol.C_VOTE, "q": data.get("qid", ""), "c": allowed[rng.randi_range(0, allowed.size() - 1)]})
+		"dnp_panel":
+			if personality == "afk" or not bool(data.get("live", false)):
+				return
+			var q := str(data.get("qid", ""))
+			for c in data.get("controls", []):
+				var key := "c:%s:%s" % [q, c.id]
+				if answered_qids.has(key):
+					continue
+				answered_qids[key] = true
+				var window := float(data.get("remaining_ms", 30000)) / 1000.0
+				if bool(c.get("decoy", false)):
+					if personality in ["terrible", "horse"] and rng.randf() < 0.3:
+						_queue(_delay(window), {"t": Protocol.C_CTL, "q": q, "c": c.id, "v": 1})
+					continue
+				var target := int(dnp_oracle.call(str(c.id))) if dnp_oracle.is_valid() else rng.randi_range(0, int(c.get("max", 1)))
+				if personality == "terrible" and rng.randf() < 0.5:
+					target = rng.randi_range(0, int(c.get("max", 1)))
+				var d := _delay(window * 0.6)
+				if str(c.type) == "button":
+					for k in range(int(c.value) + 1, target + 1):
+						_queue(d + 0.15 * k, {"t": Protocol.C_CTL, "q": q, "c": c.id, "n": k})
+				elif target != int(c.value):
+					_queue(d, {"t": Protocol.C_CTL, "q": q, "c": c.id, "v": target})
 		"wv_rate":
 			var key := "r:%s" % data.get("qid", "")
 			if answered_qids.has(key) or personality == "afk":

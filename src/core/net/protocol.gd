@@ -18,6 +18,7 @@ const C_LOCK := "lock"                      # {q, s, c}  Hole: lock candidate c 
 const C_PASS := "pass"                      # {q, s}     Hole: "show me more" for stage s
 const C_SUBMIT := "submit"                  # {q, text}  Survey/Mouthfeel: written answer (or Make It Worse step)
 const C_DRAW := "draw"                      # {q, strokes:[{w,e,p:[x,y,...]}]}  Police Sketch drawing (bounded)
+const C_CTL := "ctl"                        # {q, c (control id), v? (absolute value), n? (button press count)}  Do Not Press That
 const C_VOTE := "vote"                      # {q, c}     Survey/Mouthfeel: vote for answer c (chain: rating 1-5)
 const C_READY := "ready"                    # {}
 const C_PLAY_AGAIN := "play_again"          # {} (floor captain only)
@@ -36,10 +37,10 @@ const S_KICKED := "kicked"          # {reason}
 const S_INTERFERE := "interfere"    # {style, text, ms, buzz?, after?}  private, ephemeral, never resent
 
 ## Game actions are routed to the current segment, which validates them against its own state.
-const GAME_ACTIONS := [C_ANSWER, C_LOCK, C_PASS, C_SUBMIT, C_VOTE, C_DRAW]
+const GAME_ACTIONS := [C_ANSWER, C_LOCK, C_PASS, C_SUBMIT, C_VOTE, C_DRAW, C_CTL]
 
 const CLIENT_TYPES := [C_HELLO, C_CHECK_NAME, C_SAY_NAME, C_CREATE_PROFILE, C_SELECT_PROFILE,
-	C_START_SHOW, C_ANSWER, C_LOCK, C_PASS, C_SUBMIT, C_VOTE, C_DRAW, C_READY, C_PLAY_AGAIN, C_LEAVE, C_PING]
+	C_START_SHOW, C_ANSWER, C_LOCK, C_PASS, C_SUBMIT, C_VOTE, C_DRAW, C_CTL, C_READY, C_PLAY_AGAIN, C_LEAVE, C_PING]
 
 # Error codes (stable strings; the controller maps them to on-brand copy).
 const E_BAD_JSON := "bad_json"
@@ -60,6 +61,7 @@ const E_ALREADY_ANSWERED := "already_answered"
 const E_NOT_PARTICIPANT := "not_participant"
 const E_STALE := "stale_question"
 const E_SELF_VOTE := "self_vote"
+const E_JAMMED := "jammed"
 const E_RATE_LIMIT := "rate_limited"
 
 

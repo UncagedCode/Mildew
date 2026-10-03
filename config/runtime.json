@@ -69,6 +69,14 @@
   "open_round_chance": 0.5,
   "max_studio_holes_per_game": 1
  },
+ "dnp": {
+  "puzzles_per_game": 4,
+  "seconds": 75,
+  "jam_seconds": 5,
+  "mistake_time_penalty": 5,
+  "clean_bonus": 100,
+  "timer_irregularity_chance": 0.04
+ },
  "police_sketch": {
   "draw_seconds": 50,
   "describe_seconds": 30,

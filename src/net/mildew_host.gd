@@ -210,6 +210,11 @@ func add_fake_player(personality: String = "") -> FakePlayerBot:
 			var k := SegHole.SCALE_KEYS.find(str(it.get("scale", "")))
 			return SegHole.SCALE_LABELS[k] if k >= 0 else ""
 		return str(it.get("answer", ""))
+	bot.dnp_oracle = func(control_id: String) -> int:
+		var seg = session._current
+		if seg is SegDnp and seg.puzzle != null:
+			return int(seg.puzzle._ctl(control_id).get("target", 0))
+		return 0
 	_connect_bot(bot)
 	return bot
 
@@ -376,7 +381,7 @@ func _dev_catalogue() -> Dictionary:
 		privs.append({"id": it.id, "tier": int(it.get("tier", 1)), "source": str(it.get("source", ""))})
 	var games: Array = Director.FORMATS.keys().filter(func(k): return Director.FORMATS[k].kind == "game" and Director.FORMATS[k].implemented)
 	return {"personalities": FakePlayerBot.PERSONALITIES, "hole_items": items, "hole_variants": ["standard", "scale", "open"],
-		"private": privs, "games": games,
+		"private": privs, "games": games, "dnp_items": content.query("do_not_press_that", "", 5, 0).map(func(i): return i.id),
 		"incidents": incs, "interference": ["standard_transmission", "supervised_transmission", "clean_transmission"],
 		"timescales": [1, 2, 4, 8]}
 

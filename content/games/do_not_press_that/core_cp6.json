@@ -1,0 +1,375 @@
+{
+ "pack_id": "dnp.core_cp6",
+ "content_kind": "do_not_press_that",
+ "game_id": "do_not_press_that",
+ "_comment": "Do Not Press That puzzle templates (CP6). The engine (seg_dnp.gd) randomises values each time and allocates controls/instructions for 2-8 players so nobody holds the instruction for their own control. rules: kinds of per-control instruction this template may use.",
+ "items": [
+  {
+   "id": "dnp.studio_power",
+   "title": "RESTORE STUDIO POWER",
+   "display": "lamps",
+   "controls": "switch",
+   "labels": [
+    "RED",
+    "BLUE",
+    "GREEN",
+    "AMBER",
+    "WHITE",
+    "PINK",
+    "VIOLET",
+    "GREY"
+   ],
+   "rules": [
+    "lamp",
+    "lamp_off",
+    "never"
+   ],
+   "order": true,
+   "decoy": "BIG RED LEVER",
+   "flavour": "The studio is running on one bulb. Fix it.",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "high_energy",
+    "fictional",
+    "studio_world"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "seconds": 75
+  },
+  {
+   "id": "dnp.gas_oven",
+   "title": "LIGHT THE CANTEEN OVEN",
+   "display": "card",
+   "controls": "dial",
+   "labels": [
+    "GAS TAP 1",
+    "GAS TAP 2",
+    "GAS TAP 3",
+    "GAS TAP 4",
+    "GAS TAP 5",
+    "GAS TAP 6",
+    "GAS TAP 7",
+    "GAS TAP 8"
+   ],
+   "rules": [
+    "card",
+    "card_plus",
+    "copy"
+   ],
+   "order": false,
+   "decoy": "PILOT LIGHT (DO NOT)",
+   "card_items": [
+    "EGGS",
+    "PIES",
+    "PRAWNS",
+    "SAUSAGES",
+    "HAMS"
+   ],
+   "flavour": "Neil wants a pie. Neil always wants a pie.",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "high_energy",
+    "fictional",
+    "studio_world"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "seconds": 75
+  },
+  {
+   "id": "dnp.pressure_valves",
+   "title": "VENT THE PRESSURE",
+   "display": "gauge",
+   "controls": "dial",
+   "labels": [
+    "VALVE A",
+    "VALVE B",
+    "VALVE C",
+    "VALVE D",
+    "VALVE E",
+    "VALVE F",
+    "VALVE G",
+    "VALVE H"
+   ],
+   "rules": [
+    "gauge",
+    "gauge_minus",
+    "copy"
+   ],
+   "order": true,
+   "decoy": "EMERGENCY VENT",
+   "flavour": "Something under Studio C is building up pressure.",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "high_energy",
+    "fictional",
+    "studio_world"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "seconds": 75
+  },
+  {
+   "id": "dnp.autocue",
+   "title": "FIX THE AUTOCUE",
+   "display": "lamps",
+   "controls": "button",
+   "labels": [
+    "SCROLL",
+    "PAUSE",
+    "REWIND",
+    "SPEED",
+    "FONT",
+    "BRIGHT",
+    "MARGIN",
+    "CUE"
+   ],
+   "rules": [
+    "count",
+    "press_lamp"
+   ],
+   "order": false,
+   "decoy": "DELETE ALL",
+   "flavour": "Graham is reading tomorrow's script. Stop him.",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "high_energy",
+    "fictional",
+    "studio_world"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "seconds": 75
+  },
+  {
+   "id": "dnp.applause",
+   "title": "CALIBRATE THE APPLAUSE",
+   "display": "gauge",
+   "controls": "dial",
+   "labels": [
+    "CLAP",
+    "CHEER",
+    "WHOOP",
+    "LAUGH",
+    "GASP",
+    "AWW",
+    "BOO",
+    "SOB"
+   ],
+   "rules": [
+    "gauge",
+    "gauge_plus",
+    "copy"
+   ],
+   "order": false,
+   "decoy": "RELEASE THE AUDIENCE",
+   "flavour": "The audience are on a loop again.",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "high_energy",
+    "fictional",
+    "studio_world"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "seconds": 75
+  },
+  {
+   "id": "dnp.fridge",
+   "title": "SAVE THE GREEN ROOM FRIDGE",
+   "display": "card",
+   "controls": "switch",
+   "labels": [
+    "COMPRESSOR",
+    "FAN",
+    "DOOR SEAL",
+    "ICE TRAY",
+    "LIGHT",
+    "HUM",
+    "DEFROST",
+    "LOCK"
+   ],
+   "rules": [
+    "card_switch",
+    "never",
+    "lamp_card"
+   ],
+   "order": true,
+   "decoy": "OPEN THE FRIDGE",
+   "card_items": [
+    "HAMS",
+    "MILK",
+    "TRIFLES",
+    "UNKNOWN"
+   ],
+   "flavour": "Something in the fridge has started breathing.",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "high_energy",
+    "fictional",
+    "studio_world"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "seconds": 75
+  },
+  {
+   "id": "dnp.lighting_desk",
+   "title": "RE-PATCH THE LIGHTING DESK",
+   "display": "lamps",
+   "controls": "dial",
+   "labels": [
+    "CHANNEL 1",
+    "CHANNEL 2",
+    "CHANNEL 3",
+    "CHANNEL 4",
+    "CHANNEL 5",
+    "CHANNEL 6",
+    "CHANNEL 7",
+    "CHANNEL 8"
+   ],
+   "rules": [
+    "count",
+    "count_plus",
+    "copy"
+   ],
+   "order": true,
+   "decoy": "HOUSE LIGHTS UP",
+   "flavour": "The lighting desk has gone to Studio B. We don't have a Studio B.",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "high_energy",
+    "fictional",
+    "studio_world"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "seconds": 75
+  },
+  {
+   "id": "dnp.tea_urn",
+   "title": "STOP THE TEA URN",
+   "display": "gauge",
+   "controls": "switch",
+   "labels": [
+    "ELEMENT",
+    "TAP",
+    "THERMOSTAT",
+    "LID",
+    "FLOAT",
+    "WHISTLE",
+    "FUSE",
+    "PLUG"
+   ],
+   "rules": [
+    "gauge_switch",
+    "never",
+    "lamp_off"
+   ],
+   "order": true,
+   "decoy": "TOP IT UP",
+   "flavour": "The urn has been boiling since 1997.",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "high_energy",
+    "fictional",
+    "studio_world"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "seconds": 75
+  },
+  {
+   "id": "dnp.tape_machine",
+   "title": "LOAD TAPE 4",
+   "display": "card",
+   "controls": "button",
+   "labels": [
+    "PLAY",
+    "STOP",
+    "EJECT",
+    "REC",
+    "SPOOL",
+    "TRACK",
+    "LOCK",
+    "FEED"
+   ],
+   "rules": [
+    "card",
+    "count"
+   ],
+   "order": false,
+   "decoy": "ERASE",
+   "card_items": [
+    "SPOOLS",
+    "LABELS",
+    "SCRATCHES",
+    "FINGERPRINTS"
+   ],
+   "flavour": "Do not play tape 4 on air. Load it. Don't play it.",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "high_energy",
+    "fictional",
+    "studio_world"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "seconds": 75
+  },
+  {
+   "id": "dnp.lift",
+   "title": "CALL THE GOODS LIFT",
+   "display": "lamps",
+   "controls": "switch",
+   "labels": [
+    "CALL",
+    "HOLD",
+    "DOORS",
+    "LEVEL B",
+    "LEVEL B2",
+    "LEVEL B3",
+    "BRAKE",
+    "ALARM"
+   ],
+   "rules": [
+    "lamp",
+    "lamp_off",
+    "never"
+   ],
+   "order": true,
+   "decoy": "LEVEL B4",
+   "flavour": "The lift needs to come up. Don't let it go further down.",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "high_energy",
+    "fictional",
+    "studio_world"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "seconds": 75
+  }
+ ]
+}

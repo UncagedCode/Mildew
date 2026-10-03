@@ -79,6 +79,18 @@ func validate(db: ContentDB, release_mode: bool = false) -> bool:
 					_validate_survey(item, where)
 				"interference":
 					_validate_interference(item, where)
+				"do_not_press_that":
+					_validate_common_game(item, where)
+					if str(item.get("title", "")) == "" or (item.get("labels", []) as Array).size() < 6:
+						errors.append("%s: puzzle needs a title and 6+ control labels" % where)
+					if not ["lamps", "gauge", "card"].has(str(item.get("display", ""))) or not ["switch", "dial", "button"].has(str(item.get("controls", ""))):
+						errors.append("%s: unknown display/control kind" % where)
+					var rng := RandomNumberGenerator.new()
+					for n in range(2, 9):
+						rng.seed = hash("%s/%d" % [item.get("id"), n])
+						var errs := DnpPuzzle.generate(item, n, rng).validate()
+						if not errs.is_empty():
+							errors.append("%s: unsatisfiable layout for %d players: %s" % [where, n, errs[0]])
 				"police_sketch":
 					_validate_common_game(item, where)
 					if str(item.get("prompt", "")).strip_edges() == "" or str(item.get("prompt", "")).length() > 140:

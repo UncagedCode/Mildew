@@ -146,6 +146,7 @@ func _build_presentation() -> void:
 	presenter.quiz = view.quiz
 	presenter.wv = view.wv
 	presenter.ps = view.ps
+	presenter.dnp = view.dnp
 	add_child(presenter)
 	presenter.attach(host)
 	dev = DevOverlay.new()
@@ -632,7 +633,7 @@ func _dev_remote(cmd: String, args: Dictionary) -> Dictionary:
 			return {"ok": true, "msg": "timescale x%s" % s.time_scale}
 		"force":
 			var key := str(args.get("key", ""))
-			if not key in ["hole_variant", "hole_item", "incident", "interfere", "game"]:
+			if not key in ["hole_variant", "hole_item", "incident", "interfere", "game", "dnp_item", "dnp_timer_lie"]:
 				return {"ok": false, "msg": "unknown force key"}
 			var val := str(args.get("value", ""))
 			if val == "":

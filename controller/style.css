@@ -184,3 +184,17 @@ body {
   box-shadow: 0 4px 0 rgba(0,0,0,.35); }
 .ps-prompt { text-transform: none; }
 .ps-tools .key.on { filter: none; outline: 3px solid var(--lcd-fg); }
+
+/* Do Not Press That (CP6) */
+.dnp-ins { margin-top: 6px; }
+.dnp-line { color: var(--lcd-fg); font-size: 15px; line-height: 1.3; margin: 6px 0; text-transform: none; }
+.dnp-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.dnp-ctl { background: #3b3d38; border: 3px solid #23251f; border-radius: 6px; padding: 8px; display: flex; flex-direction: column; gap: 6px; }
+.dnp-ctl.decoy { background: #4a1d1a; border-color: #ff3b30; }
+.dnp-ctl.jammed { opacity: .45; filter: grayscale(1); }
+.dnp-ctl.jammed .dnp-label::after { content: " · JAMMED"; color: #ff5a4a; }
+.dnp-label { color: #f0e6c8; font: 700 13px/1.1 "DejaVu Sans Mono", monospace; letter-spacing: 1px; }
+.dnp-switch { min-height: 56px; --kc: #5b5f57; }
+.dnp-switch.on { --kc: #3e8f3a; }
+.dnp-val { flex: 1; text-align: center; font: 700 30px/44px "DejaVu Sans Mono", monospace; color: #ffd23f; background: #111; border-radius: 4px; }
+.dnp-count { color: #f0e6c8 !important; min-height: 16px; }

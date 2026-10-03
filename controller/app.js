@@ -33,7 +33,7 @@
     if (text !== undefined && text !== null) e.textContent = text;
     return e;
   }
-  function clear() { lcd.textContent = ""; keys.textContent = ""; cancelAnimationFrame(S.timerRAF); S.psKey = ""; S.wvKey = ""; }
+  function clear() { lcd.textContent = ""; keys.textContent = ""; cancelAnimationFrame(S.timerRAF); S.psKey = ""; S.wvKey = ""; S.dnpKey = ""; }
   function buzz(p) { try { if (navigator.vibrate) navigator.vibrate(p); } catch (e) { /* unsupported */ } }
   function key(label, cls, onTap, cap) {
     const b = el("button", "key " + (cls || ""));
@@ -149,6 +149,7 @@
     bad_room: "THAT CODE DOES NOT MATCH THE BROADCAST ON YOUR TELEVISION.",
     bad_version: "THIS UNIT IS OUT OF DATE. RELOAD THE PAGE.",
     self_vote: "YOU CAN'T VOTE FOR YOUR OWN ANSWER. WE CHECK.",
+    jammed: "JAMMED. WAIT A MOMENT.",
     name_taken: "THAT NAME IS ALREADY ON A PODIUM. TRY ANOTHER (E.G. ADD AN INITIAL).",
     name_invalid: "THE PRESENTER CANNOT PRONOUNCE THAT. LETTERS AND NUMBERS ONLY, PLEASE.",
     room_full: "ALL EIGHT PODIUMS ARE TAKEN. YOU MAY WATCH FROM THE SOFA.",
@@ -385,6 +386,8 @@
       case "wv_rate": return scrWVRate(d);
       case "wv_result": return scrWVResult(d);
       case "ps_draw": return scrPSDraw(d);
+      case "dnp_panel": return scrDnpPanel(d);
+      case "dnp_result": return scrDnpResult(d);
       case "ps_describe": return scrPSDescribe(d);
       case "ps_vote": return scrWVVote(Object.assign({}, d, { own: -1, ownList: d.own || [] }));
       case "locked": return scrLocked(d);
@@ -662,6 +665,81 @@
     S.wvKey = ""; // let the shared writer build the input below
     const holder = { qid: d.qid, header: null, prompt: "", hint: "", max: d.max || 70, remaining_ms: d.remaining_ms, total_ms: d.total_ms };
     wvWriter(holder, wkey, "DESCRIBE IT");
+  }
+
+  // ---------------- DO NOT PRESS THAT ----------------
+  // The panel updates in place (values, jams) so taps are never lost to a rebuild. Switches and
+  // dials send absolute values; buttons send the press count, so a duplicated frame can't over-press.
+  function scrDnpPanel(d) {
+    const pkey = "dnp." + d.qid + "." + (d.live ? 1 : 0);
+    if (S.dnpKey === pkey && document.getElementById("dnp-panel")) return dnpUpdate(d);
+    clear(); S.dnpKey = pkey; S.dnpLocal = {};
+    if (d.live) buzz([40, 30, 40]);
+    lcd.appendChild(el("div", "sub", d.header || "DO NOT PRESS THAT"));
+    lcd.appendChild(el("div", "title", d.title || ""));
+    if (d.live) wvTimer(d); else lcd.appendChild(el("div", "sub blinker", "STAND BY. READ YOUR INSTRUCTIONS."));
+    const ins = el("div", "dnp-ins");
+    if ((d.instructions || []).length) {
+      ins.appendChild(el("div", "sub warn", "YOUR INSTRUCTIONS (READ THEM OUT):"));
+      for (const t of d.instructions) ins.appendChild(el("div", "dnp-line", "\u25B8 " + t));
+    } else ins.appendChild(el("div", "sub", "NO INSTRUCTIONS. LISTEN TO THE OTHERS."));
+    lcd.appendChild(ins);
+    const panel = el("div", "dnp-panel"); panel.id = "dnp-panel"; keys.appendChild(panel);
+    for (const c of d.controls || []) {
+      const box = el("div", "dnp-ctl" + (c.decoy ? " decoy" : "")); box.dataset.id = c.id;
+      box.appendChild(el("div", "dnp-label", c.label));
+      const live = () => d.live && !S.status.paused;
+      if (c.type === "switch") {
+        const b = el("button", "key plain dnp-switch"); b.dataset.role = "v";
+        b.addEventListener("click", (ev) => { ev.preventDefault(); if (!live() || b.disabled) return; buzz(20);
+          const v = (S.dnpLocal[c.id] ?? c.value) ? 0 : 1; S.dnpLocal[c.id] = v; dnpPaint(box, c.type, v); send({ t: "ctl", q: d.qid, c: c.id, v }); });
+        box.appendChild(b);
+      } else if (c.type === "dial") {
+        const row = el("div", "keyrow");
+        const m = el("button", "key plain small grey", "\u2212"), v = el("div", "dnp-val"), pl = el("button", "key plain small grey", "+");
+        v.dataset.role = "v";
+        const step = (k) => { if (!live()) return; buzz(10); const cur = S.dnpLocal[c.id] ?? c.value; const nv = Math.max(1, Math.min(c.max || 9, cur + k));
+          S.dnpLocal[c.id] = nv; dnpPaint(box, c.type, nv); clearTimeout(box._t); box._t = setTimeout(() => send({ t: "ctl", q: d.qid, c: c.id, v: nv }), 250); };
+        m.addEventListener("click", (ev) => { ev.preventDefault(); step(-1); }); pl.addEventListener("click", (ev) => { ev.preventDefault(); step(1); });
+        row.appendChild(m); row.appendChild(v); row.appendChild(pl); box.appendChild(row);
+      } else {
+        const b = el("button", "key plain " + (c.decoy ? "a" : "d"), c.decoy ? "PRESS" : "PRESS"); b.dataset.role = "btn";
+        const cnt = el("div", "sub dnp-count"); cnt.dataset.role = "v";
+        b.addEventListener("click", (ev) => { ev.preventDefault(); if (!live() || b.disabled) return; buzz(c.decoy ? [80, 40, 80] : 25);
+          const n = (S.dnpLocal[c.id] ?? c.value) + 1; S.dnpLocal[c.id] = n; dnpPaint(box, c.type, n); send({ t: "ctl", q: d.qid, c: c.id, n, v: 1 }); });
+        box.appendChild(b); box.appendChild(cnt);
+      }
+      panel.appendChild(box);
+    }
+    dnpUpdate(d);
+  }
+  function dnpPaint(box, type, v) {
+    const t = box.querySelector('[data-role="v"]'); if (!t) return;
+    if (type === "switch") { t.textContent = v ? "ON" : "OFF"; t.classList.toggle("on", !!v); }
+    else if (type === "dial") t.textContent = String(v);
+    else t.textContent = v ? "PRESSED " + v + "\u00D7" : "";
+  }
+  function dnpUpdate(d) {
+    for (const c of d.controls || []) {
+      const box = document.querySelector('.dnp-ctl[data-id="' + c.id + '"]'); if (!box) continue;
+      // server value wins unless we have a newer local intent that the server has caught up with
+      if (S.dnpLocal[c.id] === undefined || S.dnpLocal[c.id] === c.value || c.type !== "dial") { S.dnpLocal[c.id] = c.value; }
+      dnpPaint(box, c.type, S.dnpLocal[c.id]);
+      const jam = (c.jammed_ms || 0) > 0;
+      box.classList.toggle("jammed", jam);
+      for (const b of box.querySelectorAll("button")) b.disabled = !d.live || jam;
+      if (jam) { clearTimeout(box._j); box._j = setTimeout(() => { box.classList.remove("jammed"); for (const b of box.querySelectorAll("button")) b.disabled = false; }, c.jammed_ms); }
+    }
+  }
+  function scrDnpResult(d) {
+    clear();
+    const T = { perfect: "PERFECT", completed: "COMPLETED", barely: "BARELY COMPLETED", failed: "FAILED SPECTACULARLY" };
+    lcd.appendChild(el("div", "sub", d.header || "DO NOT PRESS THAT"));
+    lcd.appendChild(el("div", d.tier === "failed" ? "big warn" : "big", T[d.tier] || ""));
+    if (d.points > 0) { buzz([20, 30, 60]); lcd.appendChild(el("div", "huge", "+" + fmt(d.points))); }
+    lcd.appendChild(el("div", "sub", d.mistakes ? "YOUR MISTAKES: " + d.mistakes : "YOU DIDN'T BREAK ANYTHING. BONUS."));
+    lcd.appendChild(el("div", "spacer"));
+    lcd.appendChild(el("div", "sub", "YOUR SCORE: " + fmt(d.score)));
   }
 
   // ---------------- HOLE ----------------

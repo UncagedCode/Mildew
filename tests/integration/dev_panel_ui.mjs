@@ -54,6 +54,9 @@ try {
   await P.click('#variants button[data-v="scale"]');
   await P.waitForFunction(() => document.querySelector("#forced").textContent.includes("hole_variant=scale"), null, { timeout: 5000 });
   check(true, "forced variant shown as waiting");
+  await P.selectOption("#nextgame", "hole");
+  await P.waitForFunction(() => document.querySelector("#forced").textContent.includes("game=hole"), null, { timeout: 5000 });
+  check(true, "forced first game shown as waiting");
   await shot("02_lobby_with_bots", true);
   await P.click('#speeds button[data-v="8"]');
   await P.click('button[data-cmd="start_show"]');

@@ -33,7 +33,8 @@ const FORMATS := {
 		"tags": ["writing", "gross", "good-middle", "good-finale", "2-player-safe"]},
 	"police_sketch": {"title": "POLICE SKETCH", "kind": "game", "implemented": true,
 		"tags": ["drawing", "social", "long", "good-middle", "2-player-safe"]},
-	"do_not_press_that": {"title": "DO NOT PRESS THAT", "kind": "game", "implemented": false, "tags": ["cooperation", "chaotic", "tense"]},
+	"do_not_press_that": {"title": "DO NOT PRESS THAT", "kind": "game", "implemented": true,
+		"tags": ["cooperation", "chaotic", "tense", "high-energy", "good-middle", "good-finale", "2-player-safe"]},
 	"basement": {"title": "THE BASEMENT", "kind": "game", "implemented": false, "tags": ["deduction", "discussion", "long", "unsettling-capable"]},
 }
 
@@ -64,6 +65,7 @@ var _mood_hold := 0.0               # seconds of show time before drifting back 
 
 # --- Relationships: player_id -> {trait: weight 0..1} ---
 var relationships := {}
+var dnp_culprit := ""              # Do Not Press That: who broke the last puzzle (punishment hook)
 var player_stats := {}             # player_id -> {answered, correct, wrong_streak, correct_streak, missed_streak, fastest}
 
 var skeleton: Array = []          # planned slots (resolved / unresolved), for debug overlay
@@ -127,6 +129,7 @@ func reset_for_new_show() -> void:
 	_mood_hold = 0.0
 	relationships.clear()
 	player_stats.clear()
+	dnp_culprit = ""
 	used_content.clear()
 	games_this_show.clear()
 	show_time = 0.0
@@ -251,7 +254,7 @@ func choose_game(role_tag: String, player_count: int) -> String:
 
 
 const CONTENT_KIND := {"hole": "hole", "real_or_mildew": "real_or_mildew", "guess_the_genitals": "guess_the_genitals",
-	"mildew_survey": "mildew_survey", "mouthfeel": "mouthfeel", "police_sketch": "police_sketch"}
+	"mildew_survey": "mildew_survey", "mouthfeel": "mouthfeel", "police_sketch": "police_sketch", "do_not_press_that": "do_not_press_that"}
 
 
 ## A game is only scheduled when it has enough content at this installation's familiarity tier.
@@ -300,6 +303,18 @@ func plan_game(game_id: String, player_count: int, finale: bool = false) -> Arra
 			out.append_array(_plan_survey(player_count, fmult))
 		"mouthfeel":
 			out.append_array(_plan_mouthfeel(player_count, fmult))
+		"do_not_press_that":
+			var puzzles := pick_items("do_not_press_that", "do_not_press_that", _ci("dnp.puzzles_per_game", 4), player_count)
+			if force.has("dnp_item"):
+				var fi: Dictionary = content.get_item(str(force.dnp_item)) if content else {}
+				if not fi.is_empty() and not puzzles.is_empty():
+					puzzles[0] = fi
+			out.append({"kind": "sting", "game_id": "do_not_press_that", "title": "DO NOT PRESS THAT", "style": "dnp", "seconds": 3.6})
+			out.append({"kind": "link", "lines": [["graham", "dnp_intro"], ["graham", "dnp_rules"]], "camera": "cam1"})
+			for i in puzzles.size():
+				out.append({"kind": "dnp", "item": puzzles[i], "game_id": "do_not_press_that", "round": i + 1, "of": puzzles.size(), "mid_game": i > 0,
+					"multiplier": fmult * (1.5 if fmult > 1.0 and i == puzzles.size() - 1 else 1.0)})
+			out.append({"kind": "link", "lines": [["graham", "dnp_outro"]], "camera": "cam1", "mid_game": false})
 		"police_sketch":
 			# 2–3 players: two short rounds (each draws one, interprets one, then swap with new prompts).
 			var rounds := 2 if player_count <= 3 else 1

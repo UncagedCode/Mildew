@@ -46,11 +46,20 @@ func hole_oracle(content_id: String, variant: String) -> String:
 	return str(item.get("answer", ""))
 
 
+## Dev-only: the live Do Not Press That puzzle's target for a control.
+func dnp_oracle(control_id: String) -> int:
+	var seg = session._current
+	if seg is SegDnp and seg.puzzle != null:
+		return int(seg.puzzle._ctl(control_id).get("target", 0))
+	return 0
+
+
 func add_bot(name: String, personality: String, seed: int = 0) -> FakePlayerBot:
 	var bot := FakePlayerBot.new(name, personality, seed)
 	bot.room_key = session.join_key
 	bot.oracle = oracle
 	bot.hole_oracle = hole_oracle
+	bot.dnp_oracle = dnp_oracle
 	connect_bot(bot)
 	bots.append(bot)
 	return bot
