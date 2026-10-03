@@ -30,6 +30,7 @@ var _again_sent := false
 var connected := true
 var errors_received: Array = []
 var screens_seen: Array = []
+var interferences: Array = []      # private messages received (tests)
 
 
 func _init(p_name: String, p_personality: String, seed: int = 0) -> void:
@@ -61,6 +62,8 @@ func receive(msg: Dictionary) -> void:
 			resume_token = str(msg.get("resume"))
 		Protocol.S_ERROR:
 			errors_received.append(str(msg.get("code")))
+		Protocol.S_INTERFERE:
+			interferences.append(msg)
 		Protocol.S_SCREEN:
 			last_screen = msg
 			screens_seen.append(str(msg.get("screen")))

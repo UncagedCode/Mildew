@@ -140,6 +140,8 @@
         S.kicked = true; store.del(tokenKey()); showKicked(); return;
       case "error":
         onError(m); return;
+      case "interfere":
+        interfere(m); return;
     }
   }
 
@@ -164,6 +166,33 @@
     if (S.wizard && (m.code === "name_taken" || m.code === "name_invalid")) { wizardName(text); return; }
     if (m.code === "self_vote" && S.screen && S.screen.screen === "wv_vote") { scrWVVote(S.screen.data || {}); }
     toast(text);
+  }
+  // Private interference: brief, unrecoverable, never blocks input (pointer-events: none),
+  // never imitates the phone's own call screen. Nothing is stored or listed anywhere.
+  function interfere(m) {
+    const ms = Math.max(200, Math.min(4000, Number(m.ms) || 1300));
+    if (m.buzz) buzz(m.buzz);
+    const text = String(m.text || "");
+    if (m.style === "buzz" || !text) return;
+    if (m.style === "unit") {
+      const u = $("unit-no"); const keep = u.textContent;
+      u.textContent = text; u.classList.add("intf-unit");
+      setTimeout(() => { u.textContent = keep; u.classList.remove("intf-unit"); }, ms);
+      return;
+    }
+    const ta = document.getElementById("wv-text");
+    if (m.style === "field" && ta) {
+      const keep = ta.value, ro = ta.readOnly;
+      ta.readOnly = true; ta.value = text; ta.classList.add("intf-field");
+      setTimeout(() => { ta.value = keep; ta.readOnly = ro; ta.classList.remove("intf-field"); }, ms);
+      return;
+    }
+    const o = el("div", "intf", text);
+    document.body.appendChild(o);
+    let changed = false;
+    const onTouch = () => { if (m.after && !changed) { changed = true; o.textContent = String(m.after); } };
+    if (m.after) document.addEventListener("pointerdown", onTouch, { once: true, capture: true });
+    setTimeout(() => { o.remove(); document.removeEventListener("pointerdown", onTouch, { capture: true }); }, ms);
   }
   function toast(text) {
     const t = el("div", "toast flash", text);

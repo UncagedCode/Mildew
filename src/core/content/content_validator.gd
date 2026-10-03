@@ -77,6 +77,8 @@ func validate(db: ContentDB, release_mode: bool = false) -> bool:
 					_validate_gtg(item, where, release_mode)
 				"mildew_survey":
 					_validate_survey(item, where)
+				"interference":
+					_validate_interference(item, where)
 				"mouthfeel":
 					_validate_mouthfeel(item, where, release_mode)
 				"graham_lines", "announcer_lines":
@@ -147,6 +149,38 @@ func _validate_real_or_mildew(item: Dictionary, where: String, release_mode: boo
 	for o in opts:
 		if str(o).length() > 120:
 			errors.append("%s: option longer than 120 characters (unreadable on TV)" % where)
+
+
+## Private interference (docs/03): ephemeral phone payloads; source is internal only.
+func _validate_interference(item: Dictionary, where: String) -> void:
+	var tier = item.get("tier")
+	if typeof(tier) not in [TYPE_INT, TYPE_FLOAT] or int(tier) < 1 or int(tier) > 4:
+		errors.append("%s: invalid interference tier %s" % [where, str(tier)])
+	if not PrivateInterference.SOURCES.has(item.get("source")):
+		errors.append("%s: unknown interference source '%s'" % [where, str(item.get("source"))])
+	if not PrivateInterference.STYLES.has(item.get("style")):
+		errors.append("%s: unknown interference style '%s'" % [where, str(item.get("style"))])
+	var target := str(item.get("target", ""))
+	if not PrivateInterference.TARGETS.has(target):
+		errors.append("%s: unknown interference target '%s'" % [where, target])
+	for m in item.get("moments", []):
+		if not PrivateInterference.MOMENTS.has(m):
+			errors.append("%s: unknown interference moment '%s'" % [where, m])
+	if target == "fragments":
+		if (item.get("fragments", []) as Array).size() < 2:
+			errors.append("%s: distributed interference needs 2+ fragments" % where)
+	elif str(item.get("style")) != "buzz" and (item.get("texts", []) as Array).is_empty():
+		errors.append("%s: interference needs texts" % where)
+	var ms := int(item.get("ms", 0))
+	if ms < 200 or ms > 4000:
+		errors.append("%s: ms must be 200..4000 (brief, never lingering)" % where)
+	for t in item.get("texts", []) + item.get("fragments", []):
+		if str(t).length() > 48:
+			errors.append("%s: interference text too long to flash: %s" % [where, t])
+		var low := str(t).to_lower()
+		for bad in ["incoming call", "accept", "decline", "slide to answer"]:
+			if low.contains(bad):
+				errors.append("%s: must not imitate the phone's own call UI ('%s')" % [where, bad])
 
 
 ## Mildew Survey (docs/04 §3): a prompt, enough archive filler for a 2-player vote, known round formats.

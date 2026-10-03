@@ -75,6 +75,11 @@
   "describe_rounds": 3,
   "chain_chance": 0.75
  },
+ "interference": {
+  "base_chance": 0.025,
+  "global_cooldown_seconds": 150,
+  "max_per_show": 6
+ },
  "write_vote": {
   "write_seconds": 45,
   "vote_seconds": 25,

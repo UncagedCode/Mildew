@@ -32,6 +32,7 @@ const S_SCREEN := "screen"          # {screen, data, seq}
 const S_STATUS := "status"          # {paused, reason, detail}
 const S_PONG := "pong"              # {id, st}
 const S_KICKED := "kicked"          # {reason}
+const S_INTERFERE := "interfere"    # {style, text, ms, buzz?, after?}  private, ephemeral, never resent
 
 ## Game actions are routed to the current segment, which validates them against its own state.
 const GAME_ACTIONS := [C_ANSWER, C_LOCK, C_PASS, C_SUBMIT, C_VOTE]

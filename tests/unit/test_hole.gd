@@ -11,6 +11,8 @@ func _harness(tag: String, seed: int = 4321, played: int = 3, force := {}) -> Si
 	store.installation.broadcasts_played = played
 	var h := SimHarness.new(cfg(), store, content(), seed, SCALE)
 	h.session.director.force = force
+	if not force.has("game"):
+		h.session.director.force["game"] = "hole"
 	return h
 
 

@@ -43,6 +43,7 @@ var broadcasts_played := 0
 var force := {}                    # dev overrides: hole_variant, hole_item, game
 var games_this_show: Array = []
 var incidents: IncidentEngine
+var interference: PrivateInterference
 var voice: GrahamVoiceIndex = null   # authored Graham clips (D024); voiced lines are preferred when present
 
 # --- Hidden axes (0..1). Never shown to players. ---
@@ -84,6 +85,7 @@ func _init(p_content: ContentDB = null, seed: int = 0) -> void:
 		tone[t] = 0.0
 	_index_lines()
 	incidents = IncidentEngine.new(self)
+	interference = PrivateInterference.new(self)
 
 
 func _index_lines() -> void:
@@ -130,6 +132,7 @@ func reset_for_new_show() -> void:
 	for t in TONES:
 		tone[t] = 0.0
 	incidents.reset_for_new_show()
+	interference.reset_for_new_show()
 
 
 # ---------------------------------------------------------------------------
@@ -264,7 +267,7 @@ func plan_game(game_id: String, player_count: int, finale: bool = false) -> Arra
 			var count := _ci("real_or_mildew.questions_per_game", 6)
 			var items := pick_items("real_or_mildew", "real_or_mildew", count, player_count)
 			var conf_at := -1
-			if items.size() >= 4 and (familiarity_tier >= 2 or force.get("rom_confidence", false)) and rng.randf() < _cf("real_or_mildew.confidence_round_chance", 0.6):
+			if items.size() >= 4 and (familiarity_tier >= 2 or force.get("rom_confidence", false)) and (force.get("rom_confidence", false) or rng.randf() < _cf("real_or_mildew.confidence_round_chance", 0.6)):
 				conf_at = rng.randi_range(2, items.size() - 2)
 				log_decision("Variant", "rom:confidence@%d" % (conf_at + 1), ["familiarity_tier=%d" % familiarity_tier])
 			out.append({"kind": "sting", "game_id": "real_or_mildew", "title": "REAL OR MILDEW?", "style": "rom", "seconds": 3.6})
@@ -866,6 +869,7 @@ func snapshot() -> Dictionary:
 		"relationships": relationships.duplicate(true),
 		"skeleton": skeleton.duplicate(true),
 		"used_content": used_content.keys(),
+		"interference": {"temperament": interference.temperament, "count": interference.fired, "log": interference.fired_log.duplicate()},
 		"incidents": {"temperament": incidents.temperament, "count": incidents.count_by_tier.duplicate(), "log": incidents.fired_log.duplicate()},
 		"show_time": show_time,
 	}

@@ -629,7 +629,7 @@ func _dev_remote(cmd: String, args: Dictionary) -> Dictionary:
 			return {"ok": true, "msg": "timescale x%s" % s.time_scale}
 		"force":
 			var key := str(args.get("key", ""))
-			if not key in ["hole_variant", "hole_item", "incident"]:
+			if not key in ["hole_variant", "hole_item", "incident", "interfere", "game"]:
 				return {"ok": false, "msg": "unknown force key"}
 			var val := str(args.get("value", ""))
 			if val == "":

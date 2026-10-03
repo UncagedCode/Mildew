@@ -74,6 +74,7 @@ func test_director_prefers_unseen_installation_content() -> void:
 func test_director_skeleton_and_logs() -> void:
 	var d := Director.new(content(), 3)
 	d.begin_session({"broadcasts_played": 7}, "standard_transmission")
+	d.force["game"] = "hole"
 	check_eq(d.familiarity_tier, 3, "familiarity tier grows with installation experience")
 	var plan := d.plan_episode(["p1", "p2"])
 	check_eq(plan.filter(func(s): return s.kind == "question" and s.get("game_id") == "studio_rehearsal").size(), 0, "returning installation: no rehearsal warm-up")

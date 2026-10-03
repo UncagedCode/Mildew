@@ -872,6 +872,30 @@ func emit_say(line: Dictionary, duration: float) -> void:
 func emit_tv(evt: Dictionary) -> void:
 	evt["st"] = session_time
 	tv_event.emit(evt)
+	if phase == Phase.SHOW:
+		var moment := str(INTERFERENCE_MOMENTS.get(str(evt.get("e")), ""))
+		if moment == "hole_stage" and int(evt.get("stage", 0)) != 2:
+			moment = ""
+		if moment != "":
+			_interference_opportunity(moment, str(evt.get("game_id", "")))
+
+
+## Phone-facing moments where a private irregularity may (rarely) slip through (docs/03).
+const INTERFERENCE_MOMENTS := {"question_open": "question_open", "wv_write_open": "write_open", "wv_vote_open": "vote_open",
+	"hole_stage": "hole_stage", "segment": "boundary"}
+
+
+func _interference_opportunity(moment: String, game: String) -> void:
+	if director == null or director.interference == null:
+		return
+	var ps: Array = []
+	for p in players.values():
+		if p.connected and p.is_active():
+			ps.append({"pid": p.player_id, "name": p.display_name})
+	for d in director.interference.opportunity(moment, {"players": ps, "game": game}):
+		var p: PlayerState = players.get(d.pid)
+		if p != null and p.connected and p.conn_id != -1:
+			_send(p.conn_id, d.msg)   # not stored anywhere: no history, not resent on reconnect
 
 
 func push_screens() -> void:

@@ -103,6 +103,8 @@
       <div class="row"><span class="dim">Hole variant</span><div class="seg" id="variants"></div></div>
       <div class="row"><select id="item"><option value="">Hole item: Director's choice</option></select></div>
       <div class="row"><select id="incident"><option value="">Incident: Director's choice</option></select></div>
+      <div class="row"><select id="privmsg"><option value="">Private phone message: Director's choice</option></select></div>
+      <div class="row"><select id="nextgame"><option value="">First game: Director's choice</option></select></div>
       <p class="hint" id="forced">Nothing forced.</p>
     </div>
   </section>
@@ -210,6 +212,8 @@
   $("vintent").onchange = (e) => { if (e.target.value) send("voice_intent", { value: e.target.value }); e.target.value = ""; };
   $("voicelist").addEventListener("click", (e) => { const r = e.target.closest("[data-vid]"); if (r) send("voice_play", { value: r.dataset.vid }); });
   $("incident").onchange = (e) => send("force", { key: "incident", value: e.target.value });
+  $("privmsg").onchange = (e) => send("force", { key: "interfere", value: e.target.value });
+  $("nextgame").onchange = (e) => send("force", { key: "game", value: e.target.value });
 
   function chipRow(el, values, labelFn, onTap) {
     el.innerHTML = "";
@@ -230,6 +234,10 @@
     for (const i of cat.hole_items) it.add(new Option(`${i.label}${i.tier > 1 ? "  (tier " + i.tier + ")" : ""}`, i.id));
     const inc = $("incident"); inc.length = 1;
     for (const i of cat.incidents) inc.add(new Option(`T${i.tier} · ${i.id.replace(/^t\d\./, "")}`, i.id));
+    const pm = $("privmsg"); pm.length = 1;
+    for (const i of (cat.private || [])) pm.add(new Option(`T${i.tier} · ${i.id.replace(/^p\./, "")} (${i.source})`, i.id));
+    const ng = $("nextgame"); ng.length = 1;
+    for (const g of (cat.games || [])) ng.add(new Option(g.replace(/_/g, " "), g));
   }
   const esc = (s) => String(s).replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[c]);
   function mark(el, cur) { for (const b of el.children) b.classList.toggle("on", String(b.dataset.v) === String(cur)); }
@@ -252,6 +260,8 @@
     $("platestat").textContent = "On air: " + (app.plate ? "plate " + app.plate : "3D studio (no plate for this camera)"); $("ovl").textContent = app.overlay ? "OVERLAY ON" : "OVERLAY OFF";
     if (document.activeElement !== $("item")) $("item").value = st.force.hole_item || "";
     if (document.activeElement !== $("incident")) $("incident").value = st.force.incident || "";
+    if (document.activeElement !== $("privmsg")) $("privmsg").value = st.force.interfere || "";
+    if (document.activeElement !== $("nextgame")) $("nextgame").value = st.force.game || "";
     const f = Object.entries(st.force); $("forced").textContent = f.length ? "Waiting to use: " + f.map(([k, v]) => `${k}=${v}`).join(", ") : "Nothing forced.";
 
     const humans = st.players.filter((p) => !p.fake).length;

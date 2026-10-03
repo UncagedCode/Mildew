@@ -1,0 +1,566 @@
+{
+ "pack_id": "interference.private_cp4",
+ "content_kind": "interference",
+ "_comment": "Private phone interference (docs/03). Ephemeral, never logged for players, never catalogued. 'source' is internal only. Tier 1 = odd/production; 2 = unsettling; 3 = distributed (rare).",
+ "items": [
+  {
+   "id": "p.cam4",
+   "enabled": true,
+   "quality_status": "draft",
+   "tier": 1,
+   "source": "production",
+   "style": "overlay",
+   "target": "single_phone",
+   "texts": [
+    "CAM 4 AFTER BREAK",
+    "CAM 4 NOT CLEAR",
+    "STAND BY CAM 4"
+   ],
+   "moments": [
+    "question_open",
+    "write_open",
+    "vote_open",
+    "hole_stage",
+    "boundary"
+   ],
+   "cooldown_seconds": 900,
+   "rarity_weight": 1.0,
+   "min_players": 1,
+   "ms": 1300
+  },
+  {
+   "id": "p.vt",
+   "enabled": true,
+   "quality_status": "draft",
+   "tier": 1,
+   "source": "production",
+   "style": "overlay",
+   "target": "single_phone",
+   "texts": [
+    "VT 3 NOT READY",
+    "WHO HAS VT 3",
+    "ROLL VT... NO. HOLD."
+   ],
+   "moments": [
+    "question_open",
+    "write_open",
+    "vote_open",
+    "hole_stage",
+    "boundary"
+   ],
+   "cooldown_seconds": 900,
+   "rarity_weight": 1.0,
+   "min_players": 1,
+   "ms": 1300
+  },
+  {
+   "id": "p.ham",
+   "enabled": true,
+   "quality_status": "draft",
+   "tier": 1,
+   "source": "production",
+   "style": "overlay",
+   "target": "single_phone",
+   "texts": [
+    "WHO MOVED THE HAM",
+    "HAM IS IN STUDIO C AGAIN",
+    "RETURN THE HAM TO PROPS"
+   ],
+   "moments": [
+    "question_open",
+    "write_open",
+    "vote_open",
+    "hole_stage",
+    "boundary"
+   ],
+   "cooldown_seconds": 900,
+   "rarity_weight": 1.0,
+   "min_players": 1,
+   "ms": 1300
+  },
+  {
+   "id": "p.keys",
+   "enabled": true,
+   "quality_status": "draft",
+   "tier": 1,
+   "source": "production",
+   "style": "overlay",
+   "target": "single_phone",
+   "texts": [
+    "WHO HAS THE KEYS",
+    "KEYS TO B4?",
+    "DON'T GIVE NEIL THE KEYS"
+   ],
+   "moments": [
+    "question_open",
+    "write_open",
+    "vote_open",
+    "hole_stage",
+    "boundary"
+   ],
+   "cooldown_seconds": 900,
+   "rarity_weight": 1.0,
+   "min_players": 1,
+   "ms": 1300
+  },
+  {
+   "id": "p.carol",
+   "enabled": true,
+   "quality_status": "draft",
+   "tier": 1,
+   "source": "production",
+   "style": "overlay",
+   "target": "single_phone",
+   "texts": [
+    "WHERE'S CAROL",
+    "CAROL TO GALLERY PLEASE",
+    "HAS ANYONE SEEN CAROL"
+   ],
+   "moments": [
+    "question_open",
+    "write_open",
+    "vote_open",
+    "hole_stage",
+    "boundary"
+   ],
+   "cooldown_seconds": 900,
+   "rarity_weight": 1.0,
+   "min_players": 1,
+   "ms": 1300,
+   "minimum_familiarity": 2
+  },
+  {
+   "id": "p.wrong_number",
+   "enabled": true,
+   "quality_status": "draft",
+   "tier": 1,
+   "source": "unknown",
+   "style": "overlay",
+   "target": "single_phone",
+   "texts": [
+    "SORRY WRONG NUMBER",
+    "WRONG UNIT",
+    "NOT YOU"
+   ],
+   "moments": [
+    "question_open",
+    "write_open",
+    "vote_open",
+    "hole_stage",
+    "boundary"
+   ],
+   "cooldown_seconds": 900,
+   "rarity_weight": 1.0,
+   "min_players": 1,
+   "ms": 1300,
+   "buzz": "short"
+  },
+  {
+   "id": "p.unit_name",
+   "enabled": true,
+   "quality_status": "draft",
+   "tier": 1,
+   "source": "corruption",
+   "style": "unit",
+   "target": "single_phone",
+   "texts": [
+    "UNIT No. 0000 \u00b7 CONTESTANT",
+    "UNIT No. 0013 \u00b7 NOT IN USE",
+    "UNIT No. 0004 \u00b7 {other}"
+   ],
+   "moments": [
+    "question_open",
+    "write_open",
+    "vote_open",
+    "hole_stage",
+    "boundary"
+   ],
+   "cooldown_seconds": 900,
+   "rarity_weight": 1.0,
+   "min_players": 1,
+   "ms": 1800
+  },
+  {
+   "id": "p.graham_note",
+   "enabled": true,
+   "quality_status": "draft",
+   "tier": 1,
+   "source": "graham",
+   "style": "overlay",
+   "target": "single_phone",
+   "texts": [
+    "SMILE",
+    "SIT UP STRAIGHT",
+    "LOVELY",
+    "DON'T DO THAT AGAIN"
+   ],
+   "moments": [
+    "question_open",
+    "write_open",
+    "vote_open",
+    "hole_stage",
+    "boundary"
+   ],
+   "cooldown_seconds": 900,
+   "rarity_weight": 1.0,
+   "min_players": 1,
+   "ms": 1300,
+   "minimum_familiarity": 2
+  },
+  {
+   "id": "p.archive_answer",
+   "enabled": true,
+   "quality_status": "draft",
+   "tier": 1,
+   "source": "archive",
+   "style": "field",
+   "target": "single_phone",
+   "texts": [
+    "SOMEONE ALREADY WROTE THAT IN 1998",
+    "WE HAVE THIS ANSWER ON TAPE",
+    "KEITH SAID THAT"
+   ],
+   "moments": [
+    "write_open"
+   ],
+   "cooldown_seconds": 900,
+   "rarity_weight": 1.0,
+   "min_players": 1,
+   "ms": 1600
+  },
+  {
+   "id": "p.vibrate",
+   "enabled": true,
+   "quality_status": "draft",
+   "tier": 1,
+   "source": "unknown",
+   "style": "buzz",
+   "target": "single_phone",
+   "texts": [
+    ""
+   ],
+   "moments": [
+    "question_open",
+    "write_open",
+    "vote_open",
+    "hole_stage",
+    "boundary"
+   ],
+   "cooldown_seconds": 900,
+   "rarity_weight": 1.0,
+   "min_players": 1,
+   "ms": 300,
+   "buzz": "double"
+  },
+  {
+   "id": "p.why_watching",
+   "enabled": true,
+   "quality_status": "draft",
+   "tier": 2,
+   "source": "unknown",
+   "style": "overlay",
+   "target": "single_phone",
+   "texts": [
+    "WHY ARE YOU WATCHING THIS",
+    "WHY ARE YOU STILL WATCHING"
+   ],
+   "moments": [
+    "question_open",
+    "write_open",
+    "vote_open",
+    "hole_stage",
+    "boundary"
+   ],
+   "cooldown_seconds": 2400,
+   "rarity_weight": 0.6,
+   "min_players": 1,
+   "ms": 1300
+  },
+  {
+   "id": "p.help_me",
+   "enabled": true,
+   "quality_status": "draft",
+   "tier": 2,
+   "source": "unknown",
+   "style": "overlay",
+   "target": "single_phone",
+   "texts": [
+    "YOU NEED TO HELP ME",
+    "HELP ME",
+    "PLEASE"
+   ],
+   "moments": [
+    "question_open",
+    "write_open",
+    "vote_open",
+    "hole_stage",
+    "boundary"
+   ],
+   "cooldown_seconds": 3000,
+   "rarity_weight": 0.5,
+   "min_players": 1,
+   "ms": 1300,
+   "minimum_familiarity": 2
+  },
+  {
+   "id": "p.help_me_too_late",
+   "enabled": true,
+   "quality_status": "draft",
+   "tier": 2,
+   "source": "unknown",
+   "style": "overlay",
+   "target": "single_phone",
+   "texts": [
+    "YOU NEED TO HELP ME"
+   ],
+   "moments": [
+    "question_open",
+    "write_open",
+    "vote_open",
+    "hole_stage",
+    "boundary"
+   ],
+   "cooldown_seconds": 7200,
+   "rarity_weight": 0.08,
+   "min_players": 1,
+   "ms": 2400,
+   "minimum_familiarity": 3,
+   "after": "TOO LATE"
+  },
+  {
+   "id": "p.dont_pick_red",
+   "enabled": true,
+   "quality_status": "draft",
+   "tier": 2,
+   "source": "unknown",
+   "style": "overlay",
+   "target": "single_phone",
+   "texts": [
+    "DON'T LET THEM PICK RED",
+    "NOT RED",
+    "PICK THE OTHER ONE"
+   ],
+   "moments": [
+    "question_open",
+    "vote_open"
+   ],
+   "cooldown_seconds": 2400,
+   "rarity_weight": 0.5,
+   "min_players": 1,
+   "ms": 1300
+  },
+  {
+   "id": "p.about_other",
+   "enabled": true,
+   "quality_status": "draft",
+   "tier": 2,
+   "source": "unknown",
+   "style": "overlay",
+   "target": "single_phone",
+   "texts": [
+    "DON'T TRUST {other}",
+    "{other} KNOWS",
+    "ASK {other} ABOUT THE CORRIDOR",
+    "{other} WAS HERE BEFORE"
+   ],
+   "moments": [
+    "question_open",
+    "write_open",
+    "vote_open",
+    "hole_stage",
+    "boundary"
+   ],
+   "cooldown_seconds": 3000,
+   "rarity_weight": 0.4,
+   "min_players": 2,
+   "ms": 1300,
+   "minimum_familiarity": 2
+  },
+  {
+   "id": "p.announcer_end",
+   "enabled": true,
+   "quality_status": "draft",
+   "tier": 2,
+   "source": "announcer",
+   "style": "overlay",
+   "target": "single_phone",
+   "texts": [
+    "PLEASE END THE TRANSMISSION",
+    "YOU CAN TURN THIS OFF",
+    "THIS IS NOT A LIVE PROGRAMME"
+   ],
+   "moments": [
+    "question_open",
+    "write_open",
+    "vote_open",
+    "hole_stage",
+    "boundary"
+   ],
+   "cooldown_seconds": 3600,
+   "rarity_weight": 0.35,
+   "min_players": 1,
+   "ms": 1300,
+   "minimum_familiarity": 3
+  },
+  {
+   "id": "p.fake_announcer",
+   "enabled": true,
+   "quality_status": "draft",
+   "tier": 2,
+   "source": "unknown_impersonating_source",
+   "style": "overlay",
+   "target": "single_phone",
+   "texts": [
+    "CONTINUITY: KEEP WATCHING",
+    "CONTINUITY: EVERYTHING IS NORMAL",
+    "CONTINUITY: DO NOT END THE TRANSMISSION"
+   ],
+   "moments": [
+    "question_open",
+    "write_open",
+    "vote_open",
+    "hole_stage",
+    "boundary"
+   ],
+   "cooldown_seconds": 3600,
+   "rarity_weight": 0.3,
+   "min_players": 1,
+   "ms": 1300,
+   "minimum_familiarity": 3
+  },
+  {
+   "id": "p.ring",
+   "enabled": true,
+   "quality_status": "draft",
+   "tier": 2,
+   "source": "unknown",
+   "style": "overlay",
+   "target": "single_phone",
+   "texts": [
+    "INCOMING",
+    "IT'S FOR YOU",
+    "ANSWER IT"
+   ],
+   "moments": [
+    "question_open",
+    "write_open",
+    "vote_open",
+    "hole_stage",
+    "boundary"
+   ],
+   "cooldown_seconds": 3600,
+   "rarity_weight": 0.35,
+   "min_players": 1,
+   "ms": 2600,
+   "buzz": "ring"
+  },
+  {
+   "id": "p.prediction",
+   "enabled": true,
+   "quality_status": "draft",
+   "tier": 2,
+   "source": "unknown",
+   "style": "overlay",
+   "target": "single_phone",
+   "texts": [
+    "GREEN ROOM NEXT",
+    "HE'LL STOP SMILING SOON",
+    "THE NEXT ONE IS A DUCK",
+    "AFTER THE BREAK"
+   ],
+   "moments": [
+    "question_open",
+    "write_open",
+    "vote_open",
+    "hole_stage",
+    "boundary"
+   ],
+   "cooldown_seconds": 2400,
+   "rarity_weight": 0.4,
+   "min_players": 1,
+   "ms": 1300
+  },
+  {
+   "id": "p.group_please",
+   "enabled": true,
+   "quality_status": "draft",
+   "tier": 2,
+   "source": "unknown",
+   "style": "overlay",
+   "target": "multiple_phones",
+   "texts": [
+    "PLEASE",
+    "PLEASE",
+    "PLEASE STOP"
+   ],
+   "moments": [
+    "question_open",
+    "write_open",
+    "vote_open",
+    "hole_stage",
+    "boundary"
+   ],
+   "cooldown_seconds": 4000,
+   "rarity_weight": 0.25,
+   "min_players": 3,
+   "ms": 1300,
+   "minimum_familiarity": 2
+  },
+  {
+   "id": "p.distributed_green_room",
+   "enabled": true,
+   "quality_status": "draft",
+   "tier": 3,
+   "source": "unknown",
+   "style": "overlay",
+   "target": "fragments",
+   "texts": [],
+   "moments": [
+    "question_open",
+    "write_open",
+    "vote_open",
+    "hole_stage",
+    "boundary"
+   ],
+   "cooldown_seconds": 9000,
+   "rarity_weight": 0.15,
+   "min_players": 3,
+   "ms": 1500,
+   "fragments": [
+    "GREEN ROOM",
+    "DON'T LET HIM",
+    "OPEN IT",
+    ""
+   ],
+   "minimum_familiarity": 3
+  },
+  {
+   "id": "p.distributed_count",
+   "enabled": true,
+   "quality_status": "draft",
+   "tier": 3,
+   "source": "corruption",
+   "style": "overlay",
+   "target": "fragments",
+   "texts": [],
+   "moments": [
+    "question_open",
+    "write_open",
+    "vote_open",
+    "hole_stage",
+    "boundary"
+   ],
+   "cooldown_seconds": 9000,
+   "rarity_weight": 0.1,
+   "min_players": 3,
+   "ms": 1100,
+   "fragments": [
+    "ONE",
+    "TWO",
+    "",
+    "FOUR"
+   ],
+   "minimum_familiarity": 3
+  }
+ ]
+}

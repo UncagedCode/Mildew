@@ -35,7 +35,7 @@ func test_two_player_full_show() -> void:
 	for s in st:
 		check(int(s.score) >= 0, "no negative score")
 		var earned := 0
-		for e in h.events_of("reveal") + h.events_of("hole_reveal"):
+		for e in h.events_of("reveal") + h.events_of("hole_reveal") + h.events_of("wv_reveal"):
 			earned += int(e.get("deltas", {}).get(s.pid, 0))
 		check_eq(int(s.score), earned, "score equals the sum of awarded points")
 	check(a.errors_received.is_empty() and b.errors_received.is_empty(), "bots got no errors: %s %s" % [a.errors_received, b.errors_received])

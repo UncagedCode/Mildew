@@ -371,7 +371,12 @@ func _dev_catalogue() -> Dictionary:
 	var incs: Array = []
 	for it in content.query("incident", "", 5, 0):
 		incs.append({"id": it.id, "tier": int(it.get("tier", 0)), "moments": it.get("moments", [])})
+	var privs: Array = []
+	for it in content.query("interference", "", 5, 0):
+		privs.append({"id": it.id, "tier": int(it.get("tier", 1)), "source": str(it.get("source", ""))})
+	var games: Array = Director.FORMATS.keys().filter(func(k): return Director.FORMATS[k].kind == "game" and Director.FORMATS[k].implemented)
 	return {"personalities": FakePlayerBot.PERSONALITIES, "hole_items": items, "hole_variants": ["standard", "scale", "open"],
+		"private": privs, "games": games,
 		"incidents": incs, "interference": ["standard_transmission", "supervised_transmission", "clean_transmission"],
 		"timescales": [1, 2, 4, 8]}
 

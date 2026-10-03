@@ -169,3 +169,12 @@ body {
   background: rgba(0,0,0,.35); color: var(--lcd-fg); font: inherit; font-size: 20px; padding: 10px; text-transform: none; }
 .wv-text:focus { outline: none; border-color: var(--lcd-fg); box-shadow: 0 0 10px rgba(185,244,124,.35); }
 .count { text-align: right; }
+
+/* Private interference (CP4): a hard cut of text over the unit, gone before anyone can be sure. */
+.intf { position: fixed; left: 0; right: 0; top: 34%; z-index: 50; pointer-events: none; padding: 18px 14px;
+  background: #050505; color: #e9e9e9; font-family: "Courier New", monospace; font-weight: 700; font-size: 26px;
+  letter-spacing: 2px; text-align: center; text-transform: uppercase; border-top: 2px solid #333; border-bottom: 2px solid #333;
+  animation: intf-in .06s steps(2) both; }
+@keyframes intf-in { from { opacity: 0; transform: translateX(-6px); } to { opacity: 1; transform: none; } }
+.intf-unit { color: #ff5a4a !important; }
+.intf-field { color: #ff5a4a !important; letter-spacing: 1px; }
