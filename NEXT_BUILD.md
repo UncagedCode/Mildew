@@ -19,7 +19,7 @@ tuned pacing from a real session, persistence polish, and the content gaps close
    (shelves, boxes, a mannequin), archive/tape room (tape shelves, TV trolley), and later control room, staff kitchenette,
    loading area, Graham's dressing room, the locked room (door only). Plus, per room, one variant with the door open
    and one with the light off. They would replace the procedural CCTV look in `cctv_view.gd` room by room.
-3. **More Guess the Genitals images** (5–10 licensed, clinical, animal-only) — or approval to source more museum/journal figures.
+3. Guess the Genitals now has 15 items (5 added from Commons); more are welcome toward 20.
 4. **Graham voice** for the new CP3–CP8 line packs (`content/graham/lines/cp3_*`…`cp8_*`), via the graham_factory pipeline (D024).
 
 ## Required technical outcomes (CP9)

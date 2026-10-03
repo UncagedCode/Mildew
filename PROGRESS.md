@@ -6,7 +6,7 @@ Current build/version: `0.1.0-cp8` (versionCode 8), debug APK
 Current branch: `claude/cp3-factual` (contains CP3 → CP8; see git log). APKs: branch `claude/apk-builds`.
 Godot version: **4.7.2-stable** (GL Compatibility) — pinned (D001)
 Android toolchain: headless non-Gradle export + container v2 signer + TV-launcher patch (D007, D008). Build: `tools/build/build_apk.sh`.
-Latest APK: `build/mildew-0.1.0-cp8-debug.apk` (not committed to the source branch). SHA-256 in `docs/testing/TEST_REPORT_CP8.md`.
+Latest APK: `mildew-0.1.0-cp8-debug.apk` on branch `claude/apk-builds` (SHA-256 `00e612b6…24c5`, see `docs/testing/TEST_REPORT_CP8.md`).
 
 ## Executive status
 
@@ -17,8 +17,8 @@ a star prize, then sign-off. Around it: private phone interference, Tier 0–3 i
 on CCTV whose state persists between sessions, event chains up to Tier 4 machinery, a slowly drifting Announcer, the
 {NAME}'S EASY QUESTION punishment and the hidden THE TEST interruption game.
 
-Automated: 114 GDScript test functions (~3,850 checks) green; 300-programme soak, 0 hangs; LAN/phone/dev-panel Chromium
-suites (see TEST_REPORT_CP8). **Still not verified on a real TV or phones** (no devices reachable from the build
+Automated: 114 GDScript test functions (~3,850 checks) green; 300-programme soak, 0 hangs; LAN/phone/Do-Not-Press-That/dev-panel Chromium
+suites all green (see TEST_REPORT_CP8). **Still not verified on a real TV or phones** (no devices reachable from the build
 environment): every checkpoint's "runs on target hardware" item is **PENDING USER DEVICE TEST**.
 
 ## Checkpoint status
@@ -28,7 +28,7 @@ environment): every checkpoint's "runs on target hardware" item is **PENDING USE
 | CP0 | repo/toolchain | VERIFIED | |
 | CP1 | LAN lobby, phones, reconnect | IMPLEMENTED (device test pending) | |
 | CP2 | Hole | IMPLEMENTED (device test pending) | 25 real photos |
-| CP3 | Real or Mildew? + Guess the Genitals, fact archive | IMPLEMENTED | GTG has 10 items (target 15–20) — needs more licensed images |
+| CP3 | Real or Mildew? + Guess the Genitals, fact archive | IMPLEMENTED | GTG 15 items |
 | CP4 | Mildew Survey + Mouthfeel, private interference | IMPLEMENTED | |
 | CP5 | Police Sketch | IMPLEMENTED | drawing tested in Chromium touch emulation, not on real phones |
 | CP6 | Do Not Press That | IMPLEMENTED | 2,800 generated layouts validated |
@@ -42,7 +42,7 @@ environment): every checkpoint's "runs on target hardware" item is **PENDING USE
 | 30–40 ROM items, sourced | IMPLEMENTED | `content/games/real_or_mildew/core_cp3.json` (34) | test_rom | all `draft` pending human fact-check; release validation blocks them |
 | Text/image formats, factual reveal, confidence wager | VERIFIED | `seg_question.gd`, `quiz_board.gd` | test_rom | D028 |
 | Viewer Information Service v1 | IMPLEMENTED | `main.gd` `_viewer_items`, `installation.facts_seen` | test_persistence | sources + picture credits |
-| GTG 15–20 items, animal-only, licensed | **PARTIAL** | `content/games/guess_the_genitals/core_cp3.json` (10) | test_gtg | D029; validator enforces animal-only |
+| GTG 15–20 items, animal-only, licensed | IMPLEMENTED | `content/games/guess_the_genitals/core_cp3.json` (15 incl. 3 decoys) | test_gtg | D029; validator enforces animal-only |
 | Clinical presentation, fact reveal, variants, Rot, fast-answer reactions | IMPLEMENTED | `quiz_board.gd` image layout, Director pacing | test_gtg | decoys ("Genital or Something Else?") |
 
 ### CP4 — Mildew Survey + Mouthfeel
@@ -98,7 +98,7 @@ environment): every checkpoint's "runs on target hardware" item is **PENDING USE
 |---|---|---|---|
 | Hole | 25 (+2 disabled) | reviewed, real licensed photos | 20–30 ✅ |
 | Real or Mildew? | 34 | draft (sources to check) | 30–40 ✅ |
-| Guess the Genitals | 10 | draft, licensed images | 15–20 ❌ |
+| Guess the Genitals | 15 | draft, licensed images | 15–20 ✅ |
 | Mildew Survey | 52 | draft | 40–60 ✅ |
 | Mouthfeel | 48 | draft | 40–60 ✅ |
 | Police Sketch | 38 | draft | 30–40 ✅ |
@@ -123,10 +123,9 @@ environment): every checkpoint's "runs on target hardware" item is **PENDING USE
 - Programme length measured with instant bots (≈32 min median); human play will be longer — tune `show.games_per_episode`/round counts after a real session.
 - Punishment frequency measured with deliberately bad bots (≈0.5/show); expect less with humans.
 - Factual content is `draft`; release validation blocks it until reviewed.
-- GTG needs 5–10 more licensed clinical images.
 - Generated imagery (Graham, plates) licence terms to check before commercial release.
 
 ## Next immediate actions
 1. **User:** install `mildew-0.1.0-cp8-debug.apk` and run the device checklist in `NEXT_BUILD.md` (now including all eight games).
-2. **User (optional):** photographic room plates (request in NEXT_BUILD), more GTG images, voice production for the new lines.
+2. **User (in progress):** photographic room plates, Qwen voice for the new lines.
 3. CP9: device profiling, persistence polish (profile history, cross-session Graham grudges), accessibility/legibility pass at 720p.
