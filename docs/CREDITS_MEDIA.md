@@ -30,3 +30,11 @@ Every image was cropped to 4:3 and resized to 1600×1200.
 | hole.volcano_crater | Public domain | Ingolfson at English Wikipedia (Original text: Uploader.) | https://commons.wikimedia.org/wiki/File%3AMount_Eden_Crater_Hollow_Auckland.jpg |
 | hole.whale_blowhole | CC BY 2.0 | Vilmos Vincze | https://commons.wikimedia.org/wiki/File%3ASperm_whale_blowhole_Vincze.jpg |
 | hole.woodpecker_tree | CC BY 2.0 | Jessica Merz | https://commons.wikimedia.org/wiki/File%3ARed-breasted_Sapsucker_-_Novato%2C_California.jpg |
+
+## Guess the Genitals — batch 2 (2026-10-03)
+
+- `assets/content/gtg/harvestman.jpg` — Novak, T., Slana Novak, L., Kozel, P., Schaider, M. G., Komposch, C., Lipovšek, S., Podlesnik, J., Paušič, I., & Raspotnig, G. (2021). Hidden diversity within the Nemastoma bidentatum Roewer, 1914 complex (Opiliones: Nemastomatidae) Part I: Morphological evidence. European Journal of Taxonomy, 777(1), 1-67., CC BY 4.0, via Wikimedia Commons — CC BY 4.0 — https://commons.wikimedia.org/wiki/File%3ANemastoma_%2810.5852-ejt.2021.777.1561%29_Figure_7.png
+- `assets/content/gtg/cockroach.jpg` — S.E. Thorpe, Public domain, via Wikimedia Commons — Public domain — https://commons.wikimedia.org/wiki/File%3ABlattellidae_sp._indet._1_male_terminalia.jpg
+- `assets/content/gtg/moth.jpg` — Megan McCarty, CC BY 3.0, via Wikimedia Commons — CC BY 3.0 — https://commons.wikimedia.org/wiki/File%3ACitheronia_regalis_open_claspers%2C_MM.jpg
+- `assets/content/gtg/kaka.jpg` — Judi Lapsley Miller, CC BY 4.0, via Wikimedia Commons — CC BY 4.0 — https://commons.wikimedia.org/wiki/File%3AKaka_cloaca.jpg
+- `assets/content/gtg/coco_de_mer.jpg` — Marion Schneider & Christoph Aistleitner, Public domain, via Wikimedia Commons — Public domain — https://commons.wikimedia.org/wiki/File%3ACoco_de_mer_-_male.jpg

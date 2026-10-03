@@ -1,0 +1,10 @@
+{
+ "game": "gtg",
+ "items": {
+  "harvestman": {"file": "File:Nemastoma (10.5852-ejt.2021.777.1561) Figure 7.png", "fx": 0.12, "fy": 0.5, "zoom": 1.0},
+  "cockroach": {"file": "File:Blattellidae sp. indet. 1 male terminalia.jpg", "fx": 0.5, "fy": 0.5, "zoom": 1.0},
+  "moth": {"file": "File:Citheronia regalis open claspers, MM.jpg", "fx": 0.5, "fy": 0.5, "zoom": 1.0},
+  "kaka": {"file": "File:Kaka cloaca.jpg", "fx": 0.5, "fy": 0.5, "zoom": 1.0},
+  "coco_de_mer": {"file": "File:Coco de mer - male.jpg", "fx": 0.5, "fy": 0.5, "zoom": 1.0}
+ }
+}

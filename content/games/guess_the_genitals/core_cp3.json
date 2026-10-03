@@ -686,6 +686,348 @@
     }
    ],
    "reveal_line": "A clam. That's its neck. It's been like that for a hundred years and it isn't embarrassed."
+  },
+  {
+   "enabled": true,
+   "quality_status": "draft",
+   "director_tags": [
+    "visual",
+    "gross"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "points": 1000,
+   "correct": 0,
+   "id": "gtg.harvestman",
+   "familiarity_tier": 2,
+   "weirdness": 4,
+   "content_tags": [
+    "factual",
+    "animals",
+    "sexual_anatomy_animal",
+    "grossness_1"
+   ],
+   "taxon": "Nemastoma bidentatum",
+   "kingdom_class": "animal",
+   "decoy": false,
+   "prompt": "WHOSE IS IT?",
+   "options": [
+    "A harvestman (daddy-long-legs)",
+    "A spider",
+    "A centipede",
+    "A woodlouse"
+   ],
+   "answer_label": "Harvestman (penis)",
+   "fact": "Harvestmen look like spiders but aren't, and unlike spiders the males have a real penis and mate face to face. This one, from a European Nemastoma, is about half a millimetre long. Scientists use their shapes to tell near-identical species apart.",
+   "sources": [
+    {
+     "title": "Opiliones — reproduction",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Opiliones#Reproduction",
+     "supported_claim": "Male harvestmen have a penis and mate by direct sperm transfer, unlike spiders.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check before approval."
+    },
+    {
+     "title": "Hidden diversity within the Nemastoma bidentatum complex (Opiliones) Part I",
+     "publisher_or_organisation": "European Journal of Taxonomy 777 (2021), Novak et al.",
+     "reference": "https://doi.org/10.5852/ejt.2021.777.1561",
+     "supported_claim": "Penis morphology figured and used to distinguish taxa; scale ~500 µm.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check before approval."
+    }
+   ],
+   "image": "res://assets/content/gtg/harvestman.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/gtg/harvestman.jpg",
+     "source": "Wikimedia Commons",
+     "source_page": "https://commons.wikimedia.org/wiki/File%3ANemastoma_%2810.5852-ejt.2021.777.1561%29_Figure_7.png",
+     "original_url": "https://upload.wikimedia.org/wikipedia/commons/0/07/Nemastoma_%2810.5852-ejt.2021.777.1561%29_Figure_7.png",
+     "creator": "Novak, T., Slana Novak, L., Kozel, P., Schaider, M. G., Komposch, C., Lipovšek, S., Podlesnik, J., Paušič, I., & Raspotnig, G. (2021). Hidden diversity within the Nemastoma bidentatum Roewer, 1914 complex (Opiliones: Nemastomatidae) Part I: Morphological evidence. European Journal of Taxonomy, 777(1), 1-67.",
+     "licence": "CC BY 4.0",
+     "licence_url": "https://creativecommons.org/licenses/by/4.0",
+     "attribution_required": true,
+     "attribution": "Novak, T., Slana Novak, L., Kozel, P., Schaider, M. G., Komposch, C., Lipovšek, S., Podlesnik, J., Paušič, I., & Raspotnig, G. (2021). Hidden diversity within the Nemastoma bidentatum Roewer, 1914 complex (Opiliones: Nemastomatidae) Part I: Morphological evidence. European Journal of Taxonomy, 777(1), 1-67., CC BY 4.0, via Wikimedia Commons",
+     "derivative_notes": "cropped to 4:3 and resized to 1600x1200 (tools/content/commons_media.py)",
+     "approval_status": "approved",
+     "art_status": "real_photo",
+     "retrieved": "2026-10-03"
+    }
+   ],
+   "reveal_line": "A harvestman. Daddy-long-legs. Long legs, long everything, apparently."
+  },
+  {
+   "enabled": true,
+   "quality_status": "draft",
+   "director_tags": [
+    "visual",
+    "gross"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "points": 1000,
+   "correct": 0,
+   "id": "gtg.cockroach",
+   "familiarity_tier": 2,
+   "weirdness": 3,
+   "content_tags": [
+    "factual",
+    "animals",
+    "sexual_anatomy_animal",
+    "insects",
+    "grossness_3"
+   ],
+   "taxon": "Blattellidae",
+   "kingdom_class": "animal",
+   "decoy": false,
+   "prompt": "WHOSE IS IT?",
+   "options": [
+    "A cockroach",
+    "A shrimp",
+    "A mouse",
+    "A bee"
+   ],
+   "answer_label": "Cockroach (male rear end)",
+   "fact": "Male cockroach genitals are lopsided: the left and right sides are completely different shapes, including a hook used to grab the female. Biologists rely on these asymmetric parts to identify cockroach species.",
+   "sources": [
+    {
+     "title": "The external male genitalia and the phylogeny of Blattaria and Mantodea",
+     "publisher_or_organisation": "Bonner Zoologische Monographien 42 (1997), K.-D. Klass",
+     "reference": "https://www.zobodat.at/publikation_series.php?id=20943",
+     "supported_claim": "Male cockroach genitalia are strongly asymmetrical, with hooked phallomeres; used in classification.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check before approval."
+    },
+    {
+     "title": "Cockroach",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Cockroach",
+     "supported_claim": "General cockroach biology.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check before approval."
+    }
+   ],
+   "image": "res://assets/content/gtg/cockroach.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/gtg/cockroach.jpg",
+     "source": "Wikimedia Commons",
+     "source_page": "https://commons.wikimedia.org/wiki/File%3ABlattellidae_sp._indet._1_male_terminalia.jpg",
+     "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/2e/Blattellidae_sp._indet._1_male_terminalia.jpg",
+     "creator": "S.E. Thorpe",
+     "licence": "Public domain",
+     "licence_url": "",
+     "attribution_required": false,
+     "attribution": "S.E. Thorpe, Public domain, via Wikimedia Commons",
+     "derivative_notes": "cropped to 4:3 and resized to 1600x1200 (tools/content/commons_media.py)",
+     "approval_status": "approved",
+     "art_status": "real_photo",
+     "retrieved": "2026-10-03"
+    }
+   ],
+   "reveal_line": "A cockroach. Wonky, hooked, and probably behind your fridge right now."
+  },
+  {
+   "enabled": true,
+   "quality_status": "draft",
+   "director_tags": [
+    "visual",
+    "gross"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "points": 1000,
+   "correct": 0,
+   "id": "gtg.moth",
+   "familiarity_tier": 2,
+   "weirdness": 3,
+   "content_tags": [
+    "factual",
+    "animals",
+    "sexual_anatomy_animal",
+    "insects",
+    "grossness_1"
+   ],
+   "taxon": "Citheronia regalis",
+   "kingdom_class": "animal",
+   "decoy": false,
+   "prompt": "WHOSE IS IT?",
+   "options": [
+    "A moth",
+    "A hamster",
+    "A tarantula",
+    "A fox"
+   ],
+   "answer_label": "Regal moth (open claspers)",
+   "fact": "Male moths grip the female with a pair of hooked claspers at the tip of the abdomen, and can stay locked together for hours. This is a regal moth, whose caterpillar is known as the hickory horned devil.",
+   "sources": [
+    {
+     "title": "Citheronia regalis",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Citheronia_regalis",
+     "supported_claim": "Regal moth; larva known as the hickory horned devil.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check before approval."
+    },
+    {
+     "title": "Insect morphology — genitalia",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Insect_morphology",
+     "supported_claim": "Male Lepidoptera have claspers (valvae) used to hold the female during copulation.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check before approval."
+    }
+   ],
+   "image": "res://assets/content/gtg/moth.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/gtg/moth.jpg",
+     "source": "Wikimedia Commons",
+     "source_page": "https://commons.wikimedia.org/wiki/File%3ACitheronia_regalis_open_claspers%2C_MM.jpg",
+     "original_url": "https://upload.wikimedia.org/wikipedia/commons/d/db/Citheronia_regalis_open_claspers%2C_MM.jpg",
+     "creator": "Megan McCarty",
+     "licence": "CC BY 3.0",
+     "licence_url": "https://creativecommons.org/licenses/by/3.0",
+     "attribution_required": true,
+     "attribution": "Megan McCarty, CC BY 3.0, via Wikimedia Commons",
+     "derivative_notes": "cropped to 4:3 and resized to 1600x1200 (tools/content/commons_media.py)",
+     "approval_status": "approved",
+     "art_status": "real_photo",
+     "retrieved": "2026-10-03"
+    }
+   ],
+   "reveal_line": "A moth. Furry, ginger and grabby. We've all been on that date."
+  },
+  {
+   "enabled": true,
+   "quality_status": "draft",
+   "director_tags": [
+    "visual",
+    "gross"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "points": 1000,
+   "correct": 0,
+   "id": "gtg.kaka",
+   "familiarity_tier": 1,
+   "weirdness": 2,
+   "content_tags": [
+    "factual",
+    "animals",
+    "sexual_anatomy_animal",
+    "grossness_1"
+   ],
+   "taxon": "Nestor meridionalis",
+   "kingdom_class": "animal",
+   "decoy": false,
+   "prompt": "WHOSE IS IT?",
+   "options": [
+    "A parrot",
+    "A pigeon",
+    "A bat",
+    "A squirrel"
+   ],
+   "answer_label": "Kākā parrot (cloaca)",
+   "fact": "Most birds have no penis at all. Both sexes have a single opening, the cloaca, and they mate by briefly pressing them together: the 'cloacal kiss'. This is a kākā, a large New Zealand parrot.",
+   "sources": [
+    {
+     "title": "Developmental basis of phallus reduction during bird evolution",
+     "publisher_or_organisation": "Current Biology 23 (2013), Herrera et al.",
+     "reference": "https://doi.org/10.1016/j.cub.2013.04.062",
+     "supported_claim": "About 97% of bird species lack an intromittent phallus.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check before approval."
+    },
+    {
+     "title": "Cloaca",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Cloaca",
+     "supported_claim": "Birds mate by cloacal contact ('cloacal kiss').",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check before approval."
+    }
+   ],
+   "image": "res://assets/content/gtg/kaka.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/gtg/kaka.jpg",
+     "source": "Wikimedia Commons",
+     "source_page": "https://commons.wikimedia.org/wiki/File%3AKaka_cloaca.jpg",
+     "original_url": "https://upload.wikimedia.org/wikipedia/commons/d/d8/Kaka_cloaca.jpg",
+     "creator": "Judi Lapsley Miller",
+     "licence": "CC BY 4.0",
+     "licence_url": "https://creativecommons.org/licenses/by/4.0",
+     "attribution_required": true,
+     "attribution": "Judi Lapsley Miller, CC BY 4.0, via Wikimedia Commons",
+     "derivative_notes": "cropped to 4:3 and resized to 1600x1200 (tools/content/commons_media.py)",
+     "approval_status": "approved",
+     "art_status": "real_photo",
+     "retrieved": "2026-10-03"
+    }
+   ],
+   "reveal_line": "A parrot. No penis. Just a quick kiss and on with your day. Very civilised."
+  },
+  {
+   "enabled": true,
+   "quality_status": "draft",
+   "director_tags": [
+    "visual",
+    "gross"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "points": 1000,
+   "correct": 0,
+   "id": "gtg.coco_de_mer",
+   "familiarity_tier": 2,
+   "weirdness": 3,
+   "content_tags": [
+    "factual",
+    "grossness_1"
+   ],
+   "taxon": "Lodoicea maldivica",
+   "kingdom_class": "decoy",
+   "decoy": true,
+   "prompt": "WHOSE IS IT? (IF ANYONE'S)",
+   "options": [
+    "A palm tree",
+    "A hedgehog",
+    "A crab",
+    "A squid"
+   ],
+   "answer_label": "Coco de mer (male flowers)",
+   "fact": "Not an animal at all: these are male flowers of the coco de mer palm from the Seychelles. Its giant catkins and its famously suggestive seed — the largest in the plant kingdom — have caused centuries of giggling.",
+   "sources": [
+    {
+     "title": "Lodoicea",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Lodoicea",
+     "supported_claim": "Coco de mer; dioecious palm with large male catkins; largest seed in the plant kingdom.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check before approval."
+    }
+   ],
+   "image": "res://assets/content/gtg/coco_de_mer.jpg",
+   "media": [
+    {
+     "asset_path": "res://assets/content/gtg/coco_de_mer.jpg",
+     "source": "Wikimedia Commons",
+     "source_page": "https://commons.wikimedia.org/wiki/File%3ACoco_de_mer_-_male.jpg",
+     "original_url": "https://upload.wikimedia.org/wikipedia/commons/8/80/Coco_de_mer_-_male.jpg",
+     "creator": "Marion Schneider & Christoph Aistleitner",
+     "licence": "Public domain",
+     "licence_url": "",
+     "attribution_required": false,
+     "attribution": "Marion Schneider & Christoph Aistleitner, Public domain, via Wikimedia Commons",
+     "derivative_notes": "cropped to 4:3 and resized to 1600x1200 (tools/content/commons_media.py)",
+     "approval_status": "approved",
+     "art_status": "real_photo",
+     "retrieved": "2026-10-03"
+    }
+   ],
+   "reveal_line": "It's a palm tree. A flower. Somebody's hand. You lot need help."
   }
  ]
 }
