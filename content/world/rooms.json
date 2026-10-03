@@ -1,7 +1,7 @@
 {
  "pack_id": "world.rooms_cp8",
  "content_kind": "room",
- "_comment": "Recurring backstage rooms (CP8 PoC: 5 of the 8-10). Shown as CCTV cutaways drawn by CctvView; states persist per installation and change non-linearly. Geometry (adjacent) keeps the studio complex consistent. A photographic plate can replace the CCTV look per room later.",
+ "_comment": "Recurring backstage rooms (D036/D037): 10 rooms shown as CCTV cutaways. 'plates' are graded security-camera stills (tools/art/prepare_room_plates.py) chosen by the room's persistent state; rooms without a plate for a state fall back to the base plate (darkened for light off) with overlays. figure_pos = [x, foot_y, height] in frame fractions for a dim figure overlay. min_familiarity keeps deeper rooms for seasoned installations.",
  "items": [
   {
    "id": "room.green_room",
@@ -16,6 +16,17 @@
    "adjacent": [
     "room.corridor",
     "room.kitchenette"
+   ],
+   "plates": {
+    "base": "res://assets/studio/rooms/green_room__base.jpg",
+    "door_open": "res://assets/studio/rooms/green_room__door_open.jpg",
+    "chair_door": "res://assets/studio/rooms/green_room__chair_door.jpg",
+    "light_off": "res://assets/studio/rooms/green_room__light_off.jpg"
+   },
+   "figure_pos": [
+    0.47,
+    0.66,
+    0.34
    ],
    "enabled": true,
    "quality_status": "draft",
@@ -39,6 +50,17 @@
     "room.corridor",
     "room.control_room"
    ],
+   "plates": {
+    "base": "res://assets/studio/rooms/studio_c__base.jpg",
+    "podium_lit": "res://assets/studio/rooms/studio_c__podium_lit.jpg",
+    "light_off": "res://assets/studio/rooms/studio_c__light_off.jpg"
+   },
+   "figure_pos": [
+    0.7,
+    0.47,
+    0.24
+   ],
+   "figure_plate": "podium_lit",
    "enabled": true,
    "quality_status": "draft",
    "default": {
@@ -61,9 +83,19 @@
     "room.green_room",
     "room.studio_c",
     "room.prop_store",
-    "room.tape_room"
+    "room.tape_room",
+    "room.locked"
    ],
-   "plate": "corridor",
+   "plates": {
+    "base": "res://assets/studio/rooms/corridor__base.jpg",
+    "door_open": "res://assets/studio/rooms/corridor__door_open.jpg",
+    "light_off": "res://assets/studio/rooms/corridor__light_off.jpg"
+   },
+   "figure_pos": [
+    0.5,
+    0.4,
+    0.13
+   ],
    "enabled": true,
    "quality_status": "draft",
    "default": {
@@ -87,6 +119,17 @@
     "room.corridor",
     "room.loading"
    ],
+   "plates": {
+    "base": "res://assets/studio/rooms/prop_store__base.jpg",
+    "door_open": "res://assets/studio/rooms/prop_store__door_open.jpg",
+    "mannequin_faces": "res://assets/studio/rooms/prop_store__mannequin_faces.jpg",
+    "mannequin_gone": "res://assets/studio/rooms/prop_store__mannequin_gone.jpg"
+   },
+   "figure_plates": {
+    "podium": "mannequin_faces",
+    "door": "mannequin_faces",
+    "far": "mannequin_gone"
+   },
    "enabled": true,
    "quality_status": "draft",
    "default": {
@@ -109,6 +152,153 @@
     "room.corridor",
     "room.locked"
    ],
+   "plates": {
+    "base": "res://assets/studio/rooms/tape_room__base.jpg",
+    "door_ajar": "res://assets/studio/rooms/tape_room__door_ajar.jpg",
+    "light_off": "res://assets/studio/rooms/tape_room__light_off.jpg"
+   },
+   "figure_pos": [
+    0.6,
+    0.44,
+    0.22
+   ],
+   "enabled": true,
+   "quality_status": "draft",
+   "default": {
+    "door": "closed",
+    "chair": "centre",
+    "light": "on",
+    "figure": "none"
+   }
+  },
+  {
+   "id": "room.control_room",
+   "name": "CONTROL ROOM",
+   "cam": "CAM 1",
+   "props": [],
+   "door": "left",
+   "adjacent": [
+    "room.studio_c",
+    "room.corridor"
+   ],
+   "plates": {
+    "base": "res://assets/studio/rooms/control_room__base.jpg"
+   },
+   "figure_pos": [
+    0.18,
+    0.62,
+    0.4
+   ],
+   "min_familiarity": 2,
+   "enabled": true,
+   "quality_status": "draft",
+   "default": {
+    "door": "closed",
+    "chair": "centre",
+    "light": "on",
+    "figure": "none"
+   }
+  },
+  {
+   "id": "room.kitchenette",
+   "name": "STAFF KITCHENETTE",
+   "cam": "CAM 7",
+   "props": [],
+   "door": "right",
+   "adjacent": [
+    "room.green_room"
+   ],
+   "plates": {
+    "base": "res://assets/studio/rooms/kitchenette__base.jpg"
+   },
+   "figure_pos": [
+    0.86,
+    0.58,
+    0.42
+   ],
+   "min_familiarity": 1,
+   "enabled": true,
+   "quality_status": "draft",
+   "default": {
+    "door": "closed",
+    "chair": "centre",
+    "light": "on",
+    "figure": "none"
+   }
+  },
+  {
+   "id": "room.loading",
+   "name": "LOADING BAY",
+   "cam": "CAM 12",
+   "props": [],
+   "door": "back",
+   "adjacent": [
+    "room.prop_store"
+   ],
+   "plates": {
+    "base": "res://assets/studio/rooms/loading__base.jpg"
+   },
+   "figure_pos": [
+    0.62,
+    0.52,
+    0.24
+   ],
+   "min_familiarity": 2,
+   "enabled": true,
+   "quality_status": "draft",
+   "default": {
+    "door": "closed",
+    "chair": "centre",
+    "light": "on",
+    "figure": "none"
+   }
+  },
+  {
+   "id": "room.dressing_room",
+   "name": "DRESSING ROOM 1",
+   "cam": "CAM 8",
+   "props": [],
+   "door": "right",
+   "adjacent": [
+    "room.corridor"
+   ],
+   "plates": {
+    "base": "res://assets/studio/rooms/dressing_room__base.jpg"
+   },
+   "figure_pos": [
+    0.33,
+    0.55,
+    0.38
+   ],
+   "min_familiarity": 3,
+   "enabled": true,
+   "quality_status": "draft",
+   "default": {
+    "door": "closed",
+    "chair": "centre",
+    "light": "on",
+    "figure": "none"
+   }
+  },
+  {
+   "id": "room.locked",
+   "name": "B4",
+   "cam": "CAM 13",
+   "props": [],
+   "door": "back",
+   "adjacent": [
+    "room.corridor",
+    "room.tape_room"
+   ],
+   "plates": {
+    "base": "res://assets/studio/rooms/locked__base.jpg"
+   },
+   "figure_pos": [
+    0.5,
+    0.62,
+    0.36
+   ],
+   "min_familiarity": 4,
    "enabled": true,
    "quality_status": "draft",
    "default": {

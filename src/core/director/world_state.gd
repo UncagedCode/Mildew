@@ -47,7 +47,7 @@ func save_into(installation: Dictionary) -> void:
 ## A CCTV cutaway of some room. tier 1 = just a look; tier 2 = maybe something changed since last
 ## time (or quietly changed back). Returns the presentation payload.
 func cctv(tier: int, room_id: String = "") -> Dictionary:
-	var ids: Array = rooms.keys()
+	var ids: Array = rooms.keys().filter(func(k): return int(rooms[k].get("min_familiarity", 1)) <= int(director.familiarity_tier))
 	if ids.is_empty():
 		return {}
 	var rng: RandomNumberGenerator = director.rng
@@ -80,7 +80,8 @@ func _show(id: String, change: String) -> Dictionary:
 	var r: Dictionary = rooms[id]
 	director.log_decision("Room", id, ["state=%s" % str(st), "change=%s" % change, "differs_from_last_seen=%s" % str(not prev.is_empty() and prev != st)])
 	return {"room": id, "name": str(r.get("name", "")), "cam": str(r.get("cam", "CAM")), "props": r.get("props", []),
-		"door_side": str(r.get("door", "back")), "state": st, "changed": change}
+		"door_side": str(r.get("door", "back")), "state": st, "changed": change, "plates": r.get("plates", {}),
+		"figure_pos": r.get("figure_pos", []), "figure_plate": str(r.get("figure_plate", "")), "figure_plates": r.get("figure_plates", {})}
 
 
 func _requires_ok(c: Dictionary, ctx: Dictionary) -> bool:

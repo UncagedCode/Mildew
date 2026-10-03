@@ -46,10 +46,68 @@ func _ink(v: float, a := 1.0) -> Color:
 	return Color(v * 0.86, v * 0.95, v * 0.88, a)
 
 
+var _tex_cache := {}
+
+
+func _tex(path: String) -> Texture2D:
+	if path == "" or not ResourceLoader.exists(path):
+		return null
+	if not _tex_cache.has(path):
+		_tex_cache[path] = load(path)
+	return _tex_cache[path]
+
+
+## Which photographic plate shows this state (D037), and whether a figure still needs overlaying.
+func _pick_plate(st: Dictionary) -> Array:
+	var plates: Dictionary = _p.get("plates", {})
+	if plates.is_empty():
+		return ["", false, false]
+	var fig := str(st.get("figure", "none"))
+	var fplates: Dictionary = _p.get("figure_plates", {})
+	if fig != "none" and fplates.has(fig) and plates.has(fplates[fig]):
+		return [plates[fplates[fig]], false, false]          # e.g. the mannequin has turned round
+	var overlay_fig := fig != "none"
+	if fig != "none" and str(_p.get("figure_plate", "")) != "" and plates.has(_p.figure_plate):
+		return [plates[_p.figure_plate], overlay_fig, false]
+	var light := str(st.get("light", "on"))
+	if light == "off" or (light == "flicker" and int(_t * 13.0) % 4 == 0):
+		return [plates.get("light_off", plates.base), overlay_fig, not plates.has("light_off")]
+	var door := str(st.get("door", "closed"))
+	if door == "open" and plates.has("door_open"):
+		return [plates.door_open, overlay_fig, false]
+	if door in ["ajar", "open"] and plates.has("door_ajar"):
+		return [plates.door_ajar, overlay_fig, false]
+	if str(st.get("chair", "centre")) == "door" and plates.has("chair_door"):
+		return [plates.chair_door, overlay_fig, false]
+	return [plates.base, overlay_fig, false]
+
+
+func _draw_photo(path: String, figure: bool, darken: bool) -> void:
+	var tex := _tex(path)
+	draw_texture_rect(tex, Rect2(0, 0, W, H), false, Color(0.32, 0.32, 0.32) if darken else Color.WHITE)
+	if figure:
+		var fp: Array = _p.get("figure_pos", [])
+		if fp.size() == 3:
+			var foot := Vector2(float(fp[0]) * W, float(fp[1]) * H)
+			var h := float(fp[2]) * H
+			for k in 6:   # soft-edged dim shape: stacked, widening, fading copies (never a crisp cut-out)
+				var g := 1.0 + k * 0.08
+				var a := 0.16 - k * 0.022
+				var col := Color(0.02, 0.03, 0.02, a)
+				draw_circle(foot + Vector2(0, -h + h * 0.09), h * 0.085 * g, col)
+				draw_colored_polygon(PackedVector2Array([foot + Vector2(-h * 0.12 * g, -h * 0.82), foot + Vector2(h * 0.12 * g, -h * 0.82),
+					foot + Vector2(h * 0.09 * g, 0), foot + Vector2(-h * 0.09 * g, 0)]), col)
+
+
 func _draw() -> void:
 	if _t >= _until or _p.is_empty():
 		return
 	var st: Dictionary = _p.get("state", {})
+	var pick := _pick_plate(st)
+	if str(pick[0]) != "" and _tex(str(pick[0])) != null:
+		_draw_photo(str(pick[0]), bool(pick[1]), bool(pick[2]))
+		_overlay()
+		return
 	var light := str(st.get("light", "on"))
 	var b := 1.0
 	if light == "off":
@@ -77,6 +135,10 @@ func _draw() -> void:
 	_door(bw, str(_p.get("door_side", "back")), str(st.get("door", "closed")), b)
 	_chair(bw, str(st.get("chair", "centre")), b)
 	_figure(bw, str(st.get("figure", "none")), b)
+	_overlay()
+
+
+func _overlay() -> void:
 	# video noise, scanlines, rolling bar
 	for i in 270:
 		draw_rect(Rect2(0, i * 4, W, 1), Color(0, 0, 0, 0.25))
