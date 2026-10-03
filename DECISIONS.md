@@ -7,6 +7,26 @@ and is **not** implemented until approved.
 
 **Open design-change proposals awaiting the user: none.**
 
+### 2026-10-03 — D037 Qwen3-TTS phone-local Graham production
+
+**User direction:** Qwen3-TTS chosen for Graham; only device is the user's phone; a few Termux commands,
+automated repo pipeline, ample phone storage. **Requirement:** CLAUDE.md §13 and the low-budget voice strategy.
+
+**Decision:** production-only, pinned native C Qwen runner with verified original Qwen model weights.
+VoiceDesign creates audition candidates; Base captures one accepted reference; CustomVoice uses the
+community runner's experimental ICL graft plus instructions. This extension is identified explicitly;
+official Base cloning does not guarantee simultaneous instruction control. A missing/unlocked profile
+or failed reference-prosody extraction never silently generates a new stock presenter voice.
+
+**Game impact:** fixed lines point at semantic local OGG ids through the existing GrahamVoice service.
+No provider/model in gameplay, no cloud request, no model in APK. Runtime arbitrary names/scores remain
+a separate required subsystem; the existing five named clips can be generated now. Other speakers and
+silence are not synthesized as Graham. Audio assets remain `development` until auditioned/approved.
+
+**Validation:** native Linux build + real VoiceDesign generation, automated QA/cache/import tests;
+Termux/ARM and auditory consistency gates remain explicit. No checkpoint/APK completion claim.
+**Approval:** user already authorized the provider and phone-local production pipeline.
+
 ---
 
 ### 2026-10-02 — D001 Engine pinned: Godot 4.7.2-stable

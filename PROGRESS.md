@@ -1,5 +1,29 @@
 # PROGRESS — Mildew
 
+## 2026-10-03 — Qwen voice production update
+
+- Branch: `feature/qwen-voice-pipeline`, based on the current `claude/cp3-factual` CP8 code at `8099b13`.
+  The game checkpoint report below is retained from that branch; device/game gates
+  have not been reassessed by this production-tool update.
+- Implemented: `./mildew voice` Termux setup, pinned/verified resumable model downloads,
+  VoiceDesign auditions, reusable native ICL voice profile, instructed production takes,
+  content/settings/voice hashing, resumable cache, real OGG conversion, audio QA,
+  take selection/approval, local Godot index export and phone preview.
+- Connected: 24 existing semantic/name clips plus 260 fixed Graham game lines. Dynamic
+  placeholders, silent beats and other speakers are excluded. Existing playback/broadcast bus retained.
+- Verified: 17 Python regression tests, real FFmpeg/OGG conversion, native Linux build/help,
+  pinned VoiceDesign download/hash verification and genuine Qwen generation (2.0s speech,
+  15.61s including load/generation/conversion on this container, not a phone benchmark).
+- Verified: full genuine native path — audition, 25 MB reference profile with ICL prosody,
+  instructed CustomVoice pleased/disappointed takes, OGG export into an isolated test project,
+  cached repeat build and take approval. Nine legacy factory tests also passed.
+- Pending: actual Termux/ARM compile/inference, user selection of Graham's final voice, and auditory QA.
+- No selected Qwen voice/audio is approved for release. Models/cache/source excluded from the APK.
+- Next: follow `tools/voice_pipeline/README.md`. This update does not deliver a new APK or implement
+  arbitrary runtime name/score synthesis. No paid voice service or GitHub Actions added.
+
+## Game baseline reported by the existing CP8 build
+
 Last updated: 2026-10-03 (Europe/London)
 Current checkpoint: **CP8 — Full Director / standard broadcast** (CP3–CP7 implemented in this session; CP0–CP2 earlier)
 Current build/version: `0.1.0-cp8` (versionCode 8), debug APK

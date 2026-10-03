@@ -1,64 +1,69 @@
 {
- "pack_id": "graham.cp8_specials",
- "content_kind": "graham_lines",
- "speaker": "graham",
- "_comment": "Punishment and interruption lines (CP8).",
- "items": [
-  {
-   "id": "g.punish_intro.1",
-   "category": "punish_intro",
-   "text": "{name}, this one's just for you. An easy question.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.punish_intro.2",
-   "category": "punish_intro",
-   "text": "Right. {name}'s easy question. Everyone else: watch.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.punish_success.1",
-   "category": "punish_success",
-   "text": "HE'S DONE IT!",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.punish_success.2",
-   "category": "punish_success",
-   "text": "Look at that. {name} got there. Applause, please. Proper applause.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.punish_fail.1",
-   "category": "punish_fail",
-   "text": "Extraordinary.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.punish_fail.2",
-   "category": "punish_fail",
-   "text": "...Extraordinary.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.test_after.1",
-   "category": "test_after",
-   "text": "Sorry about that. Technical fault.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.test_after.2",
-   "category": "test_after",
-   "text": "Apologies for the interruption. That wasn't for you.",
-   "enabled": true,
-   "quality_status": "draft"
-  }
- ]
+  "pack_id": "graham.cp8_specials",
+  "content_kind": "graham_lines",
+  "speaker": "graham",
+  "_comment": "Punishment and interruption lines (CP8).",
+  "items": [
+    {
+      "id": "g.punish_intro.1",
+      "category": "punish_intro",
+      "text": "{name}, this one's just for you. An easy question.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.punish_intro.2",
+      "category": "punish_intro",
+      "text": "Right. {name}'s easy question. Everyone else: watch.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.punish_success.1",
+      "category": "punish_success",
+      "text": "HE'S DONE IT!",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.punish_success.1"
+    },
+    {
+      "id": "g.punish_success.2",
+      "category": "punish_success",
+      "text": "Look at that. {name} got there. Applause, please. Proper applause.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.punish_fail.1",
+      "category": "punish_fail",
+      "text": "Extraordinary.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.punish_fail.1"
+    },
+    {
+      "id": "g.punish_fail.2",
+      "category": "punish_fail",
+      "text": "...Extraordinary.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.punish_fail.2"
+    },
+    {
+      "id": "g.test_after.1",
+      "category": "test_after",
+      "text": "Sorry about that. Technical fault.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.test_after.1"
+    },
+    {
+      "id": "g.test_after.2",
+      "category": "test_after",
+      "text": "Apologies for the interruption. That wasn't for you.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.test_after.2"
+    }
+  ]
 }

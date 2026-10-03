@@ -1,211 +1,227 @@
 {
- "pack_id": "graham.cp6_dnp",
- "content_kind": "graham_lines",
- "speaker": "graham",
- "_comment": "Graham lines for Do Not Press That (CP6).",
- "items": [
-  {
-   "id": "g.dnp_intro.1",
-   "category": "dnp_intro",
-   "text": "Do Not Press That. A test of teamwork, communication, and restraint. You'll fail at least one.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.dnp_intro.2",
-   "category": "dnp_intro",
-   "text": "It's Do Not Press That. Everyone has buttons. Everyone has instructions. Nobody has both. Talk to each other.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.dnp_rules.1",
-   "category": "dnp_rules",
-   "text": "Your device shows your controls and your instructions. Your instructions are about somebody else's controls. Talk. Out loud. Like people.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.dnp_rules.2",
-   "category": "dnp_rules",
-   "text": "Read your instructions out. Operate your own controls. And there's always one thing you should not press.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.dnp_puzzle_intro.1",
-   "category": "dnp_puzzle_intro",
-   "text": "Here's the problem.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.dnp_puzzle_intro.2",
-   "category": "dnp_puzzle_intro",
-   "text": "Right. We have a situation.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.dnp_puzzle_intro.3",
-   "category": "dnp_puzzle_intro",
-   "text": "Production have asked me to read this out. Quickly.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.dnp_dont_touch.1",
-   "category": "dnp_dont_touch",
-   "text": "Whatever you do, don't touch the {answer}.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.dnp_dont_touch.2",
-   "category": "dnp_dont_touch",
-   "text": "There's a {answer} on one of your devices. Leave it alone.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.dnp_punish.1",
-   "category": "dnp_punish",
-   "text": "{name}, since you broke the last one, you're looking after the {answer}. Don't.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.dnp_punish.2",
-   "category": "dnp_punish",
-   "text": "{name}. You've been given the {answer}. That's a test of character.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.dnp_mistake.1",
-   "category": "dnp_mistake",
-   "text": "That was {name}.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.dnp_mistake.2",
-   "category": "dnp_mistake",
-   "text": "{name}. Again.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.dnp_mistake.3",
-   "category": "dnp_mistake",
-   "text": "Someone's jammed it. It was {name}.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.dnp_mistake.4",
-   "category": "dnp_mistake",
-   "text": "Careful, {name}.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.dnp_decoy.1",
-   "category": "dnp_decoy",
-   "text": "{name} pressed it. Of course they did.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.dnp_decoy.2",
-   "category": "dnp_decoy",
-   "text": "I said don't press it. {name} pressed it.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.dnp_decoy.3",
-   "category": "dnp_decoy",
-   "text": "{name}. That was the one thing.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.dnp_perfect.1",
-   "category": "dnp_perfect",
-   "text": "Perfect. Not a single mistake. I'm almost disappointed.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.dnp_perfect.2",
-   "category": "dnp_perfect",
-   "text": "Flawless. Somebody check the equipment.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.dnp_completed.1",
-   "category": "dnp_completed",
-   "text": "Done. Not elegantly, but done.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.dnp_completed.2",
-   "category": "dnp_completed",
-   "text": "Completed. The studio thanks you. The studio is still on fire, but thanks you.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.dnp_barely.1",
-   "category": "dnp_barely",
-   "text": "Barely. By the skin of your teeth. And {name}'s teeth, unfortunately.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.dnp_barely.2",
-   "category": "dnp_barely",
-   "text": "Just about. I wouldn't put that on your CV.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.dnp_failed.1",
-   "category": "dnp_failed",
-   "text": "Failed. Spectacularly. {name}, we'll talk later.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.dnp_failed.2",
-   "category": "dnp_failed",
-   "text": "That's a failure. Someone will have to tell Neil.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.dnp_failed.3",
-   "category": "dnp_failed",
-   "text": "Out of time. That's going to leave a mark.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.dnp_outro.1",
-   "category": "dnp_outro",
-   "text": "That's Do Not Press That. Most of you pressed it.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.dnp_outro.2",
-   "category": "dnp_outro",
-   "text": "Do Not Press That. Thank you. Please wash your hands.",
-   "enabled": true,
-   "quality_status": "draft"
-  }
- ]
+  "pack_id": "graham.cp6_dnp",
+  "content_kind": "graham_lines",
+  "speaker": "graham",
+  "_comment": "Graham lines for Do Not Press That (CP6).",
+  "items": [
+    {
+      "id": "g.dnp_intro.1",
+      "category": "dnp_intro",
+      "text": "Do Not Press That. A test of teamwork, communication, and restraint. You'll fail at least one.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.dnp_intro.1"
+    },
+    {
+      "id": "g.dnp_intro.2",
+      "category": "dnp_intro",
+      "text": "It's Do Not Press That. Everyone has buttons. Everyone has instructions. Nobody has both. Talk to each other.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.dnp_intro.2"
+    },
+    {
+      "id": "g.dnp_rules.1",
+      "category": "dnp_rules",
+      "text": "Your device shows your controls and your instructions. Your instructions are about somebody else's controls. Talk. Out loud. Like people.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.dnp_rules.1"
+    },
+    {
+      "id": "g.dnp_rules.2",
+      "category": "dnp_rules",
+      "text": "Read your instructions out. Operate your own controls. And there's always one thing you should not press.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.dnp_rules.2"
+    },
+    {
+      "id": "g.dnp_puzzle_intro.1",
+      "category": "dnp_puzzle_intro",
+      "text": "Here's the problem.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.dnp_puzzle_intro.1"
+    },
+    {
+      "id": "g.dnp_puzzle_intro.2",
+      "category": "dnp_puzzle_intro",
+      "text": "Right. We have a situation.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.dnp_puzzle_intro.2"
+    },
+    {
+      "id": "g.dnp_puzzle_intro.3",
+      "category": "dnp_puzzle_intro",
+      "text": "Production have asked me to read this out. Quickly.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.dnp_puzzle_intro.3"
+    },
+    {
+      "id": "g.dnp_dont_touch.1",
+      "category": "dnp_dont_touch",
+      "text": "Whatever you do, don't touch the {answer}.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.dnp_dont_touch.2",
+      "category": "dnp_dont_touch",
+      "text": "There's a {answer} on one of your devices. Leave it alone.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.dnp_punish.1",
+      "category": "dnp_punish",
+      "text": "{name}, since you broke the last one, you're looking after the {answer}. Don't.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.dnp_punish.2",
+      "category": "dnp_punish",
+      "text": "{name}. You've been given the {answer}. That's a test of character.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.dnp_mistake.1",
+      "category": "dnp_mistake",
+      "text": "That was {name}.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.dnp_mistake.2",
+      "category": "dnp_mistake",
+      "text": "{name}. Again.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.dnp_mistake.3",
+      "category": "dnp_mistake",
+      "text": "Someone's jammed it. It was {name}.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.dnp_mistake.4",
+      "category": "dnp_mistake",
+      "text": "Careful, {name}.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.dnp_decoy.1",
+      "category": "dnp_decoy",
+      "text": "{name} pressed it. Of course they did.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.dnp_decoy.2",
+      "category": "dnp_decoy",
+      "text": "I said don't press it. {name} pressed it.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.dnp_decoy.3",
+      "category": "dnp_decoy",
+      "text": "{name}. That was the one thing.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.dnp_perfect.1",
+      "category": "dnp_perfect",
+      "text": "Perfect. Not a single mistake. I'm almost disappointed.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.dnp_perfect.1"
+    },
+    {
+      "id": "g.dnp_perfect.2",
+      "category": "dnp_perfect",
+      "text": "Flawless. Somebody check the equipment.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.dnp_perfect.2"
+    },
+    {
+      "id": "g.dnp_completed.1",
+      "category": "dnp_completed",
+      "text": "Done. Not elegantly, but done.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.dnp_completed.1"
+    },
+    {
+      "id": "g.dnp_completed.2",
+      "category": "dnp_completed",
+      "text": "Completed. The studio thanks you. The studio is still on fire, but thanks you.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.dnp_completed.2"
+    },
+    {
+      "id": "g.dnp_barely.1",
+      "category": "dnp_barely",
+      "text": "Barely. By the skin of your teeth. And {name}'s teeth, unfortunately.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.dnp_barely.2",
+      "category": "dnp_barely",
+      "text": "Just about. I wouldn't put that on your CV.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.dnp_barely.2"
+    },
+    {
+      "id": "g.dnp_failed.1",
+      "category": "dnp_failed",
+      "text": "Failed. Spectacularly. {name}, we'll talk later.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.dnp_failed.2",
+      "category": "dnp_failed",
+      "text": "That's a failure. Someone will have to tell Neil.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.dnp_failed.2"
+    },
+    {
+      "id": "g.dnp_failed.3",
+      "category": "dnp_failed",
+      "text": "Out of time. That's going to leave a mark.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.dnp_failed.3"
+    },
+    {
+      "id": "g.dnp_outro.1",
+      "category": "dnp_outro",
+      "text": "That's Do Not Press That. Most of you pressed it.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.dnp_outro.1"
+    },
+    {
+      "id": "g.dnp_outro.2",
+      "category": "dnp_outro",
+      "text": "Do Not Press That. Thank you. Please wash your hands.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.dnp_outro.2"
+    }
+  ]
 }

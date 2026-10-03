@@ -1,127 +1,140 @@
 {
- "pack_id": "graham.cp8_broadcast",
- "content_kind": "graham_lines",
- "speaker": "graham",
- "_comment": "Graham lines for breaks, viewer polls and awards (CP8). Slots {name} {answer}.",
- "items": [
-  {
-   "id": "g.break_will_we.1",
-   "category": "break_will_we",
-   "text": "Will we?",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.break_will_we.2",
-   "category": "break_will_we",
-   "text": "...Will we.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.poll_intro.1",
-   "category": "poll_intro",
-   "text": "Viewer poll. We asked you at home. Now we're asking you, at home.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.poll_intro.2",
-   "category": "poll_intro",
-   "text": "Time for the viewer poll. There are no wrong answers. There are some very wrong answers.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.poll_result.1",
-   "category": "poll_result",
-   "text": "The nation has spoken. The nation is wrong.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.poll_result.2",
-   "category": "poll_result",
-   "text": "Interesting. Disappointing, but interesting.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.poll_result.3",
-   "category": "poll_result",
-   "text": "That's what you think. Noted. On file.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.poll_unanimous.1",
-   "category": "poll_unanimous",
-   "text": "Unanimous. That's worrying.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.poll_unanimous.2",
-   "category": "poll_unanimous",
-   "text": "All of you. Remarkable.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.awards_intro.1",
-   "category": "awards_intro",
-   "text": "Before we go, the Mildew awards. Handed out by me, on merit and on mood.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.awards_intro.2",
-   "category": "awards_intro",
-   "text": "Awards. Some of you deserve them. Some of you are getting them anyway.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.award_given.1",
-   "category": "award_given",
-   "text": "{answer}: {name}.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.award_given.2",
-   "category": "award_given",
-   "text": "And {answer} goes to {name}. Don't make a speech.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.prize.1",
-   "category": "prize",
-   "text": "Tonight's winner takes home {answer}.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.prize.2",
-   "category": "prize",
-   "text": "And {name} wins tonight's star prize: {answer}.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.part_two.1",
-   "category": "part_two",
-   "text": "Welcome back. Part two. Nothing happened during the break.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.part_two.2",
-   "category": "part_two",
-   "text": "We're back. Sit down. Somebody's still in the kitchen.",
-   "enabled": true,
-   "quality_status": "draft"
-  }
- ]
+  "pack_id": "graham.cp8_broadcast",
+  "content_kind": "graham_lines",
+  "speaker": "graham",
+  "_comment": "Graham lines for breaks, viewer polls and awards (CP8). Slots {name} {answer}.",
+  "items": [
+    {
+      "id": "g.break_will_we.1",
+      "category": "break_will_we",
+      "text": "Will we?",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.break_will_we.1"
+    },
+    {
+      "id": "g.break_will_we.2",
+      "category": "break_will_we",
+      "text": "...Will we.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.break_will_we.2"
+    },
+    {
+      "id": "g.poll_intro.1",
+      "category": "poll_intro",
+      "text": "Viewer poll. We asked you at home. Now we're asking you, at home.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.poll_intro.1"
+    },
+    {
+      "id": "g.poll_intro.2",
+      "category": "poll_intro",
+      "text": "Time for the viewer poll. There are no wrong answers. There are some very wrong answers.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.poll_intro.2"
+    },
+    {
+      "id": "g.poll_result.1",
+      "category": "poll_result",
+      "text": "The nation has spoken. The nation is wrong.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.poll_result.1"
+    },
+    {
+      "id": "g.poll_result.2",
+      "category": "poll_result",
+      "text": "Interesting. Disappointing, but interesting.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.poll_result.2"
+    },
+    {
+      "id": "g.poll_result.3",
+      "category": "poll_result",
+      "text": "That's what you think. Noted. On file.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.poll_result.3"
+    },
+    {
+      "id": "g.poll_unanimous.1",
+      "category": "poll_unanimous",
+      "text": "Unanimous. That's worrying.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.poll_unanimous.1"
+    },
+    {
+      "id": "g.poll_unanimous.2",
+      "category": "poll_unanimous",
+      "text": "All of you. Remarkable.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.poll_unanimous.2"
+    },
+    {
+      "id": "g.awards_intro.1",
+      "category": "awards_intro",
+      "text": "Before we go, the Mildew awards. Handed out by me, on merit and on mood.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.awards_intro.1"
+    },
+    {
+      "id": "g.awards_intro.2",
+      "category": "awards_intro",
+      "text": "Awards. Some of you deserve them. Some of you are getting them anyway.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.awards_intro.2"
+    },
+    {
+      "id": "g.award_given.1",
+      "category": "award_given",
+      "text": "{answer}: {name}.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.award_given.2",
+      "category": "award_given",
+      "text": "And {answer} goes to {name}. Don't make a speech.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.prize.1",
+      "category": "prize",
+      "text": "Tonight's winner takes home {answer}.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.prize.2",
+      "category": "prize",
+      "text": "And {name} wins tonight's star prize: {answer}.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.part_two.1",
+      "category": "part_two",
+      "text": "Welcome back. Part two. Nothing happened during the break.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.part_two.1"
+    },
+    {
+      "id": "g.part_two.2",
+      "category": "part_two",
+      "text": "We're back. Sit down. Somebody's still in the kitchen.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.part_two.2"
+    }
+  ]
 }

@@ -4,104 +4,668 @@
   "speaker": "graham",
   "_comment": "Checkpoint 1 Graham line pools. Slots: {name} display name (spoken as the stored speech name), {secs}, {answer}, {count}, {points}. 'moods' restricts eligibility (empty = any). 'audio' is the future pre-rendered asset id (null = runtime TTS). Ordinary presenter language first; jokes are the exception.",
   "items": [
-    {"id": "g.lobby_empty.1", "category": "lobby_empty", "text": "Good evening. We appear to have no contestants.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.lobby_empty.2", "category": "lobby_empty", "text": "We're live, apparently. Nobody's here.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.lobby_empty.3", "category": "lobby_empty", "text": "Take your time. We've only got the one studio.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.lobby_empty.4", "category": "lobby_empty", "text": "I've done this programme in front of fewer people. Not many fewer.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.lobby_empty.5", "category": "lobby_empty", "text": "Phones out, please. The little code on the side of the screen. Yes, that one.", "enabled": true, "quality_status": "draft"},
-
-    {"id": "g.lobby_one.1", "category": "lobby_one", "text": "One is not really a party.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.lobby_one.2", "category": "lobby_one", "text": "Just the one, then. {name}, you'll need a friend.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.lobby_one.3", "category": "lobby_one", "text": "{name}. On your own. Bring somebody.", "enabled": true, "quality_status": "draft", "moods": ["irritated", "relaxed"]},
-
-    {"id": "g.lobby_join.1", "category": "lobby_join", "text": "{name}. Lovely.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.lobby_join.2", "category": "lobby_join", "text": "And here's {name}.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.lobby_join.3", "category": "lobby_join", "text": "Welcome, {name}.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.lobby_join.4", "category": "lobby_join", "text": "{name} has joined us. Brave.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.lobby_join.5", "category": "lobby_join", "text": "{name}. Take a podium. Any podium.", "enabled": true, "quality_status": "draft"},
-
-    {"id": "g.lobby_returning.1", "category": "lobby_returning", "text": "{name}. Back again.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.lobby_returning.2", "category": "lobby_returning", "text": "Ah. {name}.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.lobby_returning.3", "category": "lobby_returning", "text": "Welcome back, {name}. We kept your podium warm. Roughly.", "enabled": true, "quality_status": "draft"},
-
-    {"id": "g.lobby_ready.1", "category": "lobby_ready", "text": "That's enough of you. Whenever you're ready.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.lobby_ready.2", "category": "lobby_ready", "text": "{name}, you're in charge of the button. Press it when everybody's in.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.lobby_ready.3", "category": "lobby_ready", "text": "Somebody press the button. Not me. I'm not allowed.", "enabled": true, "quality_status": "draft"},
-
-    {"id": "g.lobby_left.1", "category": "lobby_left", "text": "{name} has gone home.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.lobby_left.2", "category": "lobby_left", "text": "And {name} is gone. Fine.", "enabled": true, "quality_status": "draft"},
-
-    {"id": "g.name_match.1", "category": "name_match", "text": "We've had a {name} before.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.name_match.2", "category": "name_match", "text": "{name}? We've met a {name}. Is it you?", "enabled": true, "quality_status": "draft"},
-    {"id": "g.reserved_name.1", "category": "reserved_name", "text": "No you're not.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.reserved_name.2", "category": "reserved_name", "text": "There's only one Graham on this programme.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.pronounce.1", "category": "pronounce", "text": "Is it... {name}?", "enabled": true, "quality_status": "draft"},
-    {"id": "g.pronounce.2", "category": "pronounce", "text": "{name}. Have I got that right?", "enabled": true, "quality_status": "draft"},
-
-    {"id": "g.show_open.1", "category": "show_open", "text": "Good evening, and welcome to Mildew. I'm Graham Mildew.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.show_open.2", "category": "show_open", "text": "Hello, good evening, and welcome to Mildew.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.show_open_2.1", "category": "show_open_2", "text": "Tonight's contestants are all here voluntarily. Mostly.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.show_open_2.2", "category": "show_open_2", "text": "Let's meet tonight's contestants.", "enabled": true, "quality_status": "draft"},
-
-    {"id": "g.intro.1", "category": "intro_player", "text": "{name}.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.intro.2", "category": "intro_player", "text": "On podium {count}, {name}.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.intro.3", "category": "intro_player", "text": "{name}, who has told us absolutely nothing about themselves.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.intro.4", "category": "intro_player", "text": "{name}. Lovely to have you.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.intro.5", "category": "intro_player", "text": "{name}. We've heard a lot about you.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.intro_returning.1", "category": "intro_returning", "text": "{name}, back again. We never learn.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.intro_returning.2", "category": "intro_returning", "text": "And returning to the studio, {name}.", "enabled": true, "quality_status": "draft"},
-
-    {"id": "g.rehearsal_intro.1", "category": "rehearsal_intro", "text": "Before we start properly, a quick studio rehearsal. The points are real.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.rehearsal_intro.2", "category": "rehearsal_intro", "text": "The floor manager wants a rehearsal. So. Some questions. Points count.", "enabled": true, "quality_status": "draft"},
-
-    {"id": "g.question_read.1", "category": "question_read", "text": "Here's your question.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.question_read.2", "category": "question_read", "text": "Hands on your units, please.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.question_read.3", "category": "question_read", "text": "Next question. This one's easy. Allegedly.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.question_read.4", "category": "question_read", "text": "Right. Concentrate.", "enabled": true, "quality_status": "draft", "moods": ["irritated", "relaxed"]},
-
-    {"id": "g.reveal.1", "category": "reveal", "text": "The answer was {answer}.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.reveal.2", "category": "reveal", "text": "It was, of course, {answer}.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.fast_correct.1", "category": "fast_correct", "text": "{secs} seconds, {name}. Anything you'd like to tell us?", "enabled": true, "quality_status": "draft"},
-    {"id": "g.fast_correct.2", "category": "fast_correct", "text": "{name}, that was very quick. Very quick indeed.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.all_correct.1", "category": "all_correct", "text": "All correct. Lovely.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.all_correct.2", "category": "all_correct", "text": "Everybody got that. We'll make the next one harder.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.single_correct.1", "category": "single_correct", "text": "Only {name}. Well done, {name}.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.single_correct.2", "category": "single_correct", "text": "Just {name} on that one.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.some_correct.1", "category": "some_correct", "text": "Well done to those who got it.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.some_correct.2", "category": "some_correct", "text": "Some of you got that. Some of you didn't.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.all_wrong.1", "category": "all_wrong", "text": "Nobody. Not one of you.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.all_wrong.2", "category": "all_wrong", "text": "Extraordinary.", "enabled": true, "quality_status": "draft", "moods": ["irritated", "relaxed", "amused"]},
-    {"id": "g.nobody_answered.1", "category": "nobody_answered", "text": "Nobody answered. We'll call that a technical fault.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.afk.1", "category": "afk_player", "text": "{name} remains with us in a largely ceremonial capacity.", "enabled": true, "quality_status": "draft"},
-
-    {"id": "g.scores_intro.1", "category": "scores_intro", "text": "Let's see the scores.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.scores_intro.2", "category": "scores_intro", "text": "The scores, please.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.winner.1", "category": "winner", "text": "And tonight's rehearsal winner is {name}.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.winner.2", "category": "winner", "text": "{name} wins. Well done. It doesn't mean anything.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.tie.1", "category": "tie", "text": "A tie. How disappointing for everyone.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.sign_off.1", "category": "sign_off", "text": "That's the rehearsal. The real programme will be along shortly. Goodnight.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.sign_off.2", "category": "sign_off", "text": "That's all we have time for. Goodnight. Mind how you go.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.play_again.1", "category": "play_again", "text": "Same again?", "enabled": true, "quality_status": "draft"},
-
-    {"id": "g.reconnect_lost.1", "category": "reconnect_lost", "text": "We've temporarily misplaced {name}.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.reconnect_lost.2", "category": "reconnect_lost", "text": "{name} appears to have wandered off.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.reconnect_lost.3", "category": "reconnect_lost", "text": "Could somebody find {name}?", "enabled": true, "quality_status": "draft"},
-    {"id": "g.reconnect_lost.4", "category": "reconnect_lost", "text": "...", "enabled": true, "quality_status": "draft", "silent": true},
-    {"id": "g.reconnect_mid.1", "category": "reconnect_mid", "text": "{name}?", "enabled": true, "quality_status": "draft"},
-    {"id": "g.reconnect_mid.2", "category": "reconnect_mid", "text": "Any sign of {name}?", "enabled": true, "quality_status": "draft"},
-    {"id": "g.reconnect_mid.3", "category": "reconnect_mid", "text": "We'll wait. We're very good at waiting.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.reconnect_back.1", "category": "reconnect_back", "text": "There they are!", "enabled": true, "quality_status": "draft"},
-    {"id": "g.reconnect_back.2", "category": "reconnect_back", "text": "And {name} returns.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.reconnect_back.3", "category": "reconnect_back", "text": "Welcome back, {name}. Don't do that again.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.reconnect_failed.1", "category": "reconnect_failed", "text": "{name} has elected not to return.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.reconnect_failed.2", "category": "reconnect_failed", "text": "We've lost {name}. Again.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.reconnect_failed.3", "category": "reconnect_failed", "text": "{name} won't be joining us for the rest of the programme.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.waiting_players.1", "category": "waiting_players", "text": "We need at least two of you. That's how contests work.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.waiting_players.2", "category": "waiting_players", "text": "We'll wait for somebody else. Anybody.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.all_gone.1", "category": "all_gone", "text": "Fine.", "enabled": true, "quality_status": "draft", "moods": ["irritated", "angry"]},
-    {"id": "g.all_gone.2", "category": "all_gone", "text": "Right. Fine. Goodnight, then.", "enabled": true, "quality_status": "draft", "moods": ["irritated", "angry"]},
-    {"id": "g.late_join.1", "category": "late_join", "text": "{name}, you're late. Wait there.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.late_join.2", "category": "late_join", "text": "{name} has arrived. Late. You'll be with us shortly.", "enabled": true, "quality_status": "draft"},
-    {"id": "g.player_left_show.1", "category": "player_left_show", "text": "{name} has left the building.", "enabled": true, "quality_status": "draft"}
+    {
+      "id": "g.lobby_empty.1",
+      "category": "lobby_empty",
+      "text": "Good evening. We appear to have no contestants.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.lobby_empty.1"
+    },
+    {
+      "id": "g.lobby_empty.2",
+      "category": "lobby_empty",
+      "text": "We're live, apparently. Nobody's here.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.lobby_empty.2"
+    },
+    {
+      "id": "g.lobby_empty.3",
+      "category": "lobby_empty",
+      "text": "Take your time. We've only got the one studio.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.lobby_empty.3"
+    },
+    {
+      "id": "g.lobby_empty.4",
+      "category": "lobby_empty",
+      "text": "I've done this programme in front of fewer people. Not many fewer.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.lobby_empty.4"
+    },
+    {
+      "id": "g.lobby_empty.5",
+      "category": "lobby_empty",
+      "text": "Phones out, please. The little code on the side of the screen. Yes, that one.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.lobby_empty.5"
+    },
+    {
+      "id": "g.lobby_one.1",
+      "category": "lobby_one",
+      "text": "One is not really a party.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.lobby_one.1"
+    },
+    {
+      "id": "g.lobby_one.2",
+      "category": "lobby_one",
+      "text": "Just the one, then. {name}, you'll need a friend.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.lobby_one.3",
+      "category": "lobby_one",
+      "text": "{name}. On your own. Bring somebody.",
+      "enabled": true,
+      "quality_status": "draft",
+      "moods": [
+        "irritated",
+        "relaxed"
+      ]
+    },
+    {
+      "id": "g.lobby_join.1",
+      "category": "lobby_join",
+      "text": "{name}. Lovely.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.lobby_join.2",
+      "category": "lobby_join",
+      "text": "And here's {name}.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.lobby_join.3",
+      "category": "lobby_join",
+      "text": "Welcome, {name}.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.lobby_join.4",
+      "category": "lobby_join",
+      "text": "{name} has joined us. Brave.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.lobby_join.5",
+      "category": "lobby_join",
+      "text": "{name}. Take a podium. Any podium.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.lobby_returning.1",
+      "category": "lobby_returning",
+      "text": "{name}. Back again.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.lobby_returning.2",
+      "category": "lobby_returning",
+      "text": "Ah. {name}.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.lobby_returning.3",
+      "category": "lobby_returning",
+      "text": "Welcome back, {name}. We kept your podium warm. Roughly.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.lobby_ready.1",
+      "category": "lobby_ready",
+      "text": "That's enough of you. Whenever you're ready.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.lobby_ready.1"
+    },
+    {
+      "id": "g.lobby_ready.2",
+      "category": "lobby_ready",
+      "text": "{name}, you're in charge of the button. Press it when everybody's in.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.lobby_ready.3",
+      "category": "lobby_ready",
+      "text": "Somebody press the button. Not me. I'm not allowed.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.lobby_ready.3"
+    },
+    {
+      "id": "g.lobby_left.1",
+      "category": "lobby_left",
+      "text": "{name} has gone home.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.lobby_left.2",
+      "category": "lobby_left",
+      "text": "And {name} is gone. Fine.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.name_match.1",
+      "category": "name_match",
+      "text": "We've had a {name} before.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.name_match.2",
+      "category": "name_match",
+      "text": "{name}? We've met a {name}. Is it you?",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.reserved_name.1",
+      "category": "reserved_name",
+      "text": "No you're not.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.reserved_name.1"
+    },
+    {
+      "id": "g.reserved_name.2",
+      "category": "reserved_name",
+      "text": "There's only one Graham on this programme.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.reserved_name.2"
+    },
+    {
+      "id": "g.pronounce.1",
+      "category": "pronounce",
+      "text": "Is it... {name}?",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.pronounce.2",
+      "category": "pronounce",
+      "text": "{name}. Have I got that right?",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.show_open.1",
+      "category": "show_open",
+      "text": "Good evening, and welcome to Mildew. I'm Graham Mildew.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.show_open.1"
+    },
+    {
+      "id": "g.show_open.2",
+      "category": "show_open",
+      "text": "Hello, good evening, and welcome to Mildew.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.show_open.2"
+    },
+    {
+      "id": "g.show_open_2.1",
+      "category": "show_open_2",
+      "text": "Tonight's contestants are all here voluntarily. Mostly.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.show_open_2.1"
+    },
+    {
+      "id": "g.show_open_2.2",
+      "category": "show_open_2",
+      "text": "Let's meet tonight's contestants.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.show_open_2.2"
+    },
+    {
+      "id": "g.intro.1",
+      "category": "intro_player",
+      "text": "{name}.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.intro.2",
+      "category": "intro_player",
+      "text": "On podium {count}, {name}.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.intro.3",
+      "category": "intro_player",
+      "text": "{name}, who has told us absolutely nothing about themselves.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.intro.4",
+      "category": "intro_player",
+      "text": "{name}. Lovely to have you.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.intro.5",
+      "category": "intro_player",
+      "text": "{name}. We've heard a lot about you.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.intro_returning.1",
+      "category": "intro_returning",
+      "text": "{name}, back again. We never learn.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.intro_returning.2",
+      "category": "intro_returning",
+      "text": "And returning to the studio, {name}.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.rehearsal_intro.1",
+      "category": "rehearsal_intro",
+      "text": "Before we start properly, a quick studio rehearsal. The points are real.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.rehearsal_intro.1"
+    },
+    {
+      "id": "g.rehearsal_intro.2",
+      "category": "rehearsal_intro",
+      "text": "The floor manager wants a rehearsal. So. Some questions. Points count.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.rehearsal_intro.2"
+    },
+    {
+      "id": "g.question_read.1",
+      "category": "question_read",
+      "text": "Here's your question.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.question_read.1"
+    },
+    {
+      "id": "g.question_read.2",
+      "category": "question_read",
+      "text": "Hands on your units, please.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.question_read.2"
+    },
+    {
+      "id": "g.question_read.3",
+      "category": "question_read",
+      "text": "Next question. This one's easy. Allegedly.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.question_read.3"
+    },
+    {
+      "id": "g.question_read.4",
+      "category": "question_read",
+      "text": "Right. Concentrate.",
+      "enabled": true,
+      "quality_status": "draft",
+      "moods": [
+        "irritated",
+        "relaxed"
+      ],
+      "audio": "qwen.g.question_read.4"
+    },
+    {
+      "id": "g.reveal.1",
+      "category": "reveal",
+      "text": "The answer was {answer}.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.reveal.2",
+      "category": "reveal",
+      "text": "It was, of course, {answer}.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.fast_correct.1",
+      "category": "fast_correct",
+      "text": "{secs} seconds, {name}. Anything you'd like to tell us?",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.fast_correct.2",
+      "category": "fast_correct",
+      "text": "{name}, that was very quick. Very quick indeed.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.all_correct.1",
+      "category": "all_correct",
+      "text": "All correct. Lovely.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.all_correct.1"
+    },
+    {
+      "id": "g.all_correct.2",
+      "category": "all_correct",
+      "text": "Everybody got that. We'll make the next one harder.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.all_correct.2"
+    },
+    {
+      "id": "g.single_correct.1",
+      "category": "single_correct",
+      "text": "Only {name}. Well done, {name}.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.single_correct.2",
+      "category": "single_correct",
+      "text": "Just {name} on that one.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.some_correct.1",
+      "category": "some_correct",
+      "text": "Well done to those who got it.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.some_correct.1"
+    },
+    {
+      "id": "g.some_correct.2",
+      "category": "some_correct",
+      "text": "Some of you got that. Some of you didn't.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.some_correct.2"
+    },
+    {
+      "id": "g.all_wrong.1",
+      "category": "all_wrong",
+      "text": "Nobody. Not one of you.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.all_wrong.1"
+    },
+    {
+      "id": "g.all_wrong.2",
+      "category": "all_wrong",
+      "text": "Extraordinary.",
+      "enabled": true,
+      "quality_status": "draft",
+      "moods": [
+        "irritated",
+        "relaxed",
+        "amused"
+      ],
+      "audio": "qwen.g.all_wrong.2"
+    },
+    {
+      "id": "g.nobody_answered.1",
+      "category": "nobody_answered",
+      "text": "Nobody answered. We'll call that a technical fault.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.nobody_answered.1"
+    },
+    {
+      "id": "g.afk.1",
+      "category": "afk_player",
+      "text": "{name} remains with us in a largely ceremonial capacity.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.scores_intro.1",
+      "category": "scores_intro",
+      "text": "Let's see the scores.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.scores_intro.1"
+    },
+    {
+      "id": "g.scores_intro.2",
+      "category": "scores_intro",
+      "text": "The scores, please.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.scores_intro.2"
+    },
+    {
+      "id": "g.winner.1",
+      "category": "winner",
+      "text": "And tonight's rehearsal winner is {name}.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.winner.2",
+      "category": "winner",
+      "text": "{name} wins. Well done. It doesn't mean anything.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.tie.1",
+      "category": "tie",
+      "text": "A tie. How disappointing for everyone.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.tie.1"
+    },
+    {
+      "id": "g.sign_off.1",
+      "category": "sign_off",
+      "text": "That's the rehearsal. The real programme will be along shortly. Goodnight.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.sign_off.1"
+    },
+    {
+      "id": "g.sign_off.2",
+      "category": "sign_off",
+      "text": "That's all we have time for. Goodnight. Mind how you go.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.sign_off.2"
+    },
+    {
+      "id": "g.play_again.1",
+      "category": "play_again",
+      "text": "Same again?",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.play_again.1"
+    },
+    {
+      "id": "g.reconnect_lost.1",
+      "category": "reconnect_lost",
+      "text": "We've temporarily misplaced {name}.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.reconnect_lost.2",
+      "category": "reconnect_lost",
+      "text": "{name} appears to have wandered off.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.reconnect_lost.3",
+      "category": "reconnect_lost",
+      "text": "Could somebody find {name}?",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.reconnect_lost.4",
+      "category": "reconnect_lost",
+      "text": "...",
+      "enabled": true,
+      "quality_status": "draft",
+      "silent": true
+    },
+    {
+      "id": "g.reconnect_mid.1",
+      "category": "reconnect_mid",
+      "text": "{name}?",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.reconnect_mid.2",
+      "category": "reconnect_mid",
+      "text": "Any sign of {name}?",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.reconnect_mid.3",
+      "category": "reconnect_mid",
+      "text": "We'll wait. We're very good at waiting.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.reconnect_mid.3"
+    },
+    {
+      "id": "g.reconnect_back.1",
+      "category": "reconnect_back",
+      "text": "There they are!",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.reconnect_back.1"
+    },
+    {
+      "id": "g.reconnect_back.2",
+      "category": "reconnect_back",
+      "text": "And {name} returns.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.reconnect_back.3",
+      "category": "reconnect_back",
+      "text": "Welcome back, {name}. Don't do that again.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.reconnect_failed.1",
+      "category": "reconnect_failed",
+      "text": "{name} has elected not to return.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.reconnect_failed.2",
+      "category": "reconnect_failed",
+      "text": "We've lost {name}. Again.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.reconnect_failed.3",
+      "category": "reconnect_failed",
+      "text": "{name} won't be joining us for the rest of the programme.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.waiting_players.1",
+      "category": "waiting_players",
+      "text": "We need at least two of you. That's how contests work.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.waiting_players.1"
+    },
+    {
+      "id": "g.waiting_players.2",
+      "category": "waiting_players",
+      "text": "We'll wait for somebody else. Anybody.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.waiting_players.2"
+    },
+    {
+      "id": "g.all_gone.1",
+      "category": "all_gone",
+      "text": "Fine.",
+      "enabled": true,
+      "quality_status": "draft",
+      "moods": [
+        "irritated",
+        "angry"
+      ],
+      "audio": "qwen.g.all_gone.1"
+    },
+    {
+      "id": "g.all_gone.2",
+      "category": "all_gone",
+      "text": "Right. Fine. Goodnight, then.",
+      "enabled": true,
+      "quality_status": "draft",
+      "moods": [
+        "irritated",
+        "angry"
+      ],
+      "audio": "qwen.g.all_gone.2"
+    },
+    {
+      "id": "g.late_join.1",
+      "category": "late_join",
+      "text": "{name}, you're late. Wait there.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.late_join.2",
+      "category": "late_join",
+      "text": "{name} has arrived. Late. You'll be with us shortly.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.player_left_show.1",
+      "category": "player_left_show",
+      "text": "{name} has left the building.",
+      "enabled": true,
+      "quality_status": "draft"
+    }
   ]
 }

@@ -1,0 +1,53 @@
+{
+  "presenter": {
+    "prompt": "warm British game-show host, practised smile, confident studio projection."
+  },
+  "presenter_brisk": {
+    "prompt": "brisk professional game-show host, confidently moving the programme along."
+  },
+  "pleased": {
+    "prompt": "practised game-show warmth, lightly pleased."
+  },
+  "excited": {
+    "prompt": "buoyant game-show host building studio excitement without shouting."
+  },
+  "teasing": {
+    "prompt": "smiling British game-show presenter, playfully teasing the contestant for the audience."
+  },
+  "disappointed": {
+    "prompt": "same presenter, mildly disappointed but professionally restrained."
+  },
+  "irritated": {
+    "prompt": "same television presenter, smile gone, restrained irritation."
+  },
+  "angry": {
+    "prompt": "same television presenter, controlled anger, firm rather than theatrical."
+  },
+  "rattled": {
+    "prompt": "same presenter, briefly unsettled and trying to regain professional composure."
+  },
+  "recovered": {
+    "prompt": "professional game-show presenter, smile returning slightly too quickly."
+  },
+  "off_air": {
+    "prompt": "same man speaking naturally off-air, tired and no longer performing for the audience."
+  },
+  "closing": {
+    "prompt": "warm polished British game-show host delivering his familiar end-of-show sign-off."
+  },
+  "name": {
+    "prompt": "Say the name clearly as the same presenter welcoming a contestant. No exaggerated excitement."
+  },
+  "forced_smile": {
+    "prompt": "Maintain the upbeat professional broadcast voice while suppressing disappointment. Smile through the first sentence; allow mild patronising amusement into the final words."
+  },
+  "panic_hidden": {
+    "prompt": "Begin composed. Become subtly more hurried and uneasy while trying not to alarm the studio audience. Keep the presenter polish."
+  },
+  "ominous": {
+    "prompt": "Lower the energy and speak calmly, without melodrama. Let a short pause feel uncomfortable. Keep the same human presenter voice."
+  },
+  "genuine_surprise": {
+    "prompt": "A brief involuntary moment of surprise, then quickly regain professional composure."
+  }
+}

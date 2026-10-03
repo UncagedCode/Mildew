@@ -1,456 +1,507 @@
 {
- "pack_id": "graham.cp4_games",
- "content_kind": "graham_lines",
- "speaker": "graham",
- "_comment": "Graham lines for Mildew Survey and Mouthfeel (CP4). Slots: {name} {answer}. Not yet voiced (dev TTS/subtitle only).",
- "items": [
-  {
-   "id": "g.sv_intro.1",
-   "category": "sv_intro",
-   "text": "It's the Mildew Survey. We asked the public. The public were unavailable, so we're asking you.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.sv_intro.2",
-   "category": "sv_intro",
-   "text": "Time for the Mildew Survey. Your answers are anonymous. Your shame is not.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.sv_intro.3",
-   "category": "sv_intro",
-   "text": "The Mildew Survey. Write what you think. Then judge each other. It's very healthy.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.sv_rules.1",
-   "category": "sv_rules",
-   "text": "I'll ask a question. Type an answer on your device. Then vote for the best one. Not your own. We check.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.sv_rules.2",
-   "category": "sv_rules",
-   "text": "Write an answer. Vote for somebody else's. Some answers come from our archive. Some of the archive is very old.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.sv_ask.1",
-   "category": "sv_ask",
-   "text": "Here's the question.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.sv_ask.2",
-   "category": "sv_ask",
-   "text": "Thumbs ready. Here's what the survey wants to know.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.sv_ask.3",
-   "category": "sv_ask",
-   "text": "This one came in by post. Unsigned.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.sv_ask.4",
-   "category": "sv_ask",
-   "text": "Our researchers asked this question four hundred times. Your turn.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.sv_winner.1",
-   "category": "sv_winner",
-   "text": "{name} wins that. \"{answer}\". Lovely.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.sv_winner.2",
-   "category": "sv_winner",
-   "text": "The room has spoken. {name}. \"{answer}\". I'm not proud of any of you.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.sv_winner.3",
-   "category": "sv_winner",
-   "text": "That's {name}'s. Of course it is.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.sv_winner.4",
-   "category": "sv_winner",
-   "text": "{name} takes it. We'll be keeping that one.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.sv_no_votes.1",
-   "category": "sv_no_votes",
-   "text": "Nobody voted. A survey of silence.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.sv_no_votes.2",
-   "category": "sv_no_votes",
-   "text": "Not a single vote. Apathy. Very British.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.sv_archive_reveal.1",
-   "category": "sv_archive_reveal",
-   "text": "That one came from the archive. Nobody remembers who wrote it.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.sv_archive_reveal.2",
-   "category": "sv_archive_reveal",
-   "text": "The archive answer. Some of those are from 1998. Some of them aren't.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.sv_archive_reveal.3",
-   "category": "sv_archive_reveal",
-   "text": "That was from our archive. Don't ask whose.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.sv_who_said_reveal.1",
-   "category": "sv_who_said_reveal",
-   "text": "It was {name}. You can see it in the face.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.sv_who_said_reveal.2",
-   "category": "sv_who_said_reveal",
-   "text": "{name} wrote that. We'll be talking about it later. Or not.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.sv_who_said_reveal.3",
-   "category": "sv_who_said_reveal",
-   "text": "That was {name}. Of course it was.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.sv_outro.1",
-   "category": "sv_outro",
-   "text": "That concludes the survey. Results will be shared with nobody.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.sv_outro.2",
-   "category": "sv_outro",
-   "text": "The Mildew Survey. Thank you for your honesty. Some of you should see someone.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.mf_intro.1",
-   "category": "mf_intro",
-   "text": "It's Mouthfeel. The round where you describe things that should never be in your mouth.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.mf_intro.2",
-   "category": "mf_intro",
-   "text": "Welcome to Mouthfeel. Use your words. Your awful, awful words.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.mf_intro.3",
-   "category": "mf_intro",
-   "text": "Mouthfeel. I've done this round for years. I still can't eat soup.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.mf_rules.1",
-   "category": "mf_rules",
-   "text": "I'll name something. You describe how it feels in your mouth. Then everybody votes for the category I give you. I may enter an answer myself. Anonymously.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.mf_rules.2",
-   "category": "mf_rules",
-   "text": "Describe the mouthfeel. Vote on the category. Don't vote for yourself. I'll know.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.mf_ask.1",
-   "category": "mf_ask",
-   "text": "Imagine it. Now describe it.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.mf_ask.2",
-   "category": "mf_ask",
-   "text": "Close your eyes. Open your mouth. Not literally.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.mf_ask.3",
-   "category": "mf_ask",
-   "text": "Picture this between your teeth.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.mf_ask.4",
-   "category": "mf_ask",
-   "text": "Here it is. Take your time. Chew it over.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.mf_winner.1",
-   "category": "mf_winner",
-   "text": "{name} wins it. \"{answer}\". I can taste that.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.mf_winner.2",
-   "category": "mf_winner",
-   "text": "That's {name}'s. Disgusting. Well done.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.mf_winner.3",
-   "category": "mf_winner",
-   "text": "{name}. Beautifully revolting.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.mf_no_votes.1",
-   "category": "mf_no_votes",
-   "text": "No votes. You've all lost your appetite.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.mf_no_votes.2",
-   "category": "mf_no_votes",
-   "text": "Nobody voted. That's fair.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.mf_chain_final.1",
-   "category": "mf_chain_final",
-   "text": "And there it is. Rate it. Be honest.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.mf_chain_final.2",
-   "category": "mf_chain_final",
-   "text": "Look what you've made. Rate it on your devices.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.mf_chain_final.3",
-   "category": "mf_chain_final",
-   "text": "That's what you've built. Someone has to eat it. Rate it.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.mf_chain_good.1",
-   "category": "mf_chain_good",
-   "text": "A masterpiece. Points shared between the chefs.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.mf_chain_good.2",
-   "category": "mf_chain_good",
-   "text": "That's genuinely horrible. Well done, all of you.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.mf_chain_bad.1",
-   "category": "mf_chain_bad",
-   "text": "Not your best work. Not anybody's best work.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.mf_chain_bad.2",
-   "category": "mf_chain_bad",
-   "text": "Underwhelming. Even the bin doesn't want it.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.mf_graham_choice.1",
-   "category": "mf_graham_choice",
-   "text": "My personal favourite was {name}'s. Graham's Choice. Small bonus.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.mf_graham_choice.2",
-   "category": "mf_graham_choice",
-   "text": "Graham's Choice goes to {name}. Don't let it go to your head.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.mf_graham_choice.3",
-   "category": "mf_graham_choice",
-   "text": "I liked {name}'s. That's all. Small bonus.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.mf_outro.1",
-   "category": "mf_outro",
-   "text": "That's Mouthfeel. Have a glass of water. Have several.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.mf_outro.2",
-   "category": "mf_outro",
-   "text": "That concludes Mouthfeel. Please do not eat any of it at home.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.mf_rev_ask.1",
-   "category": "mf_rev_ask",
-   "text": "I'm going to describe something. You tell me what it is.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.mf_rev_ask.2",
-   "category": "mf_rev_ask",
-   "text": "Here's my tasting note. What am I eating?",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.mf_rev_ask.3",
-   "category": "mf_rev_ask",
-   "text": "Listen carefully. What am I describing?",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.mf_rev_final.1",
-   "category": "mf_rev_final",
-   "text": "Last one. Concentrate. What is in my mouth?",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.wv_discarded.1",
-   "category": "wv_discarded",
-   "text": "One answer has been removed. No. We're not putting that on television.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.wv_discarded.2",
-   "category": "wv_discarded",
-   "text": "We've taken one out. You know who you are.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.wv_altered.1",
-   "category": "wv_altered",
-   "text": "Charming.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.wv_altered.2",
-   "category": "wv_altered",
-   "text": "I've corrected one of those. You're welcome.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.wv_graham_won.1",
-   "category": "wv_graham_won",
-   "text": "Mine won. Naturally.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.wv_graham_won.2",
-   "category": "wv_graham_won",
-   "text": "That was mine. Naturally.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.wv_graham_won.3",
-   "category": "wv_graham_won",
-   "text": "That one was me. Thirty years in the business.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.wv_archive_won.1",
-   "category": "wv_archive_won",
-   "text": "You voted for the archive. Somebody wrote that a long time ago. They'd be pleased. Probably.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.wv_archive_won.2",
-   "category": "wv_archive_won",
-   "text": "The archive wins. It usually does.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.wv_match.1",
-   "category": "wv_match",
-   "text": "Two of you wrote the same thing. That's either telepathy or a worrying sign. Bonus points.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.wv_match.2",
-   "category": "wv_match",
-   "text": "A match! Same answer, independently. Bonus.",
-   "enabled": true,
-   "quality_status": "draft"
-  }
- ]
+  "pack_id": "graham.cp4_games",
+  "content_kind": "graham_lines",
+  "speaker": "graham",
+  "_comment": "Graham lines for Mildew Survey and Mouthfeel (CP4). Slots: {name} {answer}. Not yet voiced (dev TTS/subtitle only).",
+  "items": [
+    {
+      "id": "g.sv_intro.1",
+      "category": "sv_intro",
+      "text": "It's the Mildew Survey. We asked the public. The public were unavailable, so we're asking you.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.sv_intro.1"
+    },
+    {
+      "id": "g.sv_intro.2",
+      "category": "sv_intro",
+      "text": "Time for the Mildew Survey. Your answers are anonymous. Your shame is not.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.sv_intro.2"
+    },
+    {
+      "id": "g.sv_intro.3",
+      "category": "sv_intro",
+      "text": "The Mildew Survey. Write what you think. Then judge each other. It's very healthy.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.sv_intro.3"
+    },
+    {
+      "id": "g.sv_rules.1",
+      "category": "sv_rules",
+      "text": "I'll ask a question. Type an answer on your device. Then vote for the best one. Not your own. We check.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.sv_rules.1"
+    },
+    {
+      "id": "g.sv_rules.2",
+      "category": "sv_rules",
+      "text": "Write an answer. Vote for somebody else's. Some answers come from our archive. Some of the archive is very old.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.sv_rules.2"
+    },
+    {
+      "id": "g.sv_ask.1",
+      "category": "sv_ask",
+      "text": "Here's the question.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.sv_ask.1"
+    },
+    {
+      "id": "g.sv_ask.2",
+      "category": "sv_ask",
+      "text": "Thumbs ready. Here's what the survey wants to know.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.sv_ask.2"
+    },
+    {
+      "id": "g.sv_ask.3",
+      "category": "sv_ask",
+      "text": "This one came in by post. Unsigned.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.sv_ask.3"
+    },
+    {
+      "id": "g.sv_ask.4",
+      "category": "sv_ask",
+      "text": "Our researchers asked this question four hundred times. Your turn.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.sv_ask.4"
+    },
+    {
+      "id": "g.sv_winner.1",
+      "category": "sv_winner",
+      "text": "{name} wins that. \"{answer}\". Lovely.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.sv_winner.2",
+      "category": "sv_winner",
+      "text": "The room has spoken. {name}. \"{answer}\". I'm not proud of any of you.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.sv_winner.3",
+      "category": "sv_winner",
+      "text": "That's {name}'s. Of course it is.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.sv_winner.4",
+      "category": "sv_winner",
+      "text": "{name} takes it. We'll be keeping that one.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.sv_no_votes.1",
+      "category": "sv_no_votes",
+      "text": "Nobody voted. A survey of silence.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.sv_no_votes.1"
+    },
+    {
+      "id": "g.sv_no_votes.2",
+      "category": "sv_no_votes",
+      "text": "Not a single vote. Apathy. Very British.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.sv_no_votes.2"
+    },
+    {
+      "id": "g.sv_archive_reveal.1",
+      "category": "sv_archive_reveal",
+      "text": "That one came from the archive. Nobody remembers who wrote it.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.sv_archive_reveal.1"
+    },
+    {
+      "id": "g.sv_archive_reveal.2",
+      "category": "sv_archive_reveal",
+      "text": "The archive answer. Some of those are from 1998. Some of them aren't.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.sv_archive_reveal.2"
+    },
+    {
+      "id": "g.sv_archive_reveal.3",
+      "category": "sv_archive_reveal",
+      "text": "That was from our archive. Don't ask whose.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.sv_archive_reveal.3"
+    },
+    {
+      "id": "g.sv_who_said_reveal.1",
+      "category": "sv_who_said_reveal",
+      "text": "It was {name}. You can see it in the face.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.sv_who_said_reveal.2",
+      "category": "sv_who_said_reveal",
+      "text": "{name} wrote that. We'll be talking about it later. Or not.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.sv_who_said_reveal.3",
+      "category": "sv_who_said_reveal",
+      "text": "That was {name}. Of course it was.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.sv_outro.1",
+      "category": "sv_outro",
+      "text": "That concludes the survey. Results will be shared with nobody.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.sv_outro.1"
+    },
+    {
+      "id": "g.sv_outro.2",
+      "category": "sv_outro",
+      "text": "The Mildew Survey. Thank you for your honesty. Some of you should see someone.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.sv_outro.2"
+    },
+    {
+      "id": "g.mf_intro.1",
+      "category": "mf_intro",
+      "text": "It's Mouthfeel. The round where you describe things that should never be in your mouth.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.mf_intro.1"
+    },
+    {
+      "id": "g.mf_intro.2",
+      "category": "mf_intro",
+      "text": "Welcome to Mouthfeel. Use your words. Your awful, awful words.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.mf_intro.2"
+    },
+    {
+      "id": "g.mf_intro.3",
+      "category": "mf_intro",
+      "text": "Mouthfeel. I've done this round for years. I still can't eat soup.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.mf_intro.3"
+    },
+    {
+      "id": "g.mf_rules.1",
+      "category": "mf_rules",
+      "text": "I'll name something. You describe how it feels in your mouth. Then everybody votes for the category I give you. I may enter an answer myself. Anonymously.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.mf_rules.1"
+    },
+    {
+      "id": "g.mf_rules.2",
+      "category": "mf_rules",
+      "text": "Describe the mouthfeel. Vote on the category. Don't vote for yourself. I'll know.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.mf_rules.2"
+    },
+    {
+      "id": "g.mf_ask.1",
+      "category": "mf_ask",
+      "text": "Imagine it. Now describe it.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.mf_ask.1"
+    },
+    {
+      "id": "g.mf_ask.2",
+      "category": "mf_ask",
+      "text": "Close your eyes. Open your mouth. Not literally.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.mf_ask.2"
+    },
+    {
+      "id": "g.mf_ask.3",
+      "category": "mf_ask",
+      "text": "Picture this between your teeth.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.mf_ask.3"
+    },
+    {
+      "id": "g.mf_ask.4",
+      "category": "mf_ask",
+      "text": "Here it is. Take your time. Chew it over.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.mf_ask.4"
+    },
+    {
+      "id": "g.mf_winner.1",
+      "category": "mf_winner",
+      "text": "{name} wins it. \"{answer}\". I can taste that.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.mf_winner.2",
+      "category": "mf_winner",
+      "text": "That's {name}'s. Disgusting. Well done.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.mf_winner.3",
+      "category": "mf_winner",
+      "text": "{name}. Beautifully revolting.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.mf_no_votes.1",
+      "category": "mf_no_votes",
+      "text": "No votes. You've all lost your appetite.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.mf_no_votes.1"
+    },
+    {
+      "id": "g.mf_no_votes.2",
+      "category": "mf_no_votes",
+      "text": "Nobody voted. That's fair.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.mf_no_votes.2"
+    },
+    {
+      "id": "g.mf_chain_final.1",
+      "category": "mf_chain_final",
+      "text": "And there it is. Rate it. Be honest.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.mf_chain_final.1"
+    },
+    {
+      "id": "g.mf_chain_final.2",
+      "category": "mf_chain_final",
+      "text": "Look what you've made. Rate it on your devices.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.mf_chain_final.2"
+    },
+    {
+      "id": "g.mf_chain_final.3",
+      "category": "mf_chain_final",
+      "text": "That's what you've built. Someone has to eat it. Rate it.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.mf_chain_final.3"
+    },
+    {
+      "id": "g.mf_chain_good.1",
+      "category": "mf_chain_good",
+      "text": "A masterpiece. Points shared between the chefs.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.mf_chain_good.1"
+    },
+    {
+      "id": "g.mf_chain_good.2",
+      "category": "mf_chain_good",
+      "text": "That's genuinely horrible. Well done, all of you.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.mf_chain_good.2"
+    },
+    {
+      "id": "g.mf_chain_bad.1",
+      "category": "mf_chain_bad",
+      "text": "Not your best work. Not anybody's best work.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.mf_chain_bad.1"
+    },
+    {
+      "id": "g.mf_chain_bad.2",
+      "category": "mf_chain_bad",
+      "text": "Underwhelming. Even the bin doesn't want it.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.mf_chain_bad.2"
+    },
+    {
+      "id": "g.mf_graham_choice.1",
+      "category": "mf_graham_choice",
+      "text": "My personal favourite was {name}'s. Graham's Choice. Small bonus.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.mf_graham_choice.2",
+      "category": "mf_graham_choice",
+      "text": "Graham's Choice goes to {name}. Don't let it go to your head.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.mf_graham_choice.3",
+      "category": "mf_graham_choice",
+      "text": "I liked {name}'s. That's all. Small bonus.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.mf_outro.1",
+      "category": "mf_outro",
+      "text": "That's Mouthfeel. Have a glass of water. Have several.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.mf_outro.1"
+    },
+    {
+      "id": "g.mf_outro.2",
+      "category": "mf_outro",
+      "text": "That concludes Mouthfeel. Please do not eat any of it at home.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.mf_outro.2"
+    },
+    {
+      "id": "g.mf_rev_ask.1",
+      "category": "mf_rev_ask",
+      "text": "I'm going to describe something. You tell me what it is.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.mf_rev_ask.1"
+    },
+    {
+      "id": "g.mf_rev_ask.2",
+      "category": "mf_rev_ask",
+      "text": "Here's my tasting note. What am I eating?",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.mf_rev_ask.2"
+    },
+    {
+      "id": "g.mf_rev_ask.3",
+      "category": "mf_rev_ask",
+      "text": "Listen carefully. What am I describing?",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.mf_rev_ask.3"
+    },
+    {
+      "id": "g.mf_rev_final.1",
+      "category": "mf_rev_final",
+      "text": "Last one. Concentrate. What is in my mouth?",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.mf_rev_final.1"
+    },
+    {
+      "id": "g.wv_discarded.1",
+      "category": "wv_discarded",
+      "text": "One answer has been removed. No. We're not putting that on television.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.wv_discarded.1"
+    },
+    {
+      "id": "g.wv_discarded.2",
+      "category": "wv_discarded",
+      "text": "We've taken one out. You know who you are.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.wv_discarded.2"
+    },
+    {
+      "id": "g.wv_altered.1",
+      "category": "wv_altered",
+      "text": "Charming.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.wv_altered.1"
+    },
+    {
+      "id": "g.wv_altered.2",
+      "category": "wv_altered",
+      "text": "I've corrected one of those. You're welcome.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.wv_altered.2"
+    },
+    {
+      "id": "g.wv_graham_won.1",
+      "category": "wv_graham_won",
+      "text": "Mine won. Naturally.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.wv_graham_won.1"
+    },
+    {
+      "id": "g.wv_graham_won.2",
+      "category": "wv_graham_won",
+      "text": "That was mine. Naturally.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.wv_graham_won.2"
+    },
+    {
+      "id": "g.wv_graham_won.3",
+      "category": "wv_graham_won",
+      "text": "That one was me. Thirty years in the business.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.wv_graham_won.3"
+    },
+    {
+      "id": "g.wv_archive_won.1",
+      "category": "wv_archive_won",
+      "text": "You voted for the archive. Somebody wrote that a long time ago. They'd be pleased. Probably.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.wv_archive_won.1"
+    },
+    {
+      "id": "g.wv_archive_won.2",
+      "category": "wv_archive_won",
+      "text": "The archive wins. It usually does.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.wv_archive_won.2"
+    },
+    {
+      "id": "g.wv_match.1",
+      "category": "wv_match",
+      "text": "Two of you wrote the same thing. That's either telepathy or a worrying sign. Bonus points.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.wv_match.1"
+    },
+    {
+      "id": "g.wv_match.2",
+      "category": "wv_match",
+      "text": "A match! Same answer, independently. Bonus.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.wv_match.2"
+    }
+  ]
 }

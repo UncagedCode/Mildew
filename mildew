@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd "$(dirname "$0")"
+case "${1:-help}" in
+  voice)
+    shift
+    if ! command -v python3 >/dev/null 2>&1 && [ "${1:-}" = setup ] && command -v pkg >/dev/null 2>&1; then
+      pkg install -y python
+    fi
+    exec python3 tools/voice_pipeline/pipeline.py "$@" ;;
+  test) shift; exec bash tools/run_tests.sh "$@" ;;
+  android) shift; exec bash tools/build/build_apk.sh "$@" ;;
+  *) printf '%s\n' 'Usage: ./mildew voice <setup|doctor|download|audition|lock|plan|build|select|approve|preview|collect|report|test>' './mildew test' './mildew android [debug|release]' ;;
+esac
