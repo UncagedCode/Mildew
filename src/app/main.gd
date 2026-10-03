@@ -141,6 +141,7 @@ func _build_presentation() -> void:
 	presenter.voice = voice
 	presenter.view = view
 	presenter.hole = view.hole
+	presenter.quiz = view.quiz
 	add_child(presenter)
 	presenter.attach(host)
 	dev = DevOverlay.new()

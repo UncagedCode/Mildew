@@ -71,6 +71,10 @@ func validate(db: ContentDB, release_mode: bool = false) -> bool:
 					_validate_hole(item, where, release_mode)
 				"incident":
 					_validate_incident(item, where)
+				"real_or_mildew":
+					_validate_real_or_mildew(item, where, release_mode)
+				"guess_the_genitals":
+					_validate_gtg(item, where, release_mode)
 				"graham_lines", "announcer_lines":
 					_validate_line(item, where, moods)
 				_:
@@ -115,6 +119,63 @@ func _validate_multiple_choice(item: Dictionary, where: String, release_mode: bo
 			errors.append("%s: duplicate option '%s'" % [where, o])
 		lowered[k] = true
 	_validate_factual(item, where, release_mode)
+
+
+const ROM_ROUNDS := ["which_real", "one_mildew", "all_real"]
+const ROM_CATEGORIES := ["medicine", "biology", "history", "food", "inventions", "advertising", "scientific_oddities", "historical_customs", "disasters", "strange_objects"]
+
+
+## Real or Mildew? (docs/04 §4): always factual -> sources required; round shape must be consistent.
+func _validate_real_or_mildew(item: Dictionary, where: String, release_mode: bool) -> void:
+	var it := item.duplicate()
+	it["factual"] = true
+	_validate_multiple_choice(it, where, release_mode)
+	var rnd := str(item.get("round", ""))
+	if not ROM_ROUNDS.has(rnd):
+		errors.append("%s: invalid round '%s'" % [where, rnd])
+	if not ROM_CATEGORIES.has(str(item.get("category", ""))):
+		errors.append("%s: unknown Real or Mildew category '%s'" % [where, str(item.get("category", ""))])
+	if str(item.get("fact", "")).strip_edges() == "":
+		errors.append("%s: missing factual explanation" % where)
+	var opts: Array = item.get("options", [])
+	if rnd == "all_real" and int(item.get("correct", -1)) != opts.size() - 1:
+		errors.append("%s: all_real round must have the 'all real' option last and correct" % where)
+	for o in opts:
+		if str(o).length() > 120:
+			errors.append("%s: option longer than 120 characters (unreadable on TV)" % where)
+
+
+const GTG_FORBIDDEN_TAGS := ["human", "people", "sexual_activity", "explicit"]
+
+
+## Guess the Genitals (docs/04 §1, docs/13): ANIMAL ONLY, clinical; every item needs a species,
+## a sourced biological fact and licensed media. Human anatomy is rejected outright.
+func _validate_gtg(item: Dictionary, where: String, release_mode: bool) -> void:
+	var it := item.duplicate()
+	it["factual"] = true
+	_validate_multiple_choice(it, where, release_mode)
+	var tags: Array = item.get("content_tags", [])
+	for t in GTG_FORBIDDEN_TAGS:
+		if tags.has(t):
+			errors.append("%s: forbidden tag '%s' (animal-only content rule)" % [where, t])
+	var taxon := str(item.get("taxon", "")).strip_edges()
+	if taxon == "":
+		errors.append("%s: missing taxon (animal-only enforcement needs a species or group)" % where)
+	elif taxon.to_lower().contains("homo sapiens") or taxon.to_lower() == "human":
+		errors.append("%s: human anatomy is not allowed in Guess the Genitals" % where)
+	if not ["animal", "decoy"].has(str(item.get("kingdom_class", ""))):
+		errors.append("%s: kingdom_class must be 'animal' or 'decoy'" % where)
+	if str(item.get("kingdom_class", "")) == "decoy" and not bool(item.get("decoy", false)):
+		errors.append("%s: decoy class but decoy flag not set" % where)
+	if str(item.get("fact", "")).strip_edges() == "":
+		errors.append("%s: missing biological fact" % where)
+	var img := str(item.get("image", ""))
+	if img == "":
+		errors.append("%s: missing image" % where)
+	elif not ResourceLoader.exists(img) and not FileAccess.file_exists(img):
+		errors.append("%s: missing referenced asset %s" % [where, img])
+	else:
+		_validate_media(item, where, release_mode)
 
 
 func _validate_hole(item: Dictionary, where: String, release_mode: bool) -> void:

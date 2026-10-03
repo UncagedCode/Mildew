@@ -86,6 +86,7 @@ func test_show_updates_profiles_and_installation() -> void:
 		t += 0.1
 	check_eq(s.phase, SessionServer.Phase.ENDED, "show ended")
 	check_eq(int(store.installation.broadcasts_played), 1, "broadcast counted")
-	check_eq((store.installation.recent_content_history as Array).size(), c.i("show.warmup_questions", 2) + c.i("hole.rounds_per_game", 6), "content history recorded (warm-up + Hole)")
+	check((store.installation.recent_content_history as Array).size() >= c.i("show.warmup_questions", 2) + c.i("hole.rounds_per_game", 6), "content history recorded (warm-up + every game)")
+	check(not (store.installation.get("facts_seen", []) as Array).is_empty(), "facts broadcast are archived for the Viewer Information Service")
 	for prof in store.profiles.values():
 		check_eq(int(prof.games_played), 1, "games_played incremented for %s" % prof.display_name)

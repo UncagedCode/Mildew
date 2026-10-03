@@ -199,7 +199,11 @@ func add_fake_player(personality: String = "") -> FakePlayerBot:
 		personality = FakePlayerBot.PERSONALITIES[_bot_counter % FakePlayerBot.PERSONALITIES.size()]
 	var bot := FakePlayerBot.new(name, personality)
 	bot.room_key = session.join_key
-	bot.oracle = func(content_id: String) -> int: return int(content.get_item(content_id).get("correct", -1))
+	bot.oracle = func(content_id: String) -> String:
+		var it: Dictionary = content.get_item(content_id)
+		var opts: Array = it.get("options", [])
+		var c := int(it.get("correct", -1))
+		return str(opts[c]) if c >= 0 and c < opts.size() else ""
 	bot.hole_oracle = func(content_id: String, variant: String) -> String:
 		var it: Dictionary = content.get_item(content_id)
 		if variant == "scale":

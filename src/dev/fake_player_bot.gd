@@ -15,7 +15,7 @@ var conn_id := -1
 var player_id := ""
 var resume_token := ""
 var room_key := ""
-var oracle: Callable              # func(qid_base: String) -> int (correct index) or -1
+var oracle: Callable              # func(content_id: String) -> String (correct option TEXT; options are shuffled per asking)
 var hole_oracle: Callable         # func(content_id: String, variant: String) -> String (answer label)
 var hole_handled := {}            # "qid:stage" -> true
 var rng := RandomNumberGenerator.new()
@@ -154,7 +154,7 @@ func _on_hole_pick(data: Dictionary) -> void:
 func _choose(qid: String, options: Array) -> int:
 	var correct := -1
 	if oracle.is_valid():
-		correct = int(oracle.call(qid.split("#")[0]))
+		correct = options.find(str(oracle.call(qid.split("#")[0])))
 	match personality:
 		"high_accuracy", "cautious":
 			if correct >= 0 and rng.randf() < 0.9:

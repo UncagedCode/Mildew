@@ -12,6 +12,8 @@ var audio: AudioDesk
 var voice: VoiceService
 var view: ProgrammeView
 var hole: HoleBoard
+var quiz: QuizBoard
+var _quiz_q := false                 # current question is on the quiz board (CP3 layouts)
 
 var _sync_timer := 0.0
 var _game_title := ""
@@ -42,6 +44,8 @@ func _process(delta: float) -> void:
 		gfx.players = pmap
 		if hole:
 			hole.players = pmap
+		if quiz:
+			quiz.players = pmap
 		sys.contestants = plist.filter(func(p): return p.status == "active" and p.connected).size()
 		studio.graham.set_pressure(host.session.director.pressure)
 		if not studio.graham.is_speaking():
@@ -79,6 +83,10 @@ func _on_event(evt: Dictionary) -> void:
 			gfx.dog_visible = true
 			if str(evt.kind) != "hole_round" and hole and hole.is_showing():
 				hole.hide_board()
+				_in_question = false
+			if str(evt.kind) != "question" and quiz and quiz.is_showing():
+				quiz.hide_board()
+				_quiz_q = false
 				_in_question = false
 			if str(evt.kind) == "intros":
 				audio.applause("medium")
@@ -129,8 +137,46 @@ func _on_event(evt: Dictionary) -> void:
 		"hole_reveal":
 			hole.reveal(evt)
 			_hole_reaction(evt)
+		"question_show" when str(evt.get("layout", "panel")) != "panel":
+			_in_question = true
+			_quiz_q = true
+			for pid in studio.podiums.keys():
+				studio.light_podium(pid, false)
+			gfx.hide_question()
+			quiz.show_question(evt)
+			quiz.set_answered(0, host.session.active_player_ids().size())
+			audio.play("whoosh", -4.0)
+			studio.graham.set_activity("reading")
+		"question_open" when _quiz_q:
+			quiz.start_timer(float(evt.window) / maxf(host.session.time_scale, 0.001))
+			studio.graham.set_activity("idle")
+		"answer_in" when _quiz_q:
+			quiz.set_answered(int(evt.count), int(evt.of))
+			studio.light_podium(str(evt.pid), true)
+			audio.play("lock", -6.0)
+		"question_locked" when _quiz_q:
+			quiz.stop_timer()
+		"reveal" when _quiz_q:
+			quiz.reveal(evt)
+			var qd: Dictionary = evt.get("deltas", {})
+			var qright := 0
+			for pid in qd.keys():
+				if int(qd[pid]) > 0:
+					qright += 1
+					studio.flash_podium(pid, "+%s" % PodiumScreen._fmt(int(qd[pid])))
+			audio.play("correct" if qright > 0 else "wrong")
+			if evt.get("gross", false) and qright > 0:
+				audio.crowd("ooh", -6.0)
+			elif qright == 0:
+				if not evt.get("certain", {}).is_empty():
+					audio.crowd("laugh", -6.0)
+			elif qright == qd.size():
+				audio.applause("medium")
+			else:
+				audio.applause("small")
 		"question_show":
 			_in_question = true
+			_quiz_q = false
 			for pid in studio.podiums.keys():
 				studio.light_podium(pid, false)
 			gfx.show_question(_game_title if _game_title != "" else "MILDEW", str(evt.prompt), evt.options)
@@ -455,4 +501,4 @@ func _audience_cutaway(cam: String, seconds: float) -> bool:
 
 
 func _graphic_owns_frame() -> bool:
-	return _in_question or (hole != null and hole.is_showing()) or gfx.is_question_visible()
+	return _in_question or (hole != null and hole.is_showing()) or (quiz != null and quiz.is_showing()) or gfx.is_question_visible()

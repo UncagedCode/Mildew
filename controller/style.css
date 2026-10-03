@@ -160,3 +160,6 @@ body {
 .toast { font-size: 14px; color: var(--lcd-warn); }
 .flash { animation: flash .5s ease-out 1; }
 @keyframes flash { from { filter: brightness(2.2); } to { filter: none; } }
+
+/* CP3: long Real or Mildew? claims on the keys */
+.key.long { font-size: 14px; line-height: 1.25; text-align: left; padding-top: 10px; padding-bottom: 10px; min-height: 72px; letter-spacing: 0; text-transform: none; }

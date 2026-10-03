@@ -22,8 +22,10 @@ func test_two_player_full_show() -> void:
 	check_eq(h.session.phase, SessionServer.Phase.ENDED, "phase ENDED (not closed)")
 	var warm := h.session.cfg.i("show.warmup_questions", 2)
 	var rounds := h.session.cfg.i("hole.rounds_per_game", 6)
-	check_eq(h.events_of("question_show").size(), warm, "new installation gets the rehearsal warm-up")
-	check_eq(h.events_of("reveal").size(), warm, "warm-up reveals")
+	var rehearsal := func(e): return str(e.get("game_id", "")) == "studio_rehearsal"
+	check_eq(h.events_of("question_show").filter(rehearsal).size(), warm, "new installation gets the rehearsal warm-up")
+	check_eq(h.events_of("reveal").filter(rehearsal).size(), warm, "warm-up reveals")
+	check(h.events_of("sting").size() >= 3, "a multi-game programme (rehearsal + games)")
 	check_eq(h.events_of("hole_round").size(), rounds, "a full game of Hole")
 	check_eq(h.events_of("hole_reveal").size(), rounds, "every Hole round revealed")
 	check(h.events_of("sign_off").size() == 1, "sign-off reached")
@@ -32,7 +34,10 @@ func test_two_player_full_show() -> void:
 	check(int(st[0].score) >= int(st[1].score), "standings sorted")
 	for s in st:
 		check(int(s.score) >= 0, "no negative score")
-		check(int(s.score) <= warm * (1150 + 50) + rounds * 1500, "score within max bound")
+		var earned := 0
+		for e in h.events_of("reveal") + h.events_of("hole_reveal"):
+			earned += int(e.get("deltas", {}).get(s.pid, 0))
+		check_eq(int(s.score), earned, "score equals the sum of awarded points")
 	check(a.errors_received.is_empty() and b.errors_received.is_empty(), "bots got no errors: %s %s" % [a.errors_received, b.errors_received])
 
 
@@ -51,7 +56,11 @@ func test_eight_player_full_show() -> void:
 	for p in h.session.players.values():
 		numbers[p.number] = true
 	check_eq(numbers.size(), 8, "unique podium numbers")
-	check(h.events_of("say").filter(func(e): return e.category == "afk_player").size() <= 1, "afk call-out at most once")
+	var afk_calls := h.events_of("say").filter(func(e): return e.category == "afk_player")
+	var called := {}
+	for e in afk_calls:
+		check(not called.has(e.get("pid", "")), "afk call-out at most once per player")
+		called[e.get("pid", "")] = true
 
 
 func test_ninth_player_rejected() -> void:
@@ -218,7 +227,7 @@ func test_late_join_waits_for_boundary() -> void:
 	check(h.events_of("say").filter(func(e): return e.category == "late_join").size() == 1, "Graham notes lateness")
 	check(not c.screens_seen.has("question"), "late joiner never injected mid-game")
 	check(h.run_until(func(): return pc.status == PlayerState.Status.ACTIVE, 300.0), "late joiner integrated at a game boundary")
-	var q_count_at_integration := h.events_of("question_show").size()
+	var q_count_at_integration := h.events_of("question_show").filter(func(e): return str(e.get("game_id", "")) == "studio_rehearsal").size()
 	check_eq(q_count_at_integration, h.session.cfg.i("show.warmup_questions", 2), "integrated only after the rehearsal warm-up finished")
 	check_eq(h.events_of("hole_round").size(), 0, "...and before the next game began")
 	check(h.run_until(_ended(h), 300.0), "show completes")
@@ -317,7 +326,7 @@ func test_scoring_bounds_and_speed_bonus() -> void:
 	a.auto_start_at_count = 2
 	check(h.run_until(func(): return a.last_screen.get("screen") == "question", 200.0), "question reached")
 	var qid: String = a.last_screen.data.qid
-	var correct := h.oracle(qid.split("#")[0])
+	var correct := h.correct_index(qid, a.last_screen.data.options)
 	h.send_raw(a, JSON.stringify({"t": "answer", "q": qid, "c": correct}))
 	h.send_raw(b, JSON.stringify({"t": "answer", "q": qid, "c": (correct + 1) % 4}))
 	check(h.run_until(func(): return h.events_of("reveal").size() == 1, 30.0), "reveal")

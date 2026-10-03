@@ -387,7 +387,9 @@
   function scrQuestion(d) {
     clear();
     buzz([30, 40, 30]);
+    if (d.header) lcd.appendChild(el("div", "sub", d.header));
     lcd.appendChild(el("div", "prompt", d.prompt));
+    if (d.confidence) lcd.appendChild(el("div", "sub warn", "CONFIDENCE ROUND: PICK, THEN SAY HOW SURE YOU ARE."));
     const bar = el("div", "timer"); const fill = el("div"); bar.appendChild(fill); lcd.appendChild(bar);
     const secs = el("div", "sub"); lcd.appendChild(secs);
     const total = Math.max(1, d.total_ms || 20000);
@@ -400,14 +402,29 @@
     };
     tick();
     const caps = ["A", "B", "C", "D"], cls = ["a", "b", "c", "d"];
+    const submit = (i, k) => send({ t: "answer", q: d.qid, c: i, k: k ? 1 : 0 });
     (d.options || []).forEach((opt, i) => {
-      key(opt, cls[i], (btn) => {
+      const b = key(opt, cls[i] + (d.long ? " long" : ""), (btn) => {
         if (S.status.paused) { toast("TRANSMISSION IS ON HOLD."); return; }
+        if (d.confidence) return confirmConfidence(d, i, submit);
         for (const k of keys.querySelectorAll(".key")) k.disabled = true;
         btn.classList.add("pressed");
-        send({ t: "answer", q: d.qid, c: i });
+        submit(i, false);
       }, caps[i]);
     });
+  }
+  // Confidence wager (Real or Mildew?): NORMAL or I'M CERTAIN (double points if right).
+  function confirmConfidence(d, i, submit) {
+    clear();
+    const caps = ["A", "B", "C", "D"];
+    lcd.appendChild(el("div", "sub", d.header || "CONFIDENCE ROUND"));
+    lcd.appendChild(el("div", "title", "YOU CHOSE " + caps[i]));
+    lcd.appendChild(el("div", "sub", String(d.options[i] || "").toUpperCase()));
+    lcd.appendChild(el("div", "big", "HOW SURE ARE YOU?"));
+    lcd.appendChild(el("div", "sub", "CERTAIN AND RIGHT: DOUBLE POINTS. CERTAIN AND WRONG: GRAHAM WILL REMEMBER."));
+    key("I'M CERTAIN", "go plain", (b) => { b.classList.add("pressed"); submit(i, true); });
+    key("NORMAL", "ok plain", (b) => { b.classList.add("pressed"); submit(i, false); });
+    key("CHANGE MY ANSWER", "grey plain small", () => scrQuestion(d));
   }
 
   // ---------------- HOLE ----------------
@@ -501,9 +518,10 @@
   function scrLocked(d) {
     clear();
     if (d.choice >= 0) {
-      lcd.appendChild(el("div", "sub", "ANSWER LOCKED"));
+      lcd.appendChild(el("div", "sub", (d.header ? d.header + " · " : "") + "ANSWER LOCKED"));
       lcd.appendChild(el("div", "huge", ["A", "B", "C", "D"][d.choice] || "?"));
-      lcd.appendChild(el("div", "title", (d.text || "").toUpperCase()));
+      lcd.appendChild(el("div", d.text && d.text.length > 40 ? "sub" : "title", (d.text || "").toUpperCase()));
+      if (d.certain) lcd.appendChild(el("div", "big warn", "YOU SAID: CERTAIN"));
     } else {
       lcd.appendChild(el("div", "sub", "ANSWERS CLOSED"));
       lcd.appendChild(el("div", "big warn", "NO ANSWER RECEIVED"));
@@ -518,10 +536,13 @@
       buzz([20, 30, 60]);
       lcd.appendChild(el("div", "huge", "CORRECT"));
       lcd.appendChild(el("div", "big", "+" + Number(d.points).toLocaleString("en-GB")));
+      if (d.certain) lcd.appendChild(el("div", "title", "CERTAIN, AND RIGHT. DOUBLED."));
     } else {
       buzz(200);
       lcd.appendChild(el("div", "huge warn", d.answered ? "WRONG" : "NOTHING"));
-      lcd.appendChild(el("div", "title", "IT WAS: " + String(d.answer_text || "").toUpperCase()));
+      if (d.certain) lcd.appendChild(el("div", "title warn", "AND YOU WERE CERTAIN."));
+      const at = String(d.answer_text || "");
+      lcd.appendChild(el("div", at.length > 40 ? "sub" : "title", "IT WAS: " + at.toUpperCase()));
     }
     lcd.appendChild(el("div", "spacer"));
     lcd.appendChild(el("div", "sub", "YOUR SCORE: " + Number(d.score || 0).toLocaleString("en-GB")));

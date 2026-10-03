@@ -1,0 +1,1444 @@
+{
+ "pack_id": "real_or_mildew.core_cp3",
+ "content_kind": "real_or_mildew",
+ "game_id": "real_or_mildew",
+ "_comment": "Real or Mildew? CP3 set. Fakes are written in the same factual tone as the real options (docs/04 §4). 'round': which_real = the real one is correct; one_mildew = three real, the fake is correct; all_real = rare, every claim is real and the last option is correct. All items are DRAFT until a human checks each source (release validation blocks unreviewed factual content).",
+ "items": [
+  {
+   "id": "rom.ketchup_medicine",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "factual",
+    "medical",
+    "grossness_1"
+   ],
+   "director_tags": [
+    "trivia"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "category": "medicine",
+   "round": "which_real",
+   "prompt": "WHICH ONE IS REAL?",
+   "options": [
+    "In the 1830s, tomato ketchup was sold in pill form as a cure for indigestion.",
+    "In the 1830s, mustard was sold by chemists as a cure for baldness.",
+    "In the 1830s, brown sauce was prescribed to sailors to prevent seasickness.",
+    "In the 1830s, salad cream was sold as a treatment for gout."
+   ],
+   "correct": 0,
+   "points": 1000,
+   "fact": "In the 1830s, American physician John Cooke Bennett promoted tomatoes as medicine, and 'tomato pills' made from extract were sold widely as cures for indigestion and more.",
+   "sources": [
+    {
+     "title": "Ketchup — history",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Ketchup",
+     "supported_claim": "Tomato ketchup/tomato pills were marketed as medicine in the 1830s (John Cooke Bennett).",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    }
+   ],
+   "reveal_line": "Ketchup pills. For your stomach. They didn't work, but they were very red."
+  },
+  {
+   "id": "rom.tobacco_enema",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "factual",
+    "medical",
+    "grossness_3"
+   ],
+   "director_tags": [
+    "trivia"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "category": "medicine",
+   "round": "which_real",
+   "prompt": "WHICH ONE IS REAL?",
+   "options": [
+    "18th-century rescuers revived drowning victims by blowing tobacco smoke into their bottoms.",
+    "18th-century rescuers revived drowning victims by pouring hot gin into their ears.",
+    "18th-century rescuers revived drowning victims by rolling them in warm sheep's wool soaked in vinegar.",
+    "18th-century rescuers revived drowning victims by holding a live eel against their chest."
+   ],
+   "correct": 0,
+   "points": 1000,
+   "fact": "Tobacco smoke enemas were a recommended resuscitation method in 18th-century Britain; kits were placed along the Thames by what became the Royal Humane Society.",
+   "sources": [
+    {
+     "title": "Tobacco smoke enema",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Tobacco_smoke_enema",
+     "supported_claim": "Tobacco smoke was blown into the rectum to revive drowning victims; resuscitation kits were placed along the Thames.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    }
+   ],
+   "reveal_line": "Smoke. Up the bottom. Along the Thames. That's where the phrase comes from. It isn't, but it should be."
+  },
+  {
+   "id": "rom.wombat_cubes",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "factual",
+    "animals",
+    "grossness_3",
+    "scatological"
+   ],
+   "director_tags": [
+    "trivia"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "category": "biology",
+   "round": "which_real",
+   "prompt": "WHICH ONE IS REAL?",
+   "options": [
+    "Wombats produce cube-shaped droppings.",
+    "Badgers produce perfectly spherical droppings.",
+    "Otters' droppings are naturally scented of jasmine.",
+    "Hedgehogs can only defecate while curled into a ball."
+   ],
+   "correct": 0,
+   "points": 1000,
+   "fact": "Wombat faeces are distinctly cube-shaped; a 2021 study found the shape forms in the last stretch of the intestine through varying stiffness of the gut wall.",
+   "sources": [
+    {
+     "title": "Wombat — droppings",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Wombat",
+     "supported_claim": "Wombats produce cubic faeces.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    },
+    {
+     "title": "Intestines of non-uniform stiffness mold the corners of wombat feces (Yang et al., 2021)",
+     "publisher_or_organisation": "Soft Matter (Royal Society of Chemistry)",
+     "reference": "https://doi.org/10.1039/D0SM01230K",
+     "supported_claim": "Mechanism of cube formation in the intestine.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    }
+   ],
+   "reveal_line": "Cubes. Little brown dice. Nature is a very strange designer."
+  },
+  {
+   "id": "rom.koala_prints",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "factual",
+    "animals",
+    "grossness_1"
+   ],
+   "director_tags": [
+    "trivia"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "category": "biology",
+   "round": "one_mildew",
+   "prompt": "THREE ARE REAL. ONE IS MILDEW. WHICH IS MILDEW?",
+   "options": [
+    "Koalas have fingerprints almost indistinguishable from human ones.",
+    "Octopuses have three hearts.",
+    "Horses are unable to vomit.",
+    "Giraffes have no vocal cords and cannot make any sound."
+   ],
+   "correct": 3,
+   "points": 1000,
+   "fact": "Giraffes do have a larynx and make sounds, including snorts and a low humming recorded at night. Koala prints, three-hearted octopuses and non-vomiting horses are all real.",
+   "sources": [
+    {
+     "title": "Koala — fingerprints",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Koala",
+     "supported_claim": "Koalas have fingerprints similar to human ones.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    },
+    {
+     "title": "Octopus — circulatory system",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Octopus",
+     "supported_claim": "Octopuses have three hearts.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    },
+    {
+     "title": "Equine anatomy / vomiting",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Equine_anatomy",
+     "supported_claim": "Horses are generally unable to vomit.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    },
+    {
+     "title": "Giraffe — vocalisation",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Giraffe",
+     "supported_claim": "Giraffes produce sounds including humming.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    }
+   ],
+   "reveal_line": "Giraffes hum. At night. Quietly. Nobody knows what about."
+  },
+  {
+   "id": "rom.pearlfish",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "factual",
+    "animals",
+    "grossness_3"
+   ],
+   "director_tags": [
+    "trivia"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "category": "biology",
+   "round": "which_real",
+   "prompt": "WHICH ONE IS REAL?",
+   "options": [
+    "A fish called the pearlfish lives inside the bottoms of sea cucumbers.",
+    "A fish called the sockfish lives inside the shells of discarded crabs and wears them as armour.",
+    "A fish called the lampfish lives inside the mouths of whales and eats their leftovers.",
+    "A fish called the bellfish lives inside jellyfish and steers them like a boat."
+   ],
+   "correct": 0,
+   "points": 1000,
+   "fact": "Pearlfish (family Carapidae) shelter inside sea cucumbers, entering and leaving through the anus, and some species eat the host's internal organs.",
+   "sources": [
+    {
+     "title": "Carapidae (pearlfish)",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Carapidae",
+     "supported_claim": "Pearlfish live inside sea cucumbers, entering through the anus.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    }
+   ],
+   "reveal_line": "In through the back door. Every night. And the sea cucumber just has to put up with it."
+  },
+  {
+   "id": "rom.sea_cucumber_organs",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "factual",
+    "animals",
+    "grossness_3"
+   ],
+   "director_tags": [
+    "trivia"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "category": "biology",
+   "round": "one_mildew",
+   "prompt": "THREE ARE REAL. ONE IS MILDEW. WHICH IS MILDEW?",
+   "options": [
+    "Some sea cucumbers defend themselves by ejecting their own internal organs.",
+    "Some sea cucumbers breathe through their anus.",
+    "Male seahorses become pregnant and give birth.",
+    "Some sea cucumbers can glow in the dark to attract a mate from up to a mile away."
+   ],
+   "correct": 3,
+   "points": 1000,
+   "fact": "Sea cucumbers really do expel their organs and regrow them, and many breathe through 'respiratory trees' connected to the cloaca. Male seahorses carry and give birth to young. The mile-wide mating glow is Mildew.",
+   "sources": [
+    {
+     "title": "Sea cucumber — evisceration and respiration",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Sea_cucumber",
+     "supported_claim": "Evisceration as defence; respiratory trees via the cloaca.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    },
+    {
+     "title": "Seahorse — reproduction",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Seahorse",
+     "supported_claim": "Male seahorses carry and give birth to young.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    }
+   ],
+   "reveal_line": "They breathe through their bottoms. They throw their guts at you. They do not glow. Know your enemy."
+  },
+  {
+   "id": "rom.great_stink",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "factual",
+    "grossness_3",
+    "scatological"
+   ],
+   "director_tags": [
+    "trivia"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "category": "history",
+   "round": "which_real",
+   "prompt": "WHICH ONE IS REAL?",
+   "options": [
+    "In 1858, the smell of the River Thames was so bad Parliament had to consider leaving London.",
+    "In 1858, the smell of the River Thames was so bad Queen Victoria banned the eating of fish in London.",
+    "In 1858, Parliament fined the River Thames for public indecency.",
+    "In 1858, Londoners were issued free nose pegs by the Post Office."
+   ],
+   "correct": 0,
+   "points": 1000,
+   "fact": "During the 'Great Stink' of summer 1858, the Thames smelt so bad that Parliament soaked curtains in chloride of lime and considered moving; it led to Bazalgette's sewer system.",
+   "sources": [
+    {
+     "title": "Great Stink",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Great_Stink",
+     "supported_claim": "The 1858 stench affected Parliament and led to London's sewer network.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    }
+   ],
+   "reveal_line": "Parliament nearly left London because of the smell. These days they'd just open a window."
+  },
+  {
+   "id": "rom.dancing_plague",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "factual",
+    "grossness_1"
+   ],
+   "director_tags": [
+    "trivia"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "category": "history",
+   "round": "which_real",
+   "prompt": "WHICH ONE IS REAL?",
+   "options": [
+    "In 1518, hundreds of people in Strasbourg danced uncontrollably for weeks.",
+    "In 1518, the town of Bruges laughed uncontrollably for nine days after a bad harvest.",
+    "In 1518, an entire Bavarian village fell asleep for a fortnight and woke up speaking Latin.",
+    "In 1518, a whole Swiss parish hiccupped in unison every Sunday for a year."
+   ],
+   "correct": 0,
+   "points": 1000,
+   "fact": "The dancing plague of 1518 saw many people in Strasbourg dance for days or weeks; authorities at first encouraged it, even hiring musicians.",
+   "sources": [
+    {
+     "title": "Dancing plague of 1518",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Dancing_plague_of_1518",
+     "supported_claim": "Mass dancing in Strasbourg in 1518; authorities provided musicians.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    }
+   ],
+   "reveal_line": "They hired a band. To stop the dancing. That's local government for you."
+  },
+  {
+   "id": "rom.emu_war",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "factual",
+    "animals",
+    "grossness_1"
+   ],
+   "director_tags": [
+    "trivia"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "category": "history",
+   "round": "which_real",
+   "prompt": "WHICH ONE IS REAL?",
+   "options": [
+    "In 1932, the Australian army fought a 'war' against emus. The emus won.",
+    "In 1932, the British navy fought a 'war' against seagulls in Portsmouth. The seagulls won.",
+    "In 1932, the French army fought a 'war' against wild boar in Provence. Nobody won.",
+    "In 1932, the Canadian police fought a 'war' against beavers. The beavers surrendered."
+   ],
+   "correct": 0,
+   "points": 1000,
+   "fact": "In the 1932 'Emu War', soldiers with machine guns were sent to cull emus in Western Australia; the operation largely failed.",
+   "sources": [
+    {
+     "title": "Emu War",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Emu_War",
+     "supported_claim": "1932 military operation against emus in Western Australia, largely unsuccessful.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    }
+   ],
+   "reveal_line": "Machine guns. Against emus. And the emus won. I think about that most days."
+  },
+  {
+   "id": "rom.heroin_cough",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "factual",
+    "medical",
+    "grossness_1"
+   ],
+   "director_tags": [
+    "trivia"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "category": "medicine",
+   "round": "which_real",
+   "prompt": "WHICH ONE IS REAL?",
+   "options": [
+    "Heroin was originally sold as a cough medicine, including for children.",
+    "Arsenic was originally sold as a teething gel for babies.",
+    "Petrol was originally sold as a cure for head lice in Boots chemists.",
+    "Laughing gas was originally sold as a cure for the common cold in tablet form."
+   ],
+   "correct": 0,
+   "points": 1000,
+   "fact": "Bayer marketed heroin from 1898 as a cough suppressant and non-addictive morphine substitute; it was used in children's cough remedies before its dangers were recognised.",
+   "sources": [
+    {
+     "title": "Heroin — history",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Heroin",
+     "supported_claim": "Bayer marketed heroin as a cough suppressant from 1898.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    }
+   ],
+   "reveal_line": "For your cough. Very effective. You stopped caring whether you had one."
+  },
+  {
+   "id": "rom.radioactive_toothpaste",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 3,
+   "content_tags": [
+    "factual",
+    "medical",
+    "grossness_1"
+   ],
+   "director_tags": [
+    "trivia"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "category": "medicine",
+   "round": "which_real",
+   "prompt": "WHICH ONE IS REAL?",
+   "options": [
+    "German toothpaste containing radioactive thorium was sold in the 1940s for a 'radiant' smile.",
+    "French toothpaste containing ground glass was sold in the 1940s for extra 'sparkle'.",
+    "British toothpaste containing gunpowder was sold in the 1940s to 'blast away' plaque.",
+    "Italian toothpaste containing mercury was sold in the 1940s as a mirror finish for teeth."
+   ],
+   "correct": 0,
+   "points": 1250,
+   "fact": "Doramad Radioactive Toothpaste, made in Germany, contained thorium and claimed its radiation strengthened gums and teeth.",
+   "sources": [
+    {
+     "title": "Doramad Radioactive Toothpaste",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Doramad_Radioactive_Toothpaste",
+     "supported_claim": "German toothpaste containing thorium, marketed for its radioactivity.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    }
+   ],
+   "reveal_line": "Radioactive toothpaste. Your teeth glowed. Your dentist got a bonus."
+  },
+  {
+   "id": "rom.mummy_medicine",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "factual",
+    "medical",
+    "grossness_3"
+   ],
+   "director_tags": [
+    "trivia"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "category": "medicine",
+   "round": "which_real",
+   "prompt": "WHICH ONE IS REAL?",
+   "options": [
+    "Europeans once ate powdered Egyptian mummies as medicine.",
+    "Europeans once smoked dried bats as a cure for short-sightedness.",
+    "Europeans once rubbed boiled owls on their feet to cure chilblains.",
+    "Europeans once drank melted church candles to cure a broken heart."
+   ],
+   "correct": 0,
+   "points": 1000,
+   "fact": "'Mumia', ground-up mummified human remains, was a common European remedy for centuries and was sold by apothecaries well into the 1700s.",
+   "sources": [
+    {
+     "title": "Medical cannibalism / Mummia",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Mummia",
+     "supported_claim": "Powdered mummy was used as medicine in Europe.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    }
+   ],
+   "reveal_line": "They ate mummies. For headaches. And then wondered why there was a curse."
+  },
+  {
+   "id": "rom.roman_urine",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "factual",
+    "grossness_3",
+    "scatological"
+   ],
+   "director_tags": [
+    "trivia"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "category": "history",
+   "round": "which_real",
+   "prompt": "WHICH ONE IS REAL?",
+   "options": [
+    "Some Romans used urine as a mouthwash.",
+    "Some Romans used goose fat as toothpaste and ate it afterwards.",
+    "Some Romans brushed their teeth with eel skeletons.",
+    "Some Romans gargled with sea water mixed with lead filings."
+   ],
+   "correct": 0,
+   "points": 1000,
+   "fact": "Urine contains ammonia and was used for cleaning; the poet Catullus mocked a man named Egnatius for brushing his teeth with it.",
+   "sources": [
+    {
+     "title": "Catullus 39 / urine in Roman cleaning",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Urine#History",
+     "supported_claim": "Romans used urine for cleaning; Catullus mocks teeth brushed with urine.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    }
+   ],
+   "reveal_line": "Mouthwash. Fresh from the source. Minty, it wasn't."
+  },
+  {
+   "id": "rom.bananas_berries",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "factual",
+    "food",
+    "grossness_1"
+   ],
+   "director_tags": [
+    "trivia"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "category": "food",
+   "round": "one_mildew",
+   "prompt": "THREE ARE REAL. ONE IS MILDEW. WHICH IS MILDEW?",
+   "options": [
+    "Botanically, bananas are berries.",
+    "Botanically, strawberries are not berries.",
+    "Botanically, aubergines are berries.",
+    "Botanically, peanuts are a type of berry."
+   ],
+   "correct": 3,
+   "points": 1000,
+   "fact": "Bananas and aubergines meet the botanical definition of a berry; strawberries don't. Peanuts are legumes, not berries.",
+   "sources": [
+    {
+     "title": "Berry (botany)",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Berry_(botany)",
+     "supported_claim": "Bananas and aubergines are berries; strawberries are not.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    },
+    {
+     "title": "Peanut",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Peanut",
+     "supported_claim": "Peanuts are legumes.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    }
+   ],
+   "reveal_line": "Peanuts are legumes. Like a pea. It's in the name, and still you fell for it."
+  },
+  {
+   "id": "rom.cocaine_cola",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "factual",
+    "food",
+    "grossness_1"
+   ],
+   "director_tags": [
+    "trivia"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "category": "food",
+   "round": "which_real",
+   "prompt": "WHICH ONE IS REAL?",
+   "options": [
+    "Early Coca-Cola contained cocaine from coca leaves.",
+    "Early Lucozade contained a measurable amount of gin.",
+    "Early Irn-Bru was sold as a treatment for rickets and contained iron filings.",
+    "Early Dr Pepper was sold exclusively by doctors on prescription."
+   ],
+   "correct": 0,
+   "points": 1000,
+   "fact": "Coca-Cola's early formula used coca leaf extract containing cocaine; it was removed in the early 1900s.",
+   "sources": [
+    {
+     "title": "Coca-Cola — coca content",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Coca-Cola#Coca_%E2%80%93_cocaine",
+     "supported_claim": "The early formula contained cocaine, removed in the early 1900s.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    }
+   ],
+   "reveal_line": "Cocaine. In fizzy pop. No wonder they called it the pause that refreshes."
+  },
+  {
+   "id": "rom.lobotomy_nobel",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "factual",
+    "medical",
+    "grossness_1"
+   ],
+   "director_tags": [
+    "trivia"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "category": "medicine",
+   "round": "which_real",
+   "prompt": "WHICH ONE IS REAL?",
+   "options": [
+    "The man who invented the lobotomy won a Nobel Prize for it.",
+    "The man who invented the leech farm was knighted for it.",
+    "The man who invented the straitjacket won an Olympic gold medal for it.",
+    "The man who invented the enema bulb was made a saint for it."
+   ],
+   "correct": 0,
+   "points": 1000,
+   "fact": "António Egas Moniz received the 1949 Nobel Prize in Physiology or Medicine for developing the leucotomy (lobotomy).",
+   "sources": [
+    {
+     "title": "Egas Moniz",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Egas_Moniz",
+     "supported_claim": "Received the 1949 Nobel Prize for the prefrontal leucotomy.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    }
+   ],
+   "reveal_line": "A Nobel Prize. For that. Imagine what you'd have to do to get a Blue Peter badge."
+  },
+  {
+   "id": "rom.animal_trials",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "factual",
+    "animals",
+    "grossness_1"
+   ],
+   "director_tags": [
+    "trivia"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "category": "history",
+   "round": "which_real",
+   "prompt": "WHICH ONE IS REAL?",
+   "options": [
+    "In medieval Europe, pigs were put on trial for murder, with lawyers.",
+    "In medieval Europe, cats could be made bishops if they caught enough rats.",
+    "In medieval Europe, geese were required to pay taxes on their eggs.",
+    "In medieval Europe, horses could be married to their owners in church."
+   ],
+   "correct": 0,
+   "points": 1000,
+   "fact": "Animal trials were held across medieval and early modern Europe; pigs accused of killing people were tried, defended, sentenced and sometimes executed.",
+   "sources": [
+    {
+     "title": "Animal trial",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Animal_trial",
+     "supported_claim": "Pigs and other animals were formally tried in medieval Europe.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    }
+   ],
+   "reveal_line": "A pig. In the dock. With a solicitor. And it still didn't get legal aid."
+  },
+  {
+   "id": "rom.byron_bear",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "factual",
+    "animals",
+    "grossness_1"
+   ],
+   "director_tags": [
+    "trivia"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "category": "history",
+   "round": "which_real",
+   "prompt": "WHICH ONE IS REAL?",
+   "options": [
+    "Lord Byron kept a pet bear at Cambridge University because dogs weren't allowed.",
+    "Charles Dickens kept a pet crocodile in his bath at Doughty Street.",
+    "Isaac Newton kept a pet badger he called 'Gravity'.",
+    "Queen Victoria kept a pet seal in a Buckingham Palace fountain."
+   ],
+   "correct": 0,
+   "points": 1000,
+   "fact": "Students at Trinity College, Cambridge, weren't allowed dogs, so Byron kept a tame bear instead.",
+   "sources": [
+    {
+     "title": "Lord Byron — Cambridge",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Lord_Byron",
+     "supported_claim": "Byron kept a bear at Trinity College, Cambridge.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    }
+   ],
+   "reveal_line": "A bear. Because the rules only said dogs. I respect that more than his poetry."
+  },
+  {
+   "id": "rom.vending_holy_water",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 3,
+   "content_tags": [
+    "factual",
+    "grossness_1"
+   ],
+   "director_tags": [
+    "trivia"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "category": "inventions",
+   "round": "which_real",
+   "prompt": "WHICH ONE IS REAL?",
+   "options": [
+    "The first known vending machine dispensed holy water.",
+    "The first known vending machine dispensed hot wine in Pompeii.",
+    "The first known vending machine dispensed pickled eggs in Victorian pubs.",
+    "The first known vending machine dispensed love letters in ancient Athens."
+   ],
+   "correct": 0,
+   "points": 1250,
+   "fact": "Hero of Alexandria described a coin-operated device in the 1st century AD that dispensed a measure of holy water.",
+   "sources": [
+    {
+     "title": "Vending machine — history",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Vending_machine#History",
+     "supported_claim": "Hero of Alexandria's coin-operated holy water dispenser.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    }
+   ],
+   "reveal_line": "Holy water. For a coin. Two thousand years later and the machine at Waterloo still eats my money."
+  },
+  {
+   "id": "rom.vulture_cooling",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "factual",
+    "animals",
+    "grossness_3",
+    "scatological"
+   ],
+   "director_tags": [
+    "trivia"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "category": "biology",
+   "round": "which_real",
+   "prompt": "WHICH ONE IS REAL?",
+   "options": [
+    "Vultures cool themselves down by urinating on their own legs.",
+    "Vultures cool themselves down by hanging upside down in caves.",
+    "Vultures cool themselves down by sitting in each other's shadows in a rota.",
+    "Vultures cool themselves down by eating ice from mountain peaks."
+   ],
+   "correct": 0,
+   "points": 1000,
+   "fact": "Many vultures and storks practise urohydrosis: excreting onto their legs so evaporation cools them.",
+   "sources": [
+    {
+     "title": "Urohydrosis",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Urohidrosis",
+     "supported_claim": "Vultures and storks excrete onto their legs for evaporative cooling.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    }
+   ],
+   "reveal_line": "On their own legs. On purpose. And they say we've let ourselves go."
+  },
+  {
+   "id": "rom.hippo_sweat",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "factual",
+    "animals",
+    "grossness_1"
+   ],
+   "director_tags": [
+    "trivia"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "category": "biology",
+   "round": "one_mildew",
+   "prompt": "THREE ARE REAL. ONE IS MILDEW. WHICH IS MILDEW?",
+   "options": [
+    "Hippos secrete a reddish fluid that works as a natural sunscreen.",
+    "Horses cannot breathe through their mouths.",
+    "Rats are unable to vomit.",
+    "Cows can only digest grass that has been chewed exactly forty times."
+   ],
+   "correct": 3,
+   "points": 1000,
+   "fact": "Hippo skin secretes red and orange pigments (hipposudoric acid) that block sunlight. Horses breathe only through their noses and rats can't vomit. Cows do chew the cud, but there's no magic number.",
+   "sources": [
+    {
+     "title": "Hippopotamus — skin secretion",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Hippopotamus",
+     "supported_claim": "Red secretion acts as sunscreen.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    },
+    {
+     "title": "Horse — respiration",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Horse",
+     "supported_claim": "Horses are obligate nasal breathers.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    },
+    {
+     "title": "Rat — vomiting",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Rat",
+     "supported_claim": "Rats cannot vomit.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    }
+   ],
+   "reveal_line": "Forty chews. I made that up. Well — somebody did. It was Mildew."
+  },
+  {
+   "id": "rom.immortal_jellyfish",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "factual",
+    "animals",
+    "grossness_1"
+   ],
+   "director_tags": [
+    "trivia"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "category": "biology",
+   "round": "which_real",
+   "prompt": "WHICH ONE IS REAL?",
+   "options": [
+    "One species of jellyfish can revert to an earlier stage of life and start again.",
+    "One species of jellyfish can survive being frozen solid for over a century.",
+    "One species of jellyfish can live on dry land for up to a month.",
+    "One species of jellyfish can split into two identical adults when threatened."
+   ],
+   "correct": 0,
+   "points": 1000,
+   "fact": "Turritopsis dohrnii, the 'immortal jellyfish', can transform back into its juvenile polyp stage after reaching maturity.",
+   "sources": [
+    {
+     "title": "Turritopsis dohrnii",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Turritopsis_dohrnii",
+     "supported_claim": "Can revert to the polyp stage.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    }
+   ],
+   "reveal_line": "It just goes back to being a baby. Some days I envy it."
+  },
+  {
+   "id": "rom.fainting_goats",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "factual",
+    "animals",
+    "grossness_1"
+   ],
+   "director_tags": [
+    "trivia"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "category": "biology",
+   "round": "which_real",
+   "prompt": "WHICH ONE IS REAL?",
+   "options": [
+    "There is a breed of goat that stiffens up and falls over when startled.",
+    "There is a breed of sheep that faints when it hears church bells.",
+    "There is a breed of chicken that lays eggs only during thunderstorms.",
+    "There is a breed of pig that grows a full winter beard."
+   ],
+   "correct": 0,
+   "points": 1000,
+   "fact": "Myotonic or 'fainting' goats have a hereditary condition (myotonia congenita) that makes their muscles stiffen when they're startled.",
+   "sources": [
+    {
+     "title": "Myotonic goat",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Myotonic_goat",
+     "supported_claim": "Goats whose muscles stiffen when startled.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    }
+   ],
+   "reveal_line": "They don't faint, technically. They just lock up and fall over. Like me at parties."
+  },
+  {
+   "id": "rom.crocodile_dung",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 3,
+   "content_tags": [
+    "factual",
+    "medical",
+    "grossness_3",
+    "scatological"
+   ],
+   "director_tags": [
+    "trivia"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "category": "medicine",
+   "round": "which_real",
+   "prompt": "WHICH ONE IS REAL?",
+   "options": [
+    "An ancient Egyptian medical text recommends crocodile dung as a contraceptive.",
+    "An ancient Egyptian medical text recommends swallowing a scarab beetle to cure jealousy.",
+    "An ancient Egyptian medical text recommends hippo milk to cure baldness.",
+    "An ancient Egyptian medical text recommends sleeping in sand to cure snoring."
+   ],
+   "correct": 0,
+   "points": 1250,
+   "fact": "The Kahun Gynaecological Papyrus (c.1800 BC) includes contraceptive prescriptions using crocodile dung.",
+   "sources": [
+    {
+     "title": "Kahun Gynaecological Papyrus",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Kahun_Gynaecological_Papyrus",
+     "supported_claim": "Contains contraceptive recipes including crocodile dung.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    }
+   ],
+   "reveal_line": "Crocodile dung. As contraception. I suppose it worked by putting everyone off."
+  },
+  {
+   "id": "rom.eiffel_grows",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "factual",
+    "grossness_1"
+   ],
+   "director_tags": [
+    "trivia"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "category": "scientific_oddities",
+   "round": "which_real",
+   "prompt": "WHICH ONE IS REAL?",
+   "options": [
+    "The Eiffel Tower grows by up to around 15 cm in hot weather.",
+    "Big Ben's clock runs measurably faster in winter because of the cold.",
+    "The Leaning Tower of Pisa leans less on Sundays because of reduced traffic.",
+    "The Statue of Liberty turns slightly to follow the sun."
+   ],
+   "correct": 0,
+   "points": 1000,
+   "fact": "The Eiffel Tower's iron expands in heat; its height varies by roughly 15 cm between hot and cold days.",
+   "sources": [
+    {
+     "title": "Eiffel Tower — thermal expansion",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Eiffel_Tower",
+     "supported_claim": "The tower's height varies with temperature through thermal expansion.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    }
+   ],
+   "reveal_line": "Fifteen centimetres in summer. It's just showing off."
+  },
+  {
+   "id": "rom.cleopatra_moon",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "factual",
+    "grossness_1"
+   ],
+   "director_tags": [
+    "trivia"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "category": "history",
+   "round": "which_real",
+   "prompt": "WHICH ONE IS REAL?",
+   "options": [
+    "Cleopatra lived closer in time to the Moon landing than to the building of the Great Pyramid.",
+    "Shakespeare lived closer in time to the Moon landing than to the death of Julius Caesar.",
+    "The Romans built Hadrian's Wall closer in time to the Battle of Hastings than to Stonehenge.",
+    "Henry VIII lived closer in time to the Vikings than to the Victorians."
+   ],
+   "correct": 0,
+   "points": 1000,
+   "fact": "The Great Pyramid of Giza was built around 2560 BC; Cleopatra lived around 69–30 BC, roughly 2,500 years later and about 2,000 years before 1969.",
+   "sources": [
+    {
+     "title": "Great Pyramid of Giza",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Great_Pyramid_of_Giza",
+     "supported_claim": "Built around 2560 BC.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    },
+    {
+     "title": "Cleopatra",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Cleopatra",
+     "supported_claim": "Lived 69–30 BC.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    }
+   ],
+   "reveal_line": "She was closer to Neil Armstrong than to the pyramids. Puts your commute into perspective."
+  },
+  {
+   "id": "rom.oxford_aztec",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "factual",
+    "grossness_1"
+   ],
+   "director_tags": [
+    "trivia"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "category": "history",
+   "round": "which_real",
+   "prompt": "WHICH ONE IS REAL?",
+   "options": [
+    "The University of Oxford is older than the Aztec Empire.",
+    "The University of Cambridge is older than the Great Wall of China.",
+    "Westminster Abbey is older than the Roman Colosseum.",
+    "The Royal Mint is older than the city of Rome."
+   ],
+   "correct": 0,
+   "points": 1000,
+   "fact": "Teaching at Oxford existed by 1096; the Aztec capital Tenochtitlan was founded around 1325.",
+   "sources": [
+    {
+     "title": "University of Oxford",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/University_of_Oxford",
+     "supported_claim": "Teaching existed in some form by 1096.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    },
+    {
+     "title": "Tenochtitlan",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Tenochtitlan",
+     "supported_claim": "Founded around 1325.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    }
+   ],
+   "reveal_line": "Oxford's older than the Aztecs. And the dons still dress like it."
+  },
+  {
+   "id": "rom.bees_faces",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "factual",
+    "animals",
+    "grossness_1"
+   ],
+   "director_tags": [
+    "trivia"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "category": "biology",
+   "round": "which_real",
+   "prompt": "WHICH ONE IS REAL?",
+   "options": [
+    "Honeybees can be trained to recognise individual human faces.",
+    "Wasps can be trained to recognise individual human voices.",
+    "Ants can be trained to recognise individual human signatures.",
+    "Moths can be trained to recognise individual human perfumes from a mile away."
+   ],
+   "correct": 0,
+   "points": 1000,
+   "fact": "Experiments by Adrian Dyer and colleagues (2005) showed honeybees could learn to recognise specific human face images.",
+   "sources": [
+    {
+     "title": "Honeybees can recognise images of human faces (Dyer et al., 2005)",
+     "publisher_or_organisation": "Journal of Experimental Biology",
+     "reference": "https://doi.org/10.1242/jeb.01929",
+     "supported_claim": "Bees trained to discriminate human face images.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    }
+   ],
+   "reveal_line": "They know your face. Think about that next time you swat one."
+  },
+  {
+   "id": "rom.tapeworm_diet",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 3,
+   "content_tags": [
+    "factual",
+    "medical",
+    "grossness_3"
+   ],
+   "director_tags": [
+    "trivia"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "category": "medicine",
+   "round": "which_real",
+   "prompt": "WHICH ONE IS REAL?",
+   "options": [
+    "Early 20th-century adverts sold 'sanitized tapeworms' as a slimming aid.",
+    "Early 20th-century adverts sold live leeches as a 'natural rouge' for the cheeks.",
+    "Early 20th-century adverts sold powdered slug as a 'complexion tonic'.",
+    "Early 20th-century adverts sold electric corsets that played music to aid digestion."
+   ],
+   "correct": 0,
+   "points": 1250,
+   "fact": "Adverts for 'sanitized tapeworms' in pill form appeared in the early 1900s; it's unclear whether real tapeworms were ever in them.",
+   "sources": [
+    {
+     "title": "Tapeworm diet",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Tapeworm_diet",
+     "supported_claim": "Early 20th-century adverts for 'sanitized tapeworm' diet pills.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    }
+   ],
+   "reveal_line": "A worm. For your waistline. Sanitised. Which made it alright, apparently."
+  },
+  {
+   "id": "rom.necrophiliac_penguins",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 4,
+   "content_tags": [
+    "factual",
+    "animals",
+    "sexual_anatomy_animal",
+    "grossness_3"
+   ],
+   "director_tags": [
+    "trivia"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "category": "biology",
+   "round": "which_real",
+   "prompt": "WHICH ONE IS REAL?",
+   "options": [
+    "A 1911 scientist's notes on penguin sex were so shocking they went unpublished for a century.",
+    "A 1911 scientist's notes on puffin diets were so shocking they were burned by the Royal Society.",
+    "A 1911 scientist's notes on walrus courtship were written entirely in Greek to hide them from the public.",
+    "A 1911 scientist's notes on seal songs were classified as military secrets."
+   ],
+   "correct": 0,
+   "points": 1250,
+   "fact": "George Murray Levick, on Scott's Antarctic expedition, recorded Adélie penguin sexual behaviour so graphic that his paper was privately circulated and only published in 2012.",
+   "sources": [
+    {
+     "title": "George Murray Levick",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/George_Murray_Levick",
+     "supported_claim": "His notes on Adélie penguin sexual behaviour were withheld and published in 2012.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    }
+   ],
+   "reveal_line": "Penguins. Up to things. In 1911. They kept it quiet for a hundred years and now you know too."
+  },
+  {
+   "id": "rom.all_real_body",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 3,
+   "content_tags": [
+    "factual",
+    "grossness_1"
+   ],
+   "director_tags": [
+    "trivia"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "category": "biology",
+   "round": "all_real",
+   "prompt": "ONE OF THESE IS MILDEW. PROBABLY.",
+   "options": [
+    "Your stomach gets a new lining every few days.",
+    "Humans glow very faintly in the dark — too dimly for the eye to see.",
+    "Your nose can tell apart a huge number of different smells.",
+    "None of them. They're all real."
+   ],
+   "correct": 3,
+   "points": 1250,
+   "fact": "All real: the stomach lining renews within days; a 2009 study photographed faint human bioluminescence with an ultra-sensitive camera; and human smell discriminates a very large number of odours (one widely cited estimate is over a trillion, which is disputed).",
+   "sources": [
+    {
+     "title": "Gastric mucosa renewal",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Gastric_mucosa",
+     "supported_claim": "Surface cells renew rapidly.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    },
+    {
+     "title": "Imaging of ultraweak spontaneous photon emission from human body (Kobayashi et al., 2009)",
+     "publisher_or_organisation": "PLOS ONE",
+     "reference": "https://doi.org/10.1371/journal.pone.0006256",
+     "supported_claim": "Human body emits ultraweak light.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    },
+    {
+     "title": "Olfaction — discrimination",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Olfaction",
+     "supported_claim": "Humans can distinguish many odours; trillion estimate disputed.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    }
+   ],
+   "reveal_line": "All real. Every one. I'm as surprised as you are."
+  },
+  {
+   "id": "rom.all_real_food",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 4,
+   "content_tags": [
+    "factual",
+    "food",
+    "grossness_3"
+   ],
+   "director_tags": [
+    "trivia"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "category": "food",
+   "round": "all_real",
+   "prompt": "ONE OF THESE IS MILDEW. PROBABLY.",
+   "options": [
+    "Casu marzu, a Sardinian cheese, is traditionally eaten with live maggots in it.",
+    "Surströmming, fermented Baltic herring, is often opened outdoors because of the smell.",
+    "Hákarl, an Icelandic dish, is shark meat fermented and hung to dry for months.",
+    "None of them. They're all real."
+   ],
+   "correct": 3,
+   "points": 1250,
+   "fact": "All real: casu marzu contains live insect larvae; surströmming is notoriously pungent; hákarl is fermented Greenland shark, hung to dry for several months.",
+   "sources": [
+    {
+     "title": "Casu martzu",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Casu_martzu",
+     "supported_claim": "Sardinian cheese with live larvae.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    },
+    {
+     "title": "Surströmming",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Surstr%C3%B6mming",
+     "supported_claim": "Fermented Baltic herring with strong odour.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    },
+    {
+     "title": "Hákarl",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/H%C3%A1karl",
+     "supported_claim": "Fermented and dried Greenland shark.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    }
+   ],
+   "reveal_line": "All of them. Real food. Eaten by real people. On purpose."
+  },
+  {
+   "id": "rom.seahorse_dads",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "factual",
+    "animals",
+    "grossness_1"
+   ],
+   "director_tags": [
+    "trivia"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "category": "biology",
+   "round": "which_real",
+   "prompt": "WHICH ONE IS REAL?",
+   "options": [
+    "In seahorses, it's the males that get pregnant.",
+    "In penguins, it's the males that lay the eggs.",
+    "In owls, it's the males that produce milk for the chicks.",
+    "In frogs, it's the males that grow the tadpoles inside their tongues."
+   ],
+   "correct": 0,
+   "points": 1000,
+   "fact": "Male seahorses carry fertilised eggs in a brood pouch and give birth to live young.",
+   "sources": [
+    {
+     "title": "Seahorse — reproduction",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Seahorse",
+     "supported_claim": "Males carry eggs in a brood pouch and give birth.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    }
+   ],
+   "reveal_line": "The dads. Pregnant. And they still don't get any time off."
+  },
+  {
+   "id": "rom.anglerfish_fusion",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 3,
+   "content_tags": [
+    "factual",
+    "animals",
+    "grossness_3"
+   ],
+   "director_tags": [
+    "trivia"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "category": "biology",
+   "round": "which_real",
+   "prompt": "WHICH ONE IS REAL?",
+   "options": [
+    "In some deep-sea anglerfish, the male permanently fuses into the female's body.",
+    "In some deep-sea squid, the male detaches his own head and mails it to the female.",
+    "In some deep-sea eels, the male swims backwards for its entire life.",
+    "In some deep-sea crabs, the male carries the female on his back until she dies."
+   ],
+   "correct": 0,
+   "points": 1250,
+   "fact": "In several anglerfish species, the much smaller male bites the female, fuses with her bloodstream and becomes a permanent sperm-producing appendage.",
+   "sources": [
+    {
+     "title": "Anglerfish — sexual parasitism",
+     "publisher_or_organisation": "Wikipedia",
+     "reference": "https://en.wikipedia.org/wiki/Anglerfish",
+     "supported_claim": "Males fuse permanently with females in some species.",
+     "verified_at": null,
+     "review_note": "Drafted from general knowledge; needs human fact-check against the reference before approval."
+    }
+   ],
+   "reveal_line": "He bites on, he melts in, and that's him. Forever. Some marriages are like that."
+  }
+ ]
+}

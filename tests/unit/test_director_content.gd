@@ -76,14 +76,16 @@ func test_director_skeleton_and_logs() -> void:
 	d.begin_session({"broadcasts_played": 7}, "standard_transmission")
 	check_eq(d.familiarity_tier, 3, "familiarity tier grows with installation experience")
 	var plan := d.plan_episode(["p1", "p2"])
-	check_eq(plan.filter(func(s): return s.kind == "question").size(), 0, "returning installation: no rehearsal warm-up")
+	check_eq(plan.filter(func(s): return s.kind == "question" and s.get("game_id") == "studio_rehearsal").size(), 0, "returning installation: no rehearsal warm-up")
 	check_eq(plan.filter(func(s): return s.kind == "hole_round").size(), 6, "Hole resolved into the opening game slot")
 	check(plan.filter(func(s): return s.kind == "hole_round").slice(1).all(func(s): return s.mid_game), "rounds after the first are mid-game (no late-join integration)")
 	var d2 := Director.new(content(), 4)
 	d2.begin_session({"broadcasts_played": 0}, "standard_transmission")
-	check_eq(d2.plan_episode(["p1", "p2"]).filter(func(s): return s.kind == "question").size(), 2, "new installation: short rehearsal warm-up")
-	check(d.skeleton.filter(func(s): return s.state == "unresolved").size() >= 3, "future slots left unresolved")
-	check(d.decision_log.filter(func(e): return e.kind == "SelectGame").size() == 1, "selection explained in log")
+	check_eq(d2.plan_episode(["p1", "p2"]).filter(func(s): return s.kind == "question" and s.get("game_id") == "studio_rehearsal").size(), 2, "new installation: short rehearsal warm-up")
+	check(d.skeleton.filter(func(s): return s.state == "unresolved").size() >= 2, "future slots (adverts, break) left unresolved")
+	check(d.decision_log.filter(func(e): return e.kind == "SelectGame").size() >= 1, "selection explained in log")
+	check(d.games_this_show.size() >= 2, "a returning installation gets a multi-game programme (%s)" % [d.games_this_show])
+	check(d.skeleton.filter(func(s): return s.slot == "finale").size() == 1, "a finale slot is resolved")
 
 
 func test_director_mood_reacts() -> void:

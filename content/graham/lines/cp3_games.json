@@ -1,0 +1,295 @@
+{
+ "pack_id": "graham.cp3_games",
+ "content_kind": "graham_lines",
+ "speaker": "graham",
+ "_comment": "Graham lines for Real or Mildew? and Guess the Genitals (CP3). Slots: {name} {answer}.",
+ "items": [
+  {
+   "id": "g.rom_intro.1",
+   "category": "rom_intro",
+   "text": "Next. Real or Mildew. Some of what you're about to read is true. That's the frightening part.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.rom_intro.2",
+   "category": "rom_intro",
+   "text": "It's time for Real or Mildew. The truth, and things we made up. Like a newspaper.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.rom_intro.3",
+   "category": "rom_intro",
+   "text": "Real or Mildew. Every fact in this round was checked by a team of professionals. One of them is lying.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.rom_rules.1",
+   "category": "rom_rules",
+   "text": "Four claims. Find the real one — or, if I tell you three are real, find the one we invented. Choose on your device.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.rom_rules.2",
+   "category": "rom_rules",
+   "text": "Read carefully. Some rounds, one is real. Some rounds, one is Mildew. Listen to which round it is. Then panic.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.rom_rules.3",
+   "category": "rom_rules",
+   "text": "Find what I ask for. The real one, or the fake. They're all written by the same man. He's very convincing.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.rom_ask.1",
+   "category": "rom_ask",
+   "text": "Have a read.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.rom_ask.2",
+   "category": "rom_ask",
+   "text": "Take your time. Not too much.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.rom_ask.3",
+   "category": "rom_ask",
+   "text": "One of these happened.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.rom_ask.4",
+   "category": "rom_ask",
+   "text": "Here we are.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.rom_ask.5",
+   "category": "rom_ask",
+   "text": "Read them all. Slowly. Moving your lips is fine.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.rom_certain_intro.1",
+   "category": "rom_certain_intro",
+   "text": "This one's special. If you're certain, tell us. Certain and right, double points. Certain and wrong, I'll remember.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.rom_certain_intro.2",
+   "category": "rom_certain_intro",
+   "text": "Confidence round. Press I'M CERTAIN if you are. We'll see.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.rom_final.1",
+   "category": "rom_final",
+   "text": "Last one. Worth more. Concentrate. Everybody. Even you at the back.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.rom_final.2",
+   "category": "rom_final",
+   "text": "Final question in this round. It's a big one.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.rom_outro.1",
+   "category": "rom_outro",
+   "text": "That's Real or Mildew. If you learnt anything, keep it to yourselves.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.rom_outro.2",
+   "category": "rom_outro",
+   "text": "And that's the end of Real or Mildew. The facts are on our Viewer Information Service, if you can be bothered.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.certain_wrong.1",
+   "category": "certain_wrong",
+   "text": "Certain, were you, {name}?",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.certain_wrong.2",
+   "category": "certain_wrong",
+   "text": "{name} was certain. {name} was wrong. Write that down.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.certain_wrong.3",
+   "category": "certain_wrong",
+   "text": "Certain. Wrong. Bold combination, {name}.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.certain_right.1",
+   "category": "certain_right",
+   "text": "{name} was certain. And {name} was right. Double points. I feel sick.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.certain_right.2",
+   "category": "certain_right",
+   "text": "Certain and correct, {name}. Insufferable, but correct.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.gtg_intro.1",
+   "category": "gtg_intro",
+   "text": "It's time. Guess the Genitals. This is respectable television, and I'll thank you to treat it that way.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.gtg_intro.2",
+   "category": "gtg_intro",
+   "text": "Ladies and gentlemen, Guess the Genitals. Biology, at its most honest.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.gtg_intro.3",
+   "category": "gtg_intro",
+   "text": "Guess the Genitals. I've done this round for years. You never get used to it. You just stop flinching.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.gtg_rules.1",
+   "category": "gtg_rules",
+   "text": "You'll see a reproductive organ. Animal only — we do have standards. Tell us whose it is.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.gtg_rules.2",
+   "category": "gtg_rules",
+   "text": "A specimen will appear. Identify the animal. No touching the screen.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.gtg_rules.3",
+   "category": "gtg_rules",
+   "text": "Each picture belongs to an animal. Mostly. Pick the owner. The faster you are, the more questions it raises.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.gtg_ask.1",
+   "category": "gtg_ask",
+   "text": "Have a good look.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.gtg_ask.2",
+   "category": "gtg_ask",
+   "text": "Take it in.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.gtg_ask.3",
+   "category": "gtg_ask",
+   "text": "Whose is this?",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.gtg_ask.4",
+   "category": "gtg_ask",
+   "text": "Lovely specimen. Whose?",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.gtg_ask.5",
+   "category": "gtg_ask",
+   "text": "Don't look away. It's educational.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.gtg_ask.6",
+   "category": "gtg_ask",
+   "text": "Here's one.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.gtg_final.1",
+   "category": "gtg_final",
+   "text": "The final genital. Worth more points, and frankly worth more of your attention.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.gtg_final.2",
+   "category": "gtg_final",
+   "text": "And now: the final genital. Brace yourselves. Clinically.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.gtg_outro.1",
+   "category": "gtg_outro",
+   "text": "That's Guess the Genitals. Wash your eyes. Or don't. It's a free country.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.gtg_outro.2",
+   "category": "gtg_outro",
+   "text": "And that concludes Guess the Genitals. Thank you to all the animals involved. None of them consented.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.gtg_same_again.1",
+   "category": "gtg_same_again",
+   "text": "{name}'s gone with {answer} again.",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.gtg_same_again.2",
+   "category": "gtg_same_again",
+   "text": "{answer}. Again, {name}. Is there something you'd like to share?",
+   "enabled": true,
+   "quality_status": "draft"
+  },
+  {
+   "id": "g.gtg_same_again.3",
+   "category": "gtg_same_again",
+   "text": "That's twice now you've said {answer}, {name}. We're keeping a list.",
+   "enabled": true,
+   "quality_status": "draft"
+  }
+ ]
+}

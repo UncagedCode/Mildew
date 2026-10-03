@@ -24,9 +24,16 @@ func _init(cfg: MildewConfig, store: SaveStore, content: ContentDB, seed: int, t
 	session.open()
 
 
-func oracle(content_id: String) -> int:
+## Dev-only answer oracle: the correct option's text (options are shuffled per asking).
+func oracle(content_id: String) -> String:
 	var item: Dictionary = session.content.get_item(content_id)
-	return int(item.get("correct", -1)) if not item.is_empty() else -1
+	var opts: Array = item.get("options", [])
+	var c := int(item.get("correct", -1))
+	return str(opts[c]) if c >= 0 and c < opts.size() else ""
+
+
+func correct_index(qid: String, options: Array) -> int:
+	return options.find(oracle(qid.split("#")[0]))
 
 
 func hole_oracle(content_id: String, variant: String) -> String:

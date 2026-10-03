@@ -23,8 +23,10 @@ const FORMATS := {
 	"hole": {"title": "HOLE", "kind": "game", "implemented": true,
 		"tags": ["visual", "trivia", "high-energy", "good-opener", "good-middle", "good-reset", "short", "2-player-safe", "high-content-dependency"]},
 	"studio_rehearsal": {"title": "STUDIO REHEARSAL", "kind": "warmup", "implemented": true, "tags": ["trivia", "short"]},
-	"guess_the_genitals": {"title": "GUESS THE GENITALS", "kind": "game", "implemented": false, "tags": ["visual", "trivia", "gross", "good-opener", "good-finale"]},
-	"real_or_mildew": {"title": "REAL OR MILDEW?", "kind": "game", "implemented": false, "tags": ["trivia", "good-middle", "good-reset"]},
+	"guess_the_genitals": {"title": "GUESS THE GENITALS", "kind": "game", "implemented": true,
+		"tags": ["visual", "trivia", "gross", "good-opener", "good-finale", "short", "2-player-safe", "high-content-dependency"]},
+	"real_or_mildew": {"title": "REAL OR MILDEW?", "kind": "game", "implemented": true,
+		"tags": ["trivia", "text", "good-middle", "good-reset", "2-player-safe", "high-content-dependency"]},
 	"mildew_survey": {"title": "MILDEW SURVEY", "kind": "game", "implemented": false, "tags": ["social", "writing", "good-middle"]},
 	"mouthfeel": {"title": "MOUTHFEEL", "kind": "game", "implemented": false, "tags": ["writing", "gross", "good-middle", "good-finale"]},
 	"police_sketch": {"title": "POLICE SKETCH", "kind": "game", "implemented": false, "tags": ["drawing", "social", "long"]},
@@ -169,8 +171,22 @@ func plan_episode(player_ids: Array, _legacy_question_count: int = 0) -> Array:
 		for i in qs.size():
 			plan.append({"kind": "question", "item": qs[i], "game_id": "studio_rehearsal", "mid_game": i > 0})
 	plan.append_array(plan_game(opener, n))
+	var implemented: Array = FORMATS.keys().filter(func(k): return FORMATS[k].kind == "game" and FORMATS[k].implemented)
+	var games_target := clampi(_ci("show.games_per_episode", 3), 1, implemented.size())
+	for g in range(1, games_target):
+		var role := "good-finale" if g == games_target - 1 else "good-middle"
+		var pick := choose_game(role, n)
+		if pick == "" or games_this_show.count(pick) > 1:
+			break
+		plan.append({"kind": "scores", "final": false})
+		plan.append_array(plan_game(pick, n, g == games_target - 1))
 	plan.append({"kind": "scores", "final": true})
 	plan.append({"kind": "sign_off"})
+	# Skeleton (debug overlay): the games actually scheduled, plus slots still owned by later checkpoints.
+	skeleton = skeleton.filter(func(sl): return not str(sl.slot).begins_with("game_") and sl.slot != "finale")
+	for i in games_this_show.size():
+		var slot := "finale" if i == games_this_show.size() - 1 and i > 0 else "game_%d" % (i + 1)
+		skeleton.insert(2 + i, {"slot": slot, "state": "resolved", "content": games_this_show[i] + (" (x%.1f)" % _cf("show.finale_multiplier", 1.5) if slot == "finale" else "")})
 	return plan
 
 
@@ -185,9 +201,14 @@ func choose_game(role_tag: String, player_count: int) -> String:
 		var f: Dictionary = FORMATS[k]
 		if f.kind != "game" or not f.implemented or games_this_show.has(k):
 			continue
+		if not _has_content_for(k, player_count):
+			continue
 		cands.append(k)
 	if cands.is_empty():
-		cands = ["hole"]
+		if games_this_show.is_empty():
+			cands = ["hole"]
+		else:
+			return ""
 	cands.sort_custom(func(a, b): return int(FORMATS[a].tags.has(role_tag)) > int(FORMATS[b].tags.has(role_tag)))
 	var pick: String = cands[0]
 	games_this_show.append(pick)
@@ -200,10 +221,51 @@ func choose_game(role_tag: String, player_count: int) -> String:
 	return pick
 
 
+const CONTENT_KIND := {"hole": "hole", "real_or_mildew": "real_or_mildew", "guess_the_genitals": "guess_the_genitals"}
+
+
+## A game is only scheduled when it has enough content at this installation's familiarity tier.
+func _has_content_for(game_id: String, player_count: int) -> bool:
+	if content == null:
+		return true
+	var kind := str(CONTENT_KIND.get(game_id, ""))
+	if kind == "":
+		return true
+	return content.query(kind, game_id, familiarity_tier, player_count).size() >= _ci("show.min_items_per_game", 4)
+
+
 ## Expands a game into its segments (sting, rules link, rounds, outro).
-func plan_game(game_id: String, player_count: int) -> Array:
+func plan_game(game_id: String, player_count: int, finale: bool = false) -> Array:
 	var out: Array = []
+	var fmult := float(_cf("show.finale_multiplier", 1.5)) if finale else 1.0
+	if finale:
+		log_decision("Finale", game_id, ["multiplier=%.1f" % fmult])
 	match game_id:
+		"real_or_mildew":
+			var count := _ci("real_or_mildew.questions_per_game", 6)
+			var items := pick_items("real_or_mildew", "real_or_mildew", count, player_count)
+			var conf_at := -1
+			if items.size() >= 4 and (familiarity_tier >= 2 or force.get("rom_confidence", false)) and rng.randf() < _cf("real_or_mildew.confidence_round_chance", 0.6):
+				conf_at = rng.randi_range(2, items.size() - 2)
+				log_decision("Variant", "rom:confidence@%d" % (conf_at + 1), ["familiarity_tier=%d" % familiarity_tier])
+			out.append({"kind": "sting", "game_id": "real_or_mildew", "title": "REAL OR MILDEW?", "style": "rom", "seconds": 3.6})
+			out.append({"kind": "link", "lines": [["graham", "rom_intro"], ["graham", "rom_rules"]], "camera": "cam1"})
+			for i in items.size():
+				out.append({"kind": "question", "item": items[i], "game_id": "real_or_mildew", "layout": "claims", "title": "REAL OR MILDEW?",
+					"prefix": "rom", "round": i + 1, "of": items.size(), "mid_game": i > 0, "confidence": i == conf_at,
+					"multiplier": fmult * (1.25 if finale and i == items.size() - 1 else 1.0), "final": finale and i == items.size() - 1})
+			out.append({"kind": "link", "lines": [["graham", "rom_outro"]], "camera": "cam1", "mid_game": false})
+		"guess_the_genitals":
+			var count := _ci("guess_the_genitals.questions_per_game", 7)
+			var items := pick_gtg_items(count, player_count)
+			out.append({"kind": "sting", "game_id": "guess_the_genitals", "title": "GUESS THE GENITALS", "style": "gtg", "seconds": 3.8})
+			out.append({"kind": "link", "lines": [["graham", "gtg_intro"], ["graham", "gtg_rules"]], "camera": "cam1"})
+			for i in items.size():
+				var last := i == items.size() - 1
+				out.append({"kind": "question", "item": items[i], "game_id": "guess_the_genitals", "layout": "image", "title": "GUESS THE GENITALS",
+					"prefix": "gtg", "round": i + 1, "of": items.size(), "mid_game": i > 0, "final": last,
+					"multiplier": fmult * (_cf("guess_the_genitals.final_multiplier", 1.5) if last else 1.0)})
+			out.append({"kind": "link", "lines": [["graham", "gtg_outro"]], "camera": "cam1", "mid_game": false})
 		"hole":
 			var rounds := _ci("hole.rounds_per_game", 6)
 			var items := pick_hole_items(rounds, player_count)
@@ -212,13 +274,38 @@ func plan_game(game_id: String, player_count: int) -> Array:
 			out.append({"kind": "link", "lines": [["graham", "hole_intro"], ["graham", "hole_rules"]], "camera": "cam1"})
 			for i in items.size():
 				out.append({"kind": "hole_round", "item": items[i], "game_id": "hole", "variant": variants[i],
-					"round": i + 1, "of": items.size(), "mid_game": i > 0})
+					"round": i + 1, "of": items.size(), "mid_game": i > 0, "multiplier": fmult})
 			out.append({"kind": "link", "lines": [["graham", "hole_outro"]], "camera": "cam1", "mid_game": false})
 	return out
 
 
 ## Hole content: weighted, no repeats within the session, installation-recent items avoided,
 ## at most N studio-world holes per game.
+## Guess the Genitals pacing (docs/04 §1): accessible first, stranger in the middle, the most
+## bizarre last; at most two "Genital or Something Else?" decoys, never first.
+func pick_gtg_items(count: int, player_count: int) -> Array:
+	var chosen := pick_items("guess_the_genitals", "guess_the_genitals", count, player_count)
+	var decoys := chosen.filter(func(i): return bool(i.get("decoy", false)))
+	var real := chosen.filter(func(i): return not bool(i.get("decoy", false)))
+	if decoys.size() > _ci("guess_the_genitals.max_decoys", 2):
+		for d in decoys.slice(_ci("guess_the_genitals.max_decoys", 2)):
+			chosen.erase(d)
+			used_content.erase(str(d.get("id")))
+		decoys = decoys.slice(0, _ci("guess_the_genitals.max_decoys", 2))
+	real.sort_custom(func(a, b): return float(a.get("weirdness", a.get("familiarity_tier", 1))) < float(b.get("weirdness", b.get("familiarity_tier", 1))))
+	var out: Array = real.duplicate()
+	for d in decoys:
+		out.insert(rng.randi_range(1, maxi(1, out.size() - 1)), d)
+	if force.has("gtg_item"):
+		var forced: Dictionary = content.get_item(str(force.gtg_item)) if content else {}
+		if not forced.is_empty() and not out.has(forced):
+			out[0] = forced
+			used_content[str(forced.get("id"))] = true
+			log_decision("ForceContent", str(forced.get("id")), ["forced by developer"])
+	log_decision("GTGOrder", str(out.size()), [str(out.map(func(i): return i.get("id")))])
+	return out
+
+
 func pick_hole_items(count: int, player_count: int) -> Array:
 	var chosen := pick_items("hole", "hole", count, player_count, _ci("hole.max_studio_holes_per_game", 1))
 	if force.has("hole_item"):
@@ -432,7 +519,7 @@ func _bump(pid: String, trait_name: String, amount: float) -> void:
 
 ## results: Array of {pid, answered, correct, elapsed, points}. Returns the reaction plan:
 ## {category, ctx, extra:[{category, ctx}], tone_delta}
-func on_question_result(results: Array, answer_window: float) -> Dictionary:
+func on_question_result(results: Array, answer_window: float, item: Dictionary = {}, options: Array = []) -> Dictionary:
 	var correct: Array = results.filter(func(r): return r.correct)
 	var answered: Array = results.filter(func(r): return r.answered)
 	for r in results:
@@ -487,6 +574,33 @@ func on_question_result(results: Array, answer_window: float) -> Dictionary:
 		if fastest.elapsed < minf(2.5, answer_window * 0.2) and rng.randf() < 0.7:
 			plan.extra.append({"category": "fast_correct", "ctx": {"pid": fastest.pid, "secs": "%.1f" % fastest.elapsed}})
 			reasons.append("fast_correct %s %.2fs" % [fastest.pid, fastest.elapsed])
+	# Confidence wager (Real or Mildew?): "Certain, were you?" (docs/04 §4)
+	for r in results:
+		if r.get("certain", false) and not r.correct and r.answered:
+			plan.extra.append({"category": "certain_wrong", "ctx": {"pid": r.pid}})
+			_bump(r.pid, "target", 0.08)
+			reasons.append("certain_wrong %s" % r.pid)
+			break
+	for r in results:
+		if r.get("certain", false) and r.correct:
+			plan.extra.append({"category": "certain_right", "ctx": {"pid": r.pid}})
+			reasons.append("certain_right %s" % r.pid)
+			break
+	# Repeated animal callback (Guess the Genitals): "Aaron's gone with horse again."
+	if str(item.get("id", "")).begins_with("gtg.") and not options.is_empty():
+		for r in results:
+			if not r.answered or r.correct or int(r.get("choice", -1)) < 0:
+				continue
+			var s := stats(r.pid)
+			var pick := str(options[int(r.choice)])
+			var picks: Dictionary = s.get("wrong_picks", {})
+			picks[pick] = int(picks.get(pick, 0)) + 1
+			s["wrong_picks"] = picks
+			if int(picks[pick]) >= 2 and not s.get("repeat_called", false):
+				s["repeat_called"] = true
+				plan.extra.append({"category": "gtg_same_again", "ctx": {"pid": r.pid, "answer": pick}})
+				reasons.append("repeat wrong pick %s x%d by %s" % [pick, picks[pick], r.pid])
+				break
 	# AFK notice (once per player per show).
 	for r in results:
 		var s := stats(r.pid)

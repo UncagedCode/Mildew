@@ -532,6 +532,7 @@ func start_show() -> bool:
 		if not p.connected:
 			players.erase(p.player_id)
 	director.reset_for_new_show()
+	facts_shown.clear()
 	question_counter = 0
 	for p in players.values():
 		p.score = 0
@@ -590,6 +591,15 @@ func _integrate_waiting() -> void:
 			p.status = PlayerState.Status.ACTIVE
 			emit_tv({"e": "player_integrated", "pid": p.player_id})
 			_log("integrate late joiner %s" % p.player_id)
+
+
+## Factual items shown on air this show (for the Viewer Information Service archive).
+var facts_shown: Array = []
+
+
+func note_fact(content_id: String) -> void:
+	if content_id != "" and not facts_shown.has(content_id):
+		facts_shown.append(content_id)
 
 
 func end_show() -> void:
@@ -658,6 +668,12 @@ func _persist_results() -> void:
 	while hist.size() > 200:
 		hist.pop_front()
 	store.installation.recent_content_history = hist
+	# Viewer Information Service: facts broadcast on this installation (never incidents; docs/07).
+	var seen: Array = store.installation.get("facts_seen", [])
+	for id in facts_shown:
+		if not seen.has(id):
+			seen.append(id)
+	store.installation.facts_seen = seen
 	store.save_installation()
 
 

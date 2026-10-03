@@ -11,6 +11,7 @@ var viewport: SubViewport
 var studio: StudioSet
 var gfx: GraphicsLayer
 var hole: HoleBoard
+var quiz: QuizBoard
 var graham: GrahamPresenter
 var plates: PlateStage
 var screen: TextureRect
@@ -41,10 +42,12 @@ func build() -> void:
 	plates.viewport = viewport
 	viewport.add_child(plates)
 	hole = HoleBoard.new()
-	viewport.add_child(hole)       # game boards sit under the graphics package (subtitles, lower-thirds)
+	viewport.add_child(hole)
+	quiz = QuizBoard.new()         # Real or Mildew? / Guess the Genitals board (CP3)
+	viewport.add_child(quiz)       # game boards sit under the graphics package (subtitles, lower-thirds)
 	gfx = GraphicsLayer.new()
 	viewport.add_child(gfx)
-	gfx.bottom_busy = hole.is_showing
+	gfx.bottom_busy = func(): return hole.is_showing() or quiz.is_showing()
 	screen = TextureRect.new()
 	screen.texture = viewport.get_texture()
 	screen.expand_mode = TextureRect.EXPAND_IGNORE_SIZE

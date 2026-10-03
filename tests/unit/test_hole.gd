@@ -49,7 +49,7 @@ func test_hole_full_game_two_players() -> void:
 	check(h.run_until(_ended(h), 600.0), "2-player Hole show ends")
 	check_eq(h.session.phase, SessionServer.Phase.ENDED, "ENDED")
 	var rounds := h.session.cfg.i("hole.rounds_per_game", 6)
-	check_eq(h.events_of("question_show").size(), 0, "returning installation skips the warm-up")
+	check_eq(h.events_of("question_show").filter(func(e): return str(e.get("game_id", "")) == "studio_rehearsal").size(), 0, "returning installation skips the warm-up")
 	check_eq(h.events_of("hole_round").size(), rounds, "all rounds played")
 	check_eq(h.events_of("hole_reveal").size(), rounds, "all rounds revealed")
 	var ids := {}

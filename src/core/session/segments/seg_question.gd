@@ -1,7 +1,10 @@
 class_name SegQuestion
 extends Segment
-## Generic server-authoritative multiple-choice question (CP1 Studio Rehearsal; the same
-## engine will back Real or Mildew? / Guess the Genitals in CP3).
+## Generic server-authoritative multiple-choice question: Studio Rehearsal (CP1), Real or Mildew?
+## and Guess the Genitals (CP3). Options are shuffled per asking (an `all_real` round keeps its
+## "they're all real" option last). Optional: image, TV layout, confidence wager (I'M CERTAIN = x2),
+## final-question multiplier, factual explanation shown after the reveal and archived for the
+## Viewer Information Service (sources never shown during play — docs/07).
 ## Sub-phases: read -> answer -> lock -> reveal. The answer window closes early once every
 ## present participant has answered; silent players never deadlock it (timer resolves).
 
@@ -21,6 +24,15 @@ var reveal_end := 0.0
 var multiplier := 1.0
 var results: Array = []
 var deltas := {}
+var options: Array = []           # shuffled presentation order
+var correct_idx := -1
+var layout := "panel"             # panel (rehearsal) | claims (Real or Mildew?) | image (Guess the Genitals)
+var title := ""
+var confidence := false           # I'M CERTAIN wager available
+var final_q := false
+var round_no := 0
+var round_of := 0
+var reaction_prefix := ""         # game-specific Graham line prefix, e.g. "rom" / "gtg"
 
 
 func _init(desc: Dictionary) -> void:
@@ -28,6 +40,13 @@ func _init(desc: Dictionary) -> void:
 	item = desc.get("item", {})
 	game_id = str(desc.get("game_id", ""))
 	multiplier = float(desc.get("multiplier", 1.0))
+	layout = str(desc.get("layout", "panel"))
+	title = str(desc.get("title", ""))
+	confidence = bool(desc.get("confidence", false))
+	final_q = bool(desc.get("final", false))
+	round_no = int(desc.get("round", 0))
+	round_of = int(desc.get("of", 0))
+	reaction_prefix = str(desc.get("prefix", ""))
 	allows_late_join_after = false
 
 
@@ -40,9 +59,20 @@ func start() -> void:
 	lock_t = session.cfg.f("show.question_lock_seconds", 1.4)
 	reveal_min = session.cfg.f("show.question_reveal_seconds", 6.5)
 	duration = 1.0e9
+	_shuffle()
+	session.director.used_content[str(item.get("id", ""))] = true
 	session.emit_tv({"e": "question_show", "qid": qid, "game_id": game_id, "prompt": item.get("prompt", ""),
-		"options": item.get("options", []), "number": session.question_counter})
-	say_at(0.2, "graham", "question_read")
+		"options": options, "number": session.question_counter, "layout": layout, "title": title,
+		"image": item.get("image", ""), "crop": item.get("crop", {}), "round": round_no, "of": round_of,
+		"final": final_q, "confidence": confidence, "category": item.get("category", ""), "variant": str(item.get("round", ""))})
+	if final_q and reaction_prefix != "":
+		say_at(0.2, "graham", reaction_prefix + "_final")
+	elif confidence and reaction_prefix != "":
+		say_at(0.2, "graham", reaction_prefix + "_certain_intro")
+	elif reaction_prefix != "":
+		say_at(0.2, "graham", reaction_prefix + "_ask")
+	else:
+		say_at(0.2, "graham", "question_read")
 	session.push_screens()
 
 
@@ -63,6 +93,29 @@ func update(dt: float) -> void:
 		"reveal":
 			if elapsed >= reveal_end and _timeline.is_empty():
 				done = true
+
+
+static func grossness(it: Dictionary) -> int:
+	var g := 0
+	for t in it.get("content_tags", []):
+		if str(t).begins_with("grossness_"):
+			g = maxi(g, int(str(t).substr(10)))
+	return g
+
+
+## Presentation order is random per asking; scoring follows the shuffled index.
+func _shuffle() -> void:
+	var src: Array = item.get("options", [])
+	var src_correct := int(item.get("correct", -1))
+	var order: Array = range(src.size())
+	var fixed_last := str(item.get("round", "")) == "all_real" or bool(item.get("fixed_last", false))
+	var movable: Array = order.slice(0, order.size() - 1) if fixed_last else order.duplicate()
+	if not bool(item.get("no_shuffle", false)):
+		session.director.shuffle(movable)
+	if fixed_last:
+		movable.append(order[-1])
+	options = movable.map(func(i): return src[i])
+	correct_idx = movable.find(src_correct)
 
 
 func _open() -> void:
@@ -92,12 +145,14 @@ func _lock() -> void:
 
 func _reveal() -> void:
 	sub = "reveal"
-	var correct_idx := int(item.get("correct", -1))
 	var base := int(round(float(item.get("points", 1000)) * multiplier))
 	var speed_frac: float = session.cfg.f("scoring.speed_bonus_fraction_max", 0.15)
+	var certain_mult: float = session.cfg.f("scoring.confidence_multiplier", 2.0)
+	var gross := SegQuestion.grossness(item) >= 3
 	results.clear()
 	deltas.clear()
 	var picks := {}
+	var certain := {}
 	for pid in participants:
 		var p: PlayerState = session.players.get(pid)
 		if p == null:
@@ -105,6 +160,7 @@ func _reveal() -> void:
 		var a = answers.get(pid)
 		var answered: bool = a != null
 		var is_correct: bool = answered and int(a.c) == correct_idx
+		var is_certain: bool = answered and bool(a.get("k", false))
 		var elapsed_s: float = float(a.t) if answered else answer_window
 		var pts := 0
 		if is_correct:
@@ -114,17 +170,39 @@ func _reveal() -> void:
 			var streak: int = int(session.director.stats(pid).correct_streak) + 1
 			if streak >= 3:
 				pts += 50  # small streak bonus only (docs/05)
-		p.score += pts  # wrong / no answer = 0, never negative
+			if is_certain:
+				pts = int(round(pts * certain_mult / 10.0)) * 10
+			if gross and elapsed_s < answer_window * 0.25:
+				p.add_rot(1)  # fast recognition of something revolting is noted (docs/05 Rot)
+		p.score += pts  # wrong / no answer = 0, never negative (a confident wrong answer costs only pride)
 		deltas[pid] = pts
 		if answered:
 			picks[pid] = int(a.c)
-		results.append({"pid": pid, "answered": answered, "correct": is_correct, "elapsed": elapsed_s, "points": pts})
-		p.history.append({"qid": qid, "content_id": item.get("id"), "answered": answered, "correct": is_correct, "elapsed": elapsed_s, "points": pts})
-	var reaction: Dictionary = session.director.on_question_result(results, answer_window)
-	var options: Array = item.get("options", [])
+			if is_certain:
+				certain[pid] = true
+		results.append({"pid": pid, "answered": answered, "correct": is_correct, "elapsed": elapsed_s, "points": pts, "certain": is_certain, "choice": int(a.c) if answered else -1})
+		p.history.append({"qid": qid, "content_id": item.get("id"), "answered": answered, "correct": is_correct, "elapsed": elapsed_s, "points": pts, "certain": is_certain})
+	var reaction: Dictionary = session.director.on_question_result(results, answer_window, item, options)
 	var answer_text: String = str(options[correct_idx]) if correct_idx >= 0 and correct_idx < options.size() else ""
-	session.emit_tv({"e": "reveal", "qid": qid, "correct": correct_idx, "answer_text": answer_text,
-		"picks": picks, "deltas": deltas, "standings": session.standings()})
+	var stamps: Array = []
+	if layout == "claims":
+		for i in options.size():
+			match str(item.get("round", "")):
+				"which_real":
+					stamps.append("REAL" if i == correct_idx else "MILDEW")
+				"one_mildew":
+					stamps.append("MILDEW" if i == correct_idx else "REAL")
+				"all_real":
+					stamps.append("REAL" if i != options.size() - 1 else "")
+				_:
+					stamps.append("")
+	var fact := str(item.get("fact", ""))
+	if fact != "":
+		session.note_fact(str(item.get("id", "")))
+	session.emit_tv({"e": "reveal", "qid": qid, "game_id": game_id, "correct": correct_idx, "answer_text": answer_text,
+		"picks": picks, "certain": certain, "deltas": deltas, "standings": session.standings(), "layout": layout,
+		"stamps": stamps, "fact": fact, "answer_label": str(item.get("answer_label", answer_text)),
+		"image": item.get("image", ""), "gross": gross})
 	session.push_screens()
 	var t := 0.6
 	if item.has("reveal_line"):
@@ -139,7 +217,10 @@ func _reveal() -> void:
 		t = say_at(t, "graham", reaction.category, reaction.ctx) + 0.3
 	for extra in reaction.extra:
 		t = say_at(t, "graham", extra.category, extra.ctx) + 0.3
-	reveal_end = elapsed + maxf(reveal_min, t + 0.5)
+	var fact_hold := 0.0
+	if fact != "":
+		fact_hold = clampf(fact.length() / 18.0, 4.0, 9.0)   # readable time for the fact card
+	reveal_end = elapsed + maxf(reveal_min + fact_hold * 0.5, t + 0.5)
 
 
 func handle_action(player: PlayerState, msg: Dictionary) -> String:
@@ -154,9 +235,10 @@ func handle_action(player: PlayerState, msg: Dictionary) -> String:
 	if answers.has(player.player_id):
 		return Protocol.E_ALREADY_ANSWERED
 	var c = Protocol.get_int(msg, "c")
-	if c == null or int(c) < 0 or int(c) >= (item.get("options", []) as Array).size():
+	if c == null or int(c) < 0 or int(c) >= options.size():
 		return Protocol.E_BAD_PAYLOAD
-	answers[player.player_id] = {"c": int(c), "t": elapsed - open_at}
+	var k := confidence and int(msg.get("k", 0)) == 1
+	answers[player.player_id] = {"c": int(c), "t": elapsed - open_at, "k": k}
 	session.emit_tv({"e": "answer_in", "pid": player.player_id, "count": answers.size(), "of": participants.size()})
 	return ""
 
@@ -164,31 +246,35 @@ func handle_action(player: PlayerState, msg: Dictionary) -> String:
 func screen_for(player: PlayerState) -> Dictionary:
 	if not participants.has(player.player_id):
 		return {"screen": "watch", "data": {"caption": "YOU WILL JOIN AT THE NEXT SEGMENT"}}
-	var options: Array = item.get("options", [])
+	var head := title if title != "" else ""
+	if round_of > 0:
+		head = "%s · %s" % [title, "FINAL QUESTION" if final_q else "QUESTION %d OF %d" % [round_no, round_of]]
 	match sub:
 		"read":
-			return {"screen": "get_ready", "data": {"caption": "QUESTION INCOMING", "number": session.question_counter}}
+			return {"screen": "get_ready", "data": {"caption": "QUESTION INCOMING", "number": session.question_counter, "header": head}}
 		"answer":
 			if answers.has(player.player_id):
 				var c := int(answers[player.player_id].c)
-				return {"screen": "locked", "data": {"qid": qid, "choice": c, "text": options[c]}}
+				return {"screen": "locked", "data": {"qid": qid, "choice": c, "text": options[c], "certain": bool(answers[player.player_id].k), "header": head}}
 			var remaining: float = maxf(0.0, open_at + answer_window - elapsed) / maxf(session.time_scale, 0.001)
 			return {"screen": "question", "data": {"qid": qid, "prompt": item.get("prompt", ""), "options": options,
-				"remaining_ms": int(remaining * 1000.0), "total_ms": int(answer_window / maxf(session.time_scale, 0.001) * 1000.0)}}
+				"remaining_ms": int(remaining * 1000.0), "total_ms": int(answer_window / maxf(session.time_scale, 0.001) * 1000.0),
+				"confidence": confidence, "long": layout == "claims", "header": head}}
 		"lock":
 			if answers.has(player.player_id):
 				var c2 := int(answers[player.player_id].c)
-				return {"screen": "locked", "data": {"qid": qid, "choice": c2, "text": options[c2]}}
-			return {"screen": "locked", "data": {"qid": qid, "choice": -1, "text": ""}}
+				return {"screen": "locked", "data": {"qid": qid, "choice": c2, "text": options[c2], "certain": bool(answers[player.player_id].k), "header": head}}
+			return {"screen": "locked", "data": {"qid": qid, "choice": -1, "text": "", "header": head}}
 		_:
-			var correct_idx := int(item.get("correct", -1))
 			var mine = answers.get(player.player_id)
 			return {"screen": "result", "data": {
 				"answered": mine != null,
 				"correct": mine != null and int(mine.c) == correct_idx,
+				"certain": mine != null and bool(mine.k),
 				"points": int(deltas.get(player.player_id, 0)),
-				"answer_text": str(options[correct_idx]) if correct_idx >= 0 else "",
+				"answer_text": str(item.get("answer_label", options[correct_idx] if correct_idx >= 0 else "")),
 				"score": player.score,
+				"header": head,
 			}}
 
 
