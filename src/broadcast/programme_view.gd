@@ -16,6 +16,7 @@ var wv: WriteVoteBoard
 var ps: SketchBoard
 var dnp: DnpBoard
 var bas: BasementBoard
+var ads: AdvertPlayer
 var graham: GrahamPresenter
 var plates: PlateStage
 var screen: TextureRect
@@ -57,9 +58,11 @@ func build() -> void:
 	viewport.add_child(dnp)
 	bas = BasementBoard.new()      # The Basement case file (CP7)
 	viewport.add_child(bas)
+	ads = AdvertPlayer.new()       # adverts, commercial break, viewer polls, awards (CP8)
+	viewport.add_child(ads)
 	gfx = GraphicsLayer.new()
 	viewport.add_child(gfx)
-	gfx.bottom_busy = func(): return hole.is_showing() or quiz.is_showing() or wv.is_showing() or ps.is_showing() or dnp.is_showing() or bas.is_showing()
+	gfx.bottom_busy = func(): return hole.is_showing() or quiz.is_showing() or wv.is_showing() or ps.is_showing() or dnp.is_showing() or bas.is_showing() or ads.is_showing()
 	screen = TextureRect.new()
 	screen.texture = viewport.get_texture()
 	screen.expand_mode = TextureRect.EXPAND_IGNORE_SIZE

@@ -1,0 +1,275 @@
+{
+ "pack_id": "polls.core_cp8",
+ "content_kind": "poll",
+ "_comment": "Viewer polls (interstitials). Phones vote, no points; the result is shown and Graham judges it.",
+ "items": [
+  {
+   "id": "poll.1",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "fictional"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "Which is worse: a wet sock, or a warm seat?",
+   "options": [
+    "A WET SOCK",
+    "A WARM SEAT"
+   ]
+  },
+  {
+   "id": "poll.2",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "fictional"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "Would you rather lick a bus window or a pub carpet?",
+   "options": [
+    "THE BUS WINDOW",
+    "THE PUB CARPET"
+   ]
+  },
+  {
+   "id": "poll.3",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "fictional"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "How many times a week is it acceptable to eat a pickled egg?",
+   "options": [
+    "NEVER",
+    "ONCE",
+    "DAILY",
+    "I AM A PICKLED EGG"
+   ]
+  },
+  {
+   "id": "poll.4",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "fictional"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "Should Graham get a new suit?",
+   "options": [
+    "YES",
+    "NO",
+    "HE DOESN'T DESERVE ONE"
+   ]
+  },
+  {
+   "id": "poll.5",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "fictional"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "Is a hot dog a sandwich?",
+   "options": [
+    "YES",
+    "NO",
+    "IT'S A WARNING"
+   ]
+  },
+  {
+   "id": "poll.6",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "fictional"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "Have you ever eaten something off the floor?",
+   "options": [
+    "YES",
+    "NO",
+    "I'M EATING IT NOW"
+   ]
+  },
+  {
+   "id": "poll.7",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "fictional"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "Which smell is worse: hot bin, or wet dog?",
+   "options": [
+    "HOT BIN",
+    "WET DOG",
+    "WET DOG IN A HOT BIN"
+   ]
+  },
+  {
+   "id": "poll.8",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "fictional"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "Should the studio fridge be cleaned?",
+   "options": [
+    "YES",
+    "NO",
+    "BURN IT"
+   ]
+  },
+  {
+   "id": "poll.9",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "fictional"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "Do you trust Neil?",
+   "options": [
+    "YES",
+    "NO",
+    "WHO IS NEIL?"
+   ]
+  },
+  {
+   "id": "poll.10",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "fictional"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "Have you ever pretended to know what someone said, three times in a row?",
+   "options": [
+    "YES",
+    "NO",
+    "PARDON?"
+   ]
+  },
+  {
+   "id": "poll.11",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "fictional"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "Gravy: a drink?",
+   "options": [
+    "YES",
+    "NO",
+    "ONLY AT CHRISTMAS"
+   ]
+  },
+  {
+   "id": "poll.12",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "fictional"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "Which room in your house is the dampest?",
+   "options": [
+    "BATHROOM",
+    "KITCHEN",
+    "THE ONE WE DON'T GO IN"
+   ]
+  },
+  {
+   "id": "poll.13",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "fictional"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "Should contestants be allowed home?",
+   "options": [
+    "YES",
+    "NO",
+    "NOT YET"
+   ]
+  },
+  {
+   "id": "poll.14",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "social",
+    "fictional"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "How do you feel about ham?",
+   "options": [
+    "LOVE IT",
+    "HATE IT",
+    "IT KNOWS WHAT IT DID"
+   ]
+  },
+  {
+   "id": "poll.15",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "social",
+    "fictional"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "Have you noticed anything unusual this evening?",
+   "options": [
+    "YES",
+    "NO"
+   ]
+  }
+ ]
+}

@@ -18,6 +18,10 @@ static func make(desc: Dictionary, session) -> Segment:
 			return SegQuestion.new(desc).setup(session)
 		"hole_round":
 			return SegHole.new(desc).setup(session)
+		"advert":
+			return SegAdvert.new(desc).setup(session)
+		"poll", "awards":
+			return SegInterstitial.new(desc.merged({"mode": desc.kind})).setup(session)
 		"basement":
 			return SegBasement.new(desc).setup(session)
 		"dnp":

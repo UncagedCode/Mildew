@@ -143,6 +143,10 @@ func _on_screen(screen: String, data: Dictionary) -> void:
 			if allowed.is_empty():
 				return
 			_queue(_delay(float(data.get("remaining_ms", 20000)) / 1000.0), {"t": Protocol.C_VOTE, "q": data.get("qid", ""), "c": allowed[rng.randi_range(0, allowed.size() - 1)]})
+		"break":
+			if personality != "afk" and not bool(data.get("ready", false)) and not answered_qids.has("brk:%d" % int(now)):
+				answered_qids["brk:%d" % int(now)] = true
+				_queue(rng.randf_range(0.5, 3.0), {"t": Protocol.C_READY})
 		"bas_evidence":
 			if personality == "afk" or not bool(data.get("live", false)):
 				return

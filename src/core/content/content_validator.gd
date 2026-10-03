@@ -81,6 +81,20 @@ func validate(db: ContentDB, release_mode: bool = false) -> bool:
 					_validate_interference(item, where)
 				"basement":
 					_validate_basement(item, where)
+				"advert":
+					var scenes: Array = item.get("scenes", [])
+					if str(item.get("brand", "")) == "" or scenes.is_empty():
+						errors.append("%s: advert needs a brand and scenes" % where)
+					var secs := 0.0
+					for sc in scenes:
+						secs += float(sc.get("t", 0.0))
+						if typeof(sc.get("bg")) != TYPE_ARRAY:
+							errors.append("%s: scene without bg colours" % where)
+					if secs < 6.0 or secs > 30.0:
+						errors.append("%s: advert length %.1fs outside 6..30" % [where, secs])
+				"poll":
+					if str(item.get("prompt", "")) == "" or not ((item.get("options", []) as Array).size() in [2, 3, 4]):
+						errors.append("%s: poll needs a prompt and 2-4 options" % where)
 				"do_not_press_that":
 					_validate_common_game(item, where)
 					if str(item.get("title", "")) == "" or (item.get("labels", []) as Array).size() < 6:

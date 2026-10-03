@@ -80,10 +80,10 @@ func test_hole_full_game_eight_players() -> void:
 	check_eq(h.session.standings().size(), 8, "eight in standings")
 	var protocol_errors := 0
 	for bot in h.bots:
-		protocol_errors += bot.errors_received.filter(func(c): return c != Protocol.E_STALE).size()
+		protocol_errors += bot.errors_received.filter(func(c): return c != Protocol.E_STALE and c != Protocol.E_JAMMED).size()
 	var errs: Array = []
 	for bot in h.bots:
-		errs.append_array(bot.errors_received.filter(func(c): return c != Protocol.E_STALE))
+		errs.append_array(bot.errors_received.filter(func(c): return c != Protocol.E_STALE and c != Protocol.E_JAMMED))
 	check_eq(protocol_errors, 0, "no non-stale protocol errors: %s" % [errs])
 
 

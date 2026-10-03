@@ -182,16 +182,20 @@ func plan_episode(player_ids: Array, _legacy_question_count: int = 0) -> Array:
 		plan.append({"kind": "link", "lines": [["graham", "rehearsal_intro"]], "camera": "cam1"})
 		for i in qs.size():
 			plan.append({"kind": "question", "item": qs[i], "game_id": "studio_rehearsal", "mid_game": i > 0})
-	plan.append_array(plan_game(opener, n))
+	plan.append_array(_tag_game(plan_game(opener, n), 1))
 	var implemented: Array = FORMATS.keys().filter(func(k): return FORMATS[k].kind == "game" and FORMATS[k].implemented)
 	var games_target := clampi(_ci("show.games_per_episode", 3), 1, implemented.size())
+	var mid := int(ceil(games_target / 2.0))            # the midpoint commercial break follows this game
 	for g in range(1, games_target):
 		var role := "good-finale" if g == games_target - 1 else "good-middle"
 		var pick := choose_game(role, n)
 		if pick == "" or games_this_show.count(pick) > 1:
 			break
 		plan.append({"kind": "scores", "final": false})
-		plan.append_array(plan_game(pick, n, g == games_target - 1))
+		plan.append_array(_furniture(g, mid, n))
+		plan.append_array(_tag_game(plan_game(pick, n, g == games_target - 1), g + 1))
+	if games_this_show.size() >= 2:
+		plan.append({"kind": "awards"})
 	plan.append({"kind": "scores", "final": true})
 	plan.append({"kind": "sign_off"})
 	# Skeleton (debug overlay): the games actually scheduled, plus slots still owned by later checkpoints.
@@ -200,6 +204,83 @@ func plan_episode(player_ids: Array, _legacy_question_count: int = 0) -> Array:
 		var slot := "finale" if i == games_this_show.size() - 1 and i > 0 else "game_%d" % (i + 1)
 		skeleton.insert(2 + i, {"slot": slot, "state": "resolved", "content": games_this_show[i] + (" (x%.1f)" % _cf("show.finale_multiplier", 1.5) if slot == "finale" else "")})
 	return plan
+
+
+## Marks every segment of a game with its index so pacing can trim *future* games only.
+func _tag_game(segs: Array, index: int) -> Array:
+	for sg in segs:
+		sg["game_index"] = index
+	return segs
+
+
+## Programme furniture between games (docs/01 §7 skeleton): an advert after the opener, the
+## midpoint COMMERCIAL BREAK, viewer polls / adverts elsewhere. Forced via force.furniture.
+func _furniture(after_game: int, mid: int, n: int) -> Array:
+	var kind := str(force.get("furniture", ""))
+	if kind == "":
+		if after_game == mid:
+			kind = "break"
+		elif after_game == 1:
+			kind = "advert"
+		else:
+			kind = "poll" if rng.randf() < 0.55 else "advert"
+	match kind:
+		"break":
+			var ads := pick_items("advert", "", _ci("break.adverts", 2), n)
+			log_decision("Furniture", "commercial_break", ["after game %d (midpoint)" % after_game, "ads=%s" % str(ads.map(func(a): return a.id))])
+			return [{"kind": "advert", "mode": "break", "ads": ads}, {"kind": "link", "lines": [["graham", "part_two"]], "camera": "cam1"}]
+		"poll":
+			var polls := pick_items("poll", "", 1, n)
+			if not polls.is_empty():
+				log_decision("Furniture", "viewer_poll", [str(polls[0].id)])
+				return [{"kind": "poll", "mode": "poll", "item": polls[0]}]
+	var ad := pick_items("advert", "", 1, n)
+	if ad.is_empty():
+		return []
+	log_decision("Furniture", "advert", [str(ad[0].id)])
+	return [{"kind": "link", "lines": [["announcer", "advert_link"]], "camera": "cam1"}, {"kind": "advert", "mode": "single", "ads": ad}]
+
+
+## Run-over support (docs/01 §7): when the programme is running long, future games lose rounds
+## (never the one in progress, never below two rounds). Returns how many segments were removed.
+const ROUND_KINDS := ["question", "hole_round", "write_vote", "dnp", "sketch"]
+const EST_SECONDS := {"question": 28, "hole_round": 50, "write_vote": 95, "sketch": 260, "dnp": 95, "basement": 420, "advert": 12,
+	"poll": 25, "scores": 12, "link": 9, "sting": 4, "incident": 3, "awards": 30, "sign_off": 20, "intros": 20, "opening": 10}
+
+
+func estimate_remaining(segments: Array) -> float:
+	var t := 0.0
+	for sg in segments:
+		var k := str(sg.get("kind", ""))
+		t += 90.0 if (k == "advert" and str(sg.get("mode", "")) == "break") else float(EST_SECONDS.get(k, 10))
+	return t
+
+
+func maybe_trim(segments: Array, current_game: int) -> int:
+	var target := _cf("show.target_minutes", 45.0) * 60.0
+	var allowed := _cf("show.max_overrun_minutes", 4.0) * 60.0
+	var over := show_time + estimate_remaining(segments) - (target + allowed)
+	if over <= 0.0:
+		return 0
+	var removed := 0
+	var by_game := {}
+	for sg in segments:
+		var gi := int(sg.get("game_index", 0))
+		if gi > current_game and ROUND_KINDS.has(str(sg.get("kind", ""))):
+			if not by_game.has(gi):
+				by_game[gi] = []
+			by_game[gi].append(sg)
+	for gi in by_game:
+		var rounds: Array = by_game[gi]
+		while rounds.size() > 2 and over > 0.0:
+			var victim: Dictionary = rounds[rounds.size() - 2]   # keep the final (biggest) round
+			rounds.erase(victim)
+			segments.erase(victim)
+			over -= float(EST_SECONDS.get(str(victim.kind), 30))
+			removed += 1
+	if removed > 0:
+		log_decision("Overrun", "trimmed %d rounds" % removed, ["show_time=%.0fs" % show_time, "target=%.0fs +%.0fs" % [target, allowed]])
+	return removed
 
 
 ## Picks an implemented game for a slot role tag (good-opener / good-middle / good-finale),

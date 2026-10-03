@@ -580,6 +580,9 @@ func _advance() -> void:
 		_current = null
 		end_show()
 		return
+	var gi := int(_segments[0].get("game_index", 0))
+	if gi > 0:
+		director.maybe_trim(_segments, gi)
 	var desc: Dictionary = _segments.pop_front()
 	_current = BasicSegments.make(desc, self)
 	_log("segment %s" % _current.kind)

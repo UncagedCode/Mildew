@@ -1,0 +1,104 @@
+{
+ "pack_id": "announcer.cp8",
+ "content_kind": "announcer_lines",
+ "speaker": "announcer",
+ "_comment": "CP8 continuity lines. stage gates slow cross-session progression: 0 functional, 1 unusually specific, 2 disagreeing, 3 trying to end the transmission.",
+ "items": [
+  {
+   "id": "a.break_in.1",
+   "category": "break_in",
+   "text": "We'll be right back.",
+   "enabled": true,
+   "quality_status": "draft",
+   "stage": 0
+  },
+  {
+   "id": "a.break_in.2",
+   "category": "break_in",
+   "text": "Mildew will return after these messages.",
+   "enabled": true,
+   "quality_status": "draft",
+   "stage": 0
+  },
+  {
+   "id": "a.break_in.3",
+   "category": "break_in",
+   "text": "There will now be a short intermission.",
+   "enabled": true,
+   "quality_status": "draft",
+   "stage": 0
+  },
+  {
+   "id": "a.advert_link.1",
+   "category": "advert_link",
+   "text": "And now, a word from our sponsors.",
+   "enabled": true,
+   "quality_status": "draft",
+   "stage": 0
+  },
+  {
+   "id": "a.advert_link.2",
+   "category": "advert_link",
+   "text": "Mildew continues shortly.",
+   "enabled": true,
+   "quality_status": "draft",
+   "stage": 0
+  },
+  {
+   "id": "a.break_in.4",
+   "category": "break_in",
+   "text": "We'll be right back. Probably.",
+   "enabled": true,
+   "quality_status": "draft",
+   "stage": 1
+  },
+  {
+   "id": "a.break_in.5",
+   "category": "break_in",
+   "text": "Please remain seated. Please remain where you are.",
+   "enabled": true,
+   "quality_status": "draft",
+   "stage": 1
+  },
+  {
+   "id": "a.advert_link.3",
+   "category": "advert_link",
+   "text": "We're aware of the noise in Studio C. Mildew continues shortly.",
+   "enabled": true,
+   "quality_status": "draft",
+   "stage": 1
+  },
+  {
+   "id": "a.break_in.6",
+   "category": "break_in",
+   "text": "You can leave now. During the break. Nobody would mind.",
+   "enabled": true,
+   "quality_status": "draft",
+   "stage": 2
+  },
+  {
+   "id": "a.advert_link.4",
+   "category": "advert_link",
+   "text": "That was not scheduled. Mildew continues shortly.",
+   "enabled": true,
+   "quality_status": "draft",
+   "stage": 2
+  },
+  {
+   "id": "a.break_in.7",
+   "category": "break_in",
+   "text": "Please end the transmission.",
+   "enabled": true,
+   "quality_status": "draft",
+   "stage": 3
+  },
+  {
+   "id": "a.closedown.9",
+   "category": "closedown",
+   "text": "This transmission has ended. This transmission has ended.",
+   "enabled": true,
+   "quality_status": "draft",
+   "stage": 3
+  }
+ ]
+}

@@ -388,6 +388,7 @@
       case "ps_draw": return scrPSDraw(d);
       case "dnp_panel": return scrDnpPanel(d);
       case "bas_evidence": return scrBasEvidence(d);
+      case "break": return scrBreak(d);
       case "bas_theory": return scrBasTheory(d);
       case "dnp_result": return scrDnpResult(d);
       case "ps_describe": return scrPSDescribe(d);
@@ -742,6 +743,19 @@
     lcd.appendChild(el("div", "sub", d.mistakes ? "YOUR MISTAKES: " + d.mistakes : "YOU DIDN'T BREAK ANYTHING. BONUS."));
     lcd.appendChild(el("div", "spacer"));
     lcd.appendChild(el("div", "sub", "YOUR SCORE: " + fmt(d.score)));
+  }
+
+  // ---------------- COMMERCIAL BREAK ----------------
+  function scrBreak(d) {
+    clear();
+    lcd.appendChild(el("div", "sub", "COMMERCIAL BREAK"));
+    lcd.appendChild(el("div", "big", "STRETCH. WEE. SNACK."));
+    lcd.appendChild(el("div", "sub", "THE PROGRAMME CONTINUES AFTER THE ADVERTISEMENTS."));
+    lcd.appendChild(el("div", "spacer"));
+    lcd.appendChild(el("div", "title", "BACK ON THE SOFA: " + (d.count || 0) + " / " + (d.of || 0)));
+    if (d.ready) lcd.appendChild(el("div", "sub blinker", "YOU'RE BACK. WAITING FOR THE OTHERS."));
+    else key("I'M BACK — READY", "go plain", (b) => { b.disabled = true; send({ t: "ready" }); });
+    lcd.appendChild(el("div", "sub", "NEED LONGER? THE PAUSE BUTTON ON THE TV REMOTE ALWAYS WORKS."));
   }
 
   // ---------------- THE BASEMENT ----------------

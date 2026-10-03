@@ -35,6 +35,8 @@
   "warmup_questions": 2,
   "warmup_max_broadcasts": 2,
   "games_per_episode": 5,
+  "target_minutes": 45,
+  "max_overrun_minutes": 4,
   "finale_multiplier": 1.5
  },
  "dev": {
@@ -68,6 +70,15 @@
   "open_round_min_familiarity": 4,
   "open_round_chance": 0.5,
   "max_studio_holes_per_game": 1
+ },
+ "break": {
+  "seconds": 90,
+  "adverts": 2,
+  "bumper_seconds": 4,
+  "return_seconds": 3
+ },
+ "poll": {
+  "seconds": 15
  },
  "basement": {
   "cases_per_game": 1,

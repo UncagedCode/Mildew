@@ -1,0 +1,779 @@
+{
+ "pack_id": "adverts.core_cp8",
+ "content_kind": "advert",
+ "_comment": "Fake late-90s adverts (CP8). All brands fictional. Rendered procedurally by AdvertPlayer (motion graphics); VO is subtitled and spoken by the device voice, never Graham.",
+ "items": [
+  {
+   "id": "ad.brawn_gravy",
+   "brand": "BRAWN CRISPS",
+   "scenes": [
+    {
+     "t": 3.0,
+     "bg": [
+      "#7a1f12",
+      "#3b0d06"
+     ],
+     "pattern": "sunburst",
+     "headline": "NEW!",
+     "sub": "",
+     "vo": "New from Brawn.",
+     "anim": "bounce",
+     "product": {
+      "shape": "packet",
+      "label": "BRAWN",
+      "colours": [
+       "#c8361f",
+       "#f2c94c"
+      ]
+     }
+    },
+    {
+     "t": 3.5,
+     "bg": [
+      "#f2c94c",
+      "#c8361f"
+     ],
+     "pattern": "stripes",
+     "headline": "GRAVY & MINT",
+     "sub": "THE SUNDAY DINNER YOU CAN FOLD",
+     "vo": "Gravy and Mint. The Sunday dinner you can fold.",
+     "anim": "slide",
+     "product": {
+      "shape": "packet",
+      "label": "GRAVY & MINT",
+      "colours": [
+       "#5a3a1a",
+       "#7fd06b"
+      ]
+     }
+    },
+    {
+     "t": 3.5,
+     "bg": [
+      "#3b0d06",
+      "#7a1f12"
+     ],
+     "pattern": "checker",
+     "headline": "BRAWN",
+     "sub": "CRISPS FOR MEN WHO HAVE GIVEN UP",
+     "vo": "Brawn. Crisps for men who have given up.",
+     "anim": "zoom",
+     "product": {
+      "shape": "packet",
+      "label": "BRAWN",
+      "colours": [
+       "#c8361f",
+       "#f2c94c"
+      ]
+     },
+     "tag": "CONTAINS TRACES OF DINNER"
+    }
+   ],
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "fictional",
+    "short"
+   ],
+   "min_players": 2,
+   "max_players": 8
+  },
+  {
+   "id": "ad.brawn_prawn",
+   "brand": "BRAWN CRISPS",
+   "scenes": [
+    {
+     "t": 3.0,
+     "bg": [
+      "#ff8fa8",
+      "#7a1f12"
+     ],
+     "pattern": "bubbles",
+     "headline": "PRAWN BREATH",
+     "sub": "LIMITED EDITION",
+     "vo": "Limited edition. Prawn Breath.",
+     "anim": "bounce",
+     "product": {
+      "shape": "packet",
+      "label": "PRAWN BREATH",
+      "colours": [
+       "#ff8fa8",
+       "#ffffff"
+      ]
+     }
+    },
+    {
+     "t": 4.0,
+     "bg": [
+      "#7a1f12",
+      "#ff8fa8"
+     ],
+     "pattern": "sunburst",
+     "headline": "NOBODY WILL SIT NEXT TO YOU",
+     "sub": "AND THAT'S THE POINT",
+     "vo": "Nobody will sit next to you. And that's the point.",
+     "anim": "slide"
+    },
+    {
+     "t": 3.0,
+     "bg": [
+      "#3b0d06",
+      "#7a1f12"
+     ],
+     "pattern": "checker",
+     "headline": "BRAWN",
+     "sub": "",
+     "vo": "Brawn.",
+     "anim": "zoom",
+     "product": {
+      "shape": "packet",
+      "label": "BRAWN",
+      "colours": [
+       "#c8361f",
+       "#f2c94c"
+      ]
+     },
+     "tag": "DO NOT EXHALE NEAR INFANTS"
+    }
+   ],
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "fictional",
+    "short"
+   ],
+   "min_players": 2,
+   "max_players": 8
+  },
+  {
+   "id": "ad.dampco",
+   "brand": "DAMPCO",
+   "scenes": [
+    {
+     "t": 3.5,
+     "bg": [
+      "#39505a",
+      "#1b262b"
+     ],
+     "pattern": "grid",
+     "headline": "IS YOUR HOUSE SWEATING?",
+     "sub": "",
+     "vo": "Is your house sweating?",
+     "anim": "zoom"
+    },
+    {
+     "t": 4.0,
+     "bg": [
+      "#2c3d44",
+      "#506e7a"
+     ],
+     "pattern": "stripes",
+     "headline": "DAMP? MOULD? A SMELL YOU CAN'T NAME?",
+     "sub": "",
+     "vo": "Damp? Mould? A smell you can't name?",
+     "anim": "slide",
+     "product": {
+      "shape": "tub",
+      "label": "DAMPCO",
+      "colours": [
+       "#2f7fbf",
+       "#e8f0f2"
+      ]
+     }
+    },
+    {
+     "t": 4.0,
+     "bg": [
+      "#e8f0f2",
+      "#9ab7c2"
+     ],
+     "pattern": "plain",
+     "headline": "DAMPCO",
+     "sub": "WE'LL GET RID OF IT. MOSTLY.",
+     "vo": "Dampco. We'll get rid of it. Mostly.",
+     "anim": "bounce",
+     "product": {
+      "shape": "tub",
+      "label": "DAMPCO",
+      "colours": [
+       "#2f7fbf",
+       "#e8f0f2"
+      ]
+     },
+     "tag": "SPORES NOT INCLUDED. SPORES ALREADY THERE."
+    }
+   ],
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "fictional",
+    "short"
+   ],
+   "min_players": 2,
+   "max_players": 8
+  },
+  {
+   "id": "ad.gristle_bar",
+   "brand": "GRISTLE",
+   "scenes": [
+    {
+     "t": 3.0,
+     "bg": [
+      "#4a2410",
+      "#1d0d05"
+     ],
+     "pattern": "sunburst",
+     "headline": "CHOCOLATE",
+     "sub": "",
+     "vo": "Chocolate.",
+     "anim": "zoom",
+     "product": {
+      "shape": "bar",
+      "label": "GRISTLE",
+      "colours": [
+       "#4a2410",
+       "#d9a441"
+      ]
+     }
+    },
+    {
+     "t": 3.0,
+     "bg": [
+      "#d9a441",
+      "#4a2410"
+     ],
+     "pattern": "stripes",
+     "headline": "...WITH A CHEWY MEAT CENTRE",
+     "sub": "",
+     "vo": "With a chewy meat centre.",
+     "anim": "spin",
+     "product": {
+      "shape": "bar",
+      "label": "GRISTLE",
+      "colours": [
+       "#4a2410",
+       "#d9a441"
+      ]
+     }
+    },
+    {
+     "t": 4.0,
+     "bg": [
+      "#1d0d05",
+      "#4a2410"
+     ],
+     "pattern": "checker",
+     "headline": "GRISTLE",
+     "sub": "YOU'LL BE CHEWING IT TILL TUESDAY",
+     "vo": "Gristle. You'll be chewing it till Tuesday.",
+     "anim": "bounce",
+     "product": {
+      "shape": "bar",
+      "label": "GRISTLE",
+      "colours": [
+       "#4a2410",
+       "#d9a441"
+      ]
+     },
+     "tag": "NOT SUITABLE FOR VEGETARIANS OR MOST PEOPLE"
+    }
+   ],
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "fictional",
+    "short"
+   ],
+   "min_players": 2,
+   "max_players": 8
+  },
+  {
+   "id": "ad.pellet",
+   "brand": "DR PELLET'S",
+   "scenes": [
+    {
+     "t": 3.5,
+     "bg": [
+      "#2e5c3a",
+      "#0f2414"
+     ],
+     "pattern": "grid",
+     "headline": "COUGHING?",
+     "sub": "",
+     "vo": "Coughing? Spluttering? Hacking up something with a face?",
+     "anim": "zoom"
+    },
+    {
+     "t": 4.0,
+     "bg": [
+      "#d8e8c8",
+      "#8fb07a"
+     ],
+     "pattern": "plain",
+     "headline": "DR PELLET'S LINCTUS",
+     "sub": "IT TASTES OF NOTHING YOU WOULD RECOGNISE",
+     "vo": "Dr Pellet's Linctus. It tastes of nothing you would recognise.",
+     "anim": "slide",
+     "product": {
+      "shape": "bottle",
+      "label": "DR PELLET'S",
+      "colours": [
+       "#5b2d1a",
+       "#e8d9a8"
+      ]
+     }
+    },
+    {
+     "t": 3.5,
+     "bg": [
+      "#0f2414",
+      "#2e5c3a"
+     ],
+     "pattern": "stripes",
+     "headline": "ASK FOR IT BY NAME",
+     "sub": "IF YOU CAN STILL SPEAK",
+     "vo": "Ask for it by name. If you can still speak.",
+     "anim": "bounce",
+     "product": {
+      "shape": "bottle",
+      "label": "DR PELLET'S",
+      "colours": [
+       "#5b2d1a",
+       "#e8d9a8"
+      ]
+     },
+     "tag": "MAY CAUSE DROWSINESS, LEVITATION"
+    }
+   ],
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "fictional",
+    "short"
+   ],
+   "min_players": 2,
+   "max_players": 8
+  },
+  {
+   "id": "ad.moistease",
+   "brand": "MOIST-EASE",
+   "scenes": [
+    {
+     "t": 3.5,
+     "bg": [
+      "#b8e0f0",
+      "#5aa0c8"
+     ],
+     "pattern": "bubbles",
+     "headline": "FEELING DRY?",
+     "sub": "",
+     "vo": "Feeling dry?",
+     "anim": "zoom"
+    },
+    {
+     "t": 4.0,
+     "bg": [
+      "#5aa0c8",
+      "#b8e0f0"
+     ],
+     "pattern": "stripes",
+     "headline": "MOIST-EASE TOWELETTES",
+     "sub": "FOR THE MOIST MAN ABOUT TOWN",
+     "vo": "Moist-Ease towelettes. For the moist man about town.",
+     "anim": "slide",
+     "product": {
+      "shape": "packet",
+      "label": "MOIST-EASE",
+      "colours": [
+       "#ffffff",
+       "#5aa0c8"
+      ]
+     }
+    },
+    {
+     "t": 3.5,
+     "bg": [
+      "#e8f6fb",
+      "#b8e0f0"
+     ],
+     "pattern": "plain",
+     "headline": "MOIST-EASE",
+     "sub": "STAY DAMP. STAY CONFIDENT.",
+     "vo": "Stay damp. Stay confident.",
+     "anim": "bounce",
+     "product": {
+      "shape": "packet",
+      "label": "MOIST-EASE",
+      "colours": [
+       "#ffffff",
+       "#5aa0c8"
+      ]
+     },
+     "tag": "DO NOT USE ON FACE, HANDS, BODY"
+    }
+   ],
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "fictional",
+    "short"
+   ],
+   "min_players": 2,
+   "max_players": 8
+  },
+  {
+   "id": "ad.hamco",
+   "brand": "HAMCO",
+   "scenes": [
+    {
+     "t": 3.0,
+     "bg": [
+      "#f08ca0",
+      "#8a2a3a"
+     ],
+     "pattern": "sunburst",
+     "headline": "HAM",
+     "sub": "",
+     "vo": "Ham.",
+     "anim": "spin",
+     "product": {
+      "shape": "can",
+      "label": "HAMCO",
+      "colours": [
+       "#c8202f",
+       "#f2e2c0"
+      ]
+     }
+    },
+    {
+     "t": 4.0,
+     "bg": [
+      "#8a2a3a",
+      "#f08ca0"
+     ],
+     "pattern": "checker",
+     "headline": "HAM YOU CAN TRUST",
+     "sub": "MOSTLY HAM. SINCE 1951.",
+     "vo": "Hamco. Ham you can trust. Mostly ham. Since nineteen fifty-one.",
+     "anim": "slide",
+     "product": {
+      "shape": "can",
+      "label": "HAMCO",
+      "colours": [
+       "#c8202f",
+       "#f2e2c0"
+      ]
+     }
+    },
+    {
+     "t": 3.5,
+     "bg": [
+      "#2a0a10",
+      "#8a2a3a"
+     ],
+     "pattern": "grid",
+     "headline": "HAMCO",
+     "sub": "THE OFFICIAL HAM OF MILDEW",
+     "vo": "The official ham of Mildew.",
+     "anim": "zoom",
+     "product": {
+      "shape": "can",
+      "label": "HAMCO",
+      "colours": [
+       "#c8202f",
+       "#f2e2c0"
+      ]
+     },
+     "tag": "PLEASE RETURN ANY HAM TO THE PROP STORE"
+    }
+   ],
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "fictional",
+    "short"
+   ],
+   "min_players": 2,
+   "max_players": 8
+  },
+  {
+   "id": "ad.telegrave",
+   "brand": "TELEGRAVE",
+   "scenes": [
+    {
+     "t": 4.0,
+     "bg": [
+      "#2a2a3a",
+      "#0c0c14"
+     ],
+     "pattern": "plain",
+     "headline": "SORT IT NOW",
+     "sub": "YOU MIGHT NOT BE HERE LATER",
+     "vo": "Sort it now. You might not be here later.",
+     "anim": "zoom"
+    },
+    {
+     "t": 4.0,
+     "bg": [
+      "#d8d0c0",
+      "#8a8070"
+     ],
+     "pattern": "stripes",
+     "headline": "TELEGRAVE FUNERAL PLANS",
+     "sub": "FROM 9p A DAY",
+     "vo": "Telegrave funeral plans. From nine pence a day.",
+     "anim": "slide",
+     "product": {
+      "shape": "box",
+      "label": "TELEGRAVE",
+      "colours": [
+       "#2a2a3a",
+       "#d8c070"
+      ]
+     }
+    },
+    {
+     "t": 4.0,
+     "bg": [
+      "#0c0c14",
+      "#2a2a3a"
+     ],
+     "pattern": "grid",
+     "headline": "CALL NOW FOR A FREE PEN",
+     "sub": "",
+     "vo": "Call now, and we'll send you a free pen. You'll need it.",
+     "anim": "bounce",
+     "product": {
+      "shape": "bar",
+      "label": "FREE PEN",
+      "colours": [
+       "#d8c070",
+       "#2a2a3a"
+      ]
+     },
+     "tag": "PEN MAY NOT WRITE"
+    }
+   ],
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "fictional",
+    "short"
+   ],
+   "min_players": 2,
+   "max_players": 8
+  },
+  {
+   "id": "ad.hru98",
+   "brand": "SALLOW ENTERTAINMENT",
+   "scenes": [
+    {
+     "t": 3.5,
+     "bg": [
+      "#c8b98a",
+      "#6e6345"
+     ],
+     "pattern": "grid",
+     "headline": "THE HOME RESPONSE UNIT",
+     "sub": "MODEL HRU-98",
+     "vo": "The Sallow Home Response Unit. Model H R U ninety-eight.",
+     "anim": "zoom",
+     "product": {
+      "shape": "box",
+      "label": "HRU-98",
+      "colours": [
+       "#d9cfae",
+       "#3a6b2f"
+      ]
+     }
+    },
+    {
+     "t": 4.0,
+     "bg": [
+      "#3a6b2f",
+      "#14260f"
+     ],
+     "pattern": "stripes",
+     "headline": "PLAY ALONG AT HOME",
+     "sub": "IT'S ALREADY IN YOUR HAND",
+     "vo": "Play along at home. It's already in your hand.",
+     "anim": "slide"
+    },
+    {
+     "t": 3.5,
+     "bg": [
+      "#14260f",
+      "#3a6b2f"
+     ],
+     "pattern": "plain",
+     "headline": "SALLOW",
+     "sub": "ENTERTAINMENT FOR THE WHOLE HOUSEHOLD",
+     "vo": "Sallow. Entertainment for the whole household.",
+     "anim": "bounce",
+     "product": {
+      "shape": "box",
+      "label": "HRU-98",
+      "colours": [
+       "#d9cfae",
+       "#3a6b2f"
+      ]
+     },
+     "tag": "DO NOT IMMERSE. DO NOT ANSWER IF IT RINGS."
+    }
+   ],
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "fictional",
+    "short"
+   ],
+   "min_players": 2,
+   "max_players": 8
+  },
+  {
+   "id": "ad.viewer_line",
+   "brand": "MILDEW VIEWER LINE",
+   "scenes": [
+    {
+     "t": 3.5,
+     "bg": [
+      "#1a1a60",
+      "#06061e"
+     ],
+     "pattern": "grid",
+     "headline": "WIN A HAM!",
+     "sub": "",
+     "vo": "Win a ham! Just answer this simple question.",
+     "anim": "bounce",
+     "product": {
+      "shape": "can",
+      "label": "HAM",
+      "colours": [
+       "#c8202f",
+       "#f2e2c0"
+      ]
+     }
+    },
+    {
+     "t": 4.0,
+     "bg": [
+      "#06061e",
+      "#1a1a60"
+     ],
+     "pattern": "stripes",
+     "headline": "WHAT IS IN THE BASEMENT?",
+     "sub": "A) NOTHING  B) NOTHING  C) DON'T",
+     "vo": "What is in the basement? A: nothing. B: nothing. C: don't.",
+     "anim": "slide"
+    },
+    {
+     "t": 4.0,
+     "bg": [
+      "#1a1a60",
+      "#06061e"
+     ],
+     "pattern": "plain",
+     "headline": "CALL 0898 404 404",
+     "sub": "CALLS COST 49p PER MINUTE",
+     "vo": "Calls cost forty-nine pence per minute.",
+     "anim": "zoom",
+     "tag": "CALLS MAY BE RECORDED. CALLS MAY BE RETURNED."
+    }
+   ],
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 3,
+   "content_tags": [
+    "fictional",
+    "short"
+   ],
+   "min_players": 2,
+   "max_players": 8
+  },
+  {
+   "id": "ad.kwikseal",
+   "brand": "KWIK-SEAL",
+   "scenes": [
+    {
+     "t": 3.0,
+     "bg": [
+      "#f2a33a",
+      "#8a4a10"
+     ],
+     "pattern": "sunburst",
+     "headline": "KWIK-SEAL",
+     "sub": "",
+     "vo": "Kwik-Seal.",
+     "anim": "zoom",
+     "product": {
+      "shape": "bottle",
+      "label": "KWIK-SEAL",
+      "colours": [
+       "#f2a33a",
+       "#1b1b1f"
+      ]
+     }
+    },
+    {
+     "t": 4.0,
+     "bg": [
+      "#8a4a10",
+      "#f2a33a"
+     ],
+     "pattern": "checker",
+     "headline": "SEALS ANYTHING",
+     "sub": "GAPS. CRACKS. DOORS. ANYTHING.",
+     "vo": "Gaps. Cracks. Doors. Anything.",
+     "anim": "slide",
+     "product": {
+      "shape": "bottle",
+      "label": "KWIK-SEAL",
+      "colours": [
+       "#f2a33a",
+       "#1b1b1f"
+      ]
+     }
+    },
+    {
+     "t": 3.5,
+     "bg": [
+      "#1b1b1f",
+      "#8a4a10"
+     ],
+     "pattern": "grid",
+     "headline": "ONCE IT'S SEALED, IT STAYS SEALED",
+     "sub": "",
+     "vo": "Once it's sealed, it stays sealed.",
+     "anim": "bounce",
+     "product": {
+      "shape": "bottle",
+      "label": "KWIK-SEAL",
+      "colours": [
+       "#f2a33a",
+       "#1b1b1f"
+      ]
+     },
+     "tag": "DO NOT SEAL ROOMS WITH PEOPLE IN"
+    }
+   ],
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "fictional",
+    "short"
+   ],
+   "min_players": 2,
+   "max_players": 8
+  }
+ ]
+}

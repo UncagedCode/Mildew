@@ -17,6 +17,7 @@ var wv: WriteVoteBoard
 var ps: SketchBoard
 var dnp: DnpBoard
 var bas: BasementBoard
+var ads: AdvertPlayer
 var _quiz_q := false                 # current question is on the quiz board (CP3 layouts)
 
 var _sync_timer := 0.0
@@ -58,6 +59,8 @@ func _process(delta: float) -> void:
 			dnp.players = pmap
 		if bas:
 			bas.players = pmap
+		if ads:
+			ads.players = pmap
 		sys.contestants = plist.filter(func(p): return p.status == "active" and p.connected).size()
 		studio.graham.set_pressure(host.session.director.pressure)
 		if not studio.graham.is_speaking():
@@ -99,6 +102,9 @@ func _on_event(evt: Dictionary) -> void:
 			if str(evt.kind) != "question" and quiz and quiz.is_showing():
 				quiz.hide_board()
 				_quiz_q = false
+				_in_question = false
+			if not (str(evt.kind) in ["advert", "poll", "awards"]) and ads and ads.is_showing():
+				ads.stop()
 				_in_question = false
 			if str(evt.kind) != "basement" and bas and bas.is_showing():
 				bas.hide_board()
@@ -170,6 +176,8 @@ func _on_event(evt: Dictionary) -> void:
 			_dnp_event(evt)
 		"bas_case", "bas_discuss", "bas_investigated", "bas_ready", "bas_theory", "bas_theory_in", "bas_reveal":
 			_bas_event(evt)
+		"advert_show", "advert_end", "break_card", "break_ready", "poll_show", "poll_progress", "poll_result", "award":
+			_furniture_event(evt)
 		"question_show" when str(evt.get("layout", "panel")) != "panel":
 			_in_question = true
 			_quiz_q = true
@@ -534,7 +542,7 @@ func _audience_cutaway(cam: String, seconds: float) -> bool:
 
 
 func _graphic_owns_frame() -> bool:
-	return _in_question or (hole != null and hole.is_showing()) or (quiz != null and quiz.is_showing()) or (wv != null and wv.is_showing()) or (ps != null and ps.is_showing()) or (dnp != null and dnp.is_showing()) or (bas != null and bas.is_showing()) or gfx.is_question_visible()
+	return _in_question or (hole != null and hole.is_showing()) or (quiz != null and quiz.is_showing()) or (wv != null and wv.is_showing()) or (ps != null and ps.is_showing()) or (dnp != null and dnp.is_showing()) or (bas != null and bas.is_showing()) or (ads != null and ads.is_showing()) or gfx.is_question_visible()
 
 
 ## Survey / Mouthfeel presentation (CP4): the board draws; this adds studio grammar and sound.
@@ -675,3 +683,47 @@ func _bas_event(evt: Dictionary) -> void:
 				if int(d[pid]) > 0:
 					studio.flash_podium(pid, "+%s" % PodiumScreen._fmt(int(d[pid])))
 			audio.crowd("ooh", -8.0)
+
+
+## Adverts, breaks, polls and awards (CP8).
+func _furniture_event(evt: Dictionary) -> void:
+	if ads == null:
+		return
+	var ts := host.session.time_scale
+	match str(evt.e):
+		"advert_show":
+			_in_question = true
+			gfx.hide_question()
+			gfx.dog_visible = false            # adverts carry no channel bug
+			ads.play(evt.advert, ts)
+			audio.play("sting_game", -6.0)
+		"advert_end":
+			ads.stop()
+			gfx.dog_visible = true
+			_in_question = false
+		"break_card":
+			_in_question = true
+			gfx.dog_visible = false
+			ads.show_card(evt, ts)
+			if str(evt.kind) == "interval":
+				ads.set_ready(int(evt.get("ready", 0)), int(evt.get("of", 0)))
+				audio.play("theme_opening", -14.0)
+			else:
+				audio.play("whoosh", -4.0)
+		"break_ready":
+			ads.set_ready(int(evt.count), int(evt.of))
+		"poll_show":
+			_in_question = true
+			gfx.hide_question()
+			ads.show_poll(evt)
+			audio.play("whoosh", -4.0)
+		"poll_progress":
+			ads.poll_progress(int(evt.count))
+			audio.play("lock", -10.0)
+		"poll_result":
+			ads.poll_result(evt)
+			audio.crowd("ooh", -10.0)
+		"award":
+			_in_question = true
+			ads.show_award(evt)
+			audio.applause("small" if not evt.has("prize") else "medium")
