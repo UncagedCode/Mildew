@@ -473,6 +473,8 @@ def main(argv=None):
             player = shutil.which("termux-media-player")
             if player:
                 native.run([player, "play", str(path / "clip.ogg")], timeout=60)
+            elif shutil.which("termux-open"):
+                native.run(["termux-open", "--view", "--content-type", "audio/ogg", str(path / "clip.ogg")], timeout=60)
         elif a.command == "report":
             index = read(REPO / "config/graham_voice_index.json", {"clips": {}})
             for line in lines():

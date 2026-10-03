@@ -18,8 +18,9 @@ git switch feature/qwen-voice-pipeline
 ```
 
 `setup` installs the required Termux packages, compiles the native runner and downloads the first model.
-The audition command prints the paths of three `clip.ogg` files. Play them using your phone's file
-manager, or use the preview command below. Choose the Graham voice you like, then run (for take 2):
+The audition command prints the paths of three `clip.ogg` files. Listen with
+`./mildew voice preview welcome_01 --take 1 --audition` (repeat for takes 2 and 3).
+Choose the Graham voice you like, then run (for take 2):
 
 ```bash
 ./mildew voice lock welcome_01 --take 2
@@ -78,15 +79,16 @@ Setup/downloads need the internet. Generation never sends dialogue or reference 
 
 ## Listening on the phone
 
-If Termux:API is installed on your phone and its package is available:
+Use the same command for each take:
 
 ```bash
-pkg install termux-api
 ./mildew voice preview welcome_01 --take 1 --audition
 ```
 
-Without Termux:API, `preview` prints the file path. Copy the clip to Downloads with your file manager
-and play it there. Playback integration is optional; generation does not require it.
+`preview` prints the path and uses Termux:API's media player when available, otherwise
+Termux's `termux-open` to launch your normal audio app. If external playback is blocked by
+your Termux settings, open the listed clip through a file manager's Termux storage picker.
+Playback integration is optional; generation does not require it.
 
 ## Editing dialogue and performance
 
