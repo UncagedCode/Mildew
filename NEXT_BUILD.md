@@ -1,91 +1,58 @@
 # NEXT BUILD — Mildew
 
-Checkpoint/build target: **CP3 — Real or Mildew? + Guess the Genitals** (`0.1.0-cp3`, versionCode 3)
+Checkpoint/build target: **CP9 — Persistence, polish, performance (serious PoC)** (`0.1.0-cp9`, versionCode 9)
 
-Read first: docs/11 §CP3, docs/04 (Real or Mildew?, Guess the Genitals), docs/07 (factual metadata, image approval),
-docs/13 (animal-only enforcement), DECISIONS D020 (real photos), D021/D022 (Graham presentation).
+Read first: docs/11 §CP9, docs/09 (persistence), docs/10 (debug/testing), PROGRESS.md, DECISIONS D027–D036.
 
 ## Goal
 
-Three real games in the programme. Prove the sourced-factual content architecture: every factual claim and every
-real image carries source/licence/approval metadata, the validator blocks anything missing, and the Viewer
-Information Service lists the sources players saw.
+Turn the complete CP8 programme into something that plays well on the real TV with real phones: measured performance,
+tuned pacing from a real session, persistence polish, and the content gaps closed.
 
-## Required user-visible outcomes
+## Blocking on the user (cannot be done from the build environment)
 
-- **Real or Mildew?** — 30–40 items, text and image formats (real bizarre fact vs plausible fake), factual reveal with a
-  short explanation, a confidence variant (stake points on how sure you are), Graham reactions.
-- **Guess the Genitals** — 15–20 items, *animal-only*, clinical presentation (Graham treats it as respectable
-  television), biological fact reveal, fast-answer reactions, themed/variant scaffolding, Rot hooks.
-- Viewer Information Service v1: facts broadcast on this installation with their sources (not incidents).
-- Director picks game order using mechanical variety and opener/middle/finale tags; a 3-game programme.
+1. **Device smoke test of the CP8 APK** — checklist below. Report FPS (dev overlay), any phone browser failures,
+   programme length, and anything that felt too frequent/rare (punishments, incidents, adverts).
+2. **Photographic room plates (optional but recommended)** — same pipeline as the studio plates (D026). One empty,
+   real-looking late-90s backstage photo per room, 4:3, no people, no text/logos:
+   Green Room (sofa, small fridge, plant), Studio C dark (four podiums), service corridor (exists), prop store
+   (shelves, boxes, a mannequin), archive/tape room (tape shelves, TV trolley), and later control room, staff kitchenette,
+   loading area, Graham's dressing room, the locked room (door only). Plus, per room, one variant with the door open
+   and one with the light off. They would replace the procedural CCTV look in `cctv_view.gd` room by room.
+3. **More Guess the Genitals images** (5–10 licensed, clinical, animal-only) — or approval to source more museum/journal figures.
+4. **Graham voice** for the new CP3–CP8 line packs (`content/graham/lines/cp3_*`…`cp8_*`), via the graham_factory pipeline (D024).
 
-## Required technical outcomes
+## Required technical outcomes (CP9)
 
-- Content kinds `real_or_mildew` and `genitals` (schemas in `schemas/`), factual source fields (citation, URL, retrieved),
-  image approval fields; release-mode validation blocks placeholder factual content.
-- Animal-only enforcement in the validator (species/taxon field required; human anatomy rejected).
-- Real photos via `tools/content/commons_media.py` (PD/CC0/CC BY; standard thumbnail widths; resumable manifest).
-  Genital imagery must be scientific/clinical (museum specimens, field-guide style), never sexualised.
-- Director: format tags (opener/middle/finale, mechanic), playlist across 3 games, 45-minute synthetic playlist soak.
-- Bots: answer behaviour for both games; integration + phone UI updated.
-
-## Content/assets required
-
-- 30–40 Real or Mildew? items with sources; 15–20 Guess the Genitals items with sources + licensed images.
-- Graham line pools for both games; stings for both (cheap 90s motion graphics).
+- Performance: profile on the TV (procedural boards, plate compositing, CRT shader); cap draw work; verify 60 FPS on menus/boards.
+- Pacing: adjust `show.games_per_episode`, rounds per game and timers from the first real session; keep the 45-minute target.
+- Persistence: Graham cross-session traces (rare grudge/favourite carry-over, "loves a category" misunderstanding), profile
+  history screen, reset options covering rooms/chains/announcer (Reset Mildew already wipes the installation).
+- Legibility pass at 720p for all new boards; colour-blind check on option colours.
+- Release validation run (`ContentValidator.validate(db, true)`) with a list of what blocks release.
 
 ## Test gates
 
-- [ ] project/import succeeds; unit tests pass; content validation passes
-- [ ] factual validator catches missing source/licence metadata (negative tests)
-- [ ] 2- and 8-player simulations of each game; no repeat within a game
-- [ ] 45-minute synthetic playlist with the three games completes without crashing (soak)
-- [ ] LAN + phone UI integration for both new games
-- [ ] APK export succeeds
-- [ ] physical Android TV/phone smoke test (pending: no device in environment)
-
-## Explicit non-goals
-
-Survey/Mouthfeel (CP4), Police Sketch (CP5), adverts and commercial break (CP8), Tier 2+ incidents, private interference.
-
-## Risks
-
-- Licensed clinical animal-anatomy photography on Commons is sparse: fall back to museum specimen photos and
-  scientific illustrations that are PD (clearly marked), never AI-generated "real" anatomy presented as fact.
-- Fact accuracy: every item needs a citation a reviewer can check; items stay `draft` until reviewed.
-
-## Carried over from CP2
-
-- **Studio plates (D026):** when the ChatGPT batch arrives (`references/studio/REQUEST_plates_v1.md`): save to
-  `assets/studio/plates/`, author hotspots per plate in `config/studio_plates.json` (Graham anchor/height from the
-  with/without pair, eight screen quads, lamp quads, rig lights, foreground mask for the presenter table), check on the
-  TV with dev panel → PLATE HOTSPOTS, then remove the stand-ins.
-
-- **Graham audio:** import the 19-line development library + 5 names: put the mp3s in
-  `tools/graham_factory/generated_audio/` (or any folder) and run `python tools/graham_factory/sync_godot.py [--source DIR]`;
-  approve reviewed takes with `--approve id…`. Audition on the TV via the Voice Browser. Re-generate drifting takes
-  only with `generate.py regenerate <id>` (no full-library regeneration).
-
-- Find licensed photos for `hole.bowling_ball` (finger holes) and `hole.golf_hole` (cup), then re-enable.
-- Human audition of synthesized stings/crowd audio.
-- Check the generated-image service terms for Graham cut-outs before any commercial release.
+- [ ] unit suite + content validation green; 300-programme soak 0 hangs
+- [ ] integration suites green (LAN, phone UI, DNPT UI, dev panel, QR)
+- [ ] APK export + verification
+- [ ] **real Android TV + 2 real phones: one full programme** (user)
 
 ---
 
-## Pending from CP1/CP2 — on-device checklist for the user
+## On-device checklist (CP8 APK)
 
-Install: `adb install -r mildew-0.1.0-cp2-debug.apk` (or sideload via a file manager on the TV). Then:
+Install: `adb install -r mildew-0.1.0-cp8-debug.apk` (or sideload). Then:
 
-1. App tile "Mildew" appears in the Android TV launcher. Launch it.
-2. SALLOW ident plays with a chime; title menu responds to the remote. VIEWER INFORMATION lists picture credits and scrolls.
-3. BEGIN TRANSMISSION → lobby shows QR, URL (`http://<tv-ip>:8080`) and a 4-letter code. Graham is on screen and talks.
-4. Scan the QR with two phones on the same Wi-Fi. Both reach the contestant wizard without typing the code.
-5. Enter a name → the TV speaks it (if it has an offline TTS voice; otherwise subtitles only) → pick a likeness.
-6. Floor captain presses BEGIN. Play through the rehearsal and the HOLE game: try locking on Look 1, try SHOW ME MORE,
-   use the multiple choice. Check the photos look sharp and the pull-back is smooth.
-7. Mid-game, turn one phone's Wi-Fi off for ~10 s, then on: the TV holds with an honest banner and resumes.
-8. Press BACK on the remote → TRANSMISSION PAUSED → RESUME / END TRANSMISSION.
-9. Open `http://<tv-ip>:8080/dev` on a phone, enter the PIN shown under the TV's join panel: add bots, start a show,
-   watch the FPS pill during Graham's close-up, the Hole board and the scoreboard. (Pause → DEVELOPER TOOLS still works on the remote.)
-10. Report: install result (any signature/parse error?), FPS, whether TTS spoke, any phone browser that failed, anything that looked wrong.
+1. Launch "Mildew" from the Android TV launcher; ident, title, BEGIN TRANSMISSION.
+2. Two or more phones scan the QR on the same Wi-Fi; create contestants; floor captain presses BEGIN.
+3. Play a whole programme (≈45 min). Things to look at:
+   - every game's phone screen (multiple choice, Hole gamble, typing answers, voting, drawing with a finger, the
+     Do Not Press That panel — read your instructions out loud — and Basement evidence cards);
+   - the commercial break: everyone presses I'M BACK and the programme resumes early;
+   - adverts, viewer poll, awards and star prize;
+   - anything odd: a CCTV cutaway, banging, a private message flashing on one phone (they're rare — some programmes have none).
+4. Press BACK on the remote mid-game → TRANSMISSION PAUSED → RESUME.
+5. Turn one phone's Wi-Fi off for ~10 s mid-game, then on: honest reconnect banner, resume.
+6. Dev panel: `http://<tv-ip>:8080/dev` + PIN from the TV — FPS pill, bots, forcing (first game, Easy Question, THE TEST, chain step).
+7. Report: install result, FPS, programme length, phone browsers used, anything confusing, anything that made somebody say "what was that?".

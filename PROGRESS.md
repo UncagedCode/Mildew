@@ -1,157 +1,132 @@
 # PROGRESS — Mildew
 
-Last updated: 2026-10-02 (Europe/London)
-Current checkpoint: **CP2 — Hole vertical slice** (CP0 complete; CP1 complete pending device test)
-Current build/version: `0.1.0-cp2` (versionCode 2), debug APK
-Current branch: `claude/cp2-hole` (see git log)
+Last updated: 2026-10-03 (Europe/London)
+Current checkpoint: **CP8 — Full Director / standard broadcast** (CP3–CP7 implemented in this session; CP0–CP2 earlier)
+Current build/version: `0.1.0-cp8` (versionCode 8), debug APK
+Current branch: `claude/cp3-factual` (contains CP3 → CP8; see git log). APKs: branch `claude/apk-builds`.
 Godot version: **4.7.2-stable** (GL Compatibility) — pinned (D001)
 Android toolchain: headless non-Gradle export + container v2 signer + TV-launcher patch (D007, D008). Build: `tools/build/build_apk.sh`.
-Latest APK: `build/mildew-0.1.0-cp2-debug.apk` (77.6 MB; not committed). SHA-256 in `docs/testing/TEST_REPORT_CP2.md`.
+Latest APK: `build/mildew-0.1.0-cp8-debug.apk` (not committed to the source branch). SHA-256 in `docs/testing/TEST_REPORT_CP8.md`.
 
 ## Executive status
 
-CP2 is implemented and passes every automated gate. A broadcast now runs lobby → opening → introductions →
-(two-question studio rehearsal on a new installation) → **HOLE** (sting, rules, 6 rounds with staged reveals of
-real photographs, early-lock gambling on the phone, safety-net multiple choice, SCALE and NO SAFETY NET variants,
-partial credit, audience reactions, Graham commentary) → scores → winner → sign-off, for 2–8 phones, with Tier 0
-production mess and light Tier 1 irregularities scheduled by the Director's incident engine.
-Graham is now a **photographic composited presenter** (alpha cut-outs over our own studio, D021/D022) with
-blinks, breathing, mouth cycle and TV editing that cuts away while he keeps talking.
-**Still not verified on hardware** (no TV/phones reachable from the build environment): CP1 and CP2 gate items
-"APK runs on target" remain **PENDING USER DEVICE TEST** (checklist in NEXT_BUILD.md).
+All **eight launch games** are implemented and the Director builds a whole programme:
+opening → intros → (rehearsal on new installs) → 5 games chosen by role/variety with an advert, viewer polls, a
+**90-second commercial break** at the midpoint (early resume when everyone's back), a ×1.5 finale, the MILDEW AWARDS and
+a star prize, then sign-off. Around it: private phone interference, Tier 0–3 incidents, recurring backstage rooms seen
+on CCTV whose state persists between sessions, event chains up to Tier 4 machinery, a slowly drifting Announcer, the
+{NAME}'S EASY QUESTION punishment and the hidden THE TEST interruption game.
 
-## Checkpoint status — CP2
+Automated: 114 GDScript test functions (~3,850 checks) green; 300-programme soak, 0 hangs; LAN/phone/dev-panel Chromium
+suites (see TEST_REPORT_CP8). **Still not verified on a real TV or phones** (no devices reachable from the build
+environment): every checkpoint's "runs on target hardware" item is **PENDING USER DEVICE TEST**.
 
-| Requirement | Status | Implementation/files | Verified how | Notes |
+## Checkpoint status
+
+| CP | Scope | State | Notes |
+|---|---|---|---|
+| CP0 | repo/toolchain | VERIFIED | |
+| CP1 | LAN lobby, phones, reconnect | IMPLEMENTED (device test pending) | |
+| CP2 | Hole | IMPLEMENTED (device test pending) | 25 real photos |
+| CP3 | Real or Mildew? + Guess the Genitals, fact archive | IMPLEMENTED | GTG has 10 items (target 15–20) — needs more licensed images |
+| CP4 | Mildew Survey + Mouthfeel, private interference | IMPLEMENTED | |
+| CP5 | Police Sketch | IMPLEMENTED | drawing tested in Chromium touch emulation, not on real phones |
+| CP6 | Do Not Press That | IMPLEMENTED | 2,800 generated layouts validated |
+| CP7 | The Basement | IMPLEMENTED | 7 cases |
+| CP8 | Full Director broadcast | IMPLEMENTED | rooms are procedural CCTV (photographic room plates requested) |
+| CP9 | persistence/polish/performance | NOT STARTED | needs device profiling |
+
+### CP3 — Real or Mildew? + Guess the Genitals
+| Requirement | State | Files | Verified | Notes |
 |---|---|---|---|---|
-| 20–30 Hole items | VERIFIED | `content/games/hole/core_cp2.json` (27; 25 enabled) | validator, tests | real Commons photos, `reviewed`; 2 disabled pending photos |
-| Real photos + licence metadata | VERIFIED | `tools/content/commons_media.py`, `tools/content/hole_photos.json` (+`.media.json`), `assets/content/hole/*.jpg` | stage previews, tour | PD/CC0/CC BY only; credits `docs/CREDITS_MEDIA.md` + Viewer Information Service |
-| Multi-stage reveal | VERIFIED | `seg_hole.gd`, `hole_board.gd` | unit + tour | 3 looks + safety net; log-space dolly pull-back |
-| Early lock / pass / grace | VERIFIED | `seg_hole.gd`, `protocol.gd` (`lock`, `pass`) | unit + LAN + Chromium | irreversible, confirm step on phone |
-| Scoring values + partial credit | VERIFIED | `seg_hole.gd`, `config/design_constants.json` hole.* | unit | 1500/1100/750/500; 20% for right category on looks 1–3 |
-| Variants | VERIFIED | SCALE, OPEN (familiarity-gated), studio hole (tier 3, rare) | unit | dev-forceable via `director.force` |
-| Two-player support | VERIFIED | unchanged rules, head-to-head | unit + LAN | |
-| Short game sting | IMPLEMENTED | `graphics_layer.gd` `_draw_sting_hole`, `sting_hole` audio | tour | audio synthesized, not auditioned |
-| Graham line pools | IMPLEMENTED | `content/graham/lines/hole_cp2.json` (56) | sims | draft copy |
-| Audience reactions | IMPLEMENTED | `audio_desk.gd` crowd ooh/aww/laugh/gasp, applause sizes, deliberate silence | tour | synthesized |
-| Content quality metadata + validator | VERIFIED | `content_validator.gd` `_validate_hole`, `_validate_media`, `_validate_incident` | unit | |
-| Tier 0 + light Tier 1 incidents | VERIFIED | `incident_engine.gd`, `seg_incident.gd`, `content/incidents/*`, presenter `_incident` | `test_incidents` (rates, cooldowns, settings, safeguards) | Hole doorway "Not that one." hook |
-| Photographic Graham (D021/D022) | VERIFIED (render) | `tools/art/import_graham_cutouts.py`, `config/graham_cutouts.json`, `graham_presenter.gd`, `studio_set.gd` | `test_graham`, gallery `docs/testing/graham_gallery.jpg`, tour | 25 semantic states; dev gallery (F11/F12) |
-| TV editing grammar | IMPLEMENTED | `presenter.gd` `_shot_graham_line`, `config/graham_shots.json` | tour | speech continues over cutaways/graphics |
-| Subtitle placement over game graphics | VERIFIED | `graphics_layer.gd` `bottom_busy` | tour | |
-| Phone dev panel (D023) | VERIFIED | `src/net/mildew_host.gd` (dev socket/PIN/state), `src/app/main.gd` `_dev_remote`, `devpanel/dev.html` | LAN scenario (20 checks), Chromium `dev_panel_ui.mjs` (10) | debug builds only; `/dev` + TV PIN |
-| Graham local voice (D024) | IMPLEMENTED (no audio yet) | `src/audio/graham_voice_service.gd` (autoload `GrahamVoice`), `src/core/voice/graham_voice_index.gd`, `config/graham_voice_index.json`, `config/graham_voice_intents.json`, `default_bus_layout.tres`, `content/graham/lines/voice_dev.json`, `tools/graham_factory/sync_godot.py` | `test_graham_voice` (9 tests), factory Python tests (9) | 24 ids indexed (19 lines + 5 names), all `missing` until the mp3s are supplied; then `development` |
-| Studio as photographic plates (D026) | IMPLEMENTED (stand-in plates) | `src/broadcast/plate_stage.gd`, `config/studio_plates.json`, `assets/studio/plates/`, `tests/tools/render_plates.gd`, request `references/studio/REQUEST_plates_v1.md` | `test_plates` (236 checks), plate renders with contestants, tour | batch v1 integrated (11 plates); stand-ins removed |
-| Studio restyle after reference (D025) | IMPLEMENTED | `studio_set.gd`, `tools/art/gen_studio_ref.py`, `assets/textures/studio/` | side-by-side renders vs reference, tour | Camera 1 matches the reference composition |
-| APK | IMPLEMENTED | `build/mildew-0.1.0-cp2-debug.apk` | signature, manifest, pack listing | **device install pending** |
+| 30–40 ROM items, sourced | IMPLEMENTED | `content/games/real_or_mildew/core_cp3.json` (34) | test_rom | all `draft` pending human fact-check; release validation blocks them |
+| Text/image formats, factual reveal, confidence wager | VERIFIED | `seg_question.gd`, `quiz_board.gd` | test_rom | D028 |
+| Viewer Information Service v1 | IMPLEMENTED | `main.gd` `_viewer_items`, `installation.facts_seen` | test_persistence | sources + picture credits |
+| GTG 15–20 items, animal-only, licensed | **PARTIAL** | `content/games/guess_the_genitals/core_cp3.json` (10) | test_gtg | D029; validator enforces animal-only |
+| Clinical presentation, fact reveal, variants, Rot, fast-answer reactions | IMPLEMENTED | `quiz_board.gd` image layout, Director pacing | test_gtg | decoys ("Genital or Something Else?") |
 
-**CP2 gate:** full Hole game lobby→scoreboard ✅ · 2–8 simulation ✅ · no repeat within game ✅ · APK ✅ (container) ·
-on-device ⏳ **pending user device test**. → CP2 is complete pending the on-device smoke test.
+### CP4 — Mildew Survey + Mouthfeel
+| Requirement | State | Files | Verified |
+|---|---|---|---|
+| 40–60 survey prompts, archive answers, two-player fill | VERIFIED | `content/games/mildew_survey/core_cp4.json` (52), `seg_write_vote.gd` | test_write_vote |
+| No self-vote, match normalisation, WHO SAID THAT? / ARCHIVE rounds | VERIFIED | `seg_write_vote.gd` | test_write_vote, Chromium |
+| Rare Graham answer alteration (dev-forceable) | VERIFIED | `force.alter_answer` | test_write_vote |
+| 40–60 Mouthfeel components, categories, Make It Worse, Graham's anonymous answer, reverse format | VERIFIED | `content/games/mouthfeel/core_cp4.json` (48) | test_write_vote |
+| Text survives reconnect/reload | VERIFIED | phone local drafts | Chromium (phone_ui) |
+| Private phone interference, force-testable | VERIFIED | `private_interference.gd`, `content/interference/` (22) | test_interference, D031 |
+| Mouthfeel optional imagery, Survey "None of these" | PLANNED | | deferred (D030) |
 
-## Checkpoint status — CP0
+### CP5 — Police Sketch
+| Requirement | State | Files | Verified |
+|---|---|---|---|
+| 30–40 prompts, Body Part variant scaffolding | VERIFIED | `content/games/police_sketch/core_cp5.json` (38) | test_sketch |
+| Crude canvas (thin/thick/rub/undo/clear), 45–60 s | VERIFIED | `controller/app.js` scrPSDraw | Chromium |
+| 4+ chains, explicit 2-player flow, multi-category voting, fidelity scoring | VERIFIED | `seg_sketch.gd` | test_sketch (2 & 8 players) |
+| Bounded bandwidth | VERIFIED | ≤300 strokes/6000 pts, 48 KB drawing frames, others 4 KB | test_sketch |
+| Reconnect preserves drawing, local exhibit reuse | VERIFIED | local draft, `installation.sketch_archive` | Chromium reload, test_sketch |
 
-| Requirement | Status | Implementation/files | Verified how | Notes |
-|---|---|---|---|---|
-| Inspect repo / import package | VERIFIED | repo had only README; package imported at root (`CLAUDE.md`, `docs/`, `config/`, `schemas/`, `templates/`) | git | handoff README/prompt moved into `docs/` |
-| Pin Godot version | VERIFIED | `project.godot`, D001 | headless import/export | 4.7.2-stable |
-| Android export toolchain | VERIFIED (container) | `tools/build/*` | APK exported, signature verified, manifest dumped | device install pending |
-| Package id / version naming | IMPLEMENTED | `export_presets.cfg`, D003 | manifest dump | |
-| Folder structure / progress docs / constants / test harness | VERIFIED | `src/`, `tests/`, `tools/run_tests.sh` | test runs | |
+### CP6 — Do Not Press That
+| Requirement | State | Files | Verified |
+|---|---|---|---|
+| 8–12 puzzles, role allocation 2–8, per-phone panels/instructions | VERIFIED | `content/games/do_not_press_that/core_cp6.json` (10), `dnp_puzzle.gd` | test_dnp (2,800 layouts), validator |
+| Partial failure consequences, tiers, team + individual bonus, irrelevant controls, blame | VERIFIED | `seg_dnp.gd` | test_dnp, Chromium dnp_ui |
+| Timer irregularity (dev-forceable), reconnect, latency tolerance | VERIFIED | `seg_dnp.gd` | test_dnp |
 
-## Checkpoint status — CP1
+### CP7 — The Basement
+| Requirement | State | Files | Verified |
+|---|---|---|---|
+| 6–8 cases, private evidence, investigations, individual theories, partial credit | VERIFIED | `content/games/basement/core_cp7.json` (7), `basement_case.gd`, `seg_basement.gd` | test_basement |
+| Definitive + unresolved, recurring places/people, unreliable clues, 2-player multi-clue | VERIFIED | | validator: every case × 2–8 players |
 
-| Requirement | Status | Implementation/files | Verified how | Notes |
-|---|---|---|---|---|
-| Mildew boot/ident styling | IMPLEMENTED | `studio_set.gd` (ident rig), `main.gd` | tour screenshots | Sallow gold 3D ident + chime |
-| `BEGIN TRANSMISSION` flow | VERIFIED | `main.gd` title menu | tour + manual review | remote: arrows/OK |
-| Placeholder-but-on-brand Graham | IMPLEMENTED | `graham_puppet.gd`, `presenter.gd` | mood sheet + tour | 7 moods + activities, sweat/tie vs Pressure; provisional art |
-| 4:3 broadcast in 16:9 output | VERIFIED | `programme_view.gd`, `broadcast_crt.gdshader` | screenshots | lobby uses wider layout (monitor + join page) |
-| Minimal camera grammar | IMPLEMENTED | `studio_set.gd` cut_to(), presenter | screenshots | cam1–4 + podium CUs; occasional late cuts; operator drift |
-| Local HTTP controller hosting | VERIFIED | `http_static_server.gd`, `mildew_host.gd` | integration (incl. exported Linux pack) | path traversal/POST rejected |
-| QR / local URL + room code fallback | VERIFIED | `qr_encoder.gd`, `system_layer.gd` | 90-matrix cross-check vs independent encoder; browser test | physical scan pending |
-| 2–8 real/fake clients join | VERIFIED | session/host | unit sim + real WebSocket (2, 8, ninth rejected) + browser | |
-| Returning/new profile structure | IMPLEMENTED | `save_store.gd`, session `_on_select_profile/_on_create_profile` | unit tests | group "IS THIS ACTUALLY X?" vote PLANNED (D014) |
-| Display name + pronunciation scaffolding | VERIFIED | phone wizard, `say_name`, `VoiceService` | browser test (TV speech events) | TTS audibility on TV pending device |
-| Simple avatar selection | VERIFIED | `config/avatar_parts.json`, `avatar_painter.gd`, `app.js` | screenshots | identical TV/phone renderers |
-| TV podium/contestant representation | IMPLEMENTED | `studio_set.gd` podiums + `podium_screen.gd` | screenshots | CRT screens, answer lamps, real NO LINK |
-| Minimal authoritative server | VERIFIED | `session_server.gd`, segments | 27 unit tests, soak, integration | |
-| Minimal Director object/state | VERIFIED | `director.gd` | unit tests, dev overlay | axes, tone, mood, relationships, skeleton, decision log |
-| One simple test question | VERIFIED | `content/games/studio_rehearsal/questions.json`, `seg_question.gd` | sims + browser | 3 per show from 8 |
-| Answer submission / score update | VERIFIED | `seg_question.gd` | phone result sums == server standings | |
-| Disconnect/reconnect 30 s flow | VERIFIED | session holds, phone resume token | unit + real sockets + browser | Graham lines at 0s/15s/return/fail |
-| Phone portrait UI as Home Response Unit | VERIFIED | `controller/*` | Chromium phone viewport screenshots | real-phone browsers pending |
-| Basic fake player support | VERIFIED | `fake_player_bot.gd`, `sim_harness.gd`, host dev menu | tests, tour | 6 personalities |
-| Dev network/Director diagnostics | IMPLEMENTED | `dev_overlay.gd` (F3 / pause → DEVELOPER TOOLS) | tour screenshots | FPS/frame/memory line for device profiling |
-| Installable APK | IMPLEMENTED | `build/mildew-0.1.0-cp1-debug.apk` | v2 signature verify, manifest, pack listing | **install on TV pending** |
-| Manual pause / settings / end | VERIFIED | `main.gd`, `system_layer.gd` | tour + unit (freeze) | Android BACK/MENU/Esc open it |
-| Reset Players / History / Mildew | IMPLEMENTED | `save_store.gd`, settings menu | unit tests | double-OK confirmation |
-
-**CP1 gate:** 2 and 8 clients join ✅ · phone input changes TV state ✅ (browser + WebSocket; physical phone pending) ·
-reconnect works ✅ · server rejects invalid actions ✅ · APK runs on target ⏳ **pending user device test** · status docs ✅.
-→ CP1 is **not yet declared complete**; it is complete pending the on-device smoke test.
-
-## Working now
-- Everything from CP1 (lobby, profiles, reconnect, late join, pause/settings/reset, dev tools).
-- Full Hole game for 2–8 players over real sockets; phones gamble/pass/lock; server-side scoring; reveal chips per contestant.
-- Incident engine: Tier 0 (mic pop, typo lower third, early applause, late cut, wrong camera, off-mic cue, signal tear, captions) and Tier 1 (empty corridor, Hole doorway, wrong name, odd caption, wrong audience reaction, floor shot) with rarity, cooldowns, temperament, interference setting and tone safeguards.
-- Photographic Graham in the 3D studio on all cameras; dev Graham gallery.
-- Viewer Information Service: picture credits for every real photo.
-
-- Phone dev panel at `http://<tv>:8080/dev` (debug builds, PIN on the TV): bots, start/pause, speed, forcing, overlay, Graham voice browser, live Director feed.
-
-## Partially working
-- Graham's authored voice: system complete, but no clips are in the repo yet (factory output is git-ignored). Until imported, Graham is subtitle-only in release builds; debug builds read missing lines with the device voice, marked `[DEV TTS]`.
-- Graham voice: device offline TTS (untested on device).
-- Graham motion excerpts only in plate mode (cut mode has stills + compositing animation).
-- Same-name verification vote (D014). Android TV banner art (D008).
-
-## Known broken / blockers
-- No physical-device verification possible from the cloud container.
-- No licensed real photos yet for bowling-ball finger holes and a golf cup (items disabled).
-- Generated-image service terms for the Graham cut-outs must be checked before any commercial release.
-
-## Networking status
-Unchanged from CP1 (verified in container); Hole adds `lock`/`pass` actions. Real phones tested: none yet.
-
-## Games status
-| Game | 2P | 3–8P | Scoring | Content | Broadcast polish | Tests |
-|---|---|---|---|---|---|---|
-| Hole | ✅ | ✅ | ✅ stage + partial | 25 real photos (reviewed) | sting, monitor board, dolly, reveal chips, crowd | ✅ unit/LAN/phone |
-| Real or Mildew? | – | – | engine ready (SegQuestion) | – | – | CP3 |
-| Guess the Genitals | – | – | engine ready | – | – | CP3 |
-| Mildew Survey | – | – | – | – | – | CP4 |
-| Mouthfeel | – | – | – | – | – | CP4 |
-| Police Sketch | – | – | – | – | – | CP5 |
-| Do Not Press That | – | – | – | – | – | CP6 |
-| The Basement | – | – | – | – | – | CP7 |
-| *(Studio Rehearsal — warm-up, new installs only)* | ✅ | ✅ | ✅ | 8 draft | ✅ | ✅ |
-
-## Director status
-- Format registry; `plan_episode` (warm-up for new installs, then Hole via `plan_game`); Hole item picking (weighted, no repeat, studio-hole cap) and variant choice; decision log.
-- Incident engine (above); show-time clock freezes on holds.
-- Mood/relationships/axes as CP1; Tier 2+ incidents, private interference, rooms: not yet (CP4/CP8).
+### CP8 — Full Director
+| Requirement | State | Files | Verified |
+|---|---|---|---|
+| Partial skeleton, tag/variety game selection, finale | VERIFIED | `director.gd` plan_episode/choose_game | test_broadcast |
+| Midpoint break, adverts (11 / 9 brands), polls, awards, run-over | VERIFIED | `seg_advert.gd`, `seg_interstitial.gd`, `advert_player.gd` | test_broadcast (D035) |
+| Degradation/Complicity/Pressure/Familiarity/mood/relationships | IMPLEMENTED | `director.gd` (since CP1) | unit; behavioural tuning needs play-testing |
+| Tier 0–2 incidents + small Tier 3 set | VERIFIED | `incident_engine.gd`, `content/incidents/tier0–3` | test_world, soak |
+| Private interference targeting | VERIFIED | D031 | |
+| Recurring rooms (5) with persistent state, chains, Tier 4 machinery | VERIFIED | `world_state.gd`, `cctv_view.gd`, `content/world/` | test_world (D036) |
+| Announcer progression | VERIFIED | session end_show, stage-gated lines | test_world |
+| Punishments + 1 Interruption Game (THE TEST) | VERIFIED | `seg_special.gd` | test_world |
+| 45-minute broadcast | IMPLEMENTED | | bots: median 32 min (they answer instantly); humans expected ~45 — needs a real play-test |
+| Hundreds-of-sessions simulation | VERIFIED | `tests/tools/soak.gd` | 300 programmes, 0 hangs |
+| All 8 games appear | VERIFIED | | test_broadcast, soak |
 
 ## Content status
-- Hole: 25 enabled items with real photos (`reviewed`), 2 disabled placeholders. Incidents: 8 Tier 0, 6 Tier 1 (draft). Graham lines: CP1 pools + 56 Hole + incident lines (draft).
-- Approved factual items: 0 (Hole reveal facts are light; CP3 brings sourced factual content). Validation errors: 0.
+| Library | Count | Quality | Target |
+|---|---|---|---|
+| Hole | 25 (+2 disabled) | reviewed, real licensed photos | 20–30 ✅ |
+| Real or Mildew? | 34 | draft (sources to check) | 30–40 ✅ |
+| Guess the Genitals | 10 | draft, licensed images | 15–20 ❌ |
+| Mildew Survey | 52 | draft | 40–60 ✅ |
+| Mouthfeel | 48 | draft | 40–60 ✅ |
+| Police Sketch | 38 | draft | 30–40 ✅ |
+| Do Not Press That | 10 templates | draft | 8–12 ✅ |
+| The Basement | 7 cases | draft | 6–8 ✅ |
+| Adverts | 11 / 9 brands | draft, procedural | 8–12 / 5+ ✅ |
+| Viewer polls / easy questions / THE TEST | 15 / 8 / 1 | draft | |
+| Incidents | T0 8, T1 6, T2 4, T3 2, chains 4 (one Tier 4) | draft | |
+| Private interference | 22 | draft | |
+| Rooms | 5 (CCTV procedural) | draft | 4–5 ✅ (photographic plates wanted) |
+| Graham lines | CP1–CP8 packs, ~400 lines | draft, **unvoiced** except the 19-line dev library | voice production pending |
 
 ## Art/audio status
-- Studio C restyled after the Graham reference video (D025): wrap-round sponge-painted sign (Fraunces OFL lettering, baked), PAR cans, green flats, cream pillar + red-framed monitor, chrome-rimmed table, navy ring carpet, warmer grade.
-- Graham: photographic alpha cut-outs (user-supplied, generated), composited — provisional pending licence review.
-- Hole imagery: real licensed photos. Studio: restyled set (sage/blue panels, chrome, curved MILDEW sign) — procedural.
-- Audio: synthesized sting/crowd/servo/mic pop — provisional, not human-auditioned.
+- Graham: photographic cut-outs (D021/D022). Studio: photographic plates (D026). Hole/GTG: licensed photos.
+- New this session: quiz board, write/vote board, evidence board, control-room board, Basement case file, adverts and bumpers,
+  viewer poll, awards, CCTV rooms — all drawn procedurally in the programme's 90s style.
+- Audio: all synthesized and provisional (incl. new jingle/bumper/banging/room tone/door). Not human-auditioned.
+- Graham voice: only 19 development clips + 5 names exist; all new CP3–CP8 lines are subtitle-only until voiced (D024).
 
-## Testing performed this checkpoint
-See `docs/testing/TEST_REPORT_CP2.md`: 51 GDScript tests (2394 checks), 6 real-socket scenarios, 13 Chromium phone checks, 90 QR matrices, APK verification, TV + phone screenshots in `docs/testing/cp2_screens/`.
-
-## Performance observations
-- Device: not measured. New load: one 1600×1200 photo texture at a time (threaded load), Graham Sprite3D (815×1086 lossy texture swaps). Levers as CP1.
-
-## Design compliance notes
-- Hole follows docs/04 §2; incidents follow docs/03 tiers (no Tier 2+ yet); programme never explains irregularities; real connection status never faked.
-- Graham presentation follows the user's low-budget direction (D021) and approved compositing (D022).
+## Known limitations / risks
+- No device verification. Performance on Android TV unknown (many procedural `_draw` boards; each only draws while visible).
+- Programme length measured with instant bots (≈32 min median); human play will be longer — tune `show.games_per_episode`/round counts after a real session.
+- Punishment frequency measured with deliberately bad bots (≈0.5/show); expect less with humans.
+- Factual content is `draft`; release validation blocks it until reviewed.
+- GTG needs 5–10 more licensed clinical images.
+- Generated imagery (Graham, plates) licence terms to check before commercial release.
 
 ## Next immediate actions
-1. **User:** install the CP2 APK on the Android TV and run the device checklist in `NEXT_BUILD.md`.
-2. Optionally supply/approve real photos for bowling-ball finger holes and a golf cup.
-3. Start CP3 (Real or Mildew? + Guess the Genitals) per `NEXT_BUILD.md`.
+1. **User:** install `mildew-0.1.0-cp8-debug.apk` and run the device checklist in `NEXT_BUILD.md` (now including all eight games).
+2. **User (optional):** photographic room plates (request in NEXT_BUILD), more GTG images, voice production for the new lines.
+3. CP9: device profiling, persistence polish (profile history, cross-session Graham grudges), accessibility/legibility pass at 720p.
