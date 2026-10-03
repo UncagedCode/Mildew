@@ -1,5 +1,20 @@
 # NEXT BUILD — Mildew
 
+## Current voice-production task — 2026-10-03
+
+1. In Termux, switch to `feature/qwen-voice-pipeline` and run `./mildew voice setup`.
+2. `./mildew voice audition welcome_01 --takes 3`; listen with `voice preview ... --audition`.
+3. Lock the chosen take: `./mildew voice lock welcome_01 --take <1..3>`.
+4. Test directed production: `./mildew voice build correct_01 wrong_01`; listen to both.
+5. Once the reference/acting is accepted, `./mildew voice build` generates the 284-line fixed library.
+6. Approve selected takes after listening, commit the selected OGGs/index, then build the APK
+   using the existing Android toolchain. Models/native source do not ship with the game.
+
+See `tools/voice_pipeline/README.md` and `docs/testing/TEST_REPORT_QWEN_VOICE.md`.
+The current CP9 game plan is retained below from the active game branch.
+
+## Current game build plan
+
 Checkpoint/build target: **CP9 — Persistence, polish, performance (serious PoC)** (`0.1.0-cp9`, versionCode 9)
 
 Read first: docs/11 §CP9, docs/09 (persistence), docs/10 (debug/testing), PROGRESS.md, DECISIONS D027–D036.

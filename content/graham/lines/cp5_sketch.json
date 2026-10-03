@@ -1,232 +1,258 @@
 {
- "pack_id": "graham.cp5_sketch",
- "content_kind": "graham_lines",
- "speaker": "graham",
- "_comment": "Graham lines for Police Sketch (CP5). Sparse by design.",
- "items": [
-  {
-   "id": "g.ps_intro.1",
-   "category": "ps_intro",
-   "text": "Police Sketch. A crime has been committed against good taste. You are the witnesses.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.ps_intro.2",
-   "category": "ps_intro",
-   "text": "It's Police Sketch. Draw what the witness describes. The witness is unreliable. So are you.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.ps_rules.1",
-   "category": "ps_rules",
-   "text": "Draw what you're told. The next person describes your drawing. The next draws that. We'll see what survives.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.ps_rules.2",
-   "category": "ps_rules",
-   "text": "Each of you starts a case. It passes along the line: drawing, description, drawing. Then we compare it with the truth.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.ps_rules_two.1",
-   "category": "ps_rules_two",
-   "text": "Two of you. One draws, the other says what it is. Then swap. Nowhere to hide.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.ps_rules_two.2",
-   "category": "ps_rules_two",
-   "text": "You draw one. They guess it. Then the other way round. Simple police work.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.ps_draw_open.1",
-   "category": "ps_draw_open",
-   "text": "Pens ready. Draw.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.ps_draw_open.2",
-   "category": "ps_draw_open",
-   "text": "Draw it. Quickly. The suspect is getting away.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.ps_describe_open.1",
-   "category": "ps_describe_open",
-   "text": "Now. Look at what somebody's drawn, and tell me what it is. Kindly.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.ps_describe_open.2",
-   "category": "ps_describe_open",
-   "text": "Describe the drawing. The artist is in the room. Be honest anyway.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.ps_reveal_intro.1",
-   "category": "ps_reveal_intro",
-   "text": "Let's look at the evidence.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.ps_reveal_intro.2",
-   "category": "ps_reveal_intro",
-   "text": "Right. The evidence. Brace yourselves.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.ps_comment.1",
-   "category": "ps_comment",
-   "text": "{name} appears to have abandoned perspective entirely.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.ps_comment.2",
-   "category": "ps_comment",
-   "text": "I'm told that's a dog.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.ps_comment.3",
-   "category": "ps_comment",
-   "text": "{name} drew that with their whole chest.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.ps_comment.4",
-   "category": "ps_comment",
-   "text": "Lovely line work, {name}. Wrong, but lovely.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.ps_comment.5",
-   "category": "ps_comment",
-   "text": "Our forensic team have asked for a moment.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.ps_mutated.1",
-   "category": "ps_mutated",
-   "text": "That's not what we started with.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.ps_mutated.2",
-   "category": "ps_mutated",
-   "text": "Somewhere along the line, that became a different crime.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.ps_mutated.3",
-   "category": "ps_mutated",
-   "text": "And that's how innocent people go to prison.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.ps_faithful.1",
-   "category": "ps_faithful",
-   "text": "They got it. Remarkable police work.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.ps_faithful.2",
-   "category": "ps_faithful",
-   "text": "The suspect has been identified. Well done, {name}.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.ps_vote_funny.1",
-   "category": "ps_vote_funny",
-   "text": "Vote for the funniest mutation. Not your own case.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.ps_vote_funny.2",
-   "category": "ps_vote_funny",
-   "text": "Which case went most wrong? Vote.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.ps_vote_drawing.1",
-   "category": "ps_vote_drawing",
-   "text": "And the best drawing. 'Best' is doing a lot of work there.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.ps_vote_drawing.2",
-   "category": "ps_vote_drawing",
-   "text": "Now vote for the best drawing. Use the word loosely.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.ps_graham_choice.1",
-   "category": "ps_graham_choice",
-   "text": "Graham's Choice goes to {name}'s drawing. I'd hang it in the dressing room. Facing the wall.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.ps_graham_choice.2",
-   "category": "ps_graham_choice",
-   "text": "My favourite was {name}'s. Small bonus. Don't get a big head.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.ps_outro.1",
-   "category": "ps_outro",
-   "text": "That concludes Police Sketch. All drawings will be kept on file.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.ps_outro.2",
-   "category": "ps_outro",
-   "text": "Police Sketch. Case closed. Several cases, actually, badly.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.ps_exhibit.1",
-   "category": "ps_exhibit",
-   "text": "Before we start. An exhibit from a previous interview. We never found him.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.ps_exhibit.2",
-   "category": "ps_exhibit",
-   "text": "This drawing was handed in by a previous contestant. We still don't know what it is.",
-   "enabled": true,
-   "quality_status": "draft"
-  }
- ]
+  "pack_id": "graham.cp5_sketch",
+  "content_kind": "graham_lines",
+  "speaker": "graham",
+  "_comment": "Graham lines for Police Sketch (CP5). Sparse by design.",
+  "items": [
+    {
+      "id": "g.ps_intro.1",
+      "category": "ps_intro",
+      "text": "Police Sketch. A crime has been committed against good taste. You are the witnesses.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.ps_intro.1"
+    },
+    {
+      "id": "g.ps_intro.2",
+      "category": "ps_intro",
+      "text": "It's Police Sketch. Draw what the witness describes. The witness is unreliable. So are you.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.ps_intro.2"
+    },
+    {
+      "id": "g.ps_rules.1",
+      "category": "ps_rules",
+      "text": "Draw what you're told. The next person describes your drawing. The next draws that. We'll see what survives.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.ps_rules.1"
+    },
+    {
+      "id": "g.ps_rules.2",
+      "category": "ps_rules",
+      "text": "Each of you starts a case. It passes along the line: drawing, description, drawing. Then we compare it with the truth.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.ps_rules.2"
+    },
+    {
+      "id": "g.ps_rules_two.1",
+      "category": "ps_rules_two",
+      "text": "Two of you. One draws, the other says what it is. Then swap. Nowhere to hide.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.ps_rules_two.1"
+    },
+    {
+      "id": "g.ps_rules_two.2",
+      "category": "ps_rules_two",
+      "text": "You draw one. They guess it. Then the other way round. Simple police work.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.ps_rules_two.2"
+    },
+    {
+      "id": "g.ps_draw_open.1",
+      "category": "ps_draw_open",
+      "text": "Pens ready. Draw.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.ps_draw_open.1"
+    },
+    {
+      "id": "g.ps_draw_open.2",
+      "category": "ps_draw_open",
+      "text": "Draw it. Quickly. The suspect is getting away.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.ps_draw_open.2"
+    },
+    {
+      "id": "g.ps_describe_open.1",
+      "category": "ps_describe_open",
+      "text": "Now. Look at what somebody's drawn, and tell me what it is. Kindly.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.ps_describe_open.1"
+    },
+    {
+      "id": "g.ps_describe_open.2",
+      "category": "ps_describe_open",
+      "text": "Describe the drawing. The artist is in the room. Be honest anyway.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.ps_describe_open.2"
+    },
+    {
+      "id": "g.ps_reveal_intro.1",
+      "category": "ps_reveal_intro",
+      "text": "Let's look at the evidence.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.ps_reveal_intro.1"
+    },
+    {
+      "id": "g.ps_reveal_intro.2",
+      "category": "ps_reveal_intro",
+      "text": "Right. The evidence. Brace yourselves.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.ps_reveal_intro.2"
+    },
+    {
+      "id": "g.ps_comment.1",
+      "category": "ps_comment",
+      "text": "{name} appears to have abandoned perspective entirely.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.ps_comment.2",
+      "category": "ps_comment",
+      "text": "I'm told that's a dog.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.ps_comment.2"
+    },
+    {
+      "id": "g.ps_comment.3",
+      "category": "ps_comment",
+      "text": "{name} drew that with their whole chest.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.ps_comment.4",
+      "category": "ps_comment",
+      "text": "Lovely line work, {name}. Wrong, but lovely.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.ps_comment.5",
+      "category": "ps_comment",
+      "text": "Our forensic team have asked for a moment.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.ps_comment.5"
+    },
+    {
+      "id": "g.ps_mutated.1",
+      "category": "ps_mutated",
+      "text": "That's not what we started with.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.ps_mutated.1"
+    },
+    {
+      "id": "g.ps_mutated.2",
+      "category": "ps_mutated",
+      "text": "Somewhere along the line, that became a different crime.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.ps_mutated.2"
+    },
+    {
+      "id": "g.ps_mutated.3",
+      "category": "ps_mutated",
+      "text": "And that's how innocent people go to prison.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.ps_mutated.3"
+    },
+    {
+      "id": "g.ps_faithful.1",
+      "category": "ps_faithful",
+      "text": "They got it. Remarkable police work.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.ps_faithful.1"
+    },
+    {
+      "id": "g.ps_faithful.2",
+      "category": "ps_faithful",
+      "text": "The suspect has been identified. Well done, {name}.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.ps_vote_funny.1",
+      "category": "ps_vote_funny",
+      "text": "Vote for the funniest mutation. Not your own case.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.ps_vote_funny.1"
+    },
+    {
+      "id": "g.ps_vote_funny.2",
+      "category": "ps_vote_funny",
+      "text": "Which case went most wrong? Vote.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.ps_vote_funny.2"
+    },
+    {
+      "id": "g.ps_vote_drawing.1",
+      "category": "ps_vote_drawing",
+      "text": "And the best drawing. 'Best' is doing a lot of work there.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.ps_vote_drawing.1"
+    },
+    {
+      "id": "g.ps_vote_drawing.2",
+      "category": "ps_vote_drawing",
+      "text": "Now vote for the best drawing. Use the word loosely.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.ps_vote_drawing.2"
+    },
+    {
+      "id": "g.ps_graham_choice.1",
+      "category": "ps_graham_choice",
+      "text": "Graham's Choice goes to {name}'s drawing. I'd hang it in the dressing room. Facing the wall.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.ps_graham_choice.2",
+      "category": "ps_graham_choice",
+      "text": "My favourite was {name}'s. Small bonus. Don't get a big head.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.ps_outro.1",
+      "category": "ps_outro",
+      "text": "That concludes Police Sketch. All drawings will be kept on file.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.ps_outro.1"
+    },
+    {
+      "id": "g.ps_outro.2",
+      "category": "ps_outro",
+      "text": "Police Sketch. Case closed. Several cases, actually, badly.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.ps_outro.2"
+    },
+    {
+      "id": "g.ps_exhibit.1",
+      "category": "ps_exhibit",
+      "text": "Before we start. An exhibit from a previous interview. We never found him.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.ps_exhibit.1"
+    },
+    {
+      "id": "g.ps_exhibit.2",
+      "category": "ps_exhibit",
+      "text": "This drawing was handed in by a previous contestant. We still don't know what it is.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.ps_exhibit.2"
+    }
+  ]
 }

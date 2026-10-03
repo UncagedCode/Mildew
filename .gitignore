@@ -11,3 +11,5 @@
 /tests/output/
 __pycache__/
 node_modules/
+# Phone-local Qwen source, models, references, audition takes and resumable cache
+/voice/.local/

@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "description": "British male, late forties to mid fifties, a late-1990s regional television game-show presenter. Warm mid-low register, clear British diction, polished but slightly cheap studio projection, a practised smile and faint smugness. Matter-of-fact about disgusting subjects. Human, never a monster or a modern assistant.",
+  "language": "English",
+  "seed": 1998,
+  "temperature": 0.5,
+  "quantization": "int8",
+  "threads": 4,
+  "max_seconds": 20,
+  "postprocess": {
+    "loudness_lufs": -19,
+    "peak_db": -2,
+    "tail_seconds": 0.25
+  },
+  "qa": {
+    "max_seconds": 22,
+    "min_seconds": 0.15,
+    "max_leading_silence": 2.0,
+    "max_trailing_silence": 3.5
+  }
+}

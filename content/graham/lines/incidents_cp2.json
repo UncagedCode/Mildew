@@ -1,135 +1,146 @@
 {
- "pack_id": "lines.incidents_cp2",
- "content_kind": "graham_lines",
- "_comment": "Lines used by Tier 0/1 incidents (speaker per item: graham or floor = off-mic production voice).",
- "items": [
-  {
-   "id": "g.incident_mic_pop.1",
-   "speaker": "graham",
-   "category": "incident_mic_pop",
-   "text": "Sorry. Somebody's knocked something.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.incident_mic_pop.2",
-   "speaker": "graham",
-   "category": "incident_mic_pop",
-   "text": "Bless you.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.incident_mic_pop.3",
-   "speaker": "graham",
-   "category": "incident_mic_pop",
-   "text": "That was the microphone. Not me.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.incident_feedback.1",
-   "speaker": "graham",
-   "category": "incident_feedback",
-   "text": "Lovely. Thank you, sound.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.incident_feedback.2",
-   "speaker": "graham",
-   "category": "incident_feedback",
-   "text": "Ow. Right.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.incident_early_applause.1",
-   "speaker": "graham",
-   "category": "incident_early_applause",
-   "text": "Not yet.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.incident_early_applause.2",
-   "speaker": "graham",
-   "category": "incident_early_applause",
-   "text": "Hold your applause. Hold it. Thank you.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.incident_wrong_camera.1",
-   "speaker": "graham",
-   "category": "incident_wrong_camera",
-   "text": "Camera two. Hello.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.incident_wrong_camera.2",
-   "speaker": "graham",
-   "category": "incident_wrong_camera",
-   "text": "Ah. Over here. Hello.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.hole_not_that_one.1",
-   "speaker": "graham",
-   "category": "hole_not_that_one",
-   "text": "Not that one.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.hole_not_that_one.2",
-   "speaker": "graham",
-   "category": "hole_not_that_one",
-   "text": "No. Not that one.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.incident_wrong_name.1",
-   "speaker": "graham",
-   "category": "incident_wrong_name",
-   "text": "Well done, {other}. Sorry. {name}.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "g.incident_wrong_name.2",
-   "speaker": "graham",
-   "category": "incident_wrong_name",
-   "text": "{other}... no. {name}. Well done, {name}.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "f.floor_cue.1",
-   "speaker": "floor",
-   "category": "floor_cue",
-   "text": "Thirty seconds, Graham.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "f.floor_cue.2",
-   "speaker": "floor",
-   "category": "floor_cue",
-   "text": "Graham, you're on two.",
-   "enabled": true,
-   "quality_status": "draft"
-  },
-  {
-   "id": "f.floor_cue.3",
-   "speaker": "floor",
-   "category": "floor_cue",
-   "text": "Can somebody shut that door.",
-   "enabled": true,
-   "quality_status": "draft"
-  }
- ]
+  "pack_id": "lines.incidents_cp2",
+  "content_kind": "graham_lines",
+  "_comment": "Lines used by Tier 0/1 incidents (speaker per item: graham or floor = off-mic production voice).",
+  "items": [
+    {
+      "id": "g.incident_mic_pop.1",
+      "speaker": "graham",
+      "category": "incident_mic_pop",
+      "text": "Sorry. Somebody's knocked something.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.incident_mic_pop.1"
+    },
+    {
+      "id": "g.incident_mic_pop.2",
+      "speaker": "graham",
+      "category": "incident_mic_pop",
+      "text": "Bless you.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.incident_mic_pop.2"
+    },
+    {
+      "id": "g.incident_mic_pop.3",
+      "speaker": "graham",
+      "category": "incident_mic_pop",
+      "text": "That was the microphone. Not me.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.incident_mic_pop.3"
+    },
+    {
+      "id": "g.incident_feedback.1",
+      "speaker": "graham",
+      "category": "incident_feedback",
+      "text": "Lovely. Thank you, sound.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.incident_feedback.1"
+    },
+    {
+      "id": "g.incident_feedback.2",
+      "speaker": "graham",
+      "category": "incident_feedback",
+      "text": "Ow. Right.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.incident_feedback.2"
+    },
+    {
+      "id": "g.incident_early_applause.1",
+      "speaker": "graham",
+      "category": "incident_early_applause",
+      "text": "Not yet.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.incident_early_applause.1"
+    },
+    {
+      "id": "g.incident_early_applause.2",
+      "speaker": "graham",
+      "category": "incident_early_applause",
+      "text": "Hold your applause. Hold it. Thank you.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.incident_early_applause.2"
+    },
+    {
+      "id": "g.incident_wrong_camera.1",
+      "speaker": "graham",
+      "category": "incident_wrong_camera",
+      "text": "Camera two. Hello.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.incident_wrong_camera.1"
+    },
+    {
+      "id": "g.incident_wrong_camera.2",
+      "speaker": "graham",
+      "category": "incident_wrong_camera",
+      "text": "Ah. Over here. Hello.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.incident_wrong_camera.2"
+    },
+    {
+      "id": "g.hole_not_that_one.1",
+      "speaker": "graham",
+      "category": "hole_not_that_one",
+      "text": "Not that one.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.hole_not_that_one.1"
+    },
+    {
+      "id": "g.hole_not_that_one.2",
+      "speaker": "graham",
+      "category": "hole_not_that_one",
+      "text": "No. Not that one.",
+      "enabled": true,
+      "quality_status": "draft",
+      "audio": "qwen.g.hole_not_that_one.2"
+    },
+    {
+      "id": "g.incident_wrong_name.1",
+      "speaker": "graham",
+      "category": "incident_wrong_name",
+      "text": "Well done, {other}. Sorry. {name}.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "g.incident_wrong_name.2",
+      "speaker": "graham",
+      "category": "incident_wrong_name",
+      "text": "{other}... no. {name}. Well done, {name}.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "f.floor_cue.1",
+      "speaker": "floor",
+      "category": "floor_cue",
+      "text": "Thirty seconds, Graham.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "f.floor_cue.2",
+      "speaker": "floor",
+      "category": "floor_cue",
+      "text": "Graham, you're on two.",
+      "enabled": true,
+      "quality_status": "draft"
+    },
+    {
+      "id": "f.floor_cue.3",
+      "speaker": "floor",
+      "category": "floor_cue",
+      "text": "Can somebody shut that door.",
+      "enabled": true,
+      "quality_status": "draft"
+    }
+  ]
 }

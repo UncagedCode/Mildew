@@ -1,5 +1,10 @@
 # Graham Factory
 
+**Current production pipeline: Qwen3-TTS.** Use `./mildew voice setup` from the repo root and
+follow [the phone workflow](../voice_pipeline/README.md). The ElevenLabs tool below is retained
+for old assets and compatibility; it is not called by `./mildew voice`.
+Do not run its `sync_godot.py` after a Qwen build: the Qwen command updates the shared index itself.
+
 Local, free-first production tool for Graham Mildew's pre-rendered voice library.
 
 It is intentionally **not** a runtime dependency of the game. ElevenLabs is used only while producing assets; Mildew ships and plays offline with generated audio files.
