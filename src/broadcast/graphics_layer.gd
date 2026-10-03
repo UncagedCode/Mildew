@@ -446,6 +446,14 @@ func _draw_sting() -> void:
 			bg = Color(0.32, 0.05, 0.12)
 			ca = Color("#ff8fa8")
 			cb = Color("#f4e9c8")
+		"survey":   # clipboard orange / biro blue
+			bg = Color(0.05, 0.08, 0.3)
+			ca = Color("#ff9a1f")
+			cb = Color("#f6efd8")
+		"mf":       # bile green / gravy brown
+			bg = Color(0.18, 0.1, 0.03)
+			ca = Color("#a8c43a")
+			cb = Color("#e0b07a")
 	draw_rect(Rect2(0, 0, W, H), Color(bg, fade))
 	if _st_style == "rom":
 		for i in 40:   # teletext page flicker

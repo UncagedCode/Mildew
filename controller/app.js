@@ -146,6 +146,7 @@
   const ERRORS = {
     bad_room: "THAT CODE DOES NOT MATCH THE BROADCAST ON YOUR TELEVISION.",
     bad_version: "THIS UNIT IS OUT OF DATE. RELOAD THE PAGE.",
+    self_vote: "YOU CAN'T VOTE FOR YOUR OWN ANSWER. WE CHECK.",
     name_taken: "THAT NAME IS ALREADY ON A PODIUM. TRY ANOTHER (E.G. ADD AN INITIAL).",
     name_invalid: "THE PRESENTER CANNOT PRONOUNCE THAT. LETTERS AND NUMBERS ONLY, PLEASE.",
     room_full: "ALL EIGHT PODIUMS ARE TAKEN. YOU MAY WATCH FROM THE SOFA.",
@@ -161,6 +162,7 @@
     const text = ERRORS[m.code];
     if (!text) return; // invalid-state style errors are expected races; stay quiet
     if (S.wizard && (m.code === "name_taken" || m.code === "name_invalid")) { wizardName(text); return; }
+    if (m.code === "self_vote" && S.screen && S.screen.screen === "wv_vote") { scrWVVote(S.screen.data || {}); }
     toast(text);
   }
   function toast(text) {
@@ -348,6 +350,11 @@
       case "hole_waiting": return scrWatch(d.caption || "WAITING FOR A BETTER LOOK", false, d.header);
       case "hole_result": return scrHoleResult(d);
       case "question": return scrQuestion(d);
+      case "wv_write": return scrWVWrite(d);
+      case "wv_wait": return scrWVWait(d);
+      case "wv_vote": return scrWVVote(d);
+      case "wv_rate": return scrWVRate(d);
+      case "wv_result": return scrWVResult(d);
       case "locked": return scrLocked(d);
       case "result": return scrResult(d);
       case "scores": return scrScores(d);
@@ -425,6 +432,105 @@
     key("I'M CERTAIN", "go plain", (b) => { b.classList.add("pressed"); submit(i, true); });
     key("NORMAL", "ok plain", (b) => { b.classList.add("pressed"); submit(i, false); });
     key("CHANGE MY ANSWER", "grey plain small", () => scrQuestion(d));
+  }
+
+  // ---------------- SURVEY / MOUTHFEEL (write, then vote) ----------------
+  // The draft is kept per question in local storage so a reconnect or reload doesn't lose it,
+  // and the screen is not rebuilt while typing when the server re-sends the same write screen.
+  function wvTimer(d) {
+    const bar = el("div", "timer"); const fill = el("div"); bar.appendChild(fill); lcd.appendChild(bar);
+    const secs = el("div", "sub"); lcd.appendChild(secs);
+    const total = Math.max(1, d.total_ms || d.remaining_ms || 30000), end = performance.now() + (d.remaining_ms || 0);
+    const tick = () => {
+      const left = Math.max(0, end - performance.now());
+      fill.style.transform = "scaleX(" + Math.min(1, left / total).toFixed(3) + ")";
+      secs.textContent = Math.ceil(left / 1000) + " SECONDS";
+      if (left > 0) S.timerRAF = requestAnimationFrame(tick);
+    };
+    tick();
+  }
+  function scrWVWrite(d) {
+    const wkey = "draft.wv." + d.qid + "." + (d.chain ? String(d.prompt || "").length : 0);
+    if (S.wvKey === wkey && document.getElementById("wv-text")) return; // same screen re-sent: keep typing
+    clear();
+    S.wvKey = wkey;
+    buzz([30, 40, 30]);
+    if (d.header) lcd.appendChild(el("div", "sub", d.header));
+    if (d.category) lcd.appendChild(el("div", "sub warn", "VOTE CATEGORY: " + d.category));
+    lcd.appendChild(el("div", "prompt", d.prompt));
+    if (d.hint) lcd.appendChild(el("div", "sub", d.hint));
+    wvTimer(d);
+    const ta = el("textarea", "wv-text"); ta.id = "wv-text";
+    ta.maxLength = d.max || 80; ta.rows = 3; ta.autocapitalize = "sentences"; ta.spellcheck = false;
+    ta.placeholder = d.chain ? "...AND THEN" : "TYPE YOUR ANSWER";
+    ta.value = store.get(wkey);
+    const count = el("div", "sub count");
+    const upd = () => { count.textContent = ta.value.length + " / " + ta.maxLength; store.set(wkey, ta.value); };
+    ta.addEventListener("input", upd);
+    upd();
+    keys.appendChild(ta); keys.appendChild(count);
+    const b = key(d.chain ? "MAKE IT WORSE" : "SUBMIT", "go plain", (btn) => {
+      const v = ta.value.trim();
+      if (!v) { toast("WRITE SOMETHING FIRST."); return; }
+      if (S.status.paused) { toast("TRANSMISSION IS ON HOLD."); return; }
+      if (send({ t: "submit", q: d.qid, text: v })) { btn.disabled = true; btn.classList.add("pressed"); store.del(wkey); }
+      else toast("NOT CONNECTED. YOUR ANSWER IS SAVED; TRY AGAIN IN A MOMENT.");
+    });
+    b.id = "wv-submit";
+    setTimeout(() => { try { ta.focus(); } catch (e) { /* ignore */ } }, 60);
+  }
+  function scrWVWait(d) {
+    clear(); S.wvKey = "";
+    if (d.header) lcd.appendChild(el("div", "sub", d.header));
+    lcd.appendChild(el("div", "spacer"));
+    if (d.mine) { lcd.appendChild(el("div", "sub", "YOU WROTE")); lcd.appendChild(el("div", "title", "\u201c" + d.mine + "\u201d")); }
+    lcd.appendChild(el("div", "sub blinker", d.caption || "WAITING"));
+  }
+  function scrWVVote(d) {
+    clear(); S.wvKey = "";
+    buzz([30, 40, 30]);
+    if (d.header) lcd.appendChild(el("div", "sub", d.header));
+    lcd.appendChild(el("div", "title", d.ask || "VOTE"));
+    wvTimer(d);
+    (d.options || []).forEach((opt, i) => {
+      const mine = i === d.own;
+      const b = key(mine ? opt + "  (YOURS)" : opt, "plain long " + (mine ? "grey" : ["a", "b", "c", "d"][i % 4]), (btn) => {
+        if (S.status.paused) { toast("TRANSMISSION IS ON HOLD."); return; }
+        for (const k of keys.querySelectorAll(".key")) k.disabled = true;
+        btn.classList.add("pressed");
+        send({ t: "vote", q: d.qid, c: i });
+      });
+      if (mine) b.disabled = true;
+    });
+  }
+  function scrWVRate(d) {
+    clear(); S.wvKey = "";
+    buzz([30, 40, 30]);
+    if (d.header) lcd.appendChild(el("div", "sub", d.header));
+    lcd.appendChild(el("div", "sub", "LOOK WHAT YOU'VE ALL MADE"));
+    lcd.appendChild(el("div", "prompt", d.text));
+    wvTimer(d);
+    lcd.appendChild(el("div", "title", "RATE IT. 1 = SAD. 5 = UNSPEAKABLE."));
+    const row = el("div", "keyrow"); keys.appendChild(row);
+    for (let i = 1; i <= 5; i++) {
+      const b = el("button", "key plain " + (i >= 4 ? "go" : "grey"), String(i));
+      b.addEventListener("click", (ev) => {
+        ev.preventDefault(); if (b.disabled) return; buzz(15);
+        for (const k of keys.querySelectorAll(".key")) k.disabled = true;
+        b.classList.add("pressed"); send({ t: "vote", q: d.qid, c: i });
+      });
+      row.appendChild(b);
+    }
+  }
+  function scrWVResult(d) {
+    clear(); S.wvKey = "";
+    if (d.header) lcd.appendChild(el("div", "sub", d.header));
+    if (d.points > 0) { buzz([20, 30, 60]); lcd.appendChild(el("div", "huge", "+" + fmt(d.points))); }
+    else lcd.appendChild(el("div", "big", "NO POINTS"));
+    if (d.mine) lcd.appendChild(el("div", "title", "\u201c" + d.mine + "\u201d"));
+    if (d.votes !== undefined && d.mine) lcd.appendChild(el("div", "sub", d.votes + " VOTE" + (d.votes === 1 ? "" : "S")));
+    lcd.appendChild(el("div", "spacer"));
+    lcd.appendChild(el("div", "sub", "YOUR SCORE: " + fmt(d.score)));
   }
 
   // ---------------- HOLE ----------------

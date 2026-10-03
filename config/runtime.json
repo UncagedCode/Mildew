@@ -68,6 +68,24 @@
   "open_round_chance": 0.5,
   "max_studio_holes_per_game": 1
  },
+ "mildew_survey": {
+  "rounds_per_game": 4
+ },
+ "mouthfeel": {
+  "describe_rounds": 3,
+  "chain_chance": 0.75
+ },
+ "write_vote": {
+  "write_seconds": 45,
+  "vote_seconds": 25,
+  "chain_step_seconds": 25,
+  "reveal_seconds": 8,
+  "points_per_vote": 500,
+  "match_bonus": 250,
+  "graham_choice_bonus": 250,
+  "chain_points_per_star": 60,
+  "alteration_chance": 0.02
+ },
  "real_or_mildew": {
   "questions_per_game": 6,
   "confidence_round_chance": 0.6

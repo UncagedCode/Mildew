@@ -27,8 +27,10 @@ const FORMATS := {
 		"tags": ["visual", "trivia", "gross", "good-opener", "good-finale", "short", "2-player-safe", "high-content-dependency"]},
 	"real_or_mildew": {"title": "REAL OR MILDEW?", "kind": "game", "implemented": true,
 		"tags": ["trivia", "text", "good-middle", "good-reset", "2-player-safe", "high-content-dependency"]},
-	"mildew_survey": {"title": "MILDEW SURVEY", "kind": "game", "implemented": false, "tags": ["social", "writing", "good-middle"]},
-	"mouthfeel": {"title": "MOUTHFEEL", "kind": "game", "implemented": false, "tags": ["writing", "gross", "good-middle", "good-finale"]},
+	"mildew_survey": {"title": "MILDEW SURVEY", "kind": "game", "implemented": true,
+		"tags": ["social", "writing", "discussion", "good-middle", "good-finale", "2-player-safe"]},
+	"mouthfeel": {"title": "MOUTHFEEL", "kind": "game", "implemented": true,
+		"tags": ["writing", "gross", "good-middle", "good-finale", "2-player-safe"]},
 	"police_sketch": {"title": "POLICE SKETCH", "kind": "game", "implemented": false, "tags": ["drawing", "social", "long"]},
 	"do_not_press_that": {"title": "DO NOT PRESS THAT", "kind": "game", "implemented": false, "tags": ["cooperation", "chaotic", "tense"]},
 	"basement": {"title": "THE BASEMENT", "kind": "game", "implemented": false, "tags": ["deduction", "discussion", "long", "unsettling-capable"]},
@@ -65,6 +67,7 @@ var player_stats := {}             # player_id -> {answered, correct, wrong_stre
 var skeleton: Array = []          # planned slots (resolved / unresolved), for debug overlay
 var used_content := {}            # content ids used this session
 var recent_installation_content: Array = []
+var recent_games: Array = []        # games from recent broadcasts (oldest first), for variety
 var decision_log: Array = []
 var show_time := 0.0
 var _line_history: Array = []
@@ -104,6 +107,7 @@ func begin_session(installation: Dictionary, settings_interference: String) -> v
 	# Familiarity: installation experience gradually allows higher tiers (docs/03 Familiarity).
 	familiarity_tier = clampi(1 + played / 3, 1, 5)
 	recent_installation_content = installation.get("recent_content_history", []).duplicate()
+	recent_games = installation.get("recent_games", []).duplicate()
 	log_decision("BeginSession", "familiarity_tier=%d" % familiarity_tier, [
 		"broadcasts_played=%d" % played,
 		"interference=%s (eligible repertoire, not frequency)" % interference_mode,
@@ -193,7 +197,8 @@ func plan_episode(player_ids: Array, _legacy_question_count: int = 0) -> Array:
 ## Picks an implemented game for a slot role tag (good-opener / good-middle / good-finale),
 ## avoiding games already used this show. Logged with reasons (docs/03 "Director logging").
 func choose_game(role_tag: String, player_count: int) -> String:
-	if force.has("game") and FORMATS.has(force.game) and FORMATS[force.game].implemented:
+	if force.has("game") and FORMATS.has(force.game) and FORMATS[force.game].implemented and not games_this_show.has(force.game):
+		games_this_show.append(str(force.game))
 		log_decision("SelectGame", force.game, ["forced by developer"])
 		return str(force.game)
 	var cands: Array = []
@@ -209,19 +214,33 @@ func choose_game(role_tag: String, player_count: int) -> String:
 			cands = ["hole"]
 		else:
 			return ""
-	cands.sort_custom(func(a, b): return int(FORMATS[a].tags.has(role_tag)) > int(FORMATS[b].tags.has(role_tag)))
+	# Weighted variety (docs/03 tonal mix): the slot's role matters most, but the order is not fixed;
+	# avoid two writing games back to back, and games the last broadcast opened with.
+	var prev: String = games_this_show[-1] if not games_this_show.is_empty() else ""
+	var scores := {}
+	for k in cands:
+		var sc := 1.0 + rng.randf() * 1.4
+		if FORMATS[k].tags.has(role_tag):
+			sc += 1.5
+		if prev != "" and FORMATS[k].tags.has("writing") and FORMATS[prev].tags.has("writing"):
+			sc -= 4.0
+		if recent_games.has(k):
+			sc -= 0.5 * (recent_games.size() - recent_games.find(k)) / maxf(1.0, recent_games.size())
+		scores[k] = sc
+	cands.sort_custom(func(a, b): return scores[a] > scores[b])
 	var pick: String = cands[0]
 	games_this_show.append(pick)
 	log_decision("SelectGame", pick, [
 		"role=%s tags=%s" % [role_tag, ",".join(FORMATS[pick].tags)],
 		"player_count=%d (2-player-safe=%s)" % [player_count, FORMATS[pick].tags.has("2-player-safe")],
-		"implemented candidates=%s" % str(cands),
+		"scores=%s" % str(cands.map(func(c): return "%s:%.2f" % [c, scores[c]])),
 		"recent games excluded=%s" % str(games_this_show.slice(0, games_this_show.size() - 1)),
 	])
 	return pick
 
 
-const CONTENT_KIND := {"hole": "hole", "real_or_mildew": "real_or_mildew", "guess_the_genitals": "guess_the_genitals"}
+const CONTENT_KIND := {"hole": "hole", "real_or_mildew": "real_or_mildew", "guess_the_genitals": "guess_the_genitals",
+	"mildew_survey": "mildew_survey", "mouthfeel": "mouthfeel"}
 
 
 ## A game is only scheduled when it has enough content at this installation's familiarity tier.
@@ -266,6 +285,10 @@ func plan_game(game_id: String, player_count: int, finale: bool = false) -> Arra
 					"prefix": "gtg", "round": i + 1, "of": items.size(), "mid_game": i > 0, "final": last,
 					"multiplier": fmult * (_cf("guess_the_genitals.final_multiplier", 1.5) if last else 1.0)})
 			out.append({"kind": "link", "lines": [["graham", "gtg_outro"]], "camera": "cam1", "mid_game": false})
+		"mildew_survey":
+			out.append_array(_plan_survey(player_count, fmult))
+		"mouthfeel":
+			out.append_array(_plan_mouthfeel(player_count, fmult))
 		"hole":
 			var rounds := _ci("hole.rounds_per_game", 6)
 			var items := pick_hole_items(rounds, player_count)
@@ -277,6 +300,86 @@ func plan_game(game_id: String, player_count: int, finale: bool = false) -> Arra
 					"round": i + 1, "of": items.size(), "mid_game": i > 0, "multiplier": fmult})
 			out.append({"kind": "link", "lines": [["graham", "hole_outro"]], "camera": "cam1", "mid_game": false})
 	return out
+
+
+## Mildew Survey (docs/04 §3): popularity rounds with an ARCHIVE round and (3+ players) a
+## WHO SAID THAT? round mixed in; the last round carries the finale multiplier.
+func _plan_survey(n: int, fmult: float) -> Array:
+	var out: Array = []
+	var items := pick_items("mildew_survey", "mildew_survey", _ci("mildew_survey.rounds_per_game", 4), n)
+	var modes: Array = []
+	for i in items.size():
+		modes.append("popularity")
+	if items.size() >= 3:
+		var specials: Array = ["archive"]
+		if n >= 3:
+			specials.append("who_said")
+		if force.has("survey_mode"):
+			specials = [str(force.survey_mode)]
+		var slots: Array = range(1, items.size() - 1)
+		shuffle(slots)
+		for k in mini(specials.size(), slots.size()):
+			if (items[slots[k]].get("modes", ["popularity", "archive", "who_said"]) as Array).has(specials[k]) or force.has("survey_mode"):
+				modes[slots[k]] = specials[k]
+	log_decision("Variant", "survey:%s" % ",".join(modes), ["player_count=%d" % n])
+	out.append({"kind": "sting", "game_id": "mildew_survey", "title": "MILDEW SURVEY", "style": "survey", "seconds": 3.6})
+	out.append({"kind": "link", "lines": [["graham", "sv_intro"], ["graham", "sv_rules"]], "camera": "cam1"})
+	for i in items.size():
+		var last := i == items.size() - 1
+		out.append({"kind": "write_vote", "item": items[i], "game_id": "mildew_survey", "mode": modes[i], "title": "MILDEW SURVEY",
+			"round": i + 1, "of": items.size(), "mid_game": i > 0, "multiplier": fmult * (1.5 if last and fmult > 1.0 else 1.0)})
+	out.append({"kind": "link", "lines": [["graham", "sv_outro"]], "camera": "cam1", "mid_game": false})
+	return out
+
+
+const MOUTHFEEL_CATEGORIES := ["FUNNIEST", "MOST DISGUSTING", "MOST BELIEVABLE", "I CAN FEEL THIS IN MY MOUTH", "MOST ACCURATE"]
+
+
+## Mouthfeel (docs/04 §8): describe rounds across rotating vote categories (Graham enters anonymously),
+## one reverse round (Graham describes, players guess), and Make It Worse for 3+ players.
+func _plan_mouthfeel(n: int, fmult: float) -> Array:
+	var out: Array = []
+	var pool := content.query("mouthfeel", "mouthfeel", familiarity_tier, n) if content else []
+	var describe := pick_from(pool.filter(func(i): return i.get("format") == "describe"), _ci("mouthfeel.describe_rounds", 3))
+	var reverse := pick_from(pool.filter(func(i): return i.get("format") == "reverse"), 1)
+	var chain := pick_from(pool.filter(func(i): return i.get("format") == "chain"), 1) if n >= 3 and (force.get("mf_chain", false) or rng.randf() < _cf("mouthfeel.chain_chance", 0.75)) else []
+	var cats := MOUTHFEEL_CATEGORIES.duplicate()
+	shuffle(cats)
+	cats.erase("FUNNIEST")
+	cats.insert(0, "FUNNIEST")   # the first round is always the easy one
+	var rounds: Array = []
+	for i in describe.size():
+		rounds.append({"kind": "write_vote", "item": describe[i], "game_id": "mouthfeel", "mode": "popularity", "title": "MOUTHFEEL",
+			"category": cats[i % cats.size()], "graham_answer": true})
+	if not reverse.is_empty():
+		var r: Dictionary = reverse[0].duplicate()
+		r["prompt"] = "\u201c%s\u201d" % str(r.get("description", ""))
+		rounds.insert(mini(1, rounds.size()), {"kind": "question", "item": r, "game_id": "mouthfeel", "layout": "panel",
+			"title": "MOUTHFEEL: WHAT AM I DESCRIBING?", "prefix": "mf_rev"})
+	if not chain.is_empty():
+		rounds.append({"kind": "write_vote", "item": chain[0], "game_id": "mouthfeel", "mode": "chain", "title": "MAKE IT WORSE"})
+	log_decision("Variant", "mouthfeel", ["rounds=%s" % str(rounds.map(func(r): return "%s/%s" % [r.get("mode", "reverse"), r.get("category", "")])), "chain=%s" % (not chain.is_empty())])
+	out.append({"kind": "sting", "game_id": "mouthfeel", "title": "MOUTHFEEL", "style": "mf", "seconds": 3.6})
+	out.append({"kind": "link", "lines": [["graham", "mf_intro"], ["graham", "mf_rules"]], "camera": "cam1"})
+	for i in rounds.size():
+		var r: Dictionary = rounds[i]
+		var last := i == rounds.size() - 1
+		r.merge({"round": i + 1, "of": rounds.size(), "mid_game": i > 0, "multiplier": fmult * (1.5 if last and fmult > 1.0 else 1.0)}, true)
+		out.append(r)
+	out.append({"kind": "link", "lines": [["graham", "mf_outro"]], "camera": "cam1", "mid_game": false})
+	return out
+
+
+## Weighted pick from an already-filtered pool, honouring session no-repeat.
+func pick_from(pool: Array, count: int) -> Array:
+	var fresh := pool.filter(func(i): return not used_content.has(str(i.get("id"))) and not recent_installation_content.has(str(i.get("id"))))
+	var stale := pool.filter(func(i): return not used_content.has(str(i.get("id"))) and recent_installation_content.has(str(i.get("id"))))
+	_weighted_shuffle(fresh)
+	_weighted_shuffle(stale)
+	var chosen: Array = (fresh + stale).slice(0, count)
+	for it in chosen:
+		used_content[str(it.get("id"))] = true
+	return chosen
 
 
 ## Hole content: weighted, no repeats within the session, installation-recent items avoided,

@@ -1,0 +1,1403 @@
+{
+ "pack_id": "survey.core_cp4",
+ "content_kind": "mildew_survey",
+ "_comment": "Mildew Survey prompts (CP4). Original writing. 'archive' = authored Mildew archive answers used as filler for small groups and for ARCHIVE rounds.",
+ "items": [
+  {
+   "id": "sv.what_s_the_worst_thing_to_discover_underneath_a_hotel_mattre",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "grossness_2",
+    "household"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What's the worst thing to discover underneath a hotel mattress?",
+   "archive": [
+    "Another mattress",
+    "A second, smaller guest",
+    "Your own birth certificate",
+    "A note saying 'turn it back over'",
+    "Warmth"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_s_something_you_absolutely_shouldn_t_lick",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "grossness_2"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What's something you absolutely shouldn't lick?",
+   "archive": [
+    "The bus window",
+    "A battery, again",
+    "Grandad's war medal",
+    "The Studio C floor",
+    "Anything labelled 'specimen'"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_s_the_least_reassuring_thing_a_surgeon_can_say",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "grossness_1",
+    "medical"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What's the least reassuring thing a surgeon can say?",
+   "archive": [
+    "Whose turn is it?",
+    "Oh, it's a big one",
+    "I'll just pop out for a bit",
+    "Has anyone seen my watch?",
+    "Nurse, the book"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_shouldn_t_make_a_crunching_sound",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "grossness_2",
+    "food"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What shouldn't make a crunching sound?",
+   "archive": [
+    "Soup",
+    "A baby",
+    "Your knee at the wedding",
+    "Yoghurt",
+    "The carpet in the Green Room"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_s_the_worst_thing_to_find_in_a_jar_at_your_nan_s_house",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "grossness_2",
+    "household"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What's the worst thing to find in a jar at your nan's house?",
+   "archive": [
+    "Teeth. Not hers.",
+    "Pickled grandad",
+    "Forty years of buttons and one eye",
+    "Something still moving",
+    "Her old tonsils, labelled"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.name_a_smell_that_should_be_illegal",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "grossness_2",
+    "body_fluids"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "Name a smell that should be illegal.",
+   "archive": [
+    "Hot dog water",
+    "Wet Labrador in a Vauxhall",
+    "The back of a minibus",
+    "The canteen on a Friday",
+    "Feet in tights"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_s_the_worst_name_for_a_children_s_ice_lolly",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "grossness_1",
+    "food"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What's the worst name for a children's ice lolly?",
+   "archive": [
+    "The Leaky Uncle",
+    "Mr Damp",
+    "Little Gristle",
+    "Sweaty Pete",
+    "The Lingerer"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_would_be_the_worst_thing_to_hear_from_the_next_toilet_c",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "grossness_3",
+    "scatological"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What would be the worst thing to hear from the next toilet cubicle?",
+   "archive": [
+    "Applause",
+    "'Oh, it's got legs'",
+    "Your mum's voice",
+    "Chewing",
+    "'Hello? Is that the studio?'"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_s_the_worst_thing_to_say_on_a_first_date",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "grossness_1"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What's the worst thing to say on a first date?",
+   "archive": [
+    "I've already named our children",
+    "My mother is in the car",
+    "Do you mind if I take my teeth out?",
+    "This is my fourth today",
+    "I've seen you before. On a tape."
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_should_never_be_served_warm",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "grossness_2",
+    "food"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What should never be served warm?",
+   "archive": [
+    "Milk from a stranger",
+    "Prawns",
+    "Trifle",
+    "A handshake",
+    "Toilet seats, but here we are"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_s_the_most_disappointing_prize_on_a_game_show",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "grossness_0",
+    "studio_world"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What's the most disappointing prize on a game show?",
+   "archive": [
+    "A tea towel with the host on it",
+    "A voucher for this programme",
+    "Another go",
+    "A dead plant",
+    "Graham's old coat"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_s_living_in_the_bottom_of_your_fridge_right_now",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "grossness_2",
+    "food",
+    "mould_fungi"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What's living in the bottom of your fridge right now?",
+   "archive": [
+    "A cucumber that has given up",
+    "A family",
+    "Liquid lettuce",
+    "An opinion",
+    "Something from 1998"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_s_the_worst_thing_to_find_in_a_second_hand_coat_pocket",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "grossness_2"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What's the worst thing to find in a second-hand coat pocket?",
+   "archive": [
+    "A warm sausage",
+    "Somebody's toenail collection",
+    "A wet tissue, folded with care",
+    "Your own name and address",
+    "A ticket to this show"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_s_the_worst_thing_a_dentist_could_find_in_your_mouth",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "grossness_2",
+    "teeth",
+    "medical"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What's the worst thing a dentist could find in your mouth?",
+   "archive": [
+    "Another mouth",
+    "A lost Lego man",
+    "A small fern",
+    "Somebody else's tooth",
+    "Signs of life"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_should_a_pub_never_put_on_the_menu",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "grossness_2",
+    "food"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What should a pub never put on the menu?",
+   "archive": [
+    "Mystery Pie (Ask Barry)",
+    "Soup of the Week",
+    "Landlord's Leftovers",
+    "Hot Gravy Shot",
+    "The Floor Special"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_s_the_worst_thing_to_be_the_world_s_largest",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "grossness_2"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What's the worst thing to be the 'world's largest'?",
+   "archive": [
+    "Ingrowing toenail",
+    "Scab",
+    "Earwax candle",
+    "Bin",
+    "Damp patch"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_do_you_never_want_to_hear_a_plumber_say",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "grossness_2",
+    "scatological",
+    "household"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What do you never want to hear a plumber say?",
+   "archive": [
+    "It's come back up",
+    "Well, there's your hamster",
+    "That's not mine",
+    "It's not a pipe problem, love",
+    "I've seen this before. Once. It was bad."
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_s_the_worst_flavour_of_crisp",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "grossness_2",
+    "food"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What's the worst flavour of crisp?",
+   "archive": [
+    "Prawn Breath",
+    "Damp Dog",
+    "Gravy & Mint",
+    "Old Penny",
+    "Hospital Corridor"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.name_something_you_d_hate_to_step_on_barefoot_in_the_dark",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "grossness_2",
+    "household"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "Name something you'd hate to step on barefoot in the dark.",
+   "archive": [
+    "A cold wet slice of ham",
+    "A slug, the big kind",
+    "A plug",
+    "A face",
+    "Something that says 'ow' back"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_s_the_worst_thing_to_find_in_a_bath_when_you_get_in",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "grossness_3",
+    "body_fluids"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What's the worst thing to find in a bath when you get in?",
+   "archive": [
+    "Someone else's warmth",
+    "A lot of hair that isn't yours",
+    "A pickled egg",
+    "Your dad",
+    "An eel, just resting"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_would_be_the_worst_job_at_this_studio",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "grossness_1",
+    "studio_world"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What would be the worst job at this studio?",
+   "archive": [
+    "Cleaning the Green Room sofa",
+    "Graham's make-up",
+    "Ham inventory",
+    "Tape room nights",
+    "Whatever Neil does"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_s_the_worst_thing_to_sneeze_into_your_hand_during_a_han",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "grossness_3",
+    "body_fluids"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What's the worst thing to sneeze into your hand during a handshake?",
+   "archive": [
+    "Something solid",
+    "Your fillings",
+    "A raisin you forgot about",
+    "A whole cold",
+    "An apology"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_s_the_worst_thing_to_find_in_a_sandwich_you_ve_already",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "grossness_3",
+    "food"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What's the worst thing to find in a sandwich you've already bitten?",
+   "archive": [
+    "The other half of a worm",
+    "A plaster",
+    "A ring that isn't yours",
+    "Hair, braided",
+    "Teeth marks that aren't yours"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_s_the_least_appealing_thing_to_rub_on_your_skin",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "grossness_2"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What's the least appealing thing to rub on your skin?",
+   "archive": [
+    "Cold soup",
+    "Hot butter",
+    "A cat's secret cream",
+    "Pond",
+    "Chip shop vinegar, warm"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_s_the_worst_thing_your_doctor_could_say_while_looking_a",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "grossness_1",
+    "medical"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What's the worst thing your doctor could say while looking at an X-ray?",
+   "archive": [
+    "Is that a fork?",
+    "Oh, that's a face",
+    "I've never seen two of those",
+    "Do you know what that is?",
+    "That's not a bone"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_would_be_the_worst_theme_for_a_wedding",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "grossness_1"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What would be the worst theme for a wedding?",
+   "archive": [
+    "Sewage",
+    "Your ex",
+    "The Black Death",
+    "Graham Mildew",
+    "Damp"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_s_the_worst_thing_to_be_the_smell_of_a_new_car",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "grossness_2"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What's the worst thing to be the smell of a new car?",
+   "archive": [
+    "Wet nan",
+    "Egg",
+    "Feet that have walked far",
+    "Old crisps and fear",
+    "The previous owner"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_s_the_worst_thing_to_find_at_the_bottom_of_a_ball_pit",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "grossness_3"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What's the worst thing to find at the bottom of a ball pit?",
+   "archive": [
+    "A man named Roger",
+    "Thirty years of socks",
+    "A soft, warm ball",
+    "A nest",
+    "The exit"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.name_something_you_should_never_microwave",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "grossness_1",
+    "food"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "Name something you should never microwave.",
+   "archive": [
+    "Fish at work",
+    "A pet",
+    "Eggs, in shells, in rage",
+    "Your phone, again",
+    "Anything still alive"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_s_the_most_upsetting_thing_to_find_in_a_bag_of_salad",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "grossness_2",
+    "food",
+    "animals"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What's the most upsetting thing to find in a bag of salad?",
+   "archive": [
+    "A frog with no plans",
+    "A slug in a little coat",
+    "Another receipt",
+    "A fingernail",
+    "Soup"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_s_the_worst_sound_a_car_can_make",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "grossness_0"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What's the worst sound a car can make?",
+   "archive": [
+    "A scream",
+    "A cough",
+    "A slow wet slap",
+    "Someone in the boot knocking",
+    "Your name"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_s_the_worst_thing_to_keep_in_your_pocket_all_day",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "grossness_2",
+    "food"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What's the worst thing to keep in your pocket all day?",
+   "archive": [
+    "A hard-boiled egg, peeled",
+    "A wet sock",
+    "A prawn",
+    "A small soup",
+    "Somebody's baby tooth"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_should_never_come_in_a_can",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "grossness_2",
+    "food"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What should never come in a can?",
+   "archive": [
+    "Whole chicken",
+    "Breakfast, all of it",
+    "Pudding with the bits in",
+    "Hair",
+    "Tinned human advice"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_s_the_worst_thing_to_be_greeted_with_at_a_party",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "grossness_1"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What's the worst thing to be greeted with at a party?",
+   "archive": [
+    "A hug from behind",
+    "A wet kiss from the dog",
+    "Everyone's coats, warm",
+    "Your own photo",
+    "Silence and an empty buffet"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_s_the_most_disgusting_thing_you_could_do_in_a_library",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "grossness_3",
+    "body_fluids"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What's the most disgusting thing you could do in a library?",
+   "archive": [
+    "Lick the large print section",
+    "Clip toenails into an atlas",
+    "Eat an egg very loudly",
+    "Ask for 'the book'",
+    "Undress in Reference"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_s_the_worst_thing_a_pet_could_bring_into_the_house",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "social",
+    "grossness_2",
+    "animals"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What's the worst thing a pet could bring into the house?",
+   "archive": [
+    "Half a rabbit",
+    "A neighbour",
+    "Another pet",
+    "A sock that isn't ours",
+    "A tooth"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_s_the_worst_thing_to_find_on_a_seat_on_the_night_bus",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "social",
+    "grossness_3",
+    "body_fluids"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What's the worst thing to find on a seat on the night bus?",
+   "archive": [
+    "A warm patch",
+    "Some chips, used",
+    "A man asleep under a coat",
+    "A single wet glove",
+    "A tooth with a filling"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_would_make_the_worst_air_freshener",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "social",
+    "grossness_2",
+    "household"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What would make the worst air freshener?",
+   "archive": [
+    "Mature Cheddar",
+    "Changing Room",
+    "Uncle's Car",
+    "Hot Bin Juice",
+    "Studio C"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_would_be_the_worst_thing_to_find_in_a_hot_dog",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "social",
+    "grossness_3",
+    "food"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What would be the worst thing to find in a hot dog?",
+   "archive": [
+    "The dog",
+    "A plaster from 1987",
+    "A zip",
+    "Hair, but long",
+    "A message"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_s_the_worst_way_to_wake_up",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "social",
+    "grossness_1"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What's the worst way to wake up?",
+   "archive": [
+    "Being licked by something with no tongue",
+    "Already on TV",
+    "In a bath of beans",
+    "In a different house",
+    "Graham at the foot of the bed"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_s_the_worst_thing_someone_could_leave_in_a_shared_offic",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "social",
+    "grossness_3",
+    "food",
+    "body_fluids"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What's the worst thing someone could leave in a shared office fridge?",
+   "archive": [
+    "A labelled stool sample",
+    "Breast milk, unlabelled",
+    "Their teeth",
+    "A head of cabbage, and a head",
+    "A note: 'TAKE IT IF YOU DARE'"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_s_the_worst_thing_to_hear_during_a_massage",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "social",
+    "grossness_1"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What's the worst thing to hear during a massage?",
+   "archive": [
+    "'Oh, there's a lump'",
+    "Slurping",
+    "'I'm not a masseur, I'm the cleaner'",
+    "The masseur's stomach",
+    "Clapping from the next room"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_s_the_worst_ingredient_for_a_birthday_cake",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "social",
+    "grossness_3",
+    "food"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What's the worst ingredient for a birthday cake?",
+   "archive": [
+    "Grout",
+    "Mince",
+    "Tears",
+    "Fish paste",
+    "The birthday boy"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_would_be_the_worst_job_for_a_robot",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "social",
+    "grossness_2"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What would be the worst job for a robot?",
+   "archive": [
+    "Proctologist",
+    "Grandad's nails",
+    "Licking stamps for the council",
+    "Bins after a wedding",
+    "Presenting this programme"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.describe_your_last_meal_in_three_disgusting_words",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "social",
+    "grossness_2",
+    "food"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "Describe your last meal in three disgusting words.",
+   "archive": [
+    "Wet. Brown. Warm.",
+    "Chewy. Grey. Regret.",
+    "Lukewarm. Gristle. Pain.",
+    "Soft. Damp. Lonely.",
+    "Pastry. Fluid. Why."
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_s_the_most_horrible_thing_to_find_written_on_a_toilet_d",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "social",
+    "grossness_2",
+    "scatological"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What's the most horrible thing to find written on a toilet door?",
+   "archive": [
+    "'IT'S BEHIND YOU'",
+    "Your mum's number",
+    "'HELP ME'",
+    "'DON'T FLUSH. TRUST ME.'",
+    "'CAROL WAS HERE'"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_should_never_be_described_as_moist",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "social",
+    "grossness_2"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What should never be described as 'moist'?",
+   "archive": [
+    "A handshake",
+    "A sermon",
+    "The vicar",
+    "A sofa",
+    "A hug from Graham"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_do_you_think_graham_keeps_in_his_dressing_room",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "social",
+    "grossness_1",
+    "studio_world"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What do you think Graham keeps in his dressing room?",
+   "archive": [
+    "Forty identical ties",
+    "A photo of himself, framed by himself",
+    "A mini fridge of ham",
+    "His other face",
+    "Neil"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_s_the_worst_thing_to_hear_over_the_tannoy_in_a_supermar",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "social",
+    "grossness_1"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What's the worst thing to hear over the tannoy in a supermarket?",
+   "archive": [
+    "'Clean up in aisle 4. Bring a shovel.'",
+    "'Will the owner of the arm please...'",
+    "Breathing",
+    "Your full name and address",
+    "'Everyone stay very still.'"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_s_the_most_disturbing_thing_to_find_growing_in_your_sho",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "social",
+    "grossness_3",
+    "mould_fungi"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What's the most disturbing thing to find growing in your shower?",
+   "archive": [
+    "A mushroom with a face",
+    "Hair that isn't from your head",
+    "A second, smaller shower",
+    "Fur",
+    "Teeth"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.if_this_studio_had_a_smell_what_would_it_be",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 3,
+   "content_tags": [
+    "social",
+    "grossness_2",
+    "studio_world"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "If this studio had a smell, what would it be?",
+   "archive": [
+    "Burnt dust and aftershave",
+    "Ham",
+    "Damp carpet and cigarette",
+    "Fear and hairspray",
+    "Something under the floor"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  },
+  {
+   "id": "sv.what_s_in_the_locked_room",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 3,
+   "content_tags": [
+    "social",
+    "grossness_1",
+    "studio_world",
+    "unsettling_capable"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "prompt": "What's in the locked room?",
+   "archive": [
+    "Old props",
+    "More chairs",
+    "Nothing. It's just a room.",
+    "Don't.",
+    "The 1998 Christmas special"
+   ],
+   "modes": [
+    "popularity",
+    "popularity",
+    "archive",
+    "who_said"
+   ]
+  }
+ ],
+ "game_id": "mildew_survey"
+}

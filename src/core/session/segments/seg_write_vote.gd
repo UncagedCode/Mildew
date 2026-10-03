@@ -161,7 +161,7 @@ func _close_write() -> void:
 		answers.append({"text": written[pid], "shown": written[pid], "author": pid, "match_key": match_key(written[pid])})
 	# Rare Graham interference with an answer (docs/04 §3 "Rare manipulation"; dev-forceable).
 	var force := str(session.director.force.get("alter_answer", ""))
-	if force != "" or (answers.size() >= 3 and session.director.rng.randf() < session.cfg.f("write_vote.alteration_chance", 0.02)):
+	if (force != "" and not answers.is_empty()) or (answers.size() >= 3 and session.director.rng.randf() < session.cfg.f("write_vote.alteration_chance", 0.02)):
 		session.director.force.erase("alter_answer")
 		var idx: int = session.director.rng.randi_range(0, answers.size() - 1)
 		if force == "discard":

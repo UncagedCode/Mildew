@@ -197,7 +197,7 @@ func _reveal() -> void:
 				_:
 					stamps.append("")
 	var fact := str(item.get("fact", ""))
-	if fact != "":
+	if fact != "" and not (item.get("sources", []) as Array).is_empty():
 		session.note_fact(str(item.get("id", "")))
 	session.emit_tv({"e": "reveal", "qid": qid, "game_id": game_id, "correct": correct_idx, "answer_text": answer_text,
 		"picks": picks, "certain": certain, "deltas": deltas, "standings": session.standings(), "layout": layout,

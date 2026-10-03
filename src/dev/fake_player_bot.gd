@@ -87,6 +87,35 @@ func _on_screen(screen: String, data: Dictionary) -> void:
 				_queue(delay, {"t": Protocol.C_ANSWER, "q": qid, "c": choice})
 		"hole_pick":
 			_on_hole_pick(data)
+		"wv_write":
+			var key := "w:%s:%s" % [data.get("qid", ""), data.get("prompt", "")]
+			if answered_qids.has(key) or personality == "afk":
+				return
+			answered_qids[key] = true
+			var window := float(data.get("remaining_ms", 30000)) / 1000.0
+			var delay := _delay(window)
+			if delay < window:
+				_queue(delay, {"t": Protocol.C_SUBMIT, "q": data.get("qid", ""), "text": _bot_text(bool(data.get("chain", false)))})
+		"wv_vote":
+			var key := "v:%s" % data.get("qid", "")
+			if answered_qids.has(key) or personality == "afk":
+				return
+			answered_qids[key] = true
+			var opts: Array = data.get("options", [])
+			var own := int(data.get("own", -1))
+			var allowed: Array = range(opts.size()).filter(func(i): return i != own)
+			if allowed.is_empty():
+				return
+			var window := float(data.get("remaining_ms", 20000)) / 1000.0
+			var delay := _delay(window)
+			if delay < window:
+				_queue(delay, {"t": Protocol.C_VOTE, "q": data.get("qid", ""), "c": allowed[rng.randi_range(0, allowed.size() - 1)]})
+		"wv_rate":
+			var key := "r:%s" % data.get("qid", "")
+			if answered_qids.has(key) or personality == "afk":
+				return
+			answered_qids[key] = true
+			_queue(_delay(float(data.get("remaining_ms", 20000)) / 1000.0), {"t": Protocol.C_VOTE, "q": data.get("qid", ""), "c": rng.randi_range(1, 5)})
 		"ended":
 			if data.get("captain", false) and auto_play_again and not _again_sent:
 				_again_sent = true
@@ -169,6 +198,17 @@ func _choose(qid: String, options: Array) -> int:
 					return i
 			return 0
 	return rng.randi_range(0, max(0, options.size() - 1))
+
+
+const BOT_TEXT := ["A wet sock", "Grandad's teeth", "Lukewarm regret", "A damp sponge full of soup", "Something from the canteen",
+	"Like chewing a sad flannel", "Hot gravy", "The Green Room sofa", "A pickled egg", "Ham"]
+const BOT_CHAIN := ["but warm", "with hair in it", "served in a shoe", "left out overnight", "with a surprise inside"]
+
+
+func _bot_text(chain: bool) -> String:
+	if personality == "horse":
+		return "and a horse" if chain else "A horse"
+	return BOT_CHAIN[rng.randi_range(0, BOT_CHAIN.size() - 1)] if chain else BOT_TEXT[rng.randi_range(0, BOT_TEXT.size() - 1)]
 
 
 func _delay(window: float) -> float:

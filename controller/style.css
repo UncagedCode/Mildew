@@ -163,3 +163,9 @@ body {
 
 /* CP3: long Real or Mildew? claims on the keys */
 .key.long { font-size: 14px; line-height: 1.25; text-align: left; padding-top: 10px; padding-bottom: 10px; min-height: 72px; letter-spacing: 0; text-transform: none; }
+
+/* Survey / Mouthfeel writing (CP4) */
+.wv-text { width: 100%; box-sizing: border-box; min-height: 96px; resize: none; border: 2px solid var(--lcd-dim); border-radius: 4px;
+  background: rgba(0,0,0,.35); color: var(--lcd-fg); font: inherit; font-size: 20px; padding: 10px; text-transform: none; }
+.wv-text:focus { outline: none; border-color: var(--lcd-fg); box-shadow: 0 0 10px rgba(185,244,124,.35); }
+.count { text-align: right; }

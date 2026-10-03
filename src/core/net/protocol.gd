@@ -37,7 +37,7 @@ const S_KICKED := "kicked"          # {reason}
 const GAME_ACTIONS := [C_ANSWER, C_LOCK, C_PASS, C_SUBMIT, C_VOTE]
 
 const CLIENT_TYPES := [C_HELLO, C_CHECK_NAME, C_SAY_NAME, C_CREATE_PROFILE, C_SELECT_PROFILE,
-	C_START_SHOW, C_ANSWER, C_LOCK, C_PASS, C_READY, C_PLAY_AGAIN, C_LEAVE, C_PING]
+	C_START_SHOW, C_ANSWER, C_LOCK, C_PASS, C_SUBMIT, C_VOTE, C_READY, C_PLAY_AGAIN, C_LEAVE, C_PING]
 
 # Error codes (stable strings; the controller maps them to on-brand copy).
 const E_BAD_JSON := "bad_json"

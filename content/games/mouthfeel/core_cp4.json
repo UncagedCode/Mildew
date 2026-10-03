@@ -1,0 +1,1051 @@
+{
+ "pack_id": "mouthfeel.core_cp4",
+ "content_kind": "mouthfeel",
+ "_comment": "Mouthfeel (CP4). Original writing. format: describe (write+vote on a category), chain (Make It Worse, 3+ players), reverse (Graham describes, players guess). graham_answers are entered anonymously by Graham.",
+ "items": [
+  {
+   "id": "mf.cold_porridge_carpet_underlay",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "grossness_3",
+    "food",
+    "household"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "format": "describe",
+   "prompt": "COLD PORRIDGE + CARPET UNDERLAY",
+   "hint": "DESCRIBE THE MOUTHFEEL.",
+   "graham_answers": [
+    "Firm at the edges. Forgiving in the middle. Like a vicar."
+   ],
+   "archive": [
+    "Like chewing a wet doormat that's had good news",
+    "Spongy, then gritty, then personal",
+    "A damp hug that won't end"
+   ]
+  },
+  {
+   "id": "mf.a_warm_trifle_left_in_a_car",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "grossness_3",
+    "food"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "format": "describe",
+   "prompt": "A WARM TRIFLE LEFT IN A CAR",
+   "hint": "DESCRIBE THE MOUTHFEEL.",
+   "graham_answers": [
+    "Sad custard. Ambitious sponge. Strong notes of dashboard."
+   ],
+   "archive": [
+    "Soft layers of regret, separating",
+    "Like a wet nap that tastes of vanilla",
+    "It slides. Everything slides."
+   ]
+  },
+  {
+   "id": "mf.the_skin_on_hot_milk",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "grossness_2",
+    "food"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "format": "describe",
+   "prompt": "THE SKIN ON HOT MILK",
+   "hint": "DESCRIBE THE MOUTHFEEL.",
+   "graham_answers": [
+    "A small edible curtain. Tasteful."
+   ],
+   "archive": [
+    "Like a tissue that's been crying",
+    "Warm wet paper with ambitions",
+    "A cling film of shame"
+   ]
+  },
+  {
+   "id": "mf.a_pickled_egg_from_a_pub_jar",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "grossness_3",
+    "food"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "format": "describe",
+   "prompt": "A PICKLED EGG FROM A PUB JAR",
+   "hint": "DESCRIBE THE MOUTHFEEL.",
+   "graham_answers": [
+    "Rubbery. Vinegary. Has seen things. Like me."
+   ],
+   "archive": [
+    "Squeaks against the teeth like an old door",
+    "Like biting a rubber ball full of chalk",
+    "Bouncy, with a dry crumbly secret inside"
+   ]
+  },
+  {
+   "id": "mf.a_flannel_that_s_been_in_the_bat",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "grossness_3",
+    "household"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "format": "describe",
+   "prompt": "A FLANNEL THAT'S BEEN IN THE BATH ALL WEEK",
+   "hint": "DESCRIBE THE MOUTHFEEL.",
+   "graham_answers": [
+    "Slippery cotton with a faint aftertaste of Sunday."
+   ],
+   "archive": [
+    "Slimy carpet tile, warmed",
+    "Like sucking a sad sheep",
+    "Gritty, heavy, lukewarm regret"
+   ]
+  },
+  {
+   "id": "mf.a_handful_of_candle_wax",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "grossness_2",
+    "household"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "format": "describe",
+   "prompt": "A HANDFUL OF CANDLE WAX",
+   "hint": "DESCRIBE THE MOUTHFEEL.",
+   "graham_answers": [
+    "Waxy. Unhelpful. Romantic, briefly."
+   ],
+   "archive": [
+    "Like chewing a crayon's ghost",
+    "Clings to your molars like a bad marriage",
+    "Soft then squeaky then forever"
+   ]
+  },
+  {
+   "id": "mf.canned_hot_dog_the_brine",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "grossness_3",
+    "food"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "format": "describe",
+   "prompt": "CANNED HOT DOG + THE BRINE",
+   "hint": "DESCRIBE THE MOUTHFEEL.",
+   "graham_answers": [
+    "A long pink thought, swimming."
+   ],
+   "archive": [
+    "A rubber finger in salty bathwater",
+    "Squidge, then a pop, then cold juice",
+    "Like chewing a wet balloon from a funeral"
+   ]
+  },
+  {
+   "id": "mf.a_mouthful_of_hair_from_a_plugho",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "grossness_4",
+    "body_fluids",
+    "household"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "format": "describe",
+   "prompt": "A MOUTHFUL OF HAIR FROM A PLUGHOLE",
+   "hint": "DESCRIBE THE MOUTHFEEL.",
+   "graham_answers": [
+    "Fibrous, with pockets. Richer than you'd expect."
+   ],
+   "archive": [
+    "Slippery string with crunchy bits of soap",
+    "Like flossing with someone's memories",
+    "A wet nest that coughs back"
+   ]
+  },
+  {
+   "id": "mf.a_boiled_sweet_found_down_a_sofa",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "grossness_2",
+    "food",
+    "household"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "format": "describe",
+   "prompt": "A BOILED SWEET FOUND DOWN A SOFA",
+   "hint": "DESCRIBE THE MOUTHFEEL.",
+   "graham_answers": [
+    "Sweet. Furry. Possibly mine."
+   ],
+   "archive": [
+    "Sticky glass with a woolly coat",
+    "Like licking a tiny carpet that tastes of strawberry",
+    "Crunch, then lint"
+   ]
+  },
+  {
+   "id": "mf.chewing_gum_from_under_a_school",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "grossness_4",
+    "body_fluids"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "format": "describe",
+   "prompt": "CHEWING GUM FROM UNDER A SCHOOL DESK",
+   "hint": "DESCRIBE THE MOUTHFEEL.",
+   "graham_answers": [
+    "Historical. Tough. Still faintly mint."
+   ],
+   "archive": [
+    "Concrete with a memory of spearmint",
+    "Grey rubber that crumbles like gravel",
+    "It fights back, then gives up"
+   ]
+  },
+  {
+   "id": "mf.a_slug_on_a_cracker",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "grossness_4",
+    "animals",
+    "food"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "format": "describe",
+   "prompt": "A SLUG ON A CRACKER",
+   "hint": "DESCRIBE THE MOUTHFEEL.",
+   "graham_answers": [
+    "A canapé. Firm base, lively topping."
+   ],
+   "archive": [
+    "Crunch, then a cold snotty sigh",
+    "Like a sneeze on a Jacob's",
+    "Slick, then crispy, then it moves"
+   ]
+  },
+  {
+   "id": "mf.tinned_spaghetti_left_out_overni",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "grossness_2",
+    "food"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "format": "describe",
+   "prompt": "TINNED SPAGHETTI LEFT OUT OVERNIGHT",
+   "hint": "DESCRIBE THE MOUTHFEEL.",
+   "graham_answers": [
+    "Orange worms in a quiet sauce."
+   ],
+   "archive": [
+    "Soft tubes in a skin of tomato glue",
+    "Like eating a cold slinky",
+    "It sets. Like jelly. Bad jelly."
+   ]
+  },
+  {
+   "id": "mf.somebody_else_s_retainer",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "grossness_4",
+    "teeth",
+    "body_fluids"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "format": "describe",
+   "prompt": "SOMEBODY ELSE'S RETAINER",
+   "hint": "DESCRIBE THE MOUTHFEEL.",
+   "graham_answers": [
+    "Plastic. Intimate. You know too much now."
+   ],
+   "archive": [
+    "Smooth with a crust of someone's breakfast",
+    "Like licking a stranger's yesterday",
+    "Hard and slippy, with crumbs"
+   ]
+  },
+  {
+   "id": "mf.a_deep_fried_flannel",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "grossness_3",
+    "food",
+    "household"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "format": "describe",
+   "prompt": "A DEEP-FRIED FLANNEL",
+   "hint": "DESCRIBE THE MOUTHFEEL.",
+   "graham_answers": [
+    "Crispy outside. Damp soul."
+   ],
+   "archive": [
+    "Crunchy batter, then soggy cotton",
+    "Like biting into a hot wet nap",
+    "A chip shop lie"
+   ]
+  },
+  {
+   "id": "mf.an_oyster_that_was_left_on_a_rad",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "grossness_4",
+    "food",
+    "animals"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "format": "describe",
+   "prompt": "AN OYSTER THAT WAS LEFT ON A RADIATOR",
+   "hint": "DESCRIBE THE MOUTHFEEL.",
+   "graham_answers": [
+    "Slippery. Warm. Fond of you."
+   ],
+   "archive": [
+    "A warm sneeze from the sea",
+    "Like swallowing a loose tongue",
+    "Gloopy, gritty, then it lingers"
+   ]
+  },
+  {
+   "id": "mf.a_bowl_of_ham_fat",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "grossness_3",
+    "food",
+    "studio_world"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "format": "describe",
+   "prompt": "A BOWL OF HAM FAT",
+   "hint": "DESCRIBE THE MOUTHFEEL.",
+   "graham_answers": [
+    "The best bit. I won't hear otherwise."
+   ],
+   "archive": [
+    "White, soft, cold, like candles from a pig",
+    "Melts like a dream you'd rather not have",
+    "Slippery chunks of fridge"
+   ]
+  },
+  {
+   "id": "mf.the_glue_on_the_back_of_an_envel",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "grossness_1",
+    "household"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "format": "describe",
+   "prompt": "THE GLUE ON THE BACK OF AN ENVELOPE",
+   "hint": "DESCRIBE THE MOUTHFEEL.",
+   "graham_answers": [
+    "Faint sweetness. Postal. Bureaucratic."
+   ],
+   "archive": [
+    "Like licking a stamp's armpit",
+    "Dry, then tacky, then lonely",
+    "Tastes of Tuesdays"
+   ]
+  },
+  {
+   "id": "mf.a_corn_plaster",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "grossness_4",
+    "medical",
+    "body_fluids"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "format": "describe",
+   "prompt": "A CORN PLASTER",
+   "hint": "DESCRIBE THE MOUTHFEEL.",
+   "graham_answers": [
+    "Medicinal. Felt-like. Recently worn."
+   ],
+   "archive": [
+    "Spongy felt with a cheesy undernote",
+    "Like a tiny shoe insole",
+    "Gummy, with grit"
+   ]
+  },
+  {
+   "id": "mf.a_raw_egg_shell_and_all",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "grossness_3",
+    "food"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "format": "describe",
+   "prompt": "A RAW EGG, SHELL AND ALL",
+   "hint": "DESCRIBE THE MOUTHFEEL.",
+   "graham_answers": [
+    "Crunchy and smooth. A complete meal."
+   ],
+   "archive": [
+    "Glassy crunch then cold snot",
+    "Like chewing a lightbulb full of phlegm",
+    "Shards in a slippery pool"
+   ]
+  },
+  {
+   "id": "mf.a_bath_sponge_soaked_in_gravy",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "grossness_3",
+    "food",
+    "household"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "format": "describe",
+   "prompt": "A BATH SPONGE SOAKED IN GRAVY",
+   "hint": "DESCRIBE THE MOUTHFEEL.",
+   "graham_answers": [
+    "Absorbent. Hearty. Sunday."
+   ],
+   "archive": [
+    "Squeezes gravy into every corner of your soul",
+    "Like chewing a hot wet cloud",
+    "Bouncy brown regret"
+   ]
+  },
+  {
+   "id": "mf.a_spoonful_of_pond",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "grossness_3",
+    "animals"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "format": "describe",
+   "prompt": "A SPOONFUL OF POND",
+   "hint": "DESCRIBE THE MOUTHFEEL.",
+   "graham_answers": [
+    "Earthy. Lively. Several textures at once."
+   ],
+   "archive": [
+    "Gritty water with surprises that swim",
+    "Slimy bits with crunchy bits",
+    "Like drinking a duck's opinion"
+   ]
+  },
+  {
+   "id": "mf.five_day_old_birthday_cake",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "grossness_2",
+    "food"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "format": "describe",
+   "prompt": "FIVE-DAY-OLD BIRTHDAY CAKE",
+   "hint": "DESCRIBE THE MOUTHFEEL.",
+   "graham_answers": [
+    "Dry as a sermon. Icing like a roof tile."
+   ],
+   "archive": [
+    "Crumbles to sand, then sticks like cement",
+    "Like eating a dusty pillow",
+    "Stale sponge, angry icing"
+   ]
+  },
+  {
+   "id": "mf.a_fishfinger_that_s_been_in_a_po",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "grossness_3",
+    "food"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "format": "describe",
+   "prompt": "A FISHFINGER THAT'S BEEN IN A POCKET",
+   "hint": "DESCRIBE THE MOUTHFEEL.",
+   "graham_answers": [
+    "Warm. Bendy. Trusting."
+   ],
+   "archive": [
+    "Floppy crumb with lint seasoning",
+    "Like a tiny warm wet book",
+    "Soft, then fluff"
+   ]
+  },
+  {
+   "id": "mf.your_own_tongue_but_someone_else",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 4,
+   "content_tags": [
+    "grossness_3",
+    "unsettling_capable"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "format": "describe",
+   "prompt": "YOUR OWN TONGUE, BUT SOMEONE ELSE'S",
+   "hint": "DESCRIBE THE MOUTHFEEL.",
+   "graham_answers": [
+    "Familiar. Warm. Not yours."
+   ],
+   "archive": [
+    "Like a slug that knows your secrets",
+    "Wet velvet that disagrees with you",
+    "It moves first"
+   ]
+  },
+  {
+   "id": "mf.a_jar_of_chutney_from_1983",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 3,
+   "content_tags": [
+    "grossness_3",
+    "food",
+    "mould_fungi"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "format": "describe",
+   "prompt": "A JAR OF CHUTNEY FROM 1983",
+   "hint": "DESCRIBE THE MOUTHFEEL.",
+   "graham_answers": [
+    "Matured. Fermented. Vintage."
+   ],
+   "archive": [
+    "Chunky fizz with a furry top",
+    "Like eating a compost heap's jam",
+    "Sweet, sharp, and alive"
+   ]
+  },
+  {
+   "id": "mf.the_fluff_from_a_tumble_dryer",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "grossness_2",
+    "household"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "format": "describe",
+   "prompt": "THE FLUFF FROM A TUMBLE DRYER",
+   "hint": "DESCRIBE THE MOUTHFEEL.",
+   "graham_answers": [
+    "Warm, light, and full of your best socks."
+   ],
+   "archive": [
+    "Like chewing a cloud that's been to a laundrette",
+    "Dry, then pasty, then everywhere",
+    "Grey candyfloss"
+   ]
+  },
+  {
+   "id": "mf.a_scotch_egg_made_by_a_stranger",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "grossness_2",
+    "food"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "format": "describe",
+   "prompt": "A SCOTCH EGG MADE BY A STRANGER",
+   "hint": "DESCRIBE THE MOUTHFEEL.",
+   "graham_answers": [
+    "Dense. Mysterious. Suspiciously warm."
+   ],
+   "archive": [
+    "Crumbly armour, rubbery heart",
+    "Like biting a damp tennis ball",
+    "Grit, gristle, then yolk"
+   ]
+  },
+  {
+   "id": "mf.the_studio_c_floor",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 3,
+   "content_tags": [
+    "grossness_3",
+    "studio_world"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "format": "describe",
+   "prompt": "THE STUDIO C FLOOR",
+   "hint": "DESCRIBE THE MOUTHFEEL.",
+   "graham_answers": [
+    "Firm. Sticky in the corners. Historic."
+   ],
+   "archive": [
+    "Varnish, crumbs and old applause",
+    "Tacky, like a cinema floor with a past",
+    "It tastes of 1998"
+   ]
+  },
+  {
+   "id": "mf.a_bag_of_wet_crisps",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "grossness_2",
+    "food"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "format": "describe",
+   "prompt": "A BAG OF WET CRISPS",
+   "hint": "DESCRIBE THE MOUTHFEEL.",
+   "graham_answers": [
+    "The crunch has left. Only the salt remains."
+   ],
+   "archive": [
+    "Floppy salt cards",
+    "Like chewing a soggy beer mat",
+    "Limp, cold, and still a bit cheesy"
+   ]
+  },
+  {
+   "id": "mf.gravy_that_has_formed_a_skin",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "grossness_2",
+    "food"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "format": "describe",
+   "prompt": "GRAVY THAT HAS FORMED A SKIN",
+   "hint": "DESCRIBE THE MOUTHFEEL.",
+   "graham_answers": [
+    "A brown blanket. Comforting, if you're a ghost."
+   ],
+   "archive": [
+    "Thick rubbery lid over brown lava",
+    "Like peeling a scab off Sunday",
+    "Wobbly sheet, then gloop"
+   ]
+  },
+  {
+   "id": "mf.chain.a_cheese_sandwich",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "grossness_2",
+    "food"
+   ],
+   "min_players": 3,
+   "max_players": 8,
+   "format": "chain",
+   "base": "A CHEESE SANDWICH",
+   "prompt": "A CHEESE SANDWICH"
+  },
+  {
+   "id": "mf.chain.a_cup_of_tea",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "grossness_2",
+    "food"
+   ],
+   "min_players": 3,
+   "max_players": 8,
+   "format": "chain",
+   "base": "A CUP OF TEA",
+   "prompt": "A CUP OF TEA"
+  },
+  {
+   "id": "mf.chain.a_bowl_of_cornflakes",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "grossness_2",
+    "food"
+   ],
+   "min_players": 3,
+   "max_players": 8,
+   "format": "chain",
+   "base": "A BOWL OF CORNFLAKES",
+   "prompt": "A BOWL OF CORNFLAKES"
+  },
+  {
+   "id": "mf.chain.a_sausage_roll",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "grossness_2",
+    "food"
+   ],
+   "min_players": 3,
+   "max_players": 8,
+   "format": "chain",
+   "base": "A SAUSAGE ROLL",
+   "prompt": "A SAUSAGE ROLL"
+  },
+  {
+   "id": "mf.chain.a_bath",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "grossness_2",
+    "food"
+   ],
+   "min_players": 3,
+   "max_players": 8,
+   "format": "chain",
+   "base": "A BATH",
+   "prompt": "A BATH"
+  },
+  {
+   "id": "mf.chain.a_kiss_on_the_cheek",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "grossness_2",
+    "food"
+   ],
+   "min_players": 3,
+   "max_players": 8,
+   "format": "chain",
+   "base": "A KISS ON THE CHEEK",
+   "prompt": "A KISS ON THE CHEEK"
+  },
+  {
+   "id": "mf.chain.a_prawn_cocktail",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "grossness_2",
+    "food"
+   ],
+   "min_players": 3,
+   "max_players": 8,
+   "format": "chain",
+   "base": "A PRAWN COCKTAIL",
+   "prompt": "A PRAWN COCKTAIL"
+  },
+  {
+   "id": "mf.chain.a_full_english_breakfast",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "grossness_2",
+    "food"
+   ],
+   "min_players": 3,
+   "max_players": 8,
+   "format": "chain",
+   "base": "A FULL ENGLISH BREAKFAST",
+   "prompt": "A FULL ENGLISH BREAKFAST"
+  },
+  {
+   "id": "mf.chain.a_slice_of_ham",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 2,
+   "content_tags": [
+    "grossness_2",
+    "food"
+   ],
+   "min_players": 3,
+   "max_players": 8,
+   "format": "chain",
+   "base": "A SLICE OF HAM",
+   "prompt": "A SLICE OF HAM"
+  },
+  {
+   "id": "mf.chain.a_pair_of_socks",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "grossness_2",
+    "food"
+   ],
+   "min_players": 3,
+   "max_players": 8,
+   "format": "chain",
+   "base": "A PAIR OF SOCKS",
+   "prompt": "A PAIR OF SOCKS"
+  },
+  {
+   "id": "mf.rev.1",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "grossness_2",
+    "food"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "format": "reverse",
+   "prompt": "WHAT IS GRAHAM DESCRIBING?",
+   "description": "Warm, slightly fibrous, initially soft but unexpectedly crunchy.",
+   "options": [
+    "A cheese and onion pasty",
+    "A bird's nest",
+    "A Victorian wig",
+    "A hot dog with the string on"
+   ],
+   "correct": 0,
+   "fact": "“Warm, slightly fibrous, initially soft but unexpectedly crunchy.”",
+   "answer_label": "A cheese and onion pasty"
+  },
+  {
+   "id": "mf.rev.2",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "grossness_2",
+    "food"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "format": "reverse",
+   "prompt": "WHAT IS GRAHAM DESCRIBING?",
+   "description": "Cold. Gelatinous. Wobbles when you look at it. Tastes faintly of the sea.",
+   "options": [
+    "Fish jelly from a pork pie",
+    "A jellyfish",
+    "Frogspawn",
+    "Contact lens fluid"
+   ],
+   "correct": 0,
+   "fact": "“Cold. Gelatinous. Wobbles when you look at it. Tastes faintly of the sea.”",
+   "answer_label": "Fish jelly from a pork pie"
+  },
+  {
+   "id": "mf.rev.3",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "grossness_2",
+    "food"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "format": "reverse",
+   "prompt": "WHAT IS GRAHAM DESCRIBING?",
+   "description": "Squeaks against the teeth. Salty. Faintly rubbery. Resists.",
+   "options": [
+    "Halloumi",
+    "A bath plug",
+    "A pickled egg",
+    "A squash ball"
+   ],
+   "correct": 0,
+   "fact": "“Squeaks against the teeth. Salty. Faintly rubbery. Resists.”",
+   "answer_label": "Halloumi"
+  },
+  {
+   "id": "mf.rev.4",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "grossness_2",
+    "food"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "format": "reverse",
+   "prompt": "WHAT IS GRAHAM DESCRIBING?",
+   "description": "Powdery on the outside, then sticky, then it simply will not leave.",
+   "options": [
+    "A Turkish delight",
+    "Chalk",
+    "A stamp",
+    "Peanut butter on a moth"
+   ],
+   "correct": 0,
+   "fact": "“Powdery on the outside, then sticky, then it simply will not leave.”",
+   "answer_label": "A Turkish delight"
+  },
+  {
+   "id": "mf.rev.5",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "grossness_2",
+    "food"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "format": "reverse",
+   "prompt": "WHAT IS GRAHAM DESCRIBING?",
+   "description": "Slippery, then gritty, with a lingering note of seaside.",
+   "options": [
+    "An oyster with sand in it",
+    "A wet sandal",
+    "A cockle",
+    "A lifeguard's whistle"
+   ],
+   "correct": 0,
+   "fact": "“Slippery, then gritty, with a lingering note of seaside.”",
+   "answer_label": "An oyster with sand in it"
+  },
+  {
+   "id": "mf.rev.6",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "grossness_2",
+    "food"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "format": "reverse",
+   "prompt": "WHAT IS GRAHAM DESCRIBING?",
+   "description": "Fluffy, sweet, collapses into nothing, then sticks to your face.",
+   "options": [
+    "Candyfloss",
+    "Bath foam",
+    "Cotton wool",
+    "A sheep's eyebrow"
+   ],
+   "correct": 0,
+   "fact": "“Fluffy, sweet, collapses into nothing, then sticks to your face.”",
+   "answer_label": "Candyfloss"
+  },
+  {
+   "id": "mf.rev.7",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "grossness_2",
+    "food"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "format": "reverse",
+   "prompt": "WHAT IS GRAHAM DESCRIBING?",
+   "description": "Crisp at first. Then wet. Then a sort of hot rubber. Then grief.",
+   "options": [
+    "A deep-fried Mars bar",
+    "A microwaved pasty",
+    "A fried egg on a radiator",
+    "A battered sausage"
+   ],
+   "correct": 1,
+   "fact": "“Crisp at first. Then wet. Then a sort of hot rubber. Then grief.”",
+   "answer_label": "A microwaved pasty"
+  },
+  {
+   "id": "mf.rev.8",
+   "enabled": true,
+   "quality_status": "draft",
+   "familiarity_tier": 1,
+   "content_tags": [
+    "grossness_2",
+    "food"
+   ],
+   "min_players": 2,
+   "max_players": 8,
+   "format": "reverse",
+   "prompt": "WHAT IS GRAHAM DESCRIBING?",
+   "description": "Dense. Heavy. Grey. Slightly gritty. Served with pride.",
+   "options": [
+    "Liver",
+    "Chewing gum from 1979",
+    "Black pudding",
+    "A paving slab"
+   ],
+   "correct": 0,
+   "fact": "“Dense. Heavy. Grey. Slightly gritty. Served with pride.”",
+   "answer_label": "Liver"
+  }
+ ],
+ "game_id": "mouthfeel"
+}

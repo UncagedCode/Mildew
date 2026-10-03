@@ -13,6 +13,7 @@ var voice: VoiceService
 var view: ProgrammeView
 var hole: HoleBoard
 var quiz: QuizBoard
+var wv: WriteVoteBoard
 var _quiz_q := false                 # current question is on the quiz board (CP3 layouts)
 
 var _sync_timer := 0.0
@@ -46,6 +47,8 @@ func _process(delta: float) -> void:
 			hole.players = pmap
 		if quiz:
 			quiz.players = pmap
+		if wv:
+			wv.players = pmap
 		sys.contestants = plist.filter(func(p): return p.status == "active" and p.connected).size()
 		studio.graham.set_pressure(host.session.director.pressure)
 		if not studio.graham.is_speaking():
@@ -87,6 +90,9 @@ func _on_event(evt: Dictionary) -> void:
 			if str(evt.kind) != "question" and quiz and quiz.is_showing():
 				quiz.hide_board()
 				_quiz_q = false
+				_in_question = false
+			if str(evt.kind) != "write_vote" and wv and wv.is_showing():
+				wv.hide_board()
 				_in_question = false
 			if str(evt.kind) == "intros":
 				audio.applause("medium")
@@ -137,6 +143,9 @@ func _on_event(evt: Dictionary) -> void:
 		"hole_reveal":
 			hole.reveal(evt)
 			_hole_reaction(evt)
+		# ---------------- SURVEY / MOUTHFEEL ----------------
+		"wv_show", "wv_write_open", "wv_progress", "wv_vote_progress", "wv_chain", "wv_chain_final", "wv_vote_open", "wv_reveal":
+			_wv_event(evt)
 		"question_show" when str(evt.get("layout", "panel")) != "panel":
 			_in_question = true
 			_quiz_q = true
@@ -501,4 +510,43 @@ func _audience_cutaway(cam: String, seconds: float) -> bool:
 
 
 func _graphic_owns_frame() -> bool:
-	return _in_question or (hole != null and hole.is_showing()) or (quiz != null and quiz.is_showing()) or gfx.is_question_visible()
+	return _in_question or (hole != null and hole.is_showing()) or (quiz != null and quiz.is_showing()) or (wv != null and wv.is_showing()) or gfx.is_question_visible()
+
+
+## Survey / Mouthfeel presentation (CP4): the board draws; this adds studio grammar and sound.
+func _wv_event(evt: Dictionary) -> void:
+	if wv == null:
+		return
+	wv.on_event(evt, host.session.time_scale)
+	match str(evt.e):
+		"wv_show":
+			_in_question = true
+			gfx.hide_question()
+			for pid in studio.podiums.keys():
+				studio.light_podium(pid, false)
+			audio.play("whoosh", -4.0)
+			studio.graham.set_activity("reading")
+		"wv_write_open", "wv_chain_final":
+			studio.graham.set_activity("idle")
+		"wv_progress", "wv_vote_progress":
+			studio.light_podium(str(evt.pid), true)
+			audio.play("lock", -8.0)
+		"wv_chain":
+			audio.play("whoosh", -8.0)
+		"wv_vote_open":
+			for pid in studio.podiums.keys():
+				studio.light_podium(pid, false)
+			audio.play("whoosh", -4.0)
+		"wv_reveal":
+			var d: Dictionary = evt.get("deltas", {})
+			var any := false
+			for pid in d.keys():
+				if int(d[pid]) > 0:
+					any = true
+					studio.flash_podium(pid, "+%s" % PodiumScreen._fmt(int(d[pid])))
+			if str(evt.get("mode", "")) == "chain":
+				audio.crowd("ooh" if float(evt.get("average", 0.0)) >= 3.0 else "laugh", -6.0)
+			elif any:
+				audio.applause("medium")
+			else:
+				audio.crowd("laugh", -8.0)

@@ -75,6 +75,10 @@ func validate(db: ContentDB, release_mode: bool = false) -> bool:
 					_validate_real_or_mildew(item, where, release_mode)
 				"guess_the_genitals":
 					_validate_gtg(item, where, release_mode)
+				"mildew_survey":
+					_validate_survey(item, where)
+				"mouthfeel":
+					_validate_mouthfeel(item, where, release_mode)
 				"graham_lines", "announcer_lines":
 					_validate_line(item, where, moods)
 				_:
@@ -143,6 +147,64 @@ func _validate_real_or_mildew(item: Dictionary, where: String, release_mode: boo
 	for o in opts:
 		if str(o).length() > 120:
 			errors.append("%s: option longer than 120 characters (unreadable on TV)" % where)
+
+
+## Mildew Survey (docs/04 §3): a prompt, enough archive filler for a 2-player vote, known round formats.
+const SURVEY_MODES := ["popularity", "archive", "who_said"]
+
+
+func _validate_survey(item: Dictionary, where: String) -> void:
+	_validate_common_game(item, where)
+	var p := str(item.get("prompt", "")).strip_edges()
+	if p == "":
+		errors.append("%s: missing prompt" % where)
+	elif p.length() > 110:
+		errors.append("%s: prompt longer than 110 characters (unreadable on TV)" % where)
+	_validate_answer_list(item.get("archive", []), 3, where, "archive")
+	var modes = item.get("modes", SURVEY_MODES)
+	if typeof(modes) != TYPE_ARRAY or (modes as Array).is_empty():
+		errors.append("%s: modes must be a non-empty array" % where)
+	else:
+		for m in modes:
+			if not SURVEY_MODES.has(m):
+				errors.append("%s: unknown survey mode '%s'" % [where, str(m)])
+
+
+func _validate_answer_list(arr, need: int, where: String, field: String) -> void:
+	if typeof(arr) != TYPE_ARRAY or (arr as Array).size() < need:
+		errors.append("%s: %s needs at least %d answers (two-player votes)" % [where, field, need])
+		return
+	for a in arr:
+		if str(a).strip_edges() == "" or str(a).length() > SegWriteVote.MAX_TEXT:
+			errors.append("%s: %s answer empty or longer than %d characters" % [where, field, SegWriteVote.MAX_TEXT])
+
+
+## Mouthfeel (docs/04 §8): describe (write + vote), chain (Make It Worse), reverse (multiple choice).
+const MOUTHFEEL_FORMATS := ["describe", "chain", "reverse"]
+
+
+func _validate_mouthfeel(item: Dictionary, where: String, release_mode: bool) -> void:
+	var fmt := str(item.get("format", ""))
+	if not MOUTHFEEL_FORMATS.has(fmt):
+		errors.append("%s: unknown Mouthfeel format '%s'" % [where, fmt])
+		return
+	match fmt:
+		"describe":
+			_validate_common_game(item, where)
+			if str(item.get("prompt", "")).strip_edges() == "":
+				errors.append("%s: missing prompt" % where)
+			_validate_answer_list(item.get("archive", []), 2, where, "archive")
+			_validate_answer_list(item.get("graham_answers", []), 1, where, "graham_answers")
+		"chain":
+			_validate_common_game(item, where)
+			if str(item.get("base", "")).strip_edges() == "":
+				errors.append("%s: chain item needs a base" % where)
+			if int(item.get("min_players", 2)) < 3:
+				errors.append("%s: Make It Worse needs min_players >= 3" % where)
+		"reverse":
+			_validate_multiple_choice(item, where, release_mode)
+			if str(item.get("description", "")).strip_edges() == "":
+				errors.append("%s: reverse item needs Graham's description" % where)
 
 
 const GTG_FORBIDDEN_TAGS := ["human", "people", "sexual_activity", "explicit"]

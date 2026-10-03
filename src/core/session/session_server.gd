@@ -668,6 +668,9 @@ func _persist_results() -> void:
 	while hist.size() > 200:
 		hist.pop_front()
 	store.installation.recent_content_history = hist
+	var rg: Array = store.installation.get("recent_games", [])
+	rg.append_array(director.games_this_show)
+	store.installation.recent_games = rg.slice(maxi(0, rg.size() - 8))
 	# Viewer Information Service: facts broadcast on this installation (never incidents; docs/07).
 	var seen: Array = store.installation.get("facts_seen", [])
 	for id in facts_shown:
